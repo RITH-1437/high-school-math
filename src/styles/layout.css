@@ -109,7 +109,7 @@
 
 .nav-link:hover {
   color: var(--header-ink);
-  background: rgba(241, 239, 225, 0.06);
+  background: rgba(255, 255, 255, 0.06);
   text-decoration: none;
 }
 
@@ -119,12 +119,12 @@
 
 .nav-link.is-active {
   color: var(--header-ink);
-  background: rgba(241, 239, 225, 0.09);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 .nav-link.is-active svg {
   opacity: 1;
-  color: var(--lime);
+  color: var(--accent);
 }
 
 .nav-link.is-active::after {
@@ -135,7 +135,7 @@
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--lime);
+  background: var(--accent);
   transform: translateX(-50%);
 }
 
@@ -147,8 +147,8 @@
   height: 1.15rem;
   padding-inline: 0.28rem;
   border-radius: var(--radius-pill);
-  background: var(--lime);
-  color: var(--lime-ink);
+  background: var(--accent);
+  color: var(--accent-ink);
   font-size: 0.62rem;
   font-weight: 750;
   line-height: 1;
@@ -175,7 +175,7 @@
 }
 
 .icon-button:hover {
-  background: rgba(241, 239, 225, 0.07);
+  background: rgba(255, 255, 255, 0.07);
   border-color: var(--header-line);
 }
 
@@ -457,7 +457,7 @@
 
 .page-hero--lab {
   background:
-    radial-gradient(ellipse 70% 120% at 85% 0%, rgba(201, 238, 110, 0.11), transparent 62%),
+    radial-gradient(ellipse 70% 120% at 85% 0%, rgba(57, 120, 214, 0.12), transparent 62%),
     var(--hero-bg);
   color: var(--hero-ink);
   border-bottom-color: var(--hero-line);
