@@ -1,0 +1,781 @@
+1
+2
+1
+,2
+Analysis of Geometry Units in the Mathematics 
+Curriculum of Cambodia from the Perspective of 
+Coherence
+Veasna Sieng
+, 
+Baba Takuya
+Graduate School for Humanities and Social Sciences, Hiroshima University, 1
+-
+5
+-
+-
+-
+sieng.veasna@nie.edu.kh
+1, 
+Kagamiyama, 
+Higashi
+Hiroshima city, 739
+8529, Japan
+Abstract.
+This study aims to analyse the units in the Cambodian mathematics 
+curriculum on geometry from the perspective of coherence. Four of the recently 
+-
+published in 2018, the latest versio
+n available during the research period of 2022
+2023, have been collected. The document analysis following the procedure of 
+General Topic Trace Mapping \(GTTM\ was used because it embraces curriculum 
+coherence. The results of the analysis revealed 
+that the Cambodian mathematics 
+-
+-
+-
+tions of the subdomains and contents are not well
+organised and unnecessarily 
+repetitive; \(2\the contents and sub
+contents are poorly ordered an
+d are not age
+appropriate, due to some contents are addressed as a prerequisite and other con-
+-
+-
+-
+contents, sub
+contents, and their learning outcomes are not clearly specified, 
+as 
+through a lack of logical or conceptual connections within and across years; and 
+\(4\he domains, sub
+domains, contents, sub
+contents, and learning outcomes are 
+necessity o
+f improving the coherence of geometry units in Cambodia\222s mathe-
+matics curriculum. This analysis focused on the content relation aspect among 
+three internal coherence aspects. Further research should be done on the two other 
+aspects of internal coherence, s
+tructural and pedagogical, as well as external cur-
+c
+,
+,
+,
+.
+1
+riculum coherence. Analysis of all these aspects will contribute to the holistic 
+improvement of the curriculum.
+Keywords:
+ambodia
+curriculum coherence
+general topic trace mapping
+geometry
+\226
+1.1
+Background
+Cambodia became independent from French colonial rule in 1953, and the current gen-
+eral education practice only started after the end of the civil war of 1975
+1979 \(Khmer 
+-
+-
+.
+-
+-
+-
+-
+th 
+th 
+-
+\226
+-
+-
+-
+13]
+.
+e
+Rouge\. The general education system was divided into three levels: primary, lower, 
+and upper secondary. The Ministry of Education, Youth, and Sport \(MoEYS\ has reor-
+ganised the general education system three times. First, from 1979 to 1986, a ten
+year 
+educ
+ation system was introduced comprising four years of primary, three years of lower 
+secondary, and three years of upper secondary education \(4+3+3\. Second, from 1986 
+to 1994, MoEYS changed the education system from ten to eleven years, with five years 
+of p
+rimary, three years of lower secondary, and three years of upper secondary \(5+3+3\. 
+Finally, from 1994 until today, general education has expanded to twelve years \(6+3+3\ 
+to increase teaching
+learning hours and deepen children\222s knowledge
+In addition, pre
+school education was emphasised 
+also 
+as a part of general education, 
+which covers three years. Moreover, after 
+graduation from upper secondary school, 
+students could pursue a four
+year bachelor\222s degree at universities. Non
+formal educa-
+tion, which focuses on adult literacy, is also a part of the Cambodian education system
+. 
+Even though Cambodia\222s education has expanded in the number of years in general 
+education, 
+numerous documents and reports show that students\222 learning achievement 
+is still low. For example, MoEYS reported that on the Programme for International 
+Students Assessment for Development \(PISA
+D\, only 8% of students had achieved the 
+minimum level of pr
+oficiency in reading and 10% of students the minimum level of 
+proficiency in mathematics 
+. Another report, the National Learning Assessment 
+\(NLA\ of November 2021, showed that students\222 learning achievement in both Khmer 
+\(Cambodian official language\ and math remained low compared to the NLA of 2016 
+, especially in maths, where the overall score is only 38%. At the same time, their 
+Khmer achievement is remarkably low in dictation, with only 24% of the correct an-
+swers on average 
+. In mathematics, the average achievement is the lowest in the 
+geometry domain among other \(Algebra, Statistics, Measurement, and Number\, as 
+only 35% of students in the 6
+grade could complete the assessment test correctly 
+and only 46% in the 8
+grade 
+. Similarly, the report on the 12th
+grade national ex-
+amination in academic year 2020
+2021 showed that only 47.93% of students could 
+solve geometry problems correctly 
+. All these indicators reveal insufficient student 
+achievement. 
+Factors which influence students\222 low achievement have been identified as educa-
+tional policy, curriculum, and school
+related, personal, and social factors 
+. The 
+curriculum is one of the most influential factors because it is the starting point forteach-
+ing and learning activities. Thus the whole curriculum should be consistent, and aligned 
+with broader educational goals, objectives, contents, sub
+contents, an
+d learning out-
+comes. In other words, curriculum coherence is the most dominant predictive for stu-
+dent achievement because it refers to the connection and logical progression of con-
+tents, skills, and learning outcomes within a curriculum framework, syllabus
+, textbook, 
+and assessment 
+[11
+In this sense, there is a need to confirm the curriculum coherence of Cambodia\222s 
+curriculum. Three main questions have been set for this study: \(1\ what is the definition 
+of curriculum coherence? \(2\ what is the status of Cambodia\222s primary and secondary 
+ducation geometry curriculum in terms of coherence? and \(3\ how can we enhance the 
+coherence of the curriculum? In this study, the focus is placed on the geometry domain.
+-
+-
+-
+as
+-
+1.2
+Literature Review
+The latest analysis of the education system suggests that \221curriculum coherence\222 is cru-
+cial and is linked with high
+performing systems 
+. Curriculum coherence refers to 
+more than just the simple, common use of the term \221coherence\222; a curriculum is con-
+sidered \221coherent\222 when the assessment, pedagogy, teaching content, textbooks, and 
+national curriculum contents align with and reinforce one 
+another 
+. Coherence 
+means that all of them are interrelated.  
+However, different researchers have defined curriculum coherence in different ways. 
+defined curriculum coherence as the linkage and interconnect-
+edness of the various components of a curriculum, such as the learning objectives, in-
+structional materials, teaching methods, and assessments. These should be organised to 
+ensure that all compone
+nts work together logically and are integrated to support student 
+learning and achievement. In summary, it provides students with a clear and consistent 
+educational experience by avoiding gaps, repetitions, or contradictions.
+Similarly, 
+defined curriculum coherence as the logical and 
+sequential organisation of the content standards and curricula across a period. It in-
+volves articulating a sequence of topics and performances that reflect the discipline\222s 
+hierarchical nature. Coherent cont
+ent standards and curricula are designed to progress 
+from simple content to deeper and more abstract content 
+which is 
+inherent in the disci-
+pline.
+defined curriculum coherence as the degree to which the in-
+tended learning outcomes \(instructional objective\, the instructional processes \(learning 
+activities\, and the assessments \(formative assessment and summative evaluations of 
+the student learning\ a
+re connected or aligned. They are intricately related and con-
+nected, focusing more on objectives, activities and learning outcomes. 
+defined curriculum coherence as the degree to which a 
+curriculum is organised logically and meaningfully. Here, curriculum coherence builds 
+on the student\222s prior knowledge and provides a clear learning progression, with each 
+content or concept building o
+n what the student has learned. This coherence helps stu-
+dents develop an understanding of one topic in connection to another. It also helps 
+teachers plan and deliver instruction more effectively by providing a clear framework 
+for what should be taught and 
+when a given topic could be introduced.
+defined curriculum coherence as the degree to which 
+domain
+specific or disciplinary content is systematically presented to learners in terms 
+of the conceptual coherence of its organisation. In other words, it is the extent to which 
+the curriculum is struc
+tured in a way consistent with the logical and hierarchical nature 
+of the disciplinary content from which it is derived. This coherence includes the order-
+ing relationships between content elements, the rationale for that order, and the connec-
+tions and inte
+rlinkages between different contents and sub
+contents within the subject 
+field. 
+defined curriculum coherence 
+a well
+structured and in-
+terconnected curriculum that ensures students a clear and logical progression of learn-
+ing experiences. This coherence can be achieved by aligning contents across the grades, 
+-
+1
+.
+of 
+coordinating contents within a grade, and ensuring consistency in sequencing concepts 
+and activities. 
+defined curriculum coherence as the coordination and consistency of na-
+tional curriculum content, teaching materials, pedagogical approaches, assessment 
+methods, and incentives within the education system. This coherence means linking 
+and integrating vario
+us elements within an education system. 
+These discussions of curriculum coherence can be summed up under three points. 
+First, it means such organisation as grades or grade bands, content domains, and cog-
+nitive domains across stages
+. This coherence can be called the structural aspect 
+of curriculum coherence.
+Second, it entails 
+connections between different contents within a certain topic 
+[18, 
+. This aspect of coherence means that the contents are sequenced coherently and 
+logically, and such a sequence of contents supports learning progression across grades. 
+In other words, students build their knowledge and skills from one grade to the next 
+. This coherence can be called the content
+relation aspect of curriculum coher-
+ence. 
+Third, it involves 
+the connection between objectives, instructional processes, learn-
+ing outcomes, and assessment 
+. T
+he curriculum\222s goals and objectives outline 
+what will be achieved through the educational process. This relationship highlights the 
+importance of aligning the goals of the curriculum with its actual implementation and 
+leads to the intended outcomes. Such 
+a relationship contributes to effective student 
+learning experiences 
+. This can be called the pedagogical aspect of curriculum co-
+herence. 
+The above three points are related to internal coherence. Through a curriculum with 
+internal coherence, students are more likely to experience a logically connected pro-
+gression of learning experiences, which can contribute to a deeper understanding and 
+mas
+tery of the content 
+. On the other hand, the curriculum can be aligned with 
+social needs and expectation. This is called external coherence because social needs 
+and expectation does not belong to the education itself. So, both internal and external 
+coherences form the overall
+coherence of the curriculum. This paper will focus only on 
+internal curriculum coherence because it is assumed to concern more directly student 
+learning achievement. The table below shows the relational aspects of internal coher-
+ence. 
+Table 
+Aspects
+Curriculum 
+Coherence
+Type
+Aspects
+Descriptions
+Internal coherence
+Structural 
+grades or grade bands, content domains, 
+cognitive domains
+Content relation
+different contents within a certain topic
+Pedagogical
+objectives, instructional processes, learn-
+ing 
+outcomes, and assessment
+External coherence
+Relation with social needs and expecta-
+tion
+Source:
+\(Authors developed based on the literature review\
+Table 1 shows three interrelated aspects: structural, content relation, and pedagogi-
+cal. These relations mean that an effective curriculum design considers the interplay 
+-
+-
+2
+-
+\226
+\226
+\226
+\226
+\226
+12
+-
+-
+-
+-
+-
+-
+\226
+-
+-
+-
+-
+-
+between these three aspects to create a cohesive and meaningful learning experience 
+for students. Among the three aspects of curriculum coherence, the content relation 
+aspect will be the focus of this paper because it can most effectively direct student 
+le
+arning achievement by ensuring that the curriculum is organised coherently and 
+meaningfully 
+. By establishing meaningful connections between concepts, ed-
+ucators can help students see the relevance and significance of what they are learning, 
+leading to deeper understanding and retention of the material.
+In order to analyse the curriculum from the perspective of coherence, in this paper, 
+curriculum coherence is defined as the relation between corresponding domains, sub
+domains, contents, sub
+contents, and learning outcomes within and across grades, and 
+the
+y are all arranged in order as a whole.
+Method
+Data Source
+This study used four of the recently revised mathematics syllabi 
+[22
+for analysis. 
+These were the latest versions available during the research period of 2022
+2023, and 
+together they cover primary education \(1
+6\, lower secondary education \(7
+9\, and up-
+per secondary education \(10
+12\ in general education. The last syllabi 
+for grades 10
+are separated into two files: one for the science track and the other for the social 
+science track. All syllabi contain goals, objectives, domain, contents, sub
+contents, and 
+learning outcomes from grade 1 to grade 12.
+Data Analysis Method
+All the syllabi were translated from Khmer into English. Contents and sub
+contents 
+were translated exactly the same as the original, and the contents and sub
+contents 
+within geometry were allocated according to domains and sub
+domains. The geometry 
+domains
+were devided into five sub
+domains: plane geometry, solid geometry, relations 
+and transformations, constructions, and vectors. The contents and sub
+contents were 
+identified by analysing the syllabi for grades 1
+12. Similarly, the learning outcomes 
+were tr
+anslated and summarised under knowledge, skills, and attitudes. 
+The purpose of 
+the translation is to facilitate consultations with mathematics experts regarding con-
+sistency and to ensure the validity and reliability of the syllabus analysis.
+The data were then inputted into an Excel sheet. The domains, sub
+domains, con-
+tents, sub
+contents, and learning outcomes were arranged from grades 1 to 12 and ex-
+amined within the same grade and across grades to determine whether the domains, 
+subdomains, co
+ntents, sub
+contents, and learning outcomes were related and corre-
+sponded to each other. 
+In this study, the domains, sub
+domains, contents, and sub
+contents and learning 
+outcomes were analysed using General Topics Trace Mapping \(GTTM\, which was 
+developed for content analysis in the Trends in International Mathematics and Science 
+Study \(TIMSS\
+. It provides a way to compare and analyse curricula across coun-
+-
+1.
+-
+-
+-
+2.
+-
+-
+-
+-
+-
+-
+3.
+-
+-
+-
+-
+4.
+-
+-
+-
+3
+tries and identify the content intended for instruction at each grade level and the link-
+ages between contents, sub
+contents and learning outcomes. Based on this GTTM, the 
+following procedures are set:
+We first collected all the geometry contents from the syllabi and arranged each of 
+them into appropriate sub
+domains per grade. In this step, the sub
+domains and con-
+tents are extracted from the syllabi and the grade levels when the contents within the 
+sub
+domains are to be addressed to confirm whether they are repeated or sequenced. 
+Second, sub
+contents are identified and arranged under each content at each grade 
+level. Here, we extracted the content and sub
+contents from the syllabus and con-
+firmed whether the contents and sub
+contents are arranged in order within and across 
+grades. T
+his step identifies the relation of contents and sub
+contents within each 
+grade and across grades. The former relation entails the examination of sub
+contents 
+within each grade to indicate how the contents and sub
+contents fit together.
+Third, it analyses the relation between sub
+contents and learning outcomes within 
+the content for each grade level. This step we identified the relation of sub
+contents 
+and learning outcomes whether the sub
+contents and learning outcomes are corre-
+sponding 
+within at each grade level. 
+Then, we match how each learning outcome fits 
+together with sub
+contents within each content at the grade level
+Last, it analyses the contents, sub
+contents, and learning outcomes across domains,
+subdomains, and grades. In this step, we examine the sequencing of those contents, 
+sub
+contents, and learning outcomes that are clearly related. 
+Then show out the result 
+of the curriculum response to the perspective of curriculum coherence, which have 
+been indicated as the relation between corresponding domains, subdomains, con-
+tents, sub
+contents, and learning outcome within and accress grade, and 
+they are all 
+arranged in or
+der as a whole. 
+Result and Discussion
+3.1
+Results
+Based on the content analysis across primary, lower secondary, and upper secondary 
+education by following the steps described above, we have obtained 
+the following re-
+sults: 
+Regarding the arrangement of the geometry domain, subdomains, and the contents 
+of geometry, the results show that 5 subdomains and 68 contents have been addressed 
+under the geometry domain, as shown in Table 2. 
+2
+.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+-
+-
+Table 
+The
+Arrangement of the Geometry Domain, Subdomains, and Contents from Grades 1 
+to 12
+Subdomains and Contents in the 
+Geometry Domain
+Grades
+Plane geometry
+Points, lines, and curves
+Patterns
+Two
+dimensional geometric shapes
+Rectangles and triangles
+Area and perimeter
+Angles
+Squares and rectangles
+Construction geometry
+Area of a triangle 
+Circles
+The foundation of geometric shapes
+Perimeter and area of a polygon
+Perimeter and area of a circle
+Rectangles
+Polygons
+Area of a rectangle
+Position of circles and lines
+A line and a special segment intersect in 
+a triangle
+Circles and lines
+Properties of angles within circle and 
+regular polygons
+Thales\222 theorem  
+Parabolas
+Ellipse 
+Hyperbola
+Solid Geometry
+Geometric shapes
+Three
+dimensional geometric shapes
+Volume of a solid
+Solids
+The 
+surface area of a solid
+Geometric shapes and planes in space
+Surfaces of similar shape
+The volume of a similar solid
+Geometric shapes in space
+Lines and parallel planes in space
+Orthogonal in space
+Perpendicular and parallel lines
+Symmetric shapes
+Puzzle \(Tessellation\
+Properties of triangles and 
+rectangles
+Parallel lines and perpendicular lines
+Symmetries of a point
+Symmetries of lines and planes
+Equilateral triangles
+Similarity of triangles
+Translations
+Reflections
+Rotations
+Homotheties
+Construction
+Plane coordinates \(cartesian plane\ 
+Construction of mediators, bisectors of 
+angles and 
+triangles
+Construction of rectangles
+Scale
+Pythagorean theorem 
+The trigonometric ratio in a triangle
+Triangle inequalities
+Distance between two points
+Linear equations
+Coordinate points in a plane
+Equation of a circle 
+: 
+-
+-
+b
+-
+-
+1.
+-
+,
+-
+-
+3
+.
+of 
+-
+Sub
+-
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+-
+Solving inequation by graph
+Equation of a plane
+Linear equation in space
+Equation of a sphere
+Vector
+Vectors and operations on vectors 
+Practice with vectors
+Vector spaces
+Scalar product of two vectors 
+Scalar product of two vector spaces
+Noted
+Bold indicates 
+sub
+domains
+, non
+old contents
+; 
+the contents are addressed
+Table 2 shows that the Cambodian mathematics syllabi in the geometry domain con-
+tain more contents than most international mathematics curricula 
+. However, these 
+contents are neither well
+organised nor well
+sequenced. For example, the contents of 
+\221Angle\222 addressed in grades 4, 5, and 7 are repeated. In grade 4 about the content con-
+cerns how to construct acute and perpendicular angles using a protra
+ctor and lines and 
+involves practice measuring the angle with eight directions; at grade 5, the use of a 
+protractor to construct straight angles, full rotation angles, and vertical angles; and at 
+grade 7, the notion of angle, type of angle, measuring angle
+s, and the use of a protractor 
+to measure the angle by constructing an angle with a line, a compass, and perpendicular 
+lines; this topic is skipped in grade 6. On the other hand, the relation of the contents 
+\221Parabola, Ellipse, and Hyperbola\222 are advanced 
+contents involving quadratic curves or 
+conic curves that require a higher level of mathematical knowledge. These contents 
+should be brought up in the context of a specific skill or at the university level 
+. 
+Therefore, this curriculum has weak coherence as a whole because some contents are 
+repeated, and some contents are not appropriately placed per grade level.
+The analysis based on the GTTM procedure 
+yields the following results regard-
+ing the Cambodian syllabi for geometry as a whole:
+The sub
+domains and contents are extracted from the 
+syllabi
+and the grade levels 
+when the contents within the sub
+domains are to be addressed
+and
+indicated with
+the 
+domain is Solid Geometry
+, as shown in Table 3. 
+Table 
+The
+Relation 
+Sub
+Domains 
+and 
+Contents
+domain and Contents
+Solid Geometry
+Geometric shapes
+Three
+dimensional geomet-
+ric shapes
+Solids
+-
+-
+-
+-
+-
+2.
+-
+4
+.
+-
+-
+-
+of 
+-
+-
+-
+-
+-
+-
+N
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+Volume of a solid
+The surface area of a solid
+Geometric shapes and 
+planes in space
+Surfaces of similar shape
+The volume of a similar 
+solid
+Geometric shapes in space
+Parallel lines and planes in 
+space
+Orthogonality in space
+Note: Bold font indicates a sub
+the sub
+domain are to be addressed. 
+Comprehensive analysis shows that the relation of some sub
+domains and contents 
+are not continuously dealt with or are repeated by simply adding superficial complexi-
+ties to the contents without much difference in geometrical ideas from lower to upper 
+grade
+s. In Table 3, an example of non
+continuous treatment is the content of the \221Three
+dimensional geometry shape\222. It is addressed in grade 2 and again in grade 6, which 
+means that it is not continuously treated from grade to grade. On the other hand, the 
+con
+tent of \221Solid\222 is addressed in grade 6, while the content of \221Volume of solid\222 is 
+addressed in grade 5. This can be interpreted as reverse treatment. In fact, the content 
+of \221Solid\222 should be introduced before that content of \221Volume of solid\222 in order to
+measure the solid we have to know that shape first. 
+The relation of contents and sub
+contents across grades is repeated, and their order 
+is not sequenced, as shown in Table 4. 
+Table 
+The
+Relation Between Contents 
+and 
+Sub
+Contents Within 
+and 
+Across Grades
+Grade 5
+Grade 6
+Grade 7
+Grade 8
+Volume of Solid
+Extension of a 
+solid 
+shape  
+Construction of a 
+solid with a unit 
+cubes 
+Construction of 
+Cubes
+Measurement and 
+measuring a volume 
+Volume of a cube
+and cuboid
+Volume of liquid
+Solid
+Notion of a 
+solid
+otion of the 
+surface area of a 
+solid
+Volume of solid
+Notion of solid 
+Change the unit of 
+volume 
+Volume of a right 
+prism 
+Volume of cylin-
+der 
+Volume of solid 
+Volume of a right 
+prism  
+Volume of a cylin-
+der  
+Volume of a 
+pyramid  
+Volume of cone
+Volume of sphere  
+Solve problems
+related to the  
+surface edge of  
+combined
+solids
