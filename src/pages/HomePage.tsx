@@ -18,20 +18,20 @@ import {
 import { popularSearches, resultsHref } from '../lib/search'
 import { getRecentVisits, type RecentVisit } from '../lib/progress'
 import { useBookmarks } from '../lib/bookmarks'
-import { GradeCard } from '../components/ui/GradeCard'
+import { GradeCard, gradeFormulaCount } from '../components/ui/GradeCard'
 import { FormulaCard } from '../components/ui/FormulaCard'
 import { ShapeCard } from '../components/shapes/ShapeCard'
 import { Reveal } from '../components/ui/Reveal'
 import { IconArrowRight, IconBookmark, IconSearch, IconShapes } from '../components/ui/Icons'
 
 const FLOATING = [
-  { symbol: 'π', top: '14%', left: '8%', size: '3.2rem', delay: '0s' },
-  { symbol: '∑', top: '65%', left: '5%', size: '2.6rem', delay: '1.2s' },
-  { symbol: '√x', top: '18%', left: '88%', size: '2.4rem', delay: '0.6s' },
-  { symbol: '∞', top: '46%', left: '92%', size: '2.6rem', delay: '1.8s' },
-  { symbol: 'θ', top: '76%', left: '84%', size: '2.8rem', delay: '2.4s' },
-  { symbol: '∫', top: '10%', left: '52%', size: '2.8rem', delay: '3.0s' },
-  { symbol: 'a²+b²', top: '86%', left: '46%', size: '1.5rem', delay: '1.5s' },
+  { symbol: 'π', top: '12%', left: '8%', size: '3.4rem', delay: '0s', color: '#D6A84B' },
+  { symbol: '∑', top: '65%', left: '6%', size: '2.8rem', delay: '1.2s', color: '#2457A7' },
+  { symbol: '√x', top: '16%', left: '88%', size: '2.5rem', delay: '0.6s', color: '#2457A7' },
+  { symbol: '∞', top: '48%', left: '92%', size: '2.7rem', delay: '1.8s', color: '#D6A84B' },
+  { symbol: 'θ', top: '78%', left: '85%', size: '2.8rem', delay: '2.4s', color: '#2457A7' },
+  { symbol: '∫', top: '9%', left: '52%', size: '3.0rem', delay: '3.0s', color: '#D6A84B' },
+  { symbol: 'Δ', top: '86%', left: '46%', size: '2.4rem', delay: '1.5s', color: '#D6A84B' },
 ]
 
 const FEATURED_SHAPE_IDS = ['circle', 'triangle', 'cylinder', 'cone', 'sphere', 'cube']
@@ -57,6 +57,8 @@ export default function HomePage() {
 
   const formulas = featuredFormulas(4)
   const featuredShapes = FEATURED_SHAPE_IDS.map(findShape).filter((shape): shape is NonNullable<typeof shape> => Boolean(shape))
+  const lowerGrades = grades.filter((grade) => grade.number <= 9)
+  const upperGrades = grades.filter((grade) => grade.number >= 10)
 
   const familySummaries = popularSubjectFamilies.map((family) => {
     const refs = subjectRefs.filter((ref) => ref.subject.family === family)
@@ -73,37 +75,134 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="hero on-dark">
+      <section
+        className="hero"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(234, 242, 255, 0.8), transparent 70%), linear-gradient(180deg, #FFFFFF 0%, #F7F9FC 100%)',
+          color: '#17263D',
+          borderBottom: '1px solid #E2E8F0',
+          ['--hero-bg' as string]: '#FFFFFF',
+          ['--hero-ink' as string]: '#102A56',
+          ['--hero-muted' as string]: '#64748B',
+          ['--hero-faint' as string]: '#94A3B8',
+          ['--hero-line' as string]: 'rgba(16, 42, 86, 0.08)',
+          ['--hero-accent' as string]: '#2457A7',
+        }}
+      >
         <div className="hero__symbols" aria-hidden="true">
           {FLOATING.map((item) => (
             <span
               key={item.symbol}
               className="hero__symbol"
-              style={{ top: item.top, left: item.left, fontSize: item.size, animationDelay: item.delay }}
+              style={{
+                top: item.top,
+                left: item.left,
+                fontSize: item.size,
+                animationDelay: item.delay,
+                color: item.color,
+                opacity: 0.28,
+              }}
             >
               {item.symbol}
             </span>
           ))}
         </div>
         <div className="container hero__inner">
-          <span className="eyebrow eyebrow--lime hero__rise" style={{ ['--i' as string]: 0 }}>
-            Mathematics · Grades 7–12
-          </span>
-          <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1 }}>
-            Explore Mathematics. <span className="serif-italic">Understand Every Formula.</span>
+          <div className="hero__rise" style={{ ['--i' as string]: 0 }}>
+            <span
+              className="hero-kicker"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.6rem',
+                padding: '0.3rem 0.95rem 0.3rem 0.35rem',
+                borderRadius: 'var(--radius-pill)',
+                background: 'rgba(234, 242, 255, 0.9)',
+                border: '1px solid rgba(36, 87, 167, 0.25)',
+                fontSize: '0.84rem',
+                fontWeight: 500,
+                color: '#102A56',
+                boxShadow: '0 1px 3px rgba(16, 42, 86, 0.06)',
+              }}
+            >
+              <span
+                className="badge badge--cultural"
+                style={{
+                  background: '#C83B45',
+                  color: '#FFFFFF',
+                  borderColor: 'transparent',
+                }}
+              >
+                MoEYS Aligned
+              </span>{' '}
+              Cambodian National Curriculum · Grades 7–12
+            </span>
+          </div>
+
+          <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1, color: '#102A56' }}>
+            Explore Mathematics.{' '}
+            <span className="serif-italic" style={{ color: '#2457A7' }}>
+              Understand Every Formula.
+            </span>
             <span className="visually-hidden">Essential mathematics formulas</span>
           </h1>
-          <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2 }}>
-            Your complete mathematics companion for Grades 7–12. Discover formulas, understand concepts, explore geometry, and learn step by step.
+
+          <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2, color: '#64748B' }}>
+            Your complete mathematics companion aligned with the Cambodian national curriculum for Grades 7–12. Discover verified formulas, master step-by-step problem solving, and explore interactive geometry.
           </p>
-          <div className="hero__actions hero__rise" style={{ ['--i' as string]: 3, marginTop: '2rem' }}>
-            <Link className="btn btn--lime btn--lg" to="/grades">
+
+          <div
+            className="hero__actions hero__rise"
+            style={{
+              ['--i' as string]: 3,
+              marginTop: '2rem',
+              display: 'flex',
+              gap: '0.85rem',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+            }}
+          >
+            <Link
+              className="btn btn--primary btn--lg"
+              to="/grades"
+              style={{
+                background: '#102A56',
+                color: '#FFFFFF',
+                borderColor: '#102A56',
+                boxShadow: '0 4px 14px rgba(16, 42, 86, 0.18)',
+              }}
+            >
               Explore Mathematics <IconArrowRight className="icon-arrow" size={18} />
             </Link>
+            <Link
+              className="btn btn--outline btn--lg"
+              to="/shapes"
+              style={{
+                background: '#FFFFFF',
+                color: '#17263D',
+                borderColor: '#CBD5E1',
+              }}
+            >
+              <IconShapes size={18} /> Browse Shapes &amp; Lab
+            </Link>
           </div>
-          <form className="hero__search hero__rise" style={{ ['--i' as string]: 4, marginTop: '1.75rem' }} onSubmit={onSubmit} role="search">
-            <div className="search-field search-field--dark">
-              <IconSearch size={20} />
+
+          <form
+            className="hero__search hero__rise"
+            style={{ ['--i' as string]: 4, marginTop: '2rem' }}
+            onSubmit={onSubmit}
+            role="search"
+          >
+            <div
+              className="search-field"
+              style={{
+                background: '#FFFFFF',
+                borderColor: '#CBD5E1',
+                boxShadow: '0 4px 20px -4px rgba(16, 42, 86, 0.08)',
+              }}
+            >
+              <IconSearch size={20} style={{ color: '#2457A7' }} />
               <label htmlFor="hero-search" className="visually-hidden">
                 Search formulas, topics and shapes
               </label>
@@ -112,69 +211,185 @@ export default function HomePage() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Try “quadratic formula” or “volume of a cylinder”"
+                placeholder="Try “quadratic formula”, “pythagorean theorem”, or “cone volume”"
                 autoComplete="off"
+                style={{ color: '#17263D' }}
               />
-              <button type="submit" className="search-field__submit" aria-label="Search">
+              <button
+                type="submit"
+                className="search-field__submit"
+                aria-label="Search"
+                style={{ background: '#102A56', color: '#FFFFFF' }}
+              >
                 <IconArrowRight size={18} />
               </button>
             </div>
             <div className="hero__suggestions">
               {popularSearches().map((term) => (
-                <Link key={term} className="chip chip--sm btn--on-dark" to={resultsHref(term)}>
+                <Link
+                  key={term}
+                  className="chip chip--sm"
+                  to={resultsHref(term)}
+                  style={{
+                    background: '#FFFFFF',
+                    borderColor: '#E2E8F0',
+                    color: '#243B5A',
+                  }}
+                >
                   {term}
                 </Link>
               ))}
             </div>
           </form>
 
-          <dl className="hero__stats hero__rise" style={{ ['--i' as string]: 5 }}>
+          <dl
+            className="hero__stats hero__rise"
+            style={{ ['--i' as string]: 5, borderColor: '#E2E8F0' }}
+          >
             <div>
-              <dt>Grades</dt>
-              <dd>{libraryStats.gradeCount}</dd>
+              <dt style={{ color: '#64748B' }}>Grades</dt>
+              <dd style={{ color: '#102A56' }}>{libraryStats.gradeCount}</dd>
             </div>
             <div>
-              <dt>Topics</dt>
-              <dd>{libraryStats.topicCount}</dd>
+              <dt style={{ color: '#64748B' }}>Topics</dt>
+              <dd style={{ color: '#102A56' }}>{libraryStats.topicCount}</dd>
             </div>
             <div>
-              <dt>Formulas</dt>
-              <dd>{libraryStats.formulaCount}</dd>
+              <dt style={{ color: '#64748B' }}>Formulas</dt>
+              <dd style={{ color: '#102A56' }}>{libraryStats.formulaCount}</dd>
             </div>
             <div>
-              <dt>Practice questions</dt>
-              <dd>{libraryStats.exerciseCount}</dd>
+              <dt style={{ color: '#64748B' }}>Practice questions</dt>
+              <dd style={{ color: '#102A56' }}>{libraryStats.exerciseCount}</dd>
             </div>
             <div>
-              <dt>Shapes</dt>
-              <dd>{libraryStats.shapeCount}</dd>
+              <dt style={{ color: '#64748B' }}>Shapes</dt>
+              <dd style={{ color: '#102A56' }}>{libraryStats.shapeCount}</dd>
             </div>
           </dl>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="grades-heading">
+      <section className="section" id="curriculum" aria-labelledby="grades-heading">
         <div className="container">
           <Reveal>
             <div className="section-head">
               <div className="section-head__copy">
-                <span className="eyebrow">Choose your grade</span>
-                <h2 id="grades-heading">Six years of mathematics, one clear path.</h2>
+                <span className="eyebrow">National Curriculum Framework</span>
+                <h2 id="grades-heading">Secondary Mathematics Curriculum Tracks</h2>
                 <p className="section-head__intro">
-                  Each grade builds on the last. Start where you are, or revisit an earlier year to fill a gap.
+                  Structured across Cambodia's two secondary educational stages, strictly aligned with Ministry of Education, Youth and Sport (MoEYS) standards.
                 </p>
               </div>
               <Link className="text-link section-head__link" to="/grades">
-                All grades <IconArrowRight size={14} />
+                All 6 grades <IconArrowRight size={14} />
               </Link>
             </div>
           </Reveal>
-          <div className="grade-grid">
-            {grades.map((grade, index) => (
-              <Reveal key={grade.id} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5}>
-                <GradeCard grade={grade} />
-              </Reveal>
-            ))}
+
+          {/* Lower Secondary Track (Grades 7–9) */}
+          <div className="curriculum-stage" style={{ marginBottom: '3.5rem' }}>
+            <Reveal>
+              <div
+                className="curriculum-stage__header"
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  padding: '1.25rem 1.5rem',
+                  marginBottom: '1.5rem',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'linear-gradient(135deg, rgba(36, 87, 167, 0.07) 0%, rgba(247, 249, 252, 0.95) 100%)',
+                  border: '1px solid #E2E8F0',
+                  borderLeft: '4px solid #2457A7',
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.35rem' }}>
+                    <span className="badge badge--accent" style={{ background: '#EAF2FF', color: '#2457A7' }}>
+                      Grades 7–9
+                    </span>
+                    <span className="badge badge--cultural" style={{ background: '#C83B45', color: '#FFFFFF' }}>
+                      Diploma Track
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 650, color: '#102A56' }}>
+                      Lower Secondary Education
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '0.92rem', color: '#64748B' }}>
+                    អនុវិទ្យាល័យ · Core mathematical foundations in signed numbers, linear algebra, synthetic plane geometry, and statistics leading to the National Lower Secondary Examination.
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.82rem', color: '#64748B' }}>
+                  <span><strong style={{ color: '#102A56' }}>3</strong> Grades</span>
+                  <span><strong style={{ color: '#102A56' }}>{lowerGrades.reduce((sum, g) => sum + g.subjects.length, 0)}</strong> Subjects</span>
+                  <span><strong style={{ color: '#102A56' }}>{lowerGrades.reduce((sum, g) => sum + gradeFormulaCount(g), 0)}</strong> Formulas</span>
+                </div>
+              </div>
+            </Reveal>
+            <div className="grade-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+              {lowerGrades.map((grade, index) => (
+                <Reveal key={grade.id} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5}>
+                  <GradeCard grade={grade} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          {/* Upper Secondary Track (Grades 10–12) */}
+          <div className="curriculum-stage">
+            <Reveal>
+              <div
+                className="curriculum-stage__header"
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  padding: '1.25rem 1.5rem',
+                  marginBottom: '1.5rem',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'linear-gradient(135deg, rgba(214, 168, 75, 0.1) 0%, rgba(247, 249, 252, 0.95) 100%)',
+                  border: '1px solid #E2E8F0',
+                  borderLeft: '4px solid #D6A84B',
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.35rem' }}>
+                    <span className="badge badge--accent" style={{ background: '#EAF2FF', color: '#2457A7' }}>
+                      Grades 10–12
+                    </span>
+                    <span className="badge badge--cultural" style={{ background: '#C83B45', color: '#FFFFFF' }}>
+                      Bac II Exam (បាក់ឌុប)
+                    </span>
+                    <span className="badge" style={{ background: '#FEF3C7', color: '#92400E', borderColor: '#FDE68A' }}>
+                      Basic &amp; Advanced Tracks
+                    </span>
+                    <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 650, color: '#102A56' }}>
+                      Upper Secondary Education
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '0.92rem', color: '#64748B' }}>
+                    វិទ្យាល័យ · Higher mathematics encompassing calculus, trigonometry, spatial coordinate geometry, probability, and complex numbers for Basic and Advanced science tracks.
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.82rem', color: '#64748B' }}>
+                  <span><strong style={{ color: '#102A56' }}>3</strong> Grades</span>
+                  <span><strong style={{ color: '#102A56' }}>{upperGrades.reduce((sum, g) => sum + g.subjects.length, 0)}</strong> Subjects</span>
+                  <span><strong style={{ color: '#102A56' }}>{upperGrades.reduce((sum, g) => sum + gradeFormulaCount(g), 0)}</strong> Formulas</span>
+                </div>
+              </div>
+            </Reveal>
+            <div className="grade-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+              {upperGrades.map((grade, index) => (
+                <Reveal key={grade.id} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5}>
+                  <GradeCard grade={grade} />
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
