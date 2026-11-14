@@ -730,8 +730,8 @@
   display: flex;
   gap: 0.85rem;
   padding: 1rem 1.15rem;
-  border-left: 2px solid var(--accent);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-md);
   background: var(--accent-wash);
   font-size: 0.92rem;
   line-height: 1.65;
@@ -745,7 +745,7 @@
 }
 
 .callout--warn {
-  border-left-color: var(--amber);
+  border-color: rgba(214, 168, 75, 0.4);
   background: var(--amber-soft);
 }
 
@@ -754,13 +754,13 @@
 }
 
 .callout--quiet {
-  border-left-color: var(--line-strong);
+  border-color: var(--line);
   background: var(--surface-sunken);
 }
 
 .callout--dark {
   background: rgba(255, 255, 255, 0.055);
-  border-left-color: var(--lime);
+  border-color: var(--hero-line);
   color: var(--hero-muted);
 }
 
@@ -1072,28 +1072,12 @@
               box-shadow var(--dur-mid) var(--ease-soft);
 }
 
-.grade-card::before {
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 3px;
-  background: linear-gradient(90deg, #102A56 0%, #2457A7 50%, #D6A84B 100%);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--dur-mid) var(--ease-out);
-  z-index: 1;
-}
-
 .grade-card:hover {
   transform: translateY(-4px);
   background: #F7F9FC;
   border-color: var(--accent);
   box-shadow: 0 12px 32px -16px rgba(16, 42, 86, 0.18);
   text-decoration: none;
-}
-
-.grade-card:hover::before {
-  transform: scaleX(1);
 }
 
 [data-theme='dark'] .grade-card {

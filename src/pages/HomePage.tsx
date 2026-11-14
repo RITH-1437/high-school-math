@@ -301,9 +301,9 @@ export default function HomePage() {
                   padding: '1.25rem 1.5rem',
                   marginBottom: '1.5rem',
                   borderRadius: 'var(--radius-md)',
-                  background: 'linear-gradient(135deg, rgba(36, 87, 167, 0.07) 0%, rgba(247, 249, 252, 0.95) 100%)',
+                  background: '#FFFFFF',
                   border: '1px solid #E2E8F0',
-                  borderLeft: '4px solid #2457A7',
+                  boxShadow: 'var(--shadow-sm)',
                 }}
               >
                 <div>
@@ -352,9 +352,9 @@ export default function HomePage() {
                   padding: '1.25rem 1.5rem',
                   marginBottom: '1.5rem',
                   borderRadius: 'var(--radius-md)',
-                  background: 'linear-gradient(135deg, rgba(214, 168, 75, 0.1) 0%, rgba(247, 249, 252, 0.95) 100%)',
+                  background: '#FFFFFF',
                   border: '1px solid #E2E8F0',
-                  borderLeft: '4px solid #D6A84B',
+                  boxShadow: 'var(--shadow-sm)',
                 }}
               >
                 <div>

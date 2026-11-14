@@ -361,7 +361,6 @@
 .theorem {
   padding: 1.35rem 1.5rem;
   border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
   border-radius: var(--radius-md);
   background: var(--surface);
 }
@@ -968,6 +967,7 @@
 .feedback {
   margin-top: 1.5rem;
   padding: 1.25rem 1.5rem;
+  border: 1px solid var(--line);
   border-radius: var(--radius-md);
   animation: fade-rise 320ms var(--ease-out) both;
 }
@@ -978,12 +978,12 @@
 
 .feedback--correct {
   background: var(--accent-soft);
-  border-left: 3px solid var(--accent);
+  border-color: rgba(36, 87, 167, 0.35);
 }
 
 .feedback--wrong {
   background: var(--rose-soft);
-  border-left: 3px solid var(--danger);
+  border-color: rgba(200, 59, 69, 0.4);
 }
 
 .exercise-summary h3 {
