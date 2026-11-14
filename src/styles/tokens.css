@@ -1,65 +1,108 @@
 /* ------------------------------------------------------------------
    High School Math design tokens
-   Clean white + navy blue academic theme, gold accent.
+   Cambodian High School Math: Academic White + Navy palette,
+   Cambodian Red & Academic Gold accents, Khmer typography.
    ------------------------------------------------------------------ */
 
 :root {
   color-scheme: light;
 
-  --font-display: 'Fraunces Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  --font-sans: 'Inter Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  /* Font stacks with Khmer script support */
+  --font-display: 'Fraunces Variable', 'Noto Serif Khmer', Georgia, serif;
+  --font-sans: 'Inter Variable', 'Noto Sans Khmer', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --font-math: 'KaTeX_Main', 'Fraunces Variable', serif;
 
+  /* Primitive Palette — Cambodian High School Math */
+  --palette-deep-navy: #102A56;
+  --palette-midnight-navy: #091B38;
+  --palette-academic-blue: #2457A7;
+  --palette-royal-blue: #3978D6;
+  --palette-pure-white: #FFFFFF;
+  --palette-soft-white: #F7F9FC;
+  --palette-light-blue: #EAF2FF;
+  --palette-cambodian-red: #C83B45;
+  --palette-academic-gold: #D6A84B;
+  --palette-text-dark: #17263D;
+  --palette-text-muted: #64748B;
+  --palette-border: #E2E8F0;
+
+  /* Direct palette aliases */
+  --deep-navy: #102A56;
+  --midnight-navy: #091B38;
+  --academic-blue: #2457A7;
+  --royal-blue: #3978D6;
+  --pure-white: #FFFFFF;
+  --soft-white: #F7F9FC;
+  --light-blue: #EAF2FF;
+  --border: #E2E8F0;
+
+  /* Semantic Variables — Light Theme */
   --bg: #FFFFFF;
-  --bg-deep: #F5F8FC;
+  --bg-deep: #F7F9FC;
   --surface: #FFFFFF;
   --surface-raised: #FFFFFF;
-  --surface-sunken: #F5F8FC;
-  --ink: #14243D;
-  --ink-soft: #1E3A5F;
+  --surface-sunken: #F7F9FC;
+  --ink: #17263D;
+  --ink-soft: #243B5A;
   --muted: #64748B;
   --faint: #94A3B8;
-  --line: rgba(16, 42, 86, 0.10);
-  --line-strong: rgba(16, 42, 86, 0.18);
-  --accent: #3978D6;
-  --accent-strong: #2563EB;
+  --line: #E2E8F0;
+  --line-strong: #CBD5E1;
+
+  --accent: #2457A7;
+  --accent-strong: #102A56;
+  --accent-hover: #3978D6;
   --accent-ink: #FFFFFF;
   --accent-soft: #EAF2FF;
-  --accent-wash: rgba(57, 120, 214, 0.07);
+  --accent-wash: rgba(36, 87, 167, 0.08);
+
+  --cambodian-red: #C83B45;
+  --cambodian-red-soft: #FDF2F3;
+  --academic-gold: #D6A84B;
+  --academic-gold-soft: #FDF8EE;
+
+  /* Backward compatibility */
   --lime: #D6A84B;
   --lime-ink: #FFFFFF;
-  --amber: #B8860B;
-  --amber-soft: #FFF8E7;
-  --blue: #3978D6;
+  --amber: #D6A84B;
+  --amber-soft: #FDF8EE;
+  --blue: #2457A7;
   --blue-soft: #EAF2FF;
-  --rose: #E11D48;
-  --rose-soft: #FFF1F2;
+  --rose: #C83B45;
+  --rose-soft: #FDF2F3;
   --violet: #7C3AED;
   --violet-soft: #F3EEFF;
 
+  /* Hero & Header surfaces */
   --hero-bg: #102A56;
+  --hero-bg-deep: #091B38;
   --hero-bg-raised: #183D73;
   --hero-ink: #FFFFFF;
   --hero-muted: rgba(255, 255, 255, 0.72);
   --hero-faint: rgba(255, 255, 255, 0.42);
   --hero-line: rgba(255, 255, 255, 0.14);
   --hero-accent: #D6A84B;
+  --hero-accent-red: #C83B45;
 
   --header-bg: #102A56;
+  --header-bg-deep: #091B38;
   --header-ink: #FFFFFF;
   --header-muted: rgba(255, 255, 255, 0.72);
   --header-line: rgba(255, 255, 255, 0.14);
 
-  --focus: #3978D6;
+  --focus: #2457A7;
   --focus-on-dark: #D6A84B;
-  --danger: #DC2626;
+  --danger: #C83B45;
 
+  /* Elevation & Shadows */
   --shadow-sm: 0 1px 2px rgba(16, 42, 86, 0.06), 0 8px 24px -18px rgba(16, 42, 86, 0.18);
   --shadow-md: 0 2px 4px rgba(16, 42, 86, 0.05), 0 22px 50px -30px rgba(16, 42, 86, 0.22);
   --shadow-lg: 0 30px 80px -40px rgba(9, 27, 56, 0.30);
-  --glow-blue: 0 0 40px rgba(57, 120, 214, 0.12);
+  --glow-blue: 0 0 40px rgba(36, 87, 167, 0.14);
+  --glow-gold: 0 0 40px rgba(214, 168, 75, 0.18);
 
+  /* Layout, Radius, Spacing */
   --radius-xs: 6px;
   --radius-sm: 10px;
   --radius-md: 16px;
@@ -99,34 +142,58 @@
 [data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #0A1628;
-  --bg-deep: #060F1D;
-  --surface: #0F1F35;
-  --surface-raised: #142A4A;
-  --surface-sunken: #0A1628;
-  --ink: #E8EDF5;
-  --ink-soft: #C8D4E5;
-  --muted: #8899B0;
-  --faint: #5A6F8A;
-  --line: rgba(200, 212, 229, 0.12);
-  --line-strong: rgba(200, 212, 229, 0.22);
-  --accent: #5B9AEF;
-  --accent-strong: #7BB3FF;
-  --accent-ink: #0A1628;
-  --accent-soft: #142A4A;
-  --accent-wash: rgba(91, 154, 239, 0.08);
-  --lime: #D6A84B;
-  --lime-ink: #0A1628;
+  --bg: #091B38;
+  --bg-deep: #061328;
+  --surface: #102A56;
+  --surface-raised: #183A70;
+  --surface-sunken: #091B38;
+  --ink: #F7F9FC;
+  --ink-soft: #E2E8F0;
+  --muted: #94A3B8;
+  --faint: #64748B;
+  --line: rgba(226, 232, 240, 0.12);
+  --line-strong: rgba(226, 232, 240, 0.24);
 
-  --hero-bg: #060F1D;
-  --hero-bg-raised: #0F1F35;
-  --header-bg: #060F1D;
+  --accent: #3978D6;
+  --accent-strong: #5B9AEF;
+  --accent-hover: #5B9AEF;
+  --accent-ink: #091B38;
+  --accent-soft: rgba(57, 120, 214, 0.20);
+  --accent-wash: rgba(57, 120, 214, 0.10);
 
-  --focus: #5B9AEF;
+  --cambodian-red: #E0535E;
+  --cambodian-red-soft: rgba(224, 83, 94, 0.18);
+  --academic-gold: #E5BE65;
+  --academic-gold-soft: rgba(229, 190, 101, 0.18);
+
+  --lime: #E5BE65;
+  --lime-ink: #091B38;
+
+  --hero-bg: #091B38;
+  --hero-bg-deep: #061328;
+  --hero-bg-raised: #102A56;
+  --hero-ink: #F7F9FC;
+  --hero-muted: rgba(247, 249, 252, 0.72);
+  --hero-faint: rgba(247, 249, 252, 0.42);
+  --hero-line: rgba(226, 232, 240, 0.12);
+  --hero-accent: #E5BE65;
+  --hero-accent-red: #E0535E;
+
+  --header-bg: #091B38;
+  --header-bg-deep: #061328;
+  --header-ink: #F7F9FC;
+  --header-muted: rgba(247, 249, 252, 0.72);
+  --header-line: rgba(226, 232, 240, 0.12);
+
+  --focus: #3978D6;
+  --focus-on-dark: #E5BE65;
+  --danger: #E0535E;
+
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 30px -20px rgba(0, 0, 0, 0.8);
   --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.35), 0 24px 60px -34px rgba(0, 0, 0, 0.9);
   --shadow-lg: 0 36px 100px -40px rgba(0, 0, 0, 0.9);
-  --glow-blue: 0 0 60px rgba(57, 120, 214, 0.1);
+  --glow-blue: 0 0 60px rgba(57, 120, 214, 0.15);
+  --glow-gold: 0 0 60px rgba(229, 190, 101, 0.15);
 }
 
 /* Family accent helpers — used by subject and grade surfaces. */
@@ -161,4 +228,29 @@
 [data-family='advanced'] {
   --family: #BE123C;
   --family-soft: #FFF1F2;
+}
+
+/* ------------------------------------------------------------------
+   Khmer typography helper classes
+   Khmer script requires taller line-height (1.6) for subscript
+   consonants and superscript vowel signs.
+   ------------------------------------------------------------------ */
+:lang(km),
+[lang='km'],
+.font-khmer,
+.khmer-text {
+  font-family: 'Noto Sans Khmer', var(--font-sans);
+  line-height: 1.6;
+}
+
+.font-khmer-serif,
+.khmer-display,
+.khmer-serif {
+  font-family: 'Noto Serif Khmer', var(--font-display);
+  line-height: 1.6;
+}
+
+.khmer-lead {
+  font-family: 'Noto Sans Khmer', var(--font-sans);
+  line-height: 1.65;
 }

@@ -40,6 +40,7 @@ export function BrandMark({ size = 36 }: { size?: number }) {
         stroke="rgba(255, 255, 255, 0.18)"
         strokeWidth="1"
       />
+      <circle cx="38" cy="10" r="2.5" fill="#C83B45" />
       <path
         d="M 13 17.2 C 13 14.8 15 13.2 17.5 13.2 H 35"
         stroke={`url(#${goldGradId})`}
@@ -71,7 +72,7 @@ export function Brand({ size = 36 }: BrandProps) {
       <BrandMark size={size} />
       <span className="brand-words">
         <span className="brand-name">High School Math</span>
-        <span className="brand-meta">Formula Library · Grades 7–12</span>
+        <span className="brand-meta">Cambodian Curriculum · Grades 7–12</span>
       </span>
     </Link>
   )
