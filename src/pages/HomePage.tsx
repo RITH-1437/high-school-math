@@ -25,12 +25,13 @@ import { Reveal } from '../components/ui/Reveal'
 import { IconArrowRight, IconBookmark, IconSearch, IconShapes } from '../components/ui/Icons'
 
 const FLOATING = [
-  { symbol: 'π', top: '16%', left: '8%', size: '3.2rem', delay: '0s' },
-  { symbol: '∑', top: '64%', left: '4%', size: '2.6rem', delay: '1.2s' },
-  { symbol: '√x', top: '22%', left: '86%', size: '2.4rem', delay: '0.6s' },
-  { symbol: 'θ', top: '72%', left: '90%', size: '3rem', delay: '1.8s' },
-  { symbol: '∫', top: '8%', left: '54%', size: '2.8rem', delay: '2.4s' },
-  { symbol: 'a²+b²', top: '84%', left: '46%', size: '1.5rem', delay: '0.9s' },
+  { symbol: 'π', top: '14%', left: '8%', size: '3.2rem', delay: '0s' },
+  { symbol: '∑', top: '65%', left: '5%', size: '2.6rem', delay: '1.2s' },
+  { symbol: '√x', top: '18%', left: '88%', size: '2.4rem', delay: '0.6s' },
+  { symbol: '∞', top: '46%', left: '92%', size: '2.6rem', delay: '1.8s' },
+  { symbol: 'θ', top: '76%', left: '84%', size: '2.8rem', delay: '2.4s' },
+  { symbol: '∫', top: '10%', left: '52%', size: '2.8rem', delay: '3.0s' },
+  { symbol: 'a²+b²', top: '86%', left: '46%', size: '1.5rem', delay: '1.5s' },
 ]
 
 const FEATURED_SHAPE_IDS = ['circle', 'triangle', 'cylinder', 'cone', 'sphere', 'cube']
@@ -89,13 +90,17 @@ export default function HomePage() {
             Mathematics · Grades 7–12
           </span>
           <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1 }}>
-            The formulas, the reasons, <span className="serif-italic">and the practice.</span>
+            Explore Mathematics. <span className="serif-italic">Understand Every Formula.</span>
           </h1>
           <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2 }}>
-            A digital textbook for secondary mathematics. Read the idea, follow every step of a worked example,
-            turn a shape in your hands, then test yourself. No account needed.
+            Your complete mathematics companion for Grades 7–12. Discover formulas, understand concepts, explore geometry, and learn step by step.
           </p>
-          <form className="hero__search hero__rise" style={{ ['--i' as string]: 3 }} onSubmit={onSubmit} role="search">
+          <div className="hero__actions hero__rise" style={{ ['--i' as string]: 3, marginTop: '2rem' }}>
+            <Link className="btn btn--lime btn--lg" to="/grades">
+              Explore Mathematics <IconArrowRight className="icon-arrow" size={18} />
+            </Link>
+          </div>
+          <form className="hero__search hero__rise" style={{ ['--i' as string]: 4, marginTop: '1.75rem' }} onSubmit={onSubmit} role="search">
             <div className="search-field search-field--dark">
               <IconSearch size={20} />
               <label htmlFor="hero-search" className="visually-hidden">
@@ -122,7 +127,7 @@ export default function HomePage() {
             </div>
           </form>
 
-          <dl className="hero__stats hero__rise" style={{ ['--i' as string]: 4 }}>
+          <dl className="hero__stats hero__rise" style={{ ['--i' as string]: 5 }}>
             <div>
               <dt>Grades</dt>
               <dd>{libraryStats.gradeCount}</dd>
