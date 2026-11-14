@@ -1,0 +1,1588 @@
+[
+  {
+    "id": "Q-STP-001",
+    "grade": 7,
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "question": "What is the mean of 4, 8, 6, 10, 12?",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "Sum = 40",
+      "40 ÷ 5 = 8"
+    ],
+    "explanation": "Mean = sum ÷ count.",
+    "formulaIds": [
+      "F-STP-mean"
+    ],
+    "check": {
+      "expr": "(4+8+6+10+12)/5",
+      "expected": 8,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-002",
+    "grade": 7,
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "Find the median of 22, 35, 18, 27, 30, 40.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 28.5,
+    "steps": [
+      "Order: 18,22,27,30,35,40",
+      "Average 27 and 30"
+    ],
+    "explanation": "Even count: mean of middle pair.",
+    "formulaIds": [
+      "F-STP-mean"
+    ],
+    "check": {
+      "expr": "(27+30)/2",
+      "expected": 28.5,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-003",
+    "grade": 7,
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "A data set has one extremely large value. Which measure changes least when it is added?",
+    "options": [
+      "Mean",
+      "Median",
+      "Range",
+      "Standard deviation"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Median depends on position, not size of extremes"
+    ],
+    "explanation": "Median is resistant to outliers.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-004",
+    "grade": 7,
+    "subject": "statistics",
+    "topicId": "TOP-STP-data-types",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "question": "The number of siblings a student has is:",
+    "options": [
+      "Categorical",
+      "Discrete numerical",
+      "Continuous numerical",
+      "Neither"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Counted, takes whole values"
+    ],
+    "explanation": "Counting gives discrete data.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-005",
+    "grade": 7,
+    "subject": "statistics",
+    "topicId": "TOP-STP-data-types",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "question": "Which is continuous numerical data?",
+    "options": [
+      "Eye colour",
+      "Shoe size in whole numbers",
+      "Height in cm",
+      "Number of pets"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "Height is measured and can take any value in a range"
+    ],
+    "explanation": "Measured quantities are continuous.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-006",
+    "grade": 7,
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "Daily temperatures: 12, 18, 9, 22, 15. Find the range.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 13,
+    "steps": [
+      "Max 22, min 9"
+    ],
+    "explanation": "Range = max − min.",
+    "formulaIds": [
+      "F-STP-range"
+    ],
+    "check": {
+      "expr": "22-9",
+      "expected": 13,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-007",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-frequency-tables-grouped-data",
+    "type": "word-problem",
+    "difficulty": "medium",
+    "question": "Number of goals: 1 goal in 3 games, 2 in 5, 3 in 7, 4 in 5. Find the mean goals per game.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 2.7,
+    "steps": [
+      "Σfx = 3+10+21+20 = 54",
+      "n = 20",
+      "54/20"
+    ],
+    "explanation": "Weighted mean.",
+    "formulaIds": [
+      "F-STP-mean-frequency-table"
+    ],
+    "check": {
+      "expr": "(1*3+2*5+3*7+4*5)/(3+5+7+5)",
+      "expected": 2.7,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-008",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-frequency-tables-grouped-data",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Classes 0–20 (f=3), 20–40 (f=7), 40–60 (f=6), 60–80 (f=4). Estimate the mean.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 41,
+    "steps": [
+      "Midpoints 10,30,50,70",
+      "Σfm = 30+210+300+280 = 820",
+      "820/20"
+    ],
+    "explanation": "Midpoint estimate.",
+    "formulaIds": [
+      "F-STP-mean-frequency-table"
+    ],
+    "check": {
+      "expr": "(10*3+30*7+50*6+70*4)/(3+7+6+4)",
+      "expected": 41,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-009",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-sampling-basics",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Which sampling method gives every group of n individuals the same chance of selection?",
+    "options": [
+      "Convenience",
+      "Simple random",
+      "Self-selected",
+      "Quota by opinion"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Definition of simple random sample"
+    ],
+    "explanation": "Equal chance for every group of size n.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-010",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-sampling-basics",
+    "type": "reasoning",
+    "difficulty": "medium",
+    "question": "A website poll only counts people who choose to respond. Explain why its result may not represent all users.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": null,
+    "steps": [
+      "Respondents choose themselves",
+      "Strong opinions over-represented"
+    ],
+    "explanation": "Self-selection bias: volunteers differ from non-volunteers.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-011",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Data: 2,3,5,7,8,10,12,14. Using median-of-halves, find the IQR.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 7,
+    "steps": [
+      "Q1 = (3+5)/2 = 4",
+      "Q3 = (10+12)/2 = 11",
+      "IQR = 7"
+    ],
+    "explanation": "Both halves have 4 values.",
+    "formulaIds": [
+      "F-STP-iqr"
+    ],
+    "check": {
+      "expr": "(10+12)/2-(3+5)/2",
+      "expected": 7,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-012",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Data 3,4,6,7,9,11,12,15,16,20. Using the exclude-median method, the IQR is:",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "Median 10",
+      "Lower half 3,4,6,7,9 → 6",
+      "Upper half 11,12,15,16,20 → 15",
+      "15 − 6"
+    ],
+    "explanation": "n even: halves of 5.",
+    "formulaIds": [
+      "F-STP-iqr"
+    ],
+    "check": {
+      "expr": "15-6",
+      "expected": 9,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-013",
+    "grade": 9,
+    "subject": "statistics",
+    "topicId": "TOP-STP-outliers",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Q1 = 12, Q3 = 20. Find the upper outlier fence.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 32,
+    "steps": [
+      "IQR = 8",
+      "20 + 12"
+    ],
+    "explanation": "Q3 + 1.5 IQR.",
+    "formulaIds": [
+      "F-STP-outlier-fences"
+    ],
+    "check": {
+      "expr": "20+1.5*(20-12)",
+      "expected": 32,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-014",
+    "grade": 9,
+    "subject": "statistics",
+    "topicId": "TOP-STP-outliers",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Q1 = 10, Q3 = 18. Which value is a potential outlier?",
+    "options": [
+      "5",
+      "28",
+      "31",
+      "17"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "IQR = 8; upper fence 30; lower fence −2"
+    ],
+    "explanation": "Only 31 is beyond a fence.",
+    "formulaIds": [
+      "F-STP-outlier-fences"
+    ],
+    "check": {
+      "expr": "18+1.5*(18-10)",
+      "expected": 30,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-015",
+    "grade": 9,
+    "subject": "statistics",
+    "topicId": "TOP-STP-box-plots",
+    "type": "reasoning",
+    "difficulty": "medium",
+    "question": "A box plot has its median near the left end of the box, and a much longer right whisker. What does this suggest about the shape?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": null,
+    "steps": [
+      "Longer right tail"
+    ],
+    "explanation": "Right (positive) skew: most data lower, a few large values.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-016",
+    "grade": 10,
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Population standard deviation of 1, 2, 3, 4, 10.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 3.1623,
+    "steps": [
+      "Mean 4",
+      "Squares 9+4+1+0+36 = 50",
+      "Var 10",
+      "σ = √10"
+    ],
+    "explanation": "Divide by N = 5.",
+    "formulaIds": [
+      "F-STP-sd-population"
+    ],
+    "check": {
+      "expr": "Math.sqrt((9+4+1+0+36)/5)",
+      "expected": 3.1623,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-017",
+    "grade": 10,
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Sample variance of 1, 2, 3, 4, 10.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 12.5,
+    "steps": [
+      "50/4"
+    ],
+    "explanation": "Divide by n−1.",
+    "formulaIds": [
+      "F-STP-variance-sample"
+    ],
+    "check": {
+      "expr": "(9+4+1+0+36)/4",
+      "expected": 12.5,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-018",
+    "grade": 10,
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "When is the n−1 divisor used?",
+    "options": [
+      "Data are the whole population",
+      "Data are a sample used to estimate a population",
+      "Data are skewed",
+      "Data contain outliers"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Bessel's correction"
+    ],
+    "explanation": "Sample data estimating a population value.",
+    "formulaIds": [
+      "F-STP-variance-sample"
+    ],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-019",
+    "grade": 10,
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Every value in a data set is increased by 5. The standard deviation:",
+    "options": [
+      "Increases by 5",
+      "Is multiplied by 5",
+      "Is unchanged",
+      "Becomes 0"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "Shifts do not change distances from the mean"
+    ],
+    "explanation": "var(X + b) = var(X).",
+    "formulaIds": [
+      "F-STP-variance-population"
+    ],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-020",
+    "grade": 11,
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "type": "numeric",
+    "difficulty": "hard",
+    "question": "Every value in a data set with variance 4 is multiplied by 3. New variance?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 36,
+    "steps": [
+      "a² var"
+    ],
+    "explanation": "Variance scales with a².",
+    "formulaIds": [
+      "F-STP-variance-population"
+    ],
+    "check": {
+      "expr": "3**2*4",
+      "expected": 36,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-021",
+    "grade": 11,
+    "subject": "statistics",
+    "topicId": "TOP-STP-z-scores",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "x = 85, μ = 70, σ = 12. Find z.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 1.25,
+    "steps": [
+      "(85−70)/12"
+    ],
+    "explanation": "z = (x−μ)/σ.",
+    "formulaIds": [
+      "F-STP-z-score"
+    ],
+    "check": {
+      "expr": "(85-70)/12",
+      "expected": 1.25,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-022",
+    "grade": 11,
+    "subject": "statistics",
+    "topicId": "TOP-STP-z-scores",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "z = −1.5, μ = 50, σ = 8. Find x.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 38,
+    "steps": [
+      "x = μ + zσ"
+    ],
+    "explanation": "Rearrange the formula.",
+    "formulaIds": [
+      "F-STP-z-score"
+    ],
+    "check": {
+      "expr": "50+(-1.5)*8",
+      "expected": 38,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-023",
+    "grade": 11,
+    "subject": "statistics",
+    "topicId": "TOP-STP-z-scores",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Anna: 88 (mean 80, SD 4). Ben: 70 (mean 60, SD 10). Who did better relative to their class?",
+    "options": [
+      "Anna by 1 SD",
+      "Ben by 1 SD",
+      "Equal",
+      "Cannot tell"
+    ],
+    "correctAnswer": "A",
+    "correctOptionIndex": 0,
+    "answerValue": null,
+    "steps": [
+      "z_A = 2",
+      "z_B = 1"
+    ],
+    "explanation": "Compare z-scores.",
+    "formulaIds": [
+      "F-STP-z-score"
+    ],
+    "check": {
+      "expr": "(88-80)/4-(70-60)/10",
+      "expected": 1,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-024",
+    "grade": 11,
+    "subject": "statistics",
+    "topicId": "TOP-STP-normal-distribution-empirical-rule",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Heights approx normal, mean 170 cm, SD 8 cm. What percent are above 186 cm?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 2.5,
+    "steps": [
+      "186 = μ + 2σ",
+      "(100−95)/2"
+    ],
+    "explanation": "Empirical rule symmetry.",
+    "formulaIds": [],
+    "check": {
+      "expr": "(100-95)/2",
+      "expected": 2.5,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-025",
+    "grade": 11,
+    "subject": "statistics",
+    "topicId": "TOP-STP-normal-distribution-empirical-rule",
+    "type": "word-problem",
+    "difficulty": "medium",
+    "question": "Bulb lifetimes approx normal, mean 1000 h, SD 50 h. Of 2000 bulbs, about how many last 950–1050 h?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 1360,
+    "steps": [
+      "68% within 1 SD",
+      "2000 × 0.68"
+    ],
+    "explanation": "Empirical rule.",
+    "formulaIds": [],
+    "check": {
+      "expr": "2000*0.68",
+      "expected": 1360,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-026",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-scatter-plots-correlation",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "question": "As temperature rises, hot-drink sales fall. This is:",
+    "options": [
+      "Positive correlation",
+      "Negative correlation",
+      "No correlation",
+      "Perfect correlation"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "One goes up, other goes down"
+    ],
+    "explanation": "Negative association.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-027",
+    "grade": 9,
+    "subject": "statistics",
+    "topicId": "TOP-STP-line-of-best-fit",
+    "type": "word-problem",
+    "difficulty": "medium",
+    "question": "A study line is y = 2.5x + 10 (y score, x hours). Predict y for 8 hours.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 30,
+    "steps": [
+      "2.5(8)+10"
+    ],
+    "explanation": "Substitute.",
+    "formulaIds": [
+      "F-STP-regression-intercept"
+    ],
+    "check": {
+      "expr": "2.5*8+10",
+      "expected": 30,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-028",
+    "grade": 9,
+    "subject": "statistics",
+    "topicId": "TOP-STP-scatter-plots-correlation",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Ice-cream sales and drownings are positively correlated. Best conclusion?",
+    "options": [
+      "Ice cream causes drowning",
+      "Drowning causes ice-cream sales",
+      "A third factor (hot weather) may affect both",
+      "The data must be wrong"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "Correlation ≠ causation"
+    ],
+    "explanation": "Lurking variable.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-029",
+    "grade": 12,
+    "subject": "statistics",
+    "topicId": "TOP-STP-line-of-best-fit",
+    "type": "numeric",
+    "difficulty": "hard",
+    "question": "Points (2,3),(4,5),(6,10),(8,10). Find the least-squares slope.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 1.3,
+    "steps": [
+      "n=4, Σx=20, Σy=28, Σxy=166, Σx²=120",
+      "(664−560)/(480−400)"
+    ],
+    "explanation": "Sums formula.",
+    "formulaIds": [
+      "F-STP-regression-slope"
+    ],
+    "check": {
+      "expr": "(4*166-20*28)/(4*120-20*20)",
+      "expected": 1.3,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-030",
+    "grade": 12,
+    "subject": "statistics",
+    "topicId": "TOP-STP-scatter-plots-correlation",
+    "type": "numeric",
+    "difficulty": "hard",
+    "question": "For the same four points find r (Σy² = 234).",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.9431,
+    "steps": [
+      "Sxy = 26",
+      "Sxx = 20",
+      "Syy = 38",
+      "26/√760"
+    ],
+    "explanation": "Pearson r.",
+    "formulaIds": [
+      "F-STP-pearson-r"
+    ],
+    "check": {
+      "expr": "(166-20*28/4)/Math.sqrt((120-20*20/4)*(234-28*28/4))",
+      "expected": 0.9431,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-031",
+    "grade": 8,
+    "subject": "statistics",
+    "topicId": "TOP-STP-misleading-graphs",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "A bar graph's vertical axis starts at 90 rather than 0. The effect is to:",
+    "options": [
+      "Hide differences",
+      "Exaggerate differences",
+      "Make no change",
+      "Change the data"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Bars lengths no longer proportional to values"
+    ],
+    "explanation": "Truncated axis exaggerates.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-032",
+    "grade": 7,
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "Bag: 6 red, 4 yellow, 10 green. P(yellow)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.2,
+    "steps": [
+      "4/20"
+    ],
+    "explanation": "Favourable ÷ total.",
+    "formulaIds": [
+      "F-STP-probability-equally-likely"
+    ],
+    "check": {
+      "expr": "4/20",
+      "expected": 0.2,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-033",
+    "grade": 7,
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "question": "A fair die is rolled. P(not a 6)?",
+    "options": [
+      "1/6",
+      "1/3",
+      "5/6",
+      "6/5"
+    ],
+    "correctAnswer": "C",
+    "correctOptionIndex": 2,
+    "answerValue": null,
+    "steps": [
+      "1 − 1/6"
+    ],
+    "explanation": "Complement.",
+    "formulaIds": [
+      "F-STP-complement-rule"
+    ],
+    "check": {
+      "expr": "1-1/6",
+      "expected": 0.8333,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-034",
+    "grade": 7,
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "A coin is flipped 3 times. How many outcomes in the sample space?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 8,
+    "steps": [
+      "2×2×2"
+    ],
+    "explanation": "Multiply.",
+    "formulaIds": [
+      "F-STP-fundamental-counting"
+    ],
+    "check": {
+      "expr": "2**3",
+      "expected": 8,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-035",
+    "grade": 8,
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Two fair dice. P(sum = 7)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.1667,
+    "steps": [
+      "6/36"
+    ],
+    "explanation": "Six pairs.",
+    "formulaIds": [
+      "F-STP-probability-equally-likely"
+    ],
+    "check": {
+      "expr": "6/36",
+      "expected": 0.1667,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-036",
+    "grade": 8,
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "type": "multiple-choice",
+    "difficulty": "easy",
+    "question": "Which cannot be a probability?",
+    "options": [
+      "0",
+      "0.35",
+      "1",
+      "1.4"
+    ],
+    "correctAnswer": "D",
+    "correctOptionIndex": 3,
+    "answerValue": null,
+    "steps": [
+      "Probabilities lie in [0,1]"
+    ],
+    "explanation": "1.4 > 1.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-037",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Spinner red 0.25 and coin heads 0.5. P(red and heads)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.125,
+    "steps": [
+      "0.25×0.5"
+    ],
+    "explanation": "Independent.",
+    "formulaIds": [
+      "F-STP-multiplication-independent"
+    ],
+    "check": {
+      "expr": "0.25*0.5",
+      "expected": 0.125,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-038",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Box: 6 red, 4 blue. Draw two without replacement. P(both red)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.3333,
+    "steps": [
+      "6/10 × 5/9"
+    ],
+    "explanation": "Dependent.",
+    "formulaIds": [
+      "F-STP-multiplication-general"
+    ],
+    "check": {
+      "expr": "(6/10)*(5/9)",
+      "expected": 0.3333,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-039",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "type": "word-problem",
+    "difficulty": "medium",
+    "question": "P(at least one six in 3 rolls)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.4213,
+    "steps": [
+      "1 − (5/6)³"
+    ],
+    "explanation": "Complement.",
+    "formulaIds": [
+      "F-STP-complement-rule"
+    ],
+    "check": {
+      "expr": "1-(5/6)**3",
+      "expected": 0.4213,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-040",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-mutually-exclusive-addition-rule",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "P(A)=0.5, P(B)=0.3, P(A∩B)=0.1. P(A∪B)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.7,
+    "steps": [
+      "0.5+0.3−0.1"
+    ],
+    "explanation": "General addition.",
+    "formulaIds": [
+      "F-STP-addition-general"
+    ],
+    "check": {
+      "expr": "0.5+0.3-0.1",
+      "expected": 0.7,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-041",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-mutually-exclusive-addition-rule",
+    "type": "reasoning",
+    "difficulty": "medium",
+    "question": "If A and B are mutually exclusive and both have positive probability, can they be independent? Explain.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": null,
+    "steps": [
+      "P(A∩B)=0",
+      "P(A)P(B)>0"
+    ],
+    "explanation": "No: independence requires P(A∩B) = P(A)P(B) > 0, but mutually exclusive gives 0.",
+    "formulaIds": [],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-042",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-conditional-probability",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "40 students: 25 take art; 10 take art and music. P(music | art)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.4,
+    "steps": [
+      "10/25"
+    ],
+    "explanation": "Restrict to art.",
+    "formulaIds": [
+      "F-STP-conditional-probability"
+    ],
+    "check": {
+      "expr": "10/25",
+      "expected": 0.4,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-043",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-conditional-probability",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "P(A)=0.4, P(B)=0.5, P(A∩B)=0.2. A and B are:",
+    "options": [
+      "Independent",
+      "Dependent",
+      "Mutually exclusive",
+      "Impossible"
+    ],
+    "correctAnswer": "A",
+    "correctOptionIndex": 0,
+    "answerValue": null,
+    "steps": [
+      "0.4×0.5 = 0.2"
+    ],
+    "explanation": "Product equals joint.",
+    "formulaIds": [
+      "F-STP-multiplication-independent"
+    ],
+    "check": {
+      "expr": "0.4*0.5",
+      "expected": 0.2,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-044",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-conditional-probability",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "100 students: girls 30 like maths, 20 don't; boys 25, 25. P(girl | likes maths)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.5455,
+    "steps": [
+      "30/55"
+    ],
+    "explanation": "Conditional.",
+    "formulaIds": [
+      "F-STP-conditional-probability"
+    ],
+    "check": {
+      "expr": "30/55",
+      "expected": 0.5455,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-045",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-tree-venn-two-way-tables",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Urn A (0.5) red 0.4; urn B (0.5) red 0.8. P(red)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.6,
+    "steps": [
+      "0.2+0.4"
+    ],
+    "explanation": "Total probability.",
+    "formulaIds": [
+      "F-STP-total-probability"
+    ],
+    "check": {
+      "expr": "0.5*0.4+0.5*0.8",
+      "expected": 0.6,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-046",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-expected-value",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Roll a die: win $6 on a six, lose $1 otherwise. Expected net?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.1667,
+    "steps": [
+      "6(1/6) − 1(5/6)"
+    ],
+    "explanation": "Expected value.",
+    "formulaIds": [
+      "F-STP-expected-value"
+    ],
+    "check": {
+      "expr": "6*(1/6)-1*(5/6)",
+      "expected": 0.1667,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-047",
+    "grade": 11,
+    "subject": "probability",
+    "topicId": "TOP-STP-discrete-random-variables",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "X = 0,1,2,3 with p = 0.1, 0.4, 0.3, 0.2. Find E[X].",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 1.6,
+    "steps": [
+      "0+0.4+0.6+0.6"
+    ],
+    "explanation": "Weighted sum.",
+    "formulaIds": [
+      "F-STP-expected-value"
+    ],
+    "check": {
+      "expr": "0*0.1+1*0.4+2*0.3+3*0.2",
+      "expected": 1.6,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-048",
+    "grade": 11,
+    "subject": "probability",
+    "topicId": "TOP-STP-discrete-random-variables",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "p = 0.2, 0.3, k, 0.1. Find k.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.4,
+    "steps": [
+      "1 − 0.6"
+    ],
+    "explanation": "Sum to 1.",
+    "formulaIds": [],
+    "check": {
+      "expr": "1-0.2-0.3-0.1",
+      "expected": 0.4,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-049",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-counting-principles",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "Menu: 5 starters, 6 mains, 3 desserts. Meals?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 90,
+    "steps": [
+      "5×6×3"
+    ],
+    "explanation": "Multiplication principle.",
+    "formulaIds": [
+      "F-STP-fundamental-counting"
+    ],
+    "check": {
+      "expr": "5*6*3",
+      "expected": 90,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-050",
+    "grade": 9,
+    "subject": "probability",
+    "topicId": "TOP-STP-counting-principles",
+    "type": "numeric",
+    "difficulty": "easy",
+    "question": "Compute 6!.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 720,
+    "steps": [
+      "6·5·4·3·2·1"
+    ],
+    "explanation": "Factorial.",
+    "formulaIds": [
+      "F-STP-factorial"
+    ],
+    "check": {
+      "expr": "6*5*4*3*2*1",
+      "expected": 720,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-051",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Top 3 of 10 runners in order.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 720,
+    "steps": [
+      "10×9×8"
+    ],
+    "explanation": "Permutation.",
+    "formulaIds": [
+      "F-STP-permutations"
+    ],
+    "check": {
+      "expr": "10*9*8",
+      "expected": 720,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-052",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Choose 4 of 9 students.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 126,
+    "steps": [
+      "9·8·7·6/4!"
+    ],
+    "explanation": "Combination.",
+    "formulaIds": [
+      "F-STP-combinations"
+    ],
+    "check": {
+      "expr": "9*8*7*6/(4*3*2*1)",
+      "expected": 126,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-053",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Which is a combination problem?",
+    "options": [
+      "Choose a president and secretary from 8",
+      "Choose 2 of 8 for a committee",
+      "Arrange 8 books",
+      "Assign gold/silver/bronze"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Committee order irrelevant"
+    ],
+    "explanation": "Combinations ignore order.",
+    "formulaIds": [
+      "F-STP-combinations"
+    ],
+    "check": null,
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-054",
+    "grade": 10,
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "type": "numeric",
+    "difficulty": "hard",
+    "question": "Distinct arrangements of MISSISSIPPI.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 34650,
+    "steps": [
+      "11!/(4!4!2!)"
+    ],
+    "explanation": "Divide by repeats.",
+    "formulaIds": [
+      "F-STP-permutations-repeated"
+    ],
+    "check": {
+      "expr": "39916800/(24*24*2)",
+      "expected": 34650,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-055",
+    "grade": 11,
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "Probability of exactly 2 heads in 4 fair tosses.",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.375,
+    "steps": [
+      "C(4,2)/2⁴ = 6/16"
+    ],
+    "explanation": "Binomial or counting.",
+    "formulaIds": [
+      "F-STP-binomial-pmf"
+    ],
+    "check": {
+      "expr": "6/16",
+      "expected": 0.375,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-056",
+    "grade": 12,
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "X ~ B(6, 0.5). P(X = 3)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.3125,
+    "steps": [
+      "20·0.5⁶"
+    ],
+    "explanation": "Binomial.",
+    "formulaIds": [
+      "F-STP-binomial-pmf"
+    ],
+    "check": {
+      "expr": "20*0.5**6",
+      "expected": 0.3125,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-057",
+    "grade": 12,
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "type": "numeric",
+    "difficulty": "hard",
+    "question": "X ~ B(5, 0.3). P(X = 2)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.3087,
+    "steps": [
+      "10·0.09·0.343"
+    ],
+    "explanation": "Binomial.",
+    "formulaIds": [
+      "F-STP-binomial-pmf"
+    ],
+    "check": {
+      "expr": "10*0.3**2*0.7**3",
+      "expected": 0.3087,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-058",
+    "grade": 12,
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "type": "numeric",
+    "difficulty": "medium",
+    "question": "X ~ B(40, 0.25). SD?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 2.7386,
+    "steps": [
+      "√7.5"
+    ],
+    "explanation": "√npq.",
+    "formulaIds": [
+      "F-STP-binomial-variance"
+    ],
+    "check": {
+      "expr": "Math.sqrt(40*0.25*0.75)",
+      "expected": 2.7386,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-059",
+    "grade": 12,
+    "subject": "probability",
+    "topicId": "TOP-STP-bayes-theorem",
+    "type": "numeric",
+    "difficulty": "hard",
+    "question": "A (30%, 1% defective), B (70%, 3%). P(A | defective)?",
+    "options": null,
+    "correctAnswer": null,
+    "correctOptionIndex": null,
+    "answerValue": 0.125,
+    "steps": [
+      "0.003/0.024"
+    ],
+    "explanation": "Bayes.",
+    "formulaIds": [
+      "F-STP-bayes"
+    ],
+    "check": {
+      "expr": "0.3*0.01/(0.3*0.01+0.7*0.03)",
+      "expected": 0.125,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "Q-STP-060",
+    "grade": 12,
+    "subject": "probability",
+    "topicId": "TOP-STP-bayes-theorem",
+    "type": "multiple-choice",
+    "difficulty": "medium",
+    "question": "Why can P(disease | positive) be much lower than test sensitivity?",
+    "options": [
+      "Tests are random",
+      "The disease is rare so most positives are false",
+      "Sensitivity is misreported",
+      "Bayes' theorem is invalid"
+    ],
+    "correctAnswer": "B",
+    "correctOptionIndex": 1,
+    "answerValue": null,
+    "steps": [
+      "Base rate"
+    ],
+    "explanation": "Low prevalence → many false positives.",
+    "formulaIds": [
+      "F-STP-bayes"
+    ],
+    "check": null,
+    "researchArea": "stats-probability"
+  }
+]

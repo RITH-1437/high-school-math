@@ -1,0 +1,990 @@
+[
+  {
+    "id": "TOP-STP-data-types",
+    "subject": "statistics",
+    "topic": "Types of data",
+    "subtopics": [
+      "Categorical vs numerical",
+      "Discrete vs continuous"
+    ],
+    "recommendedGrade": 7,
+    "gradeRange": [
+      7,
+      8
+    ],
+    "internationalVariation": "Data classification is commonly met in lower secondary statistics, often at ages 11-14. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Classify variables as categorical or numerical",
+      "Distinguish discrete (counted) from continuous (measured) data"
+    ],
+    "formulaIds": [],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Sorting cards for variables into a tree of data types"
+    ],
+    "sourceIds": [
+      "SRC-STP-005"
+    ]
+  },
+  {
+    "id": "TOP-STP-sampling-basics",
+    "subject": "statistics",
+    "topic": "Sampling basics",
+    "subtopics": [
+      "Population vs sample",
+      "Simple random sample",
+      "Stratified sample",
+      "Bias"
+    ],
+    "recommendedGrade": 8,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "Sampling and bias appear from lower secondary and are revisited with inference at upper secondary. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-data-types"
+    ],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Define population and sample",
+      "Describe simple random and stratified sampling",
+      "Recognise self-selected samples as a source of bias"
+    ],
+    "formulaIds": [],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Population dots with a random sample highlighted"
+    ],
+    "sourceIds": [
+      "SRC-STP-005"
+    ]
+  },
+  {
+    "id": "TOP-STP-frequency-tables-grouped-data",
+    "subject": "statistics",
+    "topic": "Frequency tables and grouped data",
+    "subtopics": [
+      "Frequency and relative frequency",
+      "Class intervals",
+      "Midpoints",
+      "Estimated mean from grouped data"
+    ],
+    "recommendedGrade": 7,
+    "gradeRange": [
+      7,
+      9
+    ],
+    "internationalVariation": "Frequency tables are lower secondary; estimating the mean of grouped data is often taught at ages 13-15. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-data-types"
+    ],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Build a frequency table",
+      "Estimate the mean from grouped data using midpoints",
+      "Identify the modal and median class"
+    ],
+    "formulaIds": [
+      "F-STP-mean-frequency-table"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Frequency table linked to a histogram"
+    ],
+    "sourceIds": [
+      "SRC-STP-003",
+      "SRC-STP-015",
+      "SRC-STP-038"
+    ]
+  },
+  {
+    "id": "TOP-STP-mean-median-mode-range",
+    "subject": "statistics",
+    "topic": "Mean, median, mode and range",
+    "subtopics": [
+      "Arithmetic mean",
+      "Median",
+      "Mode / bimodal",
+      "Range",
+      "Effect of outliers"
+    ],
+    "recommendedGrade": 7,
+    "gradeRange": [
+      6,
+      8
+    ],
+    "internationalVariation": "Introduced at primary/lower secondary level in most systems; revisited with grouped data later. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Compute mean, median, mode and range",
+      "Choose a suitable measure of centre for skewed data"
+    ],
+    "formulaIds": [
+      "F-STP-mean",
+      "F-STP-range"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Dot plot with balance-point mean marker"
+    ],
+    "sourceIds": [
+      "SRC-STP-003",
+      "SRC-STP-034"
+    ]
+  },
+  {
+    "id": "TOP-STP-quartiles-iqr-five-number",
+    "subject": "statistics",
+    "topic": "Quartiles, IQR and the five-number summary",
+    "subtopics": [
+      "Median-of-halves method",
+      "Percentile index method",
+      "Convention differences",
+      "IQR",
+      "Five-number summary"
+    ],
+    "recommendedGrade": 8,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "Quartiles are common at ages 13-16; the exact quartile method differs between textbooks, calculators and software, so assessments should state the method. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-mean-median-mode-range"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Find Q1, Q2, Q3 with a stated convention",
+      "Compute IQR and the five-number summary",
+      "Explain why different conventions can give different quartiles"
+    ],
+    "formulaIds": [
+      "F-STP-iqr",
+      "F-STP-percentile-index"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Ordered data strip split into quarters",
+      "Side-by-side convention comparison"
+    ],
+    "sourceIds": [
+      "SRC-STP-002",
+      "SRC-STP-021",
+      "SRC-STP-032",
+      "SRC-STP-035"
+    ]
+  },
+  {
+    "id": "TOP-STP-outliers",
+    "subject": "statistics",
+    "topic": "Outliers and the 1.5 x IQR rule",
+    "subtopics": [
+      "Fences",
+      "Potential outliers",
+      "Effect on mean and SD"
+    ],
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "The 1.5 x IQR rule is a convention, not a theorem; it appears from about age 14 onwards. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-quartiles-iqr-five-number"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Compute lower and upper fences",
+      "Flag potential outliers and discuss what to do about them"
+    ],
+    "formulaIds": [
+      "F-STP-outlier-fences"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Box plot with fences and flagged points"
+    ],
+    "sourceIds": [
+      "SRC-STP-002",
+      "SRC-STP-017",
+      "SRC-STP-018",
+      "SRC-STP-033"
+    ]
+  },
+  {
+    "id": "TOP-STP-box-plots",
+    "subject": "statistics",
+    "topic": "Box plots",
+    "subtopics": [
+      "Construction",
+      "Whiskers",
+      "Comparing distributions",
+      "Skew from a box plot"
+    ],
+    "recommendedGrade": 8,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "Box-and-whisker plots are usually taught at lower to middle secondary level. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-quartiles-iqr-five-number"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Draw a box plot from a five-number summary",
+      "Compare two distributions using box plots"
+    ],
+    "formulaIds": [],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Interactive box plot built from editable data"
+    ],
+    "sourceIds": [
+      "SRC-STP-002",
+      "SRC-STP-004",
+      "SRC-STP-017",
+      "SRC-STP-020",
+      "SRC-STP-035"
+    ]
+  },
+  {
+    "id": "TOP-STP-data-displays",
+    "subject": "statistics",
+    "topic": "Data displays",
+    "subtopics": [
+      "Bar chart",
+      "Line graph",
+      "Pie chart",
+      "Histogram",
+      "Stem-and-leaf plot",
+      "Frequency polygon"
+    ],
+    "recommendedGrade": 7,
+    "gradeRange": [
+      7,
+      9
+    ],
+    "internationalVariation": "Basic charts appear in primary school; histograms and stem-and-leaf plots usually appear at ages 12-15. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-data-types"
+    ],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Choose an appropriate display for a data type",
+      "Read information from each display"
+    ],
+    "formulaIds": [],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Same data in four displays"
+    ],
+    "sourceIds": [
+      "SRC-STP-015",
+      "SRC-STP-047",
+      "SRC-STP-051",
+      "SRC-STP-052"
+    ]
+  },
+  {
+    "id": "TOP-STP-misleading-graphs",
+    "subject": "statistics",
+    "topic": "Interpreting data displays, correlation and causation",
+    "subtopics": [
+      "Choosing a display for the data type",
+      "Reading frequency and time-series graphs",
+      "Association in scatter plots and correlation versus causation"
+    ],
+    "recommendedGrade": 8,
+    "gradeRange": [
+      7,
+      10
+    ],
+    "internationalVariation": "Graph literacy is commonly taught alongside charts. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-data-displays"
+    ],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Select an appropriate display for categorical and numerical data",
+      "Interpret frequencies and trends from histograms and time-series graphs",
+      "Distinguish correlation from causation and avoid causal claims from observational data"
+    ],
+    "formulaIds": [],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Before/after bar chart with axis from zero and from a high value"
+    ],
+    "sourceIds": [
+      "SRC-STP-015",
+      "SRC-STP-039",
+      "SRC-STP-048"
+    ]
+  },
+  {
+    "id": "TOP-STP-variance-standard-deviation",
+    "subject": "statistics",
+    "topic": "Variance and standard deviation",
+    "subtopics": [
+      "Population variance and SD",
+      "Sample variance and SD",
+      "When to use n vs n-1",
+      "Linear transformations"
+    ],
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "internationalVariation": "SD is often introduced at upper secondary (ages 15-17); n vs n-1 may be postponed to the final secondary years or university. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-mean-median-mode-range"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Compute population and sample variance/SD",
+      "Explain why the sample version divides by n-1",
+      "Predict how SD changes under shifting and scaling"
+    ],
+    "formulaIds": [
+      "F-STP-variance-population",
+      "F-STP-variance-sample",
+      "F-STP-sd-population",
+      "F-STP-sd-sample"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Dots with deviations drawn to the mean; SD band"
+    ],
+    "sourceIds": [
+      "SRC-STP-001",
+      "SRC-STP-022",
+      "SRC-STP-034",
+      "SRC-STP-056"
+    ]
+  },
+  {
+    "id": "TOP-STP-z-scores",
+    "subject": "statistics",
+    "topic": "z-scores",
+    "subtopics": [
+      "Standardising",
+      "Comparing across distributions",
+      "Recovering raw scores"
+    ],
+    "recommendedGrade": 11,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "internationalVariation": "Usually appears with normal distributions at ages 16-18. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-variance-standard-deviation"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Compute a z-score",
+      "Compare values from different distributions",
+      "Convert z back to a raw value"
+    ],
+    "formulaIds": [
+      "F-STP-z-score"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Value marked on a bell curve with SD ticks"
+    ],
+    "sourceIds": [
+      "SRC-STP-036",
+      "SRC-STP-054",
+      "SRC-STP-055"
+    ]
+  },
+  {
+    "id": "TOP-STP-normal-distribution-empirical-rule",
+    "subject": "statistics",
+    "topic": "Normal distribution and the empirical rule",
+    "subtopics": [
+      "Bell curve",
+      "Symmetry",
+      "68-95-99.7 rule",
+      "Standard normal"
+    ],
+    "recommendedGrade": 11,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "internationalVariation": "Normal distribution is an upper secondary topic; the empirical rule is the Grade 11-12 entry point before tables or calculators. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-z-scores"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Describe the normal curve",
+      "Use the empirical rule for approximately normal data"
+    ],
+    "formulaIds": [],
+    "theoremIds": [
+      "T-STP-empirical-rule",
+      "T-STP-central-limit-theorem"
+    ],
+    "recommendedVisualizations": [
+      "Bell curve with shaded 1, 2, 3 SD bands"
+    ],
+    "sourceIds": [
+      "SRC-STP-019",
+      "SRC-STP-036",
+      "SRC-STP-054",
+      "SRC-STP-055",
+      "SRC-STP-014"
+    ]
+  },
+  {
+    "id": "TOP-STP-scatter-plots-correlation",
+    "subject": "statistics",
+    "topic": "Scatter plots and correlation",
+    "subtopics": [
+      "Direction and strength",
+      "Outliers",
+      "Correlation vs causation",
+      "Pearson r (enrichment)"
+    ],
+    "recommendedGrade": 8,
+    "gradeRange": [
+      8,
+      12
+    ],
+    "internationalVariation": "Scatter plots appear in lower secondary; Pearson r is usually Grade 11-12 or later. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-data-displays"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Describe direction, strength and form",
+      "Explain why correlation does not prove causation",
+      "Compute r from sums (enrichment)"
+    ],
+    "formulaIds": [
+      "F-STP-pearson-r"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Scatter with adjustable noise and r readout"
+    ],
+    "sourceIds": [
+      "SRC-STP-029",
+      "SRC-STP-039",
+      "SRC-STP-048"
+    ]
+  },
+  {
+    "id": "TOP-STP-line-of-best-fit",
+    "subject": "statistics",
+    "topic": "Line of best fit and least-squares regression",
+    "subtopics": [
+      "Eyeballed line",
+      "Least squares line",
+      "Prediction",
+      "Extrapolation caution"
+    ],
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      12
+    ],
+    "internationalVariation": "Informal lines of best fit at ages 13-15; least-squares formulas at ages 16-18. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-scatter-plots-correlation"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Fit and use y = a + bx",
+      "Interpret slope and intercept in context"
+    ],
+    "formulaIds": [
+      "F-STP-regression-slope",
+      "F-STP-regression-intercept"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Scatter with draggable line and SSE readout"
+    ],
+    "sourceIds": [
+      "SRC-STP-013",
+      "SRC-STP-030",
+      "SRC-STP-040",
+      "SRC-STP-048"
+    ]
+  },
+  {
+    "id": "TOP-STP-basic-probability",
+    "subject": "probability",
+    "topic": "Basic probability, sample spaces and complements",
+    "subtopics": [
+      "Experiments and outcomes",
+      "Sample space",
+      "Events",
+      "Equally likely outcomes",
+      "Complement rule"
+    ],
+    "recommendedGrade": 7,
+    "gradeRange": [
+      7,
+      8
+    ],
+    "internationalVariation": "Basic probability starts in primary school; complements and sample spaces at ages 12-14. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "List a sample space",
+      "Compute probability of an event with equally likely outcomes",
+      "Use P(A') = 1 - P(A)"
+    ],
+    "formulaIds": [
+      "F-STP-probability-equally-likely",
+      "F-STP-complement-rule"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Dice sample-space grid"
+    ],
+    "sourceIds": [
+      "SRC-STP-006",
+      "SRC-STP-037",
+      "SRC-STP-049"
+    ]
+  },
+  {
+    "id": "TOP-STP-independent-dependent-events",
+    "subject": "probability",
+    "topic": "Independent and dependent events",
+    "subtopics": [
+      "With/without replacement",
+      "Multiplication rule",
+      "Compound events",
+      "At least one"
+    ],
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "Usually ages 14-16. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-basic-probability"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Decide whether events are independent",
+      "Multiply probabilities for sequences"
+    ],
+    "formulaIds": [
+      "F-STP-multiplication-independent",
+      "F-STP-multiplication-general"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Tree diagram with and without replacement"
+    ],
+    "sourceIds": [
+      "SRC-STP-007",
+      "SRC-STP-008",
+      "SRC-STP-037",
+      "SRC-STP-044"
+    ]
+  },
+  {
+    "id": "TOP-STP-mutually-exclusive-addition-rule",
+    "subject": "probability",
+    "topic": "Mutually exclusive events and the addition rule",
+    "subtopics": [
+      "Mutually exclusive",
+      "General addition rule",
+      "Independent vs mutually exclusive"
+    ],
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "Usually ages 14-16. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-basic-probability"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Apply P(A or B) with and without overlap",
+      "Distinguish mutually exclusive from independent"
+    ],
+    "formulaIds": [
+      "F-STP-addition-general",
+      "F-STP-addition-mutually-exclusive"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Venn diagram with overlap region"
+    ],
+    "sourceIds": [
+      "SRC-STP-007",
+      "SRC-STP-008",
+      "SRC-STP-028",
+      "SRC-STP-043"
+    ]
+  },
+  {
+    "id": "TOP-STP-conditional-probability",
+    "subject": "probability",
+    "topic": "Conditional probability",
+    "subtopics": [
+      "P(B|A)",
+      "Two-way tables",
+      "Independence test"
+    ],
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "internationalVariation": "Conditional probability is usually upper secondary (ages 15-17). Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-independent-dependent-events"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Compute P(B|A) from counts or probabilities",
+      "Test independence using P(A and B) = P(A)P(B)"
+    ],
+    "formulaIds": [
+      "F-STP-conditional-probability"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Two-way table with highlighted row/column"
+    ],
+    "sourceIds": [
+      "SRC-STP-008",
+      "SRC-STP-009",
+      "SRC-STP-024",
+      "SRC-STP-037"
+    ]
+  },
+  {
+    "id": "TOP-STP-tree-venn-two-way-tables",
+    "subject": "probability",
+    "topic": "Tree diagrams, Venn diagrams and two-way tables",
+    "subtopics": [
+      "Tree diagrams",
+      "Venn diagrams",
+      "Contingency tables"
+    ],
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      11
+    ],
+    "internationalVariation": "Venn diagrams and tree diagrams appear at ages 13-16. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-conditional-probability"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Represent a problem with a tree, Venn diagram or table",
+      "Read joint, marginal and conditional probabilities"
+    ],
+    "formulaIds": [
+      "F-STP-total-probability"
+    ],
+    "theoremIds": [
+      "T-STP-total-probability"
+    ],
+    "recommendedVisualizations": [
+      "Linked tree/table/Venn views"
+    ],
+    "sourceIds": [
+      "SRC-STP-009",
+      "SRC-STP-010",
+      "SRC-STP-037",
+      "SRC-STP-050"
+    ]
+  },
+  {
+    "id": "TOP-STP-bayes-theorem",
+    "subject": "probability",
+    "topic": "Bayes' theorem",
+    "subtopics": [
+      "Reversing a conditional",
+      "Base rates",
+      "Medical test example"
+    ],
+    "recommendedGrade": 12,
+    "gradeRange": [
+      12,
+      12
+    ],
+    "internationalVariation": "Bayes' theorem is typically university or advanced upper-secondary enrichment. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-tree-venn-two-way-tables"
+    ],
+    "difficulty": "advanced",
+    "learningObjectives": [
+      "Compute P(A|B) from P(B|A) and priors",
+      "Explain base-rate effects"
+    ],
+    "formulaIds": [
+      "F-STP-bayes"
+    ],
+    "theoremIds": [
+      "T-STP-bayes"
+    ],
+    "recommendedVisualizations": [
+      "Population of 1000 icons shaded by test result"
+    ],
+    "sourceIds": [
+      "SRC-STP-023",
+      "SRC-STP-024",
+      "SRC-STP-045"
+    ]
+  },
+  {
+    "id": "TOP-STP-expected-value",
+    "subject": "probability",
+    "topic": "Expected value",
+    "subtopics": [
+      "Weighted average",
+      "Fair games",
+      "Linearity"
+    ],
+    "recommendedGrade": 10,
+    "gradeRange": [
+      9,
+      12
+    ],
+    "internationalVariation": "Expected value of simple games appears from ages 14-15. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-basic-probability"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Compute E[X] from a distribution",
+      "Decide whether a game is fair"
+    ],
+    "formulaIds": [
+      "F-STP-expected-value"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Probability bars with balance point"
+    ],
+    "sourceIds": [
+      "SRC-STP-011",
+      "SRC-STP-031",
+      "SRC-STP-046"
+    ]
+  },
+  {
+    "id": "TOP-STP-counting-principles",
+    "subject": "probability",
+    "topic": "Counting principles and factorials",
+    "subtopics": [
+      "Fundamental counting principle",
+      "Factorial",
+      "Tree counting"
+    ],
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "internationalVariation": "Counting problems appear at ages 13-15 informally; factorial notation at 15-16. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [],
+    "difficulty": "introductory",
+    "learningObjectives": [
+      "Apply the multiplication principle",
+      "Compute factorials"
+    ],
+    "formulaIds": [
+      "F-STP-fundamental-counting",
+      "F-STP-factorial"
+    ],
+    "theoremIds": [
+      "T-STP-fundamental-counting"
+    ],
+    "recommendedVisualizations": [
+      "Choice tree for outfits"
+    ],
+    "sourceIds": [
+      "SRC-STP-016",
+      "SRC-STP-053"
+    ]
+  },
+  {
+    "id": "TOP-STP-permutations-combinations",
+    "subject": "probability",
+    "topic": "Permutations and combinations",
+    "subtopics": [
+      "Ordered vs unordered",
+      "nPr",
+      "nCr",
+      "Arrangements with repeated items"
+    ],
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "internationalVariation": "Usually ages 15-17. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-counting-principles"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Choose between permutation and combination",
+      "Count arrangements of items with repeats"
+    ],
+    "formulaIds": [
+      "F-STP-permutations",
+      "F-STP-combinations",
+      "F-STP-permutations-repeated"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Slots diagram for ordered selection"
+    ],
+    "sourceIds": [
+      "SRC-STP-016",
+      "SRC-STP-026",
+      "SRC-STP-027",
+      "SRC-STP-041"
+    ]
+  },
+  {
+    "id": "TOP-STP-discrete-random-variables",
+    "subject": "probability",
+    "topic": "Discrete random variables",
+    "subtopics": [
+      "Probability distributions",
+      "Valid distributions",
+      "Mean of X"
+    ],
+    "recommendedGrade": 11,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "internationalVariation": "Upper secondary (ages 16-18). Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-expected-value"
+    ],
+    "difficulty": "intermediate",
+    "learningObjectives": [
+      "Check a distribution sums to 1",
+      "Compute E[X]"
+    ],
+    "formulaIds": [
+      "F-STP-expected-value"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Bar chart of a distribution"
+    ],
+    "sourceIds": [
+      "SRC-STP-011",
+      "SRC-STP-031",
+      "SRC-STP-046"
+    ]
+  },
+  {
+    "id": "TOP-STP-binomial-distribution",
+    "subject": "probability",
+    "topic": "Binomial distribution",
+    "subtopics": [
+      "Bernoulli trials",
+      "P(X = k)",
+      "Mean and SD"
+    ],
+    "recommendedGrade": 12,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "internationalVariation": "Typically final secondary year or university preparation. Placement is a pedagogical recommendation; none of the fetched sources states a secondary grade level (OpenStax/LibreTexts/NIST are college or professional references; Math is Fun states no grade).",
+    "gradeEvidence": [],
+    "gradeBasis": "recommendation",
+    "prerequisites": [
+      "TOP-STP-permutations-combinations",
+      "TOP-STP-discrete-random-variables"
+    ],
+    "difficulty": "advanced",
+    "learningObjectives": [
+      "Recognise binomial situations",
+      "Compute P(X=k), mean and SD"
+    ],
+    "formulaIds": [
+      "F-STP-binomial-pmf",
+      "F-STP-binomial-mean",
+      "F-STP-binomial-variance"
+    ],
+    "theoremIds": [],
+    "recommendedVisualizations": [
+      "Bar chart of B(n,p) with sliders"
+    ],
+    "sourceIds": [
+      "SRC-STP-012",
+      "SRC-STP-025",
+      "SRC-STP-042"
+    ]
+  }
+]

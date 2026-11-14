@@ -1,0 +1,175 @@
+/* ------------------------------------------------------------------
+   High School Math design tokens
+   Warm paper light theme / deep ink dark theme, forest + chartreuse accent.
+   ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: 'Inter Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --font-math: 'KaTeX_Main', 'Fraunces Variable', serif;
+
+  --bg: #f3f0e7;
+  --bg-deep: #ebe6d9;
+  --surface: #fffdf7;
+  --surface-raised: #ffffff;
+  --surface-sunken: #efebe0;
+  --ink: #141914;
+  --ink-soft: #2e352d;
+  --muted: #5d6359;
+  --faint: #848a7f;
+  --line: rgba(20, 25, 20, 0.12);
+  --line-strong: rgba(20, 25, 20, 0.24);
+  --accent: #1b5c43;
+  --accent-strong: #134733;
+  --accent-ink: #f7f4e9;
+  --accent-soft: #deebdd;
+  --accent-wash: rgba(27, 92, 67, 0.07);
+  --lime: #c9ee6e;
+  --lime-ink: #15210d;
+  --amber: #9d5a26;
+  --amber-soft: #f4e5d3;
+  --blue: #3d5cae;
+  --blue-soft: #e2e8f8;
+  --rose: #9b3d54;
+  --rose-soft: #f6e2e7;
+  --violet: #665295;
+  --violet-soft: #e9e3f5;
+
+  --hero-bg: #0d1310;
+  --hero-bg-raised: #141b16;
+  --hero-ink: #f1efe1;
+  --hero-muted: rgba(241, 239, 225, 0.66);
+  --hero-faint: rgba(241, 239, 225, 0.38);
+  --hero-line: rgba(241, 239, 225, 0.14);
+  --hero-accent: #c9ee6e;
+
+  --header-bg: #0e1410;
+  --header-ink: #f1efe1;
+  --header-muted: rgba(241, 239, 225, 0.68);
+  --header-line: rgba(241, 239, 225, 0.16);
+
+  --focus: #1f7456;
+  --focus-on-dark: #d3f68b;
+  --danger: #a13c3c;
+
+  --shadow-sm: 0 1px 2px rgba(20, 25, 20, 0.05), 0 8px 24px -18px rgba(20, 25, 20, 0.35);
+  --shadow-md: 0 2px 4px rgba(20, 25, 20, 0.04), 0 22px 50px -30px rgba(20, 25, 20, 0.45);
+  --shadow-lg: 0 30px 80px -40px rgba(9, 18, 13, 0.55);
+  --glow-lime: 0 0 40px rgba(201, 238, 110, 0.16);
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 34px;
+  --radius-pill: 999px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  --container: 1280px;
+  --container-narrow: 1120px;
+  --reading: 760px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --header-height: 4.5rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --dur-fast: 160ms;
+  --dur-mid: 320ms;
+  --dur-slow: 700ms;
+
+  --z-header: 100;
+  --z-nav: 120;
+  --z-modal: 200;
+  --z-skip: 300;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0a0d0b;
+  --bg-deep: #070a08;
+  --surface: #111612;
+  --surface-raised: #151b16;
+  --surface-sunken: #0d120e;
+  --ink: #f0eee3;
+  --ink-soft: #d7d8cd;
+  --muted: #a4aa9e;
+  --faint: #7e8579;
+  --line: rgba(240, 238, 227, 0.12);
+  --line-strong: rgba(240, 238, 227, 0.24);
+  --accent: #b9e16f;
+  --accent-strong: #cef18d;
+  --accent-ink: #11180d;
+  --accent-soft: #1c2a1c;
+  --accent-wash: rgba(185, 225, 111, 0.08);
+  --lime: #c9ee6e;
+  --lime-ink: #15210d;
+  --amber: #e2a66b;
+  --amber-soft: #2a2116;
+  --blue: #9cb5f5;
+  --blue-soft: #182238;
+  --rose: #efa5b7;
+  --rose-soft: #2a1920;
+  --violet: #c5b3f5;
+  --violet-soft: #211b30;
+
+  --hero-bg: #0c120e;
+  --hero-bg-raised: #121914;
+  --header-bg: #0c120e;
+  --header-ink: #f1efe1;
+  --header-muted: rgba(241, 239, 225, 0.68);
+  --header-line: rgba(241, 239, 225, 0.14);
+
+  --focus: #c9ee6e;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 30px -20px rgba(0, 0, 0, 0.8);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.35), 0 24px 60px -34px rgba(0, 0, 0, 0.9);
+  --shadow-lg: 0 36px 100px -40px rgba(0, 0, 0, 0.9);
+  --glow-lime: 0 0 60px rgba(201, 238, 110, 0.1);
+}
+
+/* Family accent helpers — used by subject and grade surfaces. */
+[data-family='number'] {
+  --family: var(--amber);
+  --family-soft: var(--amber-soft);
+}
+[data-family='algebra'] {
+  --family: var(--blue);
+  --family-soft: var(--blue-soft);
+}
+[data-family='geometry'] {
+  --family: var(--accent);
+  --family-soft: var(--accent-soft);
+}
+[data-family='trigonometry'] {
+  --family: var(--rose);
+  --family-soft: var(--rose-soft);
+}
+[data-family='statistics-probability'] {
+  --family: var(--violet);
+  --family-soft: var(--violet-soft);
+}
+[data-family='coordinate-geometry'] {
+  --family: var(--amber);
+  --family-soft: var(--amber-soft);
+}
+[data-family='vectors-matrices'] {
+  --family: var(--blue);
+  --family-soft: var(--blue-soft);
+}
+[data-family='advanced'] {
+  --family: var(--rose);
+  --family-soft: var(--rose-soft);
+}

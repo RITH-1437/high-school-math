@@ -1,0 +1,149 @@
+{
+  "stats": {
+    "generatedAt": "2026-11-14T04:46:40.089Z",
+    "fragmentFiles": 6,
+    "records": {
+      "sources": 56,
+      "topics": 25,
+      "formulas": 32,
+      "theorems": 5,
+      "examples": 28,
+      "exercises": 60,
+      "shapes": 0
+    },
+    "sourcesByTier": {
+      "tier1": 16,
+      "tier2": 20,
+      "tier3": 20
+    },
+    "sourcesByType": {
+      "educational-explanation": 39,
+      "formal-reference": 17
+    },
+    "formulasByGrade": {
+      "grade7": 4,
+      "grade8": 2,
+      "grade9": 7,
+      "grade10": 11,
+      "grade11": 3,
+      "grade12": 5
+    },
+    "formulasBySubject": {
+      "probability": 18,
+      "statistics": 14
+    },
+    "formulasByStatus": {
+      "PARTIALLY_VERIFIED": 7,
+      "VERIFIED": 25
+    },
+    "theoremsByStatus": {
+      "PARTIALLY_VERIFIED": 3,
+      "VERIFIED": 2
+    },
+    "theoremsBySubject": {
+      "probability": 3,
+      "statistics": 2
+    },
+    "topicsByGrade": {
+      "grade7": 5,
+      "grade8": 5,
+      "grade9": 6,
+      "grade10": 4,
+      "grade11": 3,
+      "grade12": 2
+    },
+    "topicsBySubject": {
+      "probability": 11,
+      "statistics": 14
+    },
+    "topicGradeBasis": {
+      "recommendation": 25
+    },
+    "examplesByLevel": {
+      "advanced": 7,
+      "intermediate": 21
+    },
+    "examplesByGrade": {
+      "grade7": 1,
+      "grade8": 4,
+      "grade9": 5,
+      "grade10": 8,
+      "grade11": 5,
+      "grade12": 5
+    },
+    "exercisesByGrade": {
+      "grade7": 9,
+      "grade8": 10,
+      "grade9": 12,
+      "grade10": 13,
+      "grade11": 9,
+      "grade12": 7
+    },
+    "exercisesByType": {
+      "multiple-choice": 18,
+      "numeric": 35,
+      "reasoning": 3,
+      "word-problem": 4
+    },
+    "exercisesByDifficulty": {
+      "easy": 14,
+      "hard": 6,
+      "medium": 40
+    },
+    "exercisesBySubject": {
+      "probability": 29,
+      "statistics": 31
+    },
+    "shapesByDimension": {},
+    "machineChecks": {
+      "total": 110,
+      "passed": 110,
+      "failed": 0,
+      "skippedNull": 15
+    },
+    "validation": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "fragments": [
+    {
+      "file": "stats-probability.examples.json",
+      "basename": "stats-probability",
+      "kind": "examples",
+      "records": 28
+    },
+    {
+      "file": "stats-probability.exercises.json",
+      "basename": "stats-probability",
+      "kind": "exercises",
+      "records": 60
+    },
+    {
+      "file": "stats-probability.formulas.json",
+      "basename": "stats-probability",
+      "kind": "formulas",
+      "records": 32
+    },
+    {
+      "file": "stats-probability.sources.json",
+      "basename": "stats-probability",
+      "kind": "sources",
+      "records": 56
+    },
+    {
+      "file": "stats-probability.theorems.json",
+      "basename": "stats-probability",
+      "kind": "theorems",
+      "records": 5
+    },
+    {
+      "file": "stats-probability.topics.json",
+      "basename": "stats-probability",
+      "kind": "topics",
+      "records": 25
+    }
+  ]
+}

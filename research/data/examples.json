@@ -1,0 +1,778 @@
+[
+  {
+    "id": "EX-STP-001",
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "grade": 7,
+    "level": "intermediate",
+    "problem": "Find the median of 12, 15, 9, 20, 18, 14.",
+    "given": [
+      "6 values"
+    ],
+    "required": "Median",
+    "formulaIds": [
+      "F-STP-mean"
+    ],
+    "steps": [
+      "Order: 9, 12, 14, 15, 18, 20",
+      "Middle two: 14 and 15",
+      "Average = 14.5"
+    ],
+    "answer": "14.5",
+    "units": null,
+    "explanation": "With an even count, average the two middle values.",
+    "check": {
+      "expr": "(14+15)/2",
+      "expected": 14.5,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-002",
+    "subject": "statistics",
+    "topicId": "TOP-STP-frequency-tables-grouped-data",
+    "grade": 8,
+    "level": "intermediate",
+    "problem": "Values 0,1,2,3 have frequencies 5,8,4,3. Find the mean.",
+    "given": [
+      "n = 20"
+    ],
+    "required": "Mean",
+    "formulaIds": [
+      "F-STP-mean-frequency-table"
+    ],
+    "steps": [
+      "Σfx = 0+8+8+9 = 25",
+      "25/20"
+    ],
+    "answer": "1.25",
+    "units": null,
+    "explanation": "Weighted by frequency.",
+    "check": {
+      "expr": "(0*5+1*8+2*4+3*3)/(5+8+4+3)",
+      "expected": 1.25,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-003",
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "grade": 8,
+    "level": "intermediate",
+    "problem": "Data 3,5,6,8,9,11,12,15,20 (n=9). Find Q1, Q3 and IQR using the exclude-median method.",
+    "given": [
+      "Median = 9"
+    ],
+    "required": "IQR",
+    "formulaIds": [
+      "F-STP-iqr"
+    ],
+    "steps": [
+      "Lower half 3,5,6,8 → Q1 = 5.5",
+      "Upper half 11,12,15,20 → Q3 = 13.5",
+      "IQR = 8"
+    ],
+    "answer": "IQR = 8",
+    "units": null,
+    "explanation": "Median excluded from both halves.",
+    "check": {
+      "expr": "(12+15)/2-(5+6)/2",
+      "expected": 8,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-004",
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "grade": 9,
+    "level": "advanced",
+    "problem": "Same data, but include the median in each half. How does the IQR compare?",
+    "given": [
+      "Inclusive halves: 3,5,6,8,9 and 9,11,12,15,20"
+    ],
+    "required": "Difference in IQR",
+    "formulaIds": [
+      "F-STP-iqr"
+    ],
+    "steps": [
+      "Q1 = 6, Q3 = 12, IQR = 6",
+      "Exclusive IQR was 8"
+    ],
+    "answer": "Inclusive IQR is 2 less (6 vs 8)",
+    "units": null,
+    "explanation": "Conventions can change quartiles; state the method.",
+    "check": {
+      "expr": "(13.5-5.5)-(12-6)",
+      "expected": 2,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-005",
+    "subject": "statistics",
+    "topicId": "TOP-STP-outliers",
+    "grade": 9,
+    "level": "intermediate",
+    "problem": "Data 4,5,5,6,7,7,8,9,10,25. Is 25 an outlier?",
+    "given": [
+      "Q1 = 5, Q3 = 9 (median of halves)"
+    ],
+    "required": "Outlier decision",
+    "formulaIds": [
+      "F-STP-outlier-fences"
+    ],
+    "steps": [
+      "IQR = 4",
+      "Upper fence = 9 + 6 = 15",
+      "25 > 15"
+    ],
+    "answer": "Yes, 25 is a potential outlier",
+    "units": null,
+    "explanation": "Exceeds the fence.",
+    "check": {
+      "expr": "9+1.5*(9-5)",
+      "expected": 15,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-006",
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "grade": 8,
+    "level": "intermediate",
+    "problem": "Five-number summary of 2,4,4,5,7,8,9,12,13.",
+    "given": [
+      "n = 9"
+    ],
+    "required": "Min, Q1, median, Q3, max",
+    "formulaIds": [
+      "F-STP-iqr"
+    ],
+    "steps": [
+      "Min 2; median 7",
+      "Lower half 2,4,4,5 → Q1 = 4",
+      "Upper half 8,9,12,13 → Q3 = 10.5",
+      "Max 13"
+    ],
+    "answer": "2, 4, 7, 10.5, 13",
+    "units": null,
+    "explanation": "Exclusive method.",
+    "check": {
+      "expr": "(9+12)/2",
+      "expected": 10.5,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-007",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "Sample SD of 2,4,4,4,5,5,7,9.",
+    "given": [
+      "x̄ = 5",
+      "Sum of squares = 32"
+    ],
+    "required": "s",
+    "formulaIds": [
+      "F-STP-sd-sample"
+    ],
+    "steps": [
+      "32/7 = 4.571",
+      "√4.571 = 2.138"
+    ],
+    "answer": "s ≈ 2.14",
+    "units": null,
+    "explanation": "Population SD would be exactly 2.",
+    "check": {
+      "expr": "Math.sqrt(32/7)",
+      "expected": 2.1381,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-008",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "Sample variance of 6,8,10,12,14.",
+    "given": [
+      "x̄ = 10"
+    ],
+    "required": "s²",
+    "formulaIds": [
+      "F-STP-variance-sample"
+    ],
+    "steps": [
+      "Σ(x−x̄)² = 40",
+      "40/4 = 10"
+    ],
+    "answer": "10",
+    "units": null,
+    "explanation": "Divide by n−1 = 4.",
+    "check": {
+      "expr": "(16+4+0+4+16)/4",
+      "expected": 10,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-009",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "grade": 11,
+    "level": "intermediate",
+    "problem": "Scale all values of a data set with variance 4 by a factor of 3. New variance?",
+    "given": [
+      "Var = 4"
+    ],
+    "required": "New variance",
+    "formulaIds": [
+      "F-STP-variance-population"
+    ],
+    "steps": [
+      "var(aX) = a² var(X)",
+      "9 × 4 = 36"
+    ],
+    "answer": "36",
+    "units": null,
+    "explanation": "Scaling multiplies variance by a².",
+    "check": {
+      "expr": "3**2*4",
+      "expected": 36,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-010",
+    "subject": "statistics",
+    "topicId": "TOP-STP-z-scores",
+    "grade": 11,
+    "level": "intermediate",
+    "problem": "Maths: 82 (mean 75, SD 5); English: 70 (mean 60, SD 8). Which is relatively better, and by how much in z?",
+    "given": [
+      "z_M = 1.4",
+      "z_E = 1.25"
+    ],
+    "required": "Difference in z",
+    "formulaIds": [
+      "F-STP-z-score"
+    ],
+    "steps": [
+      "z_M = 7/5 = 1.4",
+      "z_E = 10/8 = 1.25"
+    ],
+    "answer": "Maths is better by 0.15 SD",
+    "units": null,
+    "explanation": "Standardise to compare.",
+    "check": {
+      "expr": "(82-75)/5-(70-60)/8",
+      "expected": 0.15,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-011",
+    "subject": "statistics",
+    "topicId": "TOP-STP-normal-distribution-empirical-rule",
+    "grade": 11,
+    "level": "intermediate",
+    "problem": "Lengths approx normal, mean 50 mm, SD 4 mm. Percent within 46-54? Percent above 58?",
+    "given": [
+      "±1 SD = 46..54",
+      "58 is +2 SD"
+    ],
+    "required": "Percent above 58",
+    "formulaIds": [
+      "F-STP-z-score"
+    ],
+    "steps": [
+      "68% between 46 and 54",
+      "95% within 2 SD",
+      "(100−95)/2 = 2.5% above 58"
+    ],
+    "answer": "68%; 2.5%",
+    "units": "%",
+    "explanation": "Symmetry splits the tails.",
+    "check": {
+      "expr": "(100-95)/2",
+      "expected": 2.5,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-012",
+    "subject": "statistics",
+    "topicId": "TOP-STP-line-of-best-fit",
+    "grade": 11,
+    "level": "advanced",
+    "problem": "Fit least squares to (1,2),(2,3),(3,5),(4,4),(5,6); predict y at x = 6.",
+    "given": [
+      "n=5, Σx=15, Σy=20, Σxy=69, Σx²=55"
+    ],
+    "required": "Predicted y",
+    "formulaIds": [
+      "F-STP-regression-slope",
+      "F-STP-regression-intercept"
+    ],
+    "steps": [
+      "b = 45/50 = 0.9",
+      "a = (20 − 0.9·15)/5 = 1.3",
+      "ŷ(6) = 6.7"
+    ],
+    "answer": "6.7",
+    "units": null,
+    "explanation": "x = 6 lies just outside the data.",
+    "check": {
+      "expr": "(20-((5*69-15*20)/(5*55-15*15))*15)/5+((5*69-15*20)/(5*55-15*15))*6",
+      "expected": 6.7,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-013",
+    "subject": "statistics",
+    "topicId": "TOP-STP-scatter-plots-correlation",
+    "grade": 12,
+    "level": "advanced",
+    "problem": "Pearson r for the same five points.",
+    "given": [
+      "Sxy=9, Sxx=10, Syy=10"
+    ],
+    "required": "r",
+    "formulaIds": [
+      "F-STP-pearson-r"
+    ],
+    "steps": [
+      "r = 9/√(10·10) = 0.9"
+    ],
+    "answer": "0.9",
+    "units": null,
+    "explanation": "Strong positive linear association.",
+    "check": {
+      "expr": "(69-15*20/5)/Math.sqrt((55-15*15/5)*(90-20*20/5))",
+      "expected": 0.9,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-014",
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "grade": 8,
+    "level": "intermediate",
+    "problem": "Two fair dice: P(sum is at least 10)?",
+    "given": [
+      "Favourable: 6 of 36"
+    ],
+    "required": "Probability",
+    "formulaIds": [
+      "F-STP-probability-equally-likely"
+    ],
+    "steps": [
+      "Sum 10: 3, sum 11: 2, sum 12: 1 → 6",
+      "6/36 = 1/6"
+    ],
+    "answer": "≈ 0.1667",
+    "units": null,
+    "explanation": "Count favourable pairs.",
+    "check": {
+      "expr": "6/36",
+      "expected": 0.1667,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-015",
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "grade": 9,
+    "level": "intermediate",
+    "problem": "Probability of at least one six in 3 rolls.",
+    "given": [
+      "P(no six) = 5/6 each"
+    ],
+    "required": "P(at least one six)",
+    "formulaIds": [
+      "F-STP-complement-rule",
+      "F-STP-multiplication-independent"
+    ],
+    "steps": [
+      "P(no six in 3) = (5/6)³",
+      "1 − 0.5787"
+    ],
+    "answer": "≈ 0.4213",
+    "units": null,
+    "explanation": "Complement avoids long casework.",
+    "check": {
+      "expr": "1-(5/6)**3",
+      "expected": 0.4213,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-016",
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "grade": 9,
+    "level": "intermediate",
+    "problem": "Bag: 6 red, 4 blue. Draw two without replacement: P(both red).",
+    "given": [
+      "6/10 then 5/9"
+    ],
+    "required": "P",
+    "formulaIds": [
+      "F-STP-multiplication-general"
+    ],
+    "steps": [
+      "6/10 × 5/9 = 30/90 = 1/3"
+    ],
+    "answer": "≈ 0.3333",
+    "units": null,
+    "explanation": "Second probability changes.",
+    "check": {
+      "expr": "(6/10)*(5/9)",
+      "expected": 0.3333,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-017",
+    "subject": "probability",
+    "topicId": "TOP-STP-conditional-probability",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "100 students: 30 girls like maths; 20 girls don't; 25 boys like; 25 boys don't. P(girl | likes maths)?",
+    "given": [
+      "Likes maths: 55"
+    ],
+    "required": "P",
+    "formulaIds": [
+      "F-STP-conditional-probability"
+    ],
+    "steps": [
+      "Girls who like maths = 30",
+      "Total who like maths = 55",
+      "30/55"
+    ],
+    "answer": "≈ 0.5455",
+    "units": null,
+    "explanation": "Restrict to the 'likes maths' column.",
+    "check": {
+      "expr": "30/55",
+      "expected": 0.5455,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-018",
+    "subject": "probability",
+    "topicId": "TOP-STP-tree-venn-two-way-tables",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "Urn A (prob 0.5) red prob 0.4; urn B (0.5) red 0.8. P(red)?",
+    "given": [],
+    "required": "P(red)",
+    "formulaIds": [
+      "F-STP-total-probability"
+    ],
+    "steps": [
+      "0.5·0.4 + 0.5·0.8"
+    ],
+    "answer": "0.6",
+    "units": null,
+    "explanation": "Add the two red branches.",
+    "check": {
+      "expr": "0.5*0.4+0.5*0.8",
+      "expected": 0.6,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-019",
+    "subject": "probability",
+    "topicId": "TOP-STP-bayes-theorem",
+    "grade": 12,
+    "level": "advanced",
+    "problem": "Machines A (30%, 1% defective) and B (70%, 3% defective). P(A | defective)?",
+    "given": [
+      "P(D) = 0.024"
+    ],
+    "required": "P(A|D)",
+    "formulaIds": [
+      "F-STP-bayes"
+    ],
+    "steps": [
+      "P(A∩D) = 0.003",
+      "P(D) = 0.003 + 0.021 = 0.024",
+      "0.003/0.024 = 0.125"
+    ],
+    "answer": "0.125",
+    "units": null,
+    "explanation": "A makes few defects overall.",
+    "check": {
+      "expr": "0.3*0.01/(0.3*0.01+0.7*0.03)",
+      "expected": 0.125,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-020",
+    "subject": "probability",
+    "topicId": "TOP-STP-bayes-theorem",
+    "grade": 12,
+    "level": "advanced",
+    "problem": "Screening: prevalence 2%, sensitivity 95%, false-positive 8%. P(disease | positive)?",
+    "given": [],
+    "required": "P(D|+)",
+    "formulaIds": [
+      "F-STP-bayes"
+    ],
+    "steps": [
+      "0.019/(0.019+0.0784)"
+    ],
+    "answer": "≈ 0.195",
+    "units": null,
+    "explanation": "Base rate effect.",
+    "check": {
+      "expr": "0.02*0.95/(0.02*0.95+0.98*0.08)",
+      "expected": 0.1951,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-021",
+    "subject": "probability",
+    "topicId": "TOP-STP-expected-value",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "Spin pays $10 (p 0.1), $2 (p 0.4), $0 (p 0.5); costs $3. Expected net?",
+    "given": [],
+    "required": "E",
+    "formulaIds": [
+      "F-STP-expected-value"
+    ],
+    "steps": [
+      "10(0.1)+2(0.4)+0(0.5) = 1.8",
+      "1.8 − 3"
+    ],
+    "answer": "−$1.20",
+    "units": "dollars",
+    "explanation": "Unfavourable.",
+    "check": {
+      "expr": "10*0.1+2*0.4+0*0.5-3",
+      "expected": -1.2,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-022",
+    "subject": "probability",
+    "topicId": "TOP-STP-counting-principles",
+    "grade": 9,
+    "level": "intermediate",
+    "problem": "Menu: 4 shirts, 3 trousers, 2 shoes: outfits?",
+    "given": [],
+    "required": "Count",
+    "formulaIds": [
+      "F-STP-fundamental-counting"
+    ],
+    "steps": [
+      "4×3×2"
+    ],
+    "answer": "24",
+    "units": null,
+    "explanation": "Multiply.",
+    "check": {
+      "expr": "4*3*2",
+      "expected": 24,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-023",
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "Gold/silver/bronze among 8 runners.",
+    "given": [],
+    "required": "Count",
+    "formulaIds": [
+      "F-STP-permutations"
+    ],
+    "steps": [
+      "8×7×6"
+    ],
+    "answer": "336",
+    "units": null,
+    "explanation": "Order matters.",
+    "check": {
+      "expr": "8*7*6",
+      "expected": 336,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-024",
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "grade": 10,
+    "level": "intermediate",
+    "problem": "Choose a committee of 3 from 10.",
+    "given": [],
+    "required": "Count",
+    "formulaIds": [
+      "F-STP-combinations"
+    ],
+    "steps": [
+      "10·9·8/3! = 120"
+    ],
+    "answer": "120",
+    "units": null,
+    "explanation": "Order irrelevant.",
+    "check": {
+      "expr": "10*9*8/(3*2*1)",
+      "expected": 120,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-025",
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "grade": 10,
+    "level": "advanced",
+    "problem": "Arrangements of STATISTICS.",
+    "given": [
+      "10 letters: S3 T3 I2 A1 C1"
+    ],
+    "required": "Count",
+    "formulaIds": [
+      "F-STP-permutations-repeated"
+    ],
+    "steps": [
+      "10!/(3!3!2!) = 3628800/72"
+    ],
+    "answer": "50,400",
+    "units": null,
+    "explanation": "Divide by repeated swaps.",
+    "check": {
+      "expr": "3628800/(6*6*2)",
+      "expected": 50400,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-026",
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "grade": 12,
+    "level": "advanced",
+    "problem": "5 free throws, p = 0.7: P(exactly 4)?",
+    "given": [],
+    "required": "P",
+    "formulaIds": [
+      "F-STP-binomial-pmf"
+    ],
+    "steps": [
+      "C(5,4)=5",
+      "0.7⁴ = 0.2401",
+      "5·0.2401·0.3"
+    ],
+    "answer": "≈ 0.360",
+    "units": null,
+    "explanation": "Binomial pmf.",
+    "check": {
+      "expr": "5*0.7**4*0.3",
+      "expected": 0.36015,
+      "tolerance": 0.0001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-027",
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "grade": 12,
+    "level": "intermediate",
+    "problem": "n = 50, p = 0.2: mean and SD.",
+    "given": [],
+    "required": "SD",
+    "formulaIds": [
+      "F-STP-binomial-mean",
+      "F-STP-binomial-variance"
+    ],
+    "steps": [
+      "μ = 10",
+      "σ = √8"
+    ],
+    "answer": "μ = 10, σ ≈ 2.83",
+    "units": null,
+    "explanation": "np and √(npq).",
+    "check": {
+      "expr": "Math.sqrt(50*0.2*0.8)",
+      "expected": 2.8284,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "EX-STP-028",
+    "subject": "probability",
+    "topicId": "TOP-STP-discrete-random-variables",
+    "grade": 11,
+    "level": "intermediate",
+    "problem": "X = 1,2,3,4 with p = 0.1, 0.3, k, 0.2. Find k and E[X].",
+    "given": [
+      "Probabilities sum to 1"
+    ],
+    "required": "E[X]",
+    "formulaIds": [
+      "F-STP-expected-value"
+    ],
+    "steps": [
+      "k = 0.4",
+      "E = 0.1+0.6+1.2+0.8"
+    ],
+    "answer": "k = 0.4; E[X] = 2.7",
+    "units": null,
+    "explanation": "Probabilities sum to 1.",
+    "check": {
+      "expr": "1*0.1+2*0.3+3*0.4+4*0.2",
+      "expected": 2.7,
+      "tolerance": 0.001
+    },
+    "researchArea": "stats-probability"
+  }
+]

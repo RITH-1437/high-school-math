@@ -1,0 +1,252 @@
+[
+  {
+    "id": "T-STP-empirical-rule",
+    "name": "Empirical rule (68-95-99.7 rule)",
+    "subject": "statistics",
+    "topicId": "TOP-STP-normal-distribution-empirical-rule",
+    "recommendedGrade": 11,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "statement": "For approximately normal data, about 68% of values lie within 1 SD of the mean, about 95% within 2 SD, and about 99.7% within 3 SD.",
+    "notation": "P(\\mu-k\\sigma\\le X\\le\\mu+k\\sigma)\\approx 0.68,\\ 0.95,\\ 0.997\\ (k=1,2,3)",
+    "conditions": [
+      "Distribution roughly bell-shaped and symmetric",
+      "Percentages are approximations"
+    ],
+    "explanation": "A rule of thumb derived from the normal curve; not valid for skewed data or heavy outliers.",
+    "proof": {
+      "type": "none",
+      "summary": "Follows from integrating the normal density (beyond secondary level)."
+    },
+    "diagramRequirements": [
+      "Bell curve with shaded 1, 2, 3 SD bands"
+    ],
+    "application": {
+      "problem": "Test scores approx normal, mean 70, SD 4. What percent lie above 78?",
+      "solution": "78 is 2 SD above the mean; 95% lie within 2 SD, so 5% lie outside, half above: 2.5%.",
+      "check": {
+        "expr": "(100-95)/2",
+        "expected": 2.5,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedTheoremIds": [
+      "T-STP-central-limit-theorem"
+    ],
+    "sourceIds": [
+      "SRC-STP-036",
+      "SRC-STP-054",
+      "SRC-STP-055",
+      "SRC-STP-034"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-036",
+        "SRC-STP-054",
+        "SRC-STP-055",
+        "SRC-STP-034"
+      ],
+      "recomputed": true,
+      "notes": "Four fetched pages from three sites agree on 68/95/99.7 and the 'approximately normal' condition."
+    }
+  },
+  {
+    "id": "T-STP-central-limit-theorem",
+    "name": "Central limit theorem (enrichment)",
+    "subject": "statistics",
+    "topicId": "TOP-STP-normal-distribution-empirical-rule",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      12,
+      12
+    ],
+    "statement": "For samples of size n from a population with mean μ and SD σ, the distribution of the sample mean tends toward a normal with mean μ and SD σ/√n as n grows.",
+    "notation": "\\bar{X}\\approx N\\!\\left(\\mu,\\frac{\\sigma}{\\sqrt n}\\right)",
+    "conditions": [
+      "Independent random samples",
+      "Finite mean and SD",
+      "n sufficiently large"
+    ],
+    "explanation": "Explains why normal models appear for averages. College-level; enrichment only.",
+    "proof": {
+      "type": "none",
+      "summary": "Proof is beyond secondary school."
+    },
+    "diagramRequirements": [
+      "Histograms of sample means for n = 1, 5, 30"
+    ],
+    "application": {
+      "problem": "σ = 12, n = 36: SD of the sample mean?",
+      "solution": "12/√36 = 2.",
+      "check": {
+        "expr": "12/Math.sqrt(36)",
+        "expected": 2,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedTheoremIds": [
+      "T-STP-empirical-rule"
+    ],
+    "sourceIds": [
+      "SRC-STP-014"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-014"
+      ],
+      "recomputed": true,
+      "notes": "Single fetched source (OpenStax 7.1)."
+    }
+  },
+  {
+    "id": "T-STP-total-probability",
+    "name": "Law of total probability",
+    "subject": "probability",
+    "topicId": "TOP-STP-tree-venn-two-way-tables",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "statement": "If A_1,…,A_n partition the sample space, then P(B) = ΣP(A_i)P(B|A_i).",
+    "notation": "P(B)=\\sum_i P(A_i)P(B\\mid A_i)",
+    "conditions": [
+      "Partition is mutually exclusive and exhaustive",
+      "P(A_i) > 0"
+    ],
+    "explanation": "Add the weighted branch probabilities of a tree diagram that end in B.",
+    "proof": {
+      "type": "outline",
+      "summary": "B is the disjoint union of the sets B ∩ A_i, each with probability P(A_i)P(B|A_i)."
+    },
+    "diagramRequirements": [
+      "Tree diagram with branches summed"
+    ],
+    "application": {
+      "problem": "P(A)=0.5, P(B|A)=0.4, P(A')=0.5, P(B|A')=0.8. Find P(B).",
+      "solution": "0.5×0.4 + 0.5×0.8 = 0.6.",
+      "check": {
+        "expr": "0.5*0.4+0.5*0.8",
+        "expected": 0.6,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedTheoremIds": [
+      "T-STP-bayes"
+    ],
+    "sourceIds": [
+      "SRC-STP-023",
+      "SRC-STP-037"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-023",
+        "SRC-STP-037"
+      ],
+      "recomputed": true,
+      "notes": "MathWorld equation (7) within Bayes derivation; Math is Fun tree example only."
+    }
+  },
+  {
+    "id": "T-STP-bayes",
+    "name": "Bayes' theorem",
+    "subject": "probability",
+    "topicId": "TOP-STP-bayes-theorem",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      12,
+      12
+    ],
+    "statement": "P(A|B) = P(A)P(B|A)/P(B); with a partition, P(A_i|B) = P(A_i)P(B|A_i)/ΣP(A_j)P(B|A_j).",
+    "notation": "P(A\\mid B)=\\frac{P(A)P(B\\mid A)}{P(B)}",
+    "conditions": [
+      "P(B) > 0",
+      "Partition if using the sum form"
+    ],
+    "explanation": "Reverses the direction of a conditional probability.",
+    "proof": {
+      "type": "outline",
+      "summary": "Equate P(A∩B) = P(A)P(B|A) = P(B)P(A|B) and divide by P(B)."
+    },
+    "diagramRequirements": [
+      "Tree with reversed conditional highlighted"
+    ],
+    "application": {
+      "problem": "P(A)=0.3, P(D|A)=0.01, P(B)=0.7, P(D|B)=0.03. Find P(A|D).",
+      "solution": "0.003/(0.003+0.021) = 0.125.",
+      "check": {
+        "expr": "0.3*0.01/(0.3*0.01+0.7*0.03)",
+        "expected": 0.125,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedTheoremIds": [
+      "T-STP-total-probability"
+    ],
+    "sourceIds": [
+      "SRC-STP-023",
+      "SRC-STP-024",
+      "SRC-STP-045"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-023",
+        "SRC-STP-024",
+        "SRC-STP-045"
+      ],
+      "recomputed": true,
+      "notes": "Three fetched sources agree."
+    }
+  },
+  {
+    "id": "T-STP-fundamental-counting",
+    "name": "Fundamental counting principle",
+    "subject": "probability",
+    "topicId": "TOP-STP-counting-principles",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "statement": "If one stage can occur in m ways and, for each, a second stage in n ways, the two stages together occur in m×n ways.",
+    "notation": "m\\times n",
+    "conditions": [
+      "Independent counts"
+    ],
+    "explanation": "Multiply choices across stages.",
+    "proof": {
+      "type": "outline",
+      "summary": "Tree of choices: m branches each splitting into n."
+    },
+    "diagramRequirements": [
+      "Choice tree"
+    ],
+    "application": {
+      "problem": "2 skirts and 4 blouses: outfits?",
+      "solution": "2×4 = 8.",
+      "check": {
+        "expr": "2*4",
+        "expected": 8,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedTheoremIds": [],
+    "sourceIds": [
+      "SRC-STP-016"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-016"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax Precalculus; Math is Fun partial."
+    }
+  }
+]

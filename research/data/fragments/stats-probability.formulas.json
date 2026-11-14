@@ -1,0 +1,2446 @@
+[
+  {
+    "id": "F-STP-mean",
+    "name": "Arithmetic mean",
+    "expression": "\\bar{x} = \\frac{\\sum x_i}{n}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "subtopic": "Centre",
+    "category": "central tendency",
+    "recommendedGrade": 7,
+    "gradeRange": [
+      6,
+      8
+    ],
+    "description": "Add the values and divide by how many there are.",
+    "meaning": "Balance point of the data; sensitive to extreme values.",
+    "variables": [
+      {
+        "symbol": "x_i",
+        "name": "data values",
+        "unit": null
+      },
+      {
+        "symbol": "n",
+        "name": "number of values",
+        "unit": "count"
+      },
+      {
+        "symbol": "\\bar{x}",
+        "name": "sample mean",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "n ≥ 1",
+      "Numerical data"
+    ],
+    "restrictions": [
+      "Population mean is written \\mu with the same arithmetic"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "Six quiz scores are 7, 9, 6, 8, 10 and 8. Find the mean.",
+      "given": [
+        "Scores: 7, 9, 6, 8, 10, 8"
+      ],
+      "required": "Mean score",
+      "formula": "\\bar{x}=\\frac{\\sum x_i}{n}",
+      "substitution": "\\bar{x}=\\frac{7+9+6+8+10+8}{6}",
+      "calculation": [
+        "Sum = 48",
+        "\\bar{x}=48/6=8"
+      ],
+      "answer": "Mean = 8 points",
+      "units": "points",
+      "explanation": "The sum of all values divided by the number of values.",
+      "check": {
+        "expr": "(7+9+6+8+10+8)/6",
+        "expected": 8,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-mean-frequency-table",
+      "F-STP-variance-sample"
+    ],
+    "equivalentForms": [
+      "\\mu = \\frac{\\sum x_i}{N}\\text{ for a population}"
+    ],
+    "sourceIds": [
+      "SRC-STP-003",
+      "SRC-STP-034",
+      "SRC-STP-001"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-003",
+        "SRC-STP-034",
+        "SRC-STP-001"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, Math is Fun worked example and definitions agree; population symbol mu vs sample x-bar only changes notation."
+    }
+  },
+  {
+    "id": "F-STP-mean-frequency-table",
+    "name": "Mean from a frequency table / estimated mean of grouped data",
+    "expression": "\\bar{x} \\approx \\frac{\\sum f\\,m}{\\sum f}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-frequency-tables-grouped-data",
+    "subtopic": "Grouped data",
+    "category": "central tendency",
+    "recommendedGrade": 8,
+    "gradeRange": [
+      7,
+      9
+    ],
+    "description": "Multiply each value (or class midpoint) by its frequency, add, and divide by the total frequency.",
+    "meaning": "Exact mean for a table of single values; an estimate for class intervals because individual values are unknown.",
+    "variables": [
+      {
+        "symbol": "f",
+        "name": "frequency of the value or class",
+        "unit": "count"
+      },
+      {
+        "symbol": "m",
+        "name": "value or class midpoint",
+        "unit": null
+      },
+      {
+        "symbol": "\\sum f",
+        "name": "total frequency (n)",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "All frequencies ≥ 0",
+      "Midpoint = (lower boundary + upper boundary)/2"
+    ],
+    "restrictions": [
+      "For class intervals the result is an estimate only"
+    ],
+    "derivation": "Treating every value in a class as if it equalled the midpoint gives the weighted sum.",
+    "example": {
+      "level": "medium",
+      "problem": "Class midpoints and frequencies: 5→4, 15→6, 25→8, 35→2. Estimate the mean.",
+      "given": [
+        "m = 5, 15, 25, 35",
+        "f = 4, 6, 8, 2"
+      ],
+      "required": "Estimated mean",
+      "formula": "\\bar{x}\\approx\\frac{\\sum fm}{\\sum f}",
+      "substitution": "\\frac{5(4)+15(6)+25(8)+35(2)}{4+6+8+2}",
+      "calculation": [
+        "Σfm = 20+90+200+70 = 380",
+        "Σf = 20",
+        "380/20 = 19"
+      ],
+      "answer": "Estimated mean = 19",
+      "units": null,
+      "explanation": "Each class is represented by its midpoint.",
+      "check": {
+        "expr": "(5*4+15*6+25*8+35*2)/(4+6+8+2)",
+        "expected": 19,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-mean"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-003",
+      "SRC-STP-038"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-003",
+        "SRC-STP-038"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax (sum f*m / sum f) and Math is Fun (midpoint method, estimated mean) agree."
+    }
+  },
+  {
+    "id": "F-STP-range",
+    "name": "Range",
+    "expression": "\\text{range}=x_{\\max}-x_{\\min}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-mean-median-mode-range",
+    "subtopic": "Spread",
+    "category": "spread",
+    "recommendedGrade": 7,
+    "gradeRange": [
+      6,
+      8
+    ],
+    "description": "Largest value minus smallest value.",
+    "meaning": "Simplest measure of spread; depends only on the two extreme values.",
+    "variables": [
+      {
+        "symbol": "x_{\\max}",
+        "name": "largest value",
+        "unit": null
+      },
+      {
+        "symbol": "x_{\\min}",
+        "name": "smallest value",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "At least one data value"
+    ],
+    "restrictions": [
+      "Very sensitive to outliers"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "Daily temperatures were 12, 18, 9, 22 and 15 degrees Celsius. Find the range.",
+      "given": [
+        "max 22, min 9"
+      ],
+      "required": "Range",
+      "formula": "\\text{range}=x_{\\max}-x_{\\min}",
+      "substitution": "22-9",
+      "calculation": [
+        "22 - 9 = 13"
+      ],
+      "answer": "Range = 13 °C",
+      "units": "°C",
+      "explanation": "Subtract the smallest from the largest.",
+      "check": {
+        "expr": "22-9",
+        "expected": 13,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-iqr"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-001"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-001"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax lists range among spread measures (chapter objective) but the fetched text does not spell out the subtraction; definition is elementary and was recomputed. Only one fetched source mentions it."
+    }
+  },
+  {
+    "id": "F-STP-percentile-index",
+    "name": "Percentile position (OpenStax convention)",
+    "expression": "i=\\frac{k}{100}(n+1)",
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "subtopic": "Percentiles",
+    "category": "location",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      9,
+      12
+    ],
+    "description": "Find the position of the k-th percentile in ordered data of n values; average the two neighbours when i is not whole.",
+    "meaning": "One of several percentile conventions; Q1 is k = 25, Q3 is k = 75.",
+    "variables": [
+      {
+        "symbol": "i",
+        "name": "position in ordered data",
+        "unit": null
+      },
+      {
+        "symbol": "k",
+        "name": "percentile (0-100)",
+        "unit": null
+      },
+      {
+        "symbol": "n",
+        "name": "number of values",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "Data sorted ascending",
+      "If i is not an integer average the values at floor(i) and ceil(i) (as OpenStax describes)"
+    ],
+    "restrictions": [
+      "Other texts use k/100 × n or (n−1) with interpolation; results may differ"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "For 11 sorted values, at which position is the 25th percentile under this convention?",
+      "given": [
+        "n = 11",
+        "k = 25"
+      ],
+      "required": "Position i",
+      "formula": "i=\\frac{k}{100}(n+1)",
+      "substitution": "i=\\frac{25}{100}(12)",
+      "calculation": [
+        "i = 3"
+      ],
+      "answer": "Position 3",
+      "units": null,
+      "explanation": "Whole number, so Q1 is the third value.",
+      "check": {
+        "expr": "(25/100)*(11+1)",
+        "expected": 3,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-iqr"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-002",
+      "SRC-STP-021"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-002",
+        "SRC-STP-021"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax states this formula; MathWorld confirms multiple competing position conventions exist (e.g. (n+1)/4 for Minitab/Moore-McCabe) so no independent second statement of this exact formula beyond the (n+1)/4 equivalence for k = 25."
+    }
+  },
+  {
+    "id": "F-STP-iqr",
+    "name": "Interquartile range",
+    "expression": "\\mathrm{IQR}=Q_3-Q_1",
+    "subject": "statistics",
+    "topicId": "TOP-STP-quartiles-iqr-five-number",
+    "subtopic": "Spread",
+    "category": "spread",
+    "recommendedGrade": 8,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "Distance between the third and first quartiles.",
+    "meaning": "Width of the middle half of the data; resistant to extreme values.",
+    "variables": [
+      {
+        "symbol": "Q_1",
+        "name": "first quartile",
+        "unit": null
+      },
+      {
+        "symbol": "Q_3",
+        "name": "third quartile",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Quartile method must be stated; different conventions can give different Q1, Q3"
+    ],
+    "restrictions": [
+      "Not the same as range"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "A data set has Q1 = 5.5 and Q3 = 13.5. Find the IQR.",
+      "given": [
+        "Q1 = 5.5",
+        "Q3 = 13.5"
+      ],
+      "required": "IQR",
+      "formula": "\\mathrm{IQR}=Q_3-Q_1",
+      "substitution": "13.5-5.5",
+      "calculation": [
+        "13.5 - 5.5 = 8"
+      ],
+      "answer": "IQR = 8",
+      "units": null,
+      "explanation": "Subtract Q1 from Q3.",
+      "check": {
+        "expr": "13.5-5.5",
+        "expected": 8,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-outlier-fences",
+      "F-STP-range"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-002",
+      "SRC-STP-035",
+      "SRC-STP-032"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-002",
+        "SRC-STP-035",
+        "SRC-STP-032"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, Math is Fun and MathWorld agree on IQR = Q3 - Q1; all three note or imply quartile convention dependence."
+    }
+  },
+  {
+    "id": "F-STP-outlier-fences",
+    "name": "Outlier fences (1.5 × IQR rule)",
+    "expression": "\\text{lower}=Q_1-1.5\\,\\mathrm{IQR},\\quad \\text{upper}=Q_3+1.5\\,\\mathrm{IQR}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-outliers",
+    "subtopic": "Outliers",
+    "category": "outliers",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "Values below the lower fence or above the upper fence are flagged as potential outliers.",
+    "meaning": "A screening convention for unusually distant values; flagged points need investigation, not automatic removal.",
+    "variables": [
+      {
+        "symbol": "Q_1",
+        "name": "first quartile",
+        "unit": null
+      },
+      {
+        "symbol": "Q_3",
+        "name": "third quartile",
+        "unit": null
+      },
+      {
+        "symbol": "\\mathrm{IQR}",
+        "name": "interquartile range",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Quartile convention stated"
+    ],
+    "restrictions": [
+      "1.5 is a convention; NIST also defines outer fences at 3 × IQR",
+      "Not a proof that a value is an error"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Q1 = 5 and Q3 = 9 for a data set. Find the upper fence.",
+      "given": [
+        "Q1 = 5",
+        "Q3 = 9"
+      ],
+      "required": "Upper fence",
+      "formula": "\\text{upper}=Q_3+1.5\\,\\mathrm{IQR}",
+      "substitution": "9+1.5(9-5)",
+      "calculation": [
+        "IQR = 4",
+        "9 + 6 = 15"
+      ],
+      "answer": "Upper fence = 15",
+      "units": null,
+      "explanation": "Anything above 15 is a potential outlier.",
+      "check": {
+        "expr": "9+1.5*(9-5)",
+        "expected": 15,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-iqr"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-002",
+      "SRC-STP-017",
+      "SRC-STP-018",
+      "SRC-STP-033"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-002",
+        "SRC-STP-017",
+        "SRC-STP-018",
+        "SRC-STP-033"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, NIST (twice) and MathWorld agree on the 1.5 × IQR fences; NIST adds the 3 × IQR outer fences."
+    }
+  },
+  {
+    "id": "F-STP-variance-population",
+    "name": "Population variance",
+    "expression": "\\sigma^{2}=\\frac{1}{N}\\sum_{i=1}^{N}(x_i-\\mu)^{2}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "subtopic": "Spread",
+    "category": "spread",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Average of the squared distances from the population mean.",
+    "meaning": "Use when the data are the whole population of interest (a census).",
+    "variables": [
+      {
+        "symbol": "N",
+        "name": "population size",
+        "unit": "count"
+      },
+      {
+        "symbol": "x_i",
+        "name": "values",
+        "unit": null
+      },
+      {
+        "symbol": "\\mu",
+        "name": "population mean",
+        "unit": null
+      },
+      {
+        "symbol": "\\sigma^2",
+        "name": "population variance",
+        "unit": "square of data unit"
+      }
+    ],
+    "conditions": [
+      "N ≥ 1"
+    ],
+    "restrictions": [
+      "Units are the square of the data units"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Data 6, 8, 10, 12, 14 are the entire population. Find the variance.",
+      "given": [
+        "μ = 10"
+      ],
+      "required": "Population variance",
+      "formula": "\\sigma^{2}=\\frac{1}{N}\\sum(x_i-\\mu)^{2}",
+      "substitution": "\\frac{16+4+0+4+16}{5}",
+      "calculation": [
+        "Sum of squares = 40",
+        "40/5 = 8"
+      ],
+      "answer": "σ² = 8",
+      "units": "square units",
+      "explanation": "Average the squared deviations.",
+      "check": {
+        "expr": "(16+4+0+4+16)/5",
+        "expected": 8,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-variance-sample",
+      "F-STP-sd-population"
+    ],
+    "equivalentForms": [
+      "\\sigma^{2}=\\frac{\\sum x_i^{2}}{N}-\\mu^{2}"
+    ],
+    "sourceIds": [
+      "SRC-STP-001",
+      "SRC-STP-022",
+      "SRC-STP-034"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-001",
+        "SRC-STP-022",
+        "SRC-STP-034"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax (divide by N for population), MathWorld (sigma^2 as mean squared deviation) and Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-variance-sample",
+    "name": "Sample variance",
+    "expression": "s^{2}=\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar{x})^{2}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "subtopic": "Spread",
+    "category": "spread",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Add the squared distances from the sample mean and divide by n − 1.",
+    "meaning": "Use when the data are a sample used to estimate a population's variance.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "sample size",
+        "unit": "count"
+      },
+      {
+        "symbol": "x_i",
+        "name": "values",
+        "unit": null
+      },
+      {
+        "symbol": "\\bar{x}",
+        "name": "sample mean",
+        "unit": null
+      },
+      {
+        "symbol": "s^2",
+        "name": "sample variance",
+        "unit": "square of data unit"
+      }
+    ],
+    "conditions": [
+      "n ≥ 2"
+    ],
+    "restrictions": [
+      "Some sources/calculators use 1/n for 'sample variance'; MathWorld calls that the biased version",
+      "Check which convention your calculator uses (σx vs sx)"
+    ],
+    "derivation": "Dividing by n−1 (Bessel's correction) corrects the bias in estimating the population variance when the mean is estimated from the same data.",
+    "example": {
+      "level": "medium",
+      "problem": "Data 6, 8, 10, 12, 14 are a sample. Find the sample variance.",
+      "given": [
+        "x̄ = 10"
+      ],
+      "required": "Sample variance",
+      "formula": "s^{2}=\\frac{\\sum(x_i-\\bar{x})^{2}}{n-1}",
+      "substitution": "\\frac{40}{4}",
+      "calculation": [
+        "Sum of squares = 40",
+        "n − 1 = 4",
+        "40/4 = 10"
+      ],
+      "answer": "s² = 10",
+      "units": "square units",
+      "explanation": "Same numerator as the population version but divided by 4, not 5.",
+      "check": {
+        "expr": "(16+4+0+4+16)/(5-1)",
+        "expected": 10,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-variance-population",
+      "F-STP-sd-sample"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-001",
+      "SRC-STP-022",
+      "SRC-STP-034",
+      "SRC-STP-056"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-001",
+        "SRC-STP-022",
+        "SRC-STP-034",
+        "SRC-STP-056"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, MathWorld, Math is Fun agree on 1/(n-1); MathWorld explicitly documents the competing 1/N 'sample variance' and warns about notation. SRC-STP-056 is the same OpenStax text, not counted as independent."
+    }
+  },
+  {
+    "id": "F-STP-sd-population",
+    "name": "Population standard deviation",
+    "expression": "\\sigma=\\sqrt{\\frac{1}{N}\\sum_{i=1}^{N}(x_i-\\mu)^{2}}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "subtopic": "Spread",
+    "category": "spread",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Square root of the population variance.",
+    "meaning": "Typical distance from the mean, in the same units as the data.",
+    "variables": [
+      {
+        "symbol": "\\sigma",
+        "name": "population standard deviation",
+        "unit": "data unit"
+      }
+    ],
+    "conditions": [
+      "N ≥ 1"
+    ],
+    "restrictions": [
+      "Zero only when all values are equal"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Find σ for 2, 4, 4, 4, 5, 5, 7, 9 (population).",
+      "given": [
+        "μ = 5",
+        "N = 8"
+      ],
+      "required": "Population SD",
+      "formula": "\\sigma=\\sqrt{\\frac{\\sum(x_i-\\mu)^2}{N}}",
+      "substitution": "\\sqrt{\\frac{9+1+1+1+0+0+4+16}{8}}",
+      "calculation": [
+        "Sum of squares = 32",
+        "Variance = 4",
+        "σ = 2"
+      ],
+      "answer": "σ = 2",
+      "units": "data units",
+      "explanation": "Square root brings units back.",
+      "check": {
+        "expr": "Math.sqrt((9+1+1+1+0+0+4+16)/8)",
+        "expected": 2,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-sd-sample",
+      "F-STP-variance-population"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-001",
+      "SRC-STP-034",
+      "SRC-STP-022"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-001",
+        "SRC-STP-034",
+        "SRC-STP-022"
+      ],
+      "recomputed": true,
+      "notes": "Sources agree: SD is the square root of variance; population version divides by N."
+    }
+  },
+  {
+    "id": "F-STP-sd-sample",
+    "name": "Sample standard deviation",
+    "expression": "s=\\sqrt{\\frac{1}{n-1}\\sum_{i=1}^{n}(x_i-\\bar{x})^{2}}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-variance-standard-deviation",
+    "subtopic": "Spread",
+    "category": "spread",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Square root of the sample variance.",
+    "meaning": "Estimate of the population SD from sample data; the default on most calculators' 's' key.",
+    "variables": [
+      {
+        "symbol": "s",
+        "name": "sample standard deviation",
+        "unit": "data unit"
+      }
+    ],
+    "conditions": [
+      "n ≥ 2"
+    ],
+    "restrictions": [
+      "Not an unbiased estimator of σ even though s² is unbiased for σ²"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Find s for 2, 4, 4, 4, 5, 5, 7, 9 (sample).",
+      "given": [
+        "x̄ = 5",
+        "n = 8"
+      ],
+      "required": "Sample SD",
+      "formula": "s=\\sqrt{\\frac{\\sum(x_i-\\bar{x})^2}{n-1}}",
+      "substitution": "\\sqrt{\\frac{32}{7}}",
+      "calculation": [
+        "32/7 ≈ 4.5714",
+        "s ≈ 2.14"
+      ],
+      "answer": "s ≈ 2.14",
+      "units": "data units",
+      "explanation": "Divide by 7 rather than 8.",
+      "check": {
+        "expr": "Math.sqrt(32/7)",
+        "expected": 2.1381,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-sd-population",
+      "F-STP-variance-sample"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-001",
+      "SRC-STP-034",
+      "SRC-STP-022"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-001",
+        "SRC-STP-034",
+        "SRC-STP-022"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax and Math is Fun agree on n-1; Math is Fun's dog example (sd 147 population vs 165 sample) was recomputed independently."
+    }
+  },
+  {
+    "id": "F-STP-z-score",
+    "name": "z-score (standard score)",
+    "expression": "z=\\frac{x-\\mu}{\\sigma}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-z-scores",
+    "subtopic": "Standardising",
+    "category": "location",
+    "recommendedGrade": 11,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "How many standard deviations a value lies above or below the mean.",
+    "meaning": "Makes values from different distributions comparable.",
+    "variables": [
+      {
+        "symbol": "x",
+        "name": "value",
+        "unit": null
+      },
+      {
+        "symbol": "\\mu",
+        "name": "mean",
+        "unit": null
+      },
+      {
+        "symbol": "\\sigma",
+        "name": "standard deviation",
+        "unit": null
+      },
+      {
+        "symbol": "z",
+        "name": "standard score",
+        "unit": "number of SDs"
+      }
+    ],
+    "conditions": [
+      "σ > 0"
+    ],
+    "restrictions": [
+      "For a sample use x̄ and s",
+      "Percent interpretation needs an approximately normal distribution"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "A score of 78 in a class with mean 70 and SD 4. Find z.",
+      "given": [
+        "x = 78",
+        "μ = 70",
+        "σ = 4"
+      ],
+      "required": "z",
+      "formula": "z=\\frac{x-\\mu}{\\sigma}",
+      "substitution": "z=\\frac{78-70}{4}",
+      "calculation": [
+        "8/4 = 2"
+      ],
+      "answer": "z = 2",
+      "units": null,
+      "explanation": "78 is 2 SDs above the mean.",
+      "check": {
+        "expr": "(78-70)/4",
+        "expected": 2,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-sd-population"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-036",
+      "SRC-STP-054",
+      "SRC-STP-055"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-036",
+        "SRC-STP-054",
+        "SRC-STP-055"
+      ],
+      "recomputed": true,
+      "notes": "Math is Fun (explicit formula), LibreTexts pages (z-scores in normal-distribution sections) agree; no conflicts."
+    }
+  },
+  {
+    "id": "F-STP-regression-slope",
+    "name": "Least-squares slope",
+    "expression": "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^{2}-\\left(\\sum x\\right)^{2}}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-line-of-best-fit",
+    "subtopic": "Regression",
+    "category": "regression",
+    "recommendedGrade": 11,
+    "gradeRange": [
+      9,
+      12
+    ],
+    "description": "Slope of the line minimising the sum of squared vertical errors.",
+    "meaning": "Predicted change in y for a one-unit increase in x.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "number of points",
+        "unit": "count"
+      },
+      {
+        "symbol": "b",
+        "name": "slope",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "At least two distinct x-values",
+      "Equivalent to Σ(x−x̄)(y−ȳ)/Σ(x−x̄)²"
+    ],
+    "restrictions": [
+      "Valid for prediction inside the data range; extrapolation is risky"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Points (1,2),(2,3),(3,5),(4,4),(5,6). Find the slope.",
+      "given": [
+        "n=5, Σx=15, Σy=20, Σxy=69, Σx²=55"
+      ],
+      "required": "Slope b",
+      "formula": "b=\\frac{n\\sum xy-\\sum x\\sum y}{n\\sum x^2-(\\sum x)^2}",
+      "substitution": "b=\\frac{5(69)-15(20)}{5(55)-15^2}",
+      "calculation": [
+        "Numerator 45",
+        "Denominator 50",
+        "b = 0.9"
+      ],
+      "answer": "b = 0.9",
+      "units": null,
+      "explanation": "Slope is 0.9 y-units per x-unit.",
+      "check": {
+        "expr": "(5*69-15*20)/(5*55-15*15)",
+        "expected": 0.9,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-regression-intercept",
+      "F-STP-pearson-r"
+    ],
+    "equivalentForms": [
+      "b=\\frac{\\sum(x-\\bar{x})(y-\\bar{y})}{\\sum(x-\\bar{x})^{2}}"
+    ],
+    "sourceIds": [
+      "SRC-STP-013",
+      "SRC-STP-029",
+      "SRC-STP-040"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-013",
+        "SRC-STP-029",
+        "SRC-STP-040"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax gives the deviation form; Math is Fun and MathWorld give the sums form; recomputed numerically that both forms agree on the example."
+    }
+  },
+  {
+    "id": "F-STP-regression-intercept",
+    "name": "Least-squares intercept",
+    "expression": "a=\\bar{y}-b\\bar{x}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-line-of-best-fit",
+    "subtopic": "Regression",
+    "category": "regression",
+    "recommendedGrade": 11,
+    "gradeRange": [
+      9,
+      12
+    ],
+    "description": "The line passes through (x̄, ȳ), so the intercept is ȳ − b x̄.",
+    "meaning": "Predicted y when x = 0 (meaningful only if x = 0 is realistic).",
+    "variables": [
+      {
+        "symbol": "a",
+        "name": "intercept",
+        "unit": null
+      },
+      {
+        "symbol": "b",
+        "name": "slope",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Slope b already computed"
+    ],
+    "restrictions": [
+      "Interpretation at x = 0 can be meaningless"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "With slope 0.9, x̄ = 3, ȳ = 4 find a and predict y at x = 6.",
+      "given": [
+        "b = 0.9",
+        "x̄ = 3",
+        "ȳ = 4"
+      ],
+      "required": "Equation and prediction",
+      "formula": "a=\\bar y-b\\bar x",
+      "substitution": "a=4-0.9(3)",
+      "calculation": [
+        "a = 1.3",
+        "ŷ(6) = 1.3 + 0.9(6) = 6.7"
+      ],
+      "answer": "ŷ = 1.3 + 0.9x; ŷ(6) = 6.7",
+      "units": null,
+      "explanation": "x = 6 is just outside the data range, so treat with care.",
+      "check": {
+        "expr": "(4-0.9*3)+0.9*6",
+        "expected": 6.7,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-regression-slope"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-013",
+      "SRC-STP-040"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-013",
+        "SRC-STP-040"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax a = ȳ − b x̄; Math is Fun's intercept step from sums gives the same value on the checked example (b=0.9, a=1.3)."
+    }
+  },
+  {
+    "id": "F-STP-pearson-r",
+    "name": "Pearson correlation coefficient (enrichment)",
+    "expression": "r=\\frac{\\sum(x-\\bar{x})(y-\\bar{y})}{\\sqrt{\\sum(x-\\bar{x})^{2}\\sum(y-\\bar{y})^{2}}}",
+    "subject": "statistics",
+    "topicId": "TOP-STP-scatter-plots-correlation",
+    "subtopic": "Correlation",
+    "category": "correlation",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "description": "Standardised measure of linear association between two variables.",
+    "meaning": "Sign shows direction; |r| near 1 means points lie near a line; says nothing about causation.",
+    "variables": [
+      {
+        "symbol": "r",
+        "name": "correlation coefficient",
+        "unit": "dimensionless (−1 to 1)"
+      }
+    ],
+    "conditions": [
+      "Paired numerical data",
+      "At least two distinct values for each variable"
+    ],
+    "restrictions": [
+      "Measures linear association only",
+      "Sensitive to outliers",
+      "Correlation does not imply causation"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "hard",
+      "problem": "Using the five points (1,2),(2,3),(3,5),(4,4),(5,6), find r.",
+      "given": [
+        "Σx=15, Σy=20, Σxy=69, Σx²=55, Σy²=90, n=5"
+      ],
+      "required": "r",
+      "formula": "r=\\frac{S_{xy}}{\\sqrt{S_{xx}S_{yy}}}",
+      "substitution": "r=\\frac{69-15(20)/5}{\\sqrt{(55-15^2/5)(90-20^2/5)}}",
+      "calculation": [
+        "Sxy = 9",
+        "Sxx = 10",
+        "Syy = 10",
+        "r = 0.9"
+      ],
+      "answer": "r = 0.9",
+      "units": null,
+      "explanation": "Strong positive linear association.",
+      "check": {
+        "expr": "(69-15*20/5)/Math.sqrt((55-15*15/5)*(90-20*20/5))",
+        "expected": 0.9,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-regression-slope"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-029",
+      "SRC-STP-039"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-029",
+        "SRC-STP-039"
+      ],
+      "recomputed": true,
+      "notes": "MathWorld gives r^2 = ss_xy^2/(ss_xx ss_yy) (sign from ss_xy); Math is Fun describes Pearson's correlation stepwise but its exact formula text was not captured, so the signed form is derived rather than copied. Enrichment topic."
+    }
+  },
+  {
+    "id": "F-STP-probability-equally-likely",
+    "name": "Probability with equally likely outcomes",
+    "expression": "P(A)=\\frac{n(A)}{n(S)}",
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "subtopic": "Basic",
+    "category": "probability",
+    "recommendedGrade": 7,
+    "gradeRange": [
+      7,
+      8
+    ],
+    "description": "Count favourable outcomes and divide by the total number of equally likely outcomes.",
+    "meaning": "Value between 0 (impossible) and 1 (certain).",
+    "variables": [
+      {
+        "symbol": "n(A)",
+        "name": "outcomes in event A",
+        "unit": "count"
+      },
+      {
+        "symbol": "n(S)",
+        "name": "outcomes in sample space",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "Outcomes equally likely",
+      "0 ≤ P(A) ≤ 1"
+    ],
+    "restrictions": [
+      "Not valid when outcomes have unequal chances"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "Two fair dice are rolled. Find P(sum = 8).",
+      "given": [
+        "n(S) = 36",
+        "Favourable: (2,6),(3,5),(4,4),(5,3),(6,2)"
+      ],
+      "required": "P(sum 8)",
+      "formula": "P(A)=\\frac{n(A)}{n(S)}",
+      "substitution": "\\frac{5}{36}",
+      "calculation": [
+        "5/36 ≈ 0.1389"
+      ],
+      "answer": "P ≈ 0.139",
+      "units": null,
+      "explanation": "Five of 36 equally likely pairs.",
+      "check": {
+        "expr": "5/36",
+        "expected": 0.1389,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-complement-rule"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-006",
+      "SRC-STP-049"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-006",
+        "SRC-STP-049"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax terminology and Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-complement-rule",
+    "name": "Complement rule",
+    "expression": "P(A')=1-P(A)",
+    "subject": "probability",
+    "topicId": "TOP-STP-basic-probability",
+    "subtopic": "Complement",
+    "category": "probability",
+    "recommendedGrade": 7,
+    "gradeRange": [
+      7,
+      8
+    ],
+    "description": "The chance A does not happen is 1 minus the chance it does.",
+    "meaning": "Useful for 'at least one' questions.",
+    "variables": [
+      {
+        "symbol": "A'",
+        "name": "complement of A",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "0 ≤ P(A) ≤ 1"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "A bag has 4 red, 3 blue, 5 green marbles. Find P(not green).",
+      "given": [
+        "P(green) = 5/12"
+      ],
+      "required": "P(not green)",
+      "formula": "P(A')=1-P(A)",
+      "substitution": "1-\\frac{5}{12}",
+      "calculation": [
+        "7/12 ≈ 0.5833"
+      ],
+      "answer": "P ≈ 0.583",
+      "units": null,
+      "explanation": "Equivalent to counting 4+3 = 7 non-green.",
+      "check": {
+        "expr": "1-5/12",
+        "expected": 0.5833,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-probability-equally-likely"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-006",
+      "SRC-STP-037"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-006",
+        "SRC-STP-037"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax states P(A)+P(A')=1; Math is Fun uses 1 − P(no match) trick."
+    }
+  },
+  {
+    "id": "F-STP-addition-general",
+    "name": "General addition rule",
+    "expression": "P(A\\cup B)=P(A)+P(B)-P(A\\cap B)",
+    "subject": "probability",
+    "topicId": "TOP-STP-mutually-exclusive-addition-rule",
+    "subtopic": "Addition",
+    "category": "probability",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "Add the probabilities, then subtract the overlap counted twice.",
+    "meaning": "Probability that at least one of A or B occurs.",
+    "variables": [
+      {
+        "symbol": "P(A\\cap B)",
+        "name": "probability both occur",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "All probabilities in [0,1]"
+    ],
+    "restrictions": [],
+    "derivation": "Inclusion-exclusion for two sets.",
+    "example": {
+      "level": "medium",
+      "problem": "30 students: 18 play soccer, 12 play chess, 5 play both. Find P(soccer or chess).",
+      "given": [
+        "P(S)=18/30, P(C)=12/30, P(both)=5/30"
+      ],
+      "required": "P(S ∪ C)",
+      "formula": "P(A\\cup B)=P(A)+P(B)-P(A\\cap B)",
+      "substitution": "\\frac{18}{30}+\\frac{12}{30}-\\frac{5}{30}",
+      "calculation": [
+        "25/30 ≈ 0.8333"
+      ],
+      "answer": "P ≈ 0.833",
+      "units": null,
+      "explanation": "Both-players were counted in each group.",
+      "check": {
+        "expr": "18/30+12/30-5/30",
+        "expected": 0.8333,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-addition-mutually-exclusive"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-008",
+      "SRC-STP-028"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-008",
+        "SRC-STP-028"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax gives the probability form; MathWorld inclusion-exclusion gives the set-cardinality generalisation; consistent."
+    }
+  },
+  {
+    "id": "F-STP-addition-mutually-exclusive",
+    "name": "Addition rule for mutually exclusive events",
+    "expression": "P(A\\cup B)=P(A)+P(B)",
+    "subject": "probability",
+    "topicId": "TOP-STP-mutually-exclusive-addition-rule",
+    "subtopic": "Addition",
+    "category": "probability",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "If A and B cannot both happen, simply add.",
+    "meaning": "Special case of the general rule where P(A ∩ B) = 0.",
+    "variables": [
+      {
+        "symbol": "P(A)",
+        "name": "probability of event A",
+        "unit": null
+      },
+      {
+        "symbol": "P(B)",
+        "name": "probability of event B",
+        "unit": null
+      },
+      {
+        "symbol": "P(A \\cup B)",
+        "name": "probability of A or B",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "P(A ∩ B) = 0"
+    ],
+    "restrictions": [
+      "Do not use when events overlap (e.g. King and Heart)"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "One card from a deck: P(King or Queen).",
+      "given": [
+        "P(K)=4/52, P(Q)=4/52"
+      ],
+      "required": "P(K or Q)",
+      "formula": "P(A\\cup B)=P(A)+P(B)",
+      "substitution": "\\frac{4}{52}+\\frac{4}{52}",
+      "calculation": [
+        "8/52 = 2/13 ≈ 0.1538"
+      ],
+      "answer": "P ≈ 0.154",
+      "units": null,
+      "explanation": "No card is both.",
+      "check": {
+        "expr": "4/52+4/52",
+        "expected": 0.1538,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-addition-general"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-007",
+      "SRC-STP-008",
+      "SRC-STP-043"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-007",
+        "SRC-STP-008",
+        "SRC-STP-043"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax and Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-multiplication-independent",
+    "name": "Multiplication rule for independent events",
+    "expression": "P(A\\cap B)=P(A)\\,P(B)",
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "subtopic": "Multiplication",
+    "category": "probability",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "Multiply the probabilities of independent events.",
+    "meaning": "Also the test for independence.",
+    "variables": [
+      {
+        "symbol": "P(A)",
+        "name": "probability of event A",
+        "unit": null
+      },
+      {
+        "symbol": "P(B)",
+        "name": "probability of event B",
+        "unit": null
+      },
+      {
+        "symbol": "P(A \\cap B)",
+        "name": "probability of A and B",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "A and B independent"
+    ],
+    "restrictions": [
+      "Not applicable without replacement unless re-computed as dependent"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "Coin shows heads and a die shows 6.",
+      "given": [
+        "P(H)=1/2, P(6)=1/6"
+      ],
+      "required": "P(H and 6)",
+      "formula": "P(A\\cap B)=P(A)P(B)",
+      "substitution": "\\frac12\\cdot\\frac16",
+      "calculation": [
+        "1/12 ≈ 0.0833"
+      ],
+      "answer": "P ≈ 0.0833",
+      "units": null,
+      "explanation": "Independent trials.",
+      "check": {
+        "expr": "(1/2)*(1/6)",
+        "expected": 0.0833,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-multiplication-general"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-007",
+      "SRC-STP-008",
+      "SRC-STP-044"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-007",
+        "SRC-STP-008",
+        "SRC-STP-044"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax and Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-multiplication-general",
+    "name": "General multiplication rule",
+    "expression": "P(A\\cap B)=P(A)\\,P(B\\mid A)",
+    "subject": "probability",
+    "topicId": "TOP-STP-independent-dependent-events",
+    "subtopic": "Multiplication",
+    "category": "probability",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "Probability of A, times the probability of B given A happened.",
+    "meaning": "Handles dependent events such as draws without replacement.",
+    "variables": [
+      {
+        "symbol": "P(B\\mid A)",
+        "name": "probability of B given A",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "P(A) > 0"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Two cards drawn without replacement: both hearts.",
+      "given": [
+        "13/52 then 12/51"
+      ],
+      "required": "P(both hearts)",
+      "formula": "P(A\\cap B)=P(A)P(B\\mid A)",
+      "substitution": "\\frac{13}{52}\\cdot\\frac{12}{51}",
+      "calculation": [
+        "1/17 ≈ 0.0588"
+      ],
+      "answer": "P ≈ 0.0588",
+      "units": null,
+      "explanation": "Second draw has one fewer heart and one fewer card.",
+      "check": {
+        "expr": "(13/52)*(12/51)",
+        "expected": 0.0588,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-conditional-probability"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-008",
+      "SRC-STP-037",
+      "SRC-STP-024"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-008",
+        "SRC-STP-037",
+        "SRC-STP-024"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, Math is Fun, MathWorld agree."
+    }
+  },
+  {
+    "id": "F-STP-conditional-probability",
+    "name": "Conditional probability",
+    "expression": "P(B\\mid A)=\\frac{P(A\\cap B)}{P(A)}",
+    "subject": "probability",
+    "topicId": "TOP-STP-conditional-probability",
+    "subtopic": "Conditional",
+    "category": "probability",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Restrict attention to the outcomes where A occurred.",
+    "meaning": "Updated probability of B given the information that A occurred.",
+    "variables": [
+      {
+        "symbol": "P(B \\mid A)",
+        "name": "probability of B given A",
+        "unit": null
+      },
+      {
+        "symbol": "P(A \\cap B)",
+        "name": "probability of A and B",
+        "unit": null
+      },
+      {
+        "symbol": "P(A)",
+        "name": "probability of A",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "P(A) > 0"
+    ],
+    "restrictions": [
+      "P(B|A) ≠ P(A|B) in general"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "80 students; 50 like pizza; 30 like pizza and pasta. Find P(pasta | pizza).",
+      "given": [
+        "P(both)=30/80",
+        "P(pizza)=50/80"
+      ],
+      "required": "P(pasta | pizza)",
+      "formula": "P(B\\mid A)=\\frac{P(A\\cap B)}{P(A)}",
+      "substitution": "\\frac{30/80}{50/80}",
+      "calculation": [
+        "0.6"
+      ],
+      "answer": "0.6",
+      "units": null,
+      "explanation": "Equivalent to 30/50 in counts.",
+      "check": {
+        "expr": "(30/80)/(50/80)",
+        "expected": 0.6,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-multiplication-general",
+      "F-STP-bayes"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-008",
+      "SRC-STP-024",
+      "SRC-STP-037"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-008",
+        "SRC-STP-024",
+        "SRC-STP-037"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, MathWorld, Math is Fun agree (MathWorld requires P(A)>0)."
+    }
+  },
+  {
+    "id": "F-STP-total-probability",
+    "name": "Law of total probability",
+    "expression": "P(B)=\\sum_{i}P(A_i)\\,P(B\\mid A_i)",
+    "subject": "probability",
+    "topicId": "TOP-STP-tree-venn-two-way-tables",
+    "subtopic": "Total probability",
+    "category": "probability",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Add the probabilities along all tree branches leading to B.",
+    "meaning": "Splits an event across a partition A_1, …, A_n.",
+    "variables": [
+      {
+        "symbol": "A_i",
+        "name": "partition events",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "A_i mutually exclusive",
+      "Union of A_i is the whole sample space",
+      "P(A_i) > 0"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Machine A makes 60% of items (2% defective); machine B 40% (5% defective). P(defective)?",
+      "given": [
+        "P(A)=0.6",
+        "P(D|A)=0.02",
+        "P(B)=0.4",
+        "P(D|B)=0.05"
+      ],
+      "required": "P(D)",
+      "formula": "P(D)=\\sum P(A_i)P(D\\mid A_i)",
+      "substitution": "0.6(0.02)+0.4(0.05)",
+      "calculation": [
+        "0.012+0.02 = 0.032"
+      ],
+      "answer": "P(D) = 0.032",
+      "units": null,
+      "explanation": "Sum over the two branches.",
+      "check": {
+        "expr": "0.6*0.02+0.4*0.05",
+        "expected": 0.032,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-bayes"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-023",
+      "SRC-STP-037"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-023",
+        "SRC-STP-037"
+      ],
+      "recomputed": true,
+      "notes": "MathWorld derives it within the Bayes proof; Math is Fun shows the tree-diagram version in a worked example, not a general statement."
+    }
+  },
+  {
+    "id": "F-STP-bayes",
+    "name": "Bayes' theorem",
+    "expression": "P(A\\mid B)=\\frac{P(A)\\,P(B\\mid A)}{P(B)}",
+    "subject": "probability",
+    "topicId": "TOP-STP-bayes-theorem",
+    "subtopic": "Bayes",
+    "category": "probability",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      12,
+      12
+    ],
+    "description": "Reverse a conditional probability using the prior.",
+    "meaning": "Updates belief in A after seeing B.",
+    "variables": [
+      {
+        "symbol": "P(A \\mid B)",
+        "name": "probability of A given B",
+        "unit": null
+      },
+      {
+        "symbol": "P(A)",
+        "name": "prior probability of A",
+        "unit": null
+      },
+      {
+        "symbol": "P(B \\mid A)",
+        "name": "likelihood of B given A",
+        "unit": null
+      },
+      {
+        "symbol": "P(B)",
+        "name": "total probability of B",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "P(B) > 0"
+    ],
+    "restrictions": [
+      "Base rates matter"
+    ],
+    "derivation": "From P(A∩B) = P(A)P(B|A) = P(B)P(A|B).",
+    "example": {
+      "level": "hard",
+      "problem": "P(D)=0.02, P(+|D)=0.95, P(+|not D)=0.08. Find P(D|+).",
+      "given": [
+        "Prevalence 0.02",
+        "Sensitivity 0.95",
+        "False-positive rate 0.08"
+      ],
+      "required": "P(D|+)",
+      "formula": "P(D\\mid +)=\\frac{P(D)P(+\\mid D)}{P(D)P(+\\mid D)+P(D')P(+\\mid D')}",
+      "substitution": "\\frac{0.02(0.95)}{0.02(0.95)+0.98(0.08)}",
+      "calculation": [
+        "0.019/0.0974 ≈ 0.1951"
+      ],
+      "answer": "P ≈ 0.195",
+      "units": null,
+      "explanation": "Most positives come from the large healthy group.",
+      "check": {
+        "expr": "0.02*0.95/(0.02*0.95+0.98*0.08)",
+        "expected": 0.1951,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-conditional-probability",
+      "F-STP-total-probability"
+    ],
+    "equivalentForms": [
+      "P(A_i\\mid B)=\\frac{P(A_i)P(B\\mid A_i)}{\\sum_j P(A_j)P(B\\mid A_j)}"
+    ],
+    "sourceIds": [
+      "SRC-STP-023",
+      "SRC-STP-024",
+      "SRC-STP-045"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-023",
+        "SRC-STP-024",
+        "SRC-STP-045"
+      ],
+      "recomputed": true,
+      "notes": "MathWorld, Math is Fun and MathWorld conditional-probability page give identical forms."
+    }
+  },
+  {
+    "id": "F-STP-expected-value",
+    "name": "Expected value of a discrete random variable",
+    "expression": "E[X]=\\sum x\\,P(X=x)",
+    "subject": "probability",
+    "topicId": "TOP-STP-expected-value",
+    "subtopic": "Expected value",
+    "category": "probability",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      9,
+      12
+    ],
+    "description": "Multiply each value by its probability and sum.",
+    "meaning": "Long-run average.",
+    "variables": [
+      {
+        "symbol": "x",
+        "name": "possible values",
+        "unit": null
+      },
+      {
+        "symbol": "P(X=x)",
+        "name": "probabilities",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Σ P(X=x) = 1",
+      "0 ≤ P ≤ 1"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Win $10 (p 0.1), $2 (p 0.4), $0 (p 0.5); ticket $3. Expected net?",
+      "given": [
+        "Probabilities sum to 1"
+      ],
+      "required": "Expected net gain",
+      "formula": "E=\\sum xP(x)",
+      "substitution": "10(0.1)+2(0.4)+0(0.5)-3",
+      "calculation": [
+        "1+0.8+0-3 = -1.2"
+      ],
+      "answer": "−$1.20 per game",
+      "units": "dollars",
+      "explanation": "Negative: unfavourable game.",
+      "check": {
+        "expr": "10*0.1+2*0.4+0*0.5-3",
+        "expected": -1.2,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-binomial-mean"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-011",
+      "SRC-STP-031",
+      "SRC-STP-046"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-011",
+        "SRC-STP-031",
+        "SRC-STP-046"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, MathWorld, Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-fundamental-counting",
+    "name": "Fundamental counting principle",
+    "expression": "N=n_1\\times n_2\\times\\cdots\\times n_k",
+    "subject": "probability",
+    "topicId": "TOP-STP-counting-principles",
+    "subtopic": "Counting",
+    "category": "counting",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      8,
+      10
+    ],
+    "description": "Multiply the number of choices at each stage.",
+    "meaning": "Counts the ways to complete independent stages.",
+    "variables": [
+      {
+        "symbol": "n_i",
+        "name": "choices at stage i",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "Number of choices at later stages not affected by earlier ones (or counted after adjustment)"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "4 shirts × 3 trousers × 2 pairs of shoes.",
+      "given": [
+        "4, 3, 2"
+      ],
+      "required": "Outfits",
+      "formula": "N=n_1n_2n_3",
+      "substitution": "4×3×2",
+      "calculation": [
+        "24"
+      ],
+      "answer": "24 outfits",
+      "units": null,
+      "explanation": "One choice per stage.",
+      "check": {
+        "expr": "4*3*2",
+        "expected": 24,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-factorial"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-016",
+      "SRC-STP-041"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-016",
+        "SRC-STP-041"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax Precalculus states the principle; Math is Fun shows repetition (n^r) as a special case, not as a general statement."
+    }
+  },
+  {
+    "id": "F-STP-factorial",
+    "name": "Factorial",
+    "expression": "n!=n(n-1)(n-2)\\cdots 2\\cdot 1",
+    "subject": "probability",
+    "topicId": "TOP-STP-counting-principles",
+    "subtopic": "Counting",
+    "category": "counting",
+    "recommendedGrade": 9,
+    "gradeRange": [
+      9,
+      10
+    ],
+    "description": "Product of whole numbers from n down to 1.",
+    "meaning": "Number of ways to arrange n distinct objects in a row.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "non-negative integer",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "n ≥ 0"
+    ],
+    "restrictions": [
+      "0! = 1 by convention"
+    ],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "Compute 6!.",
+      "given": [
+        "n = 6"
+      ],
+      "required": "6!",
+      "formula": "n!",
+      "substitution": "6·5·4·3·2·1",
+      "calculation": [
+        "720"
+      ],
+      "answer": "720",
+      "units": null,
+      "explanation": "Product of 6 down to 1.",
+      "check": {
+        "expr": "6*5*4*3*2*1",
+        "expected": 720,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-permutations"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-026",
+      "SRC-STP-053"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-026",
+        "SRC-STP-053"
+      ],
+      "recomputed": true,
+      "notes": "MathWorld and Math is Fun agree on n! as the product down to 1. The 0! = 1 convention was not located in the fetched text and is listed as a standard convention supported by reasoning only."
+    }
+  },
+  {
+    "id": "F-STP-permutations",
+    "name": "Permutations (ordered selections)",
+    "expression": "{}_nP_r=\\frac{n!}{(n-r)!}",
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "subtopic": "Permutations",
+    "category": "counting",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Number of ordered arrangements of r objects from n distinct objects.",
+    "meaning": "Order matters; no repetition.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "objects available",
+        "unit": "count"
+      },
+      {
+        "symbol": "r",
+        "name": "objects chosen",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "0 ≤ r ≤ n"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "Gold, silver, bronze among 8 runners.",
+      "given": [
+        "n=8, r=3"
+      ],
+      "required": "Number of podiums",
+      "formula": "{}_nP_r=\\frac{n!}{(n-r)!}",
+      "substitution": "8!/5!",
+      "calculation": [
+        "8×7×6 = 336"
+      ],
+      "answer": "336",
+      "units": null,
+      "explanation": "8 choices, 7, then 6.",
+      "check": {
+        "expr": "8*7*6",
+        "expected": 336,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-combinations"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-016",
+      "SRC-STP-026",
+      "SRC-STP-041"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-016",
+        "SRC-STP-026",
+        "SRC-STP-041"
+      ],
+      "recomputed": true,
+      "notes": "MathWorld, Math is Fun and OpenStax agree."
+    }
+  },
+  {
+    "id": "F-STP-combinations",
+    "name": "Combinations (unordered selections)",
+    "expression": "\\binom{n}{r}=\\frac{n!}{r!\\,(n-r)!}",
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "subtopic": "Combinations",
+    "category": "counting",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Number of ways to choose r objects from n when order is irrelevant.",
+    "meaning": "Divide permutations by r! to remove order.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "objects available",
+        "unit": "count"
+      },
+      {
+        "symbol": "r",
+        "name": "objects chosen",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "0 ≤ r ≤ n"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Committee of 3 from 10 students.",
+      "given": [
+        "n=10, r=3"
+      ],
+      "required": "Committees",
+      "formula": "\\binom nr=\\frac{n!}{r!(n-r)!}",
+      "substitution": "10!/(3!7!)",
+      "calculation": [
+        "720/6 = 120"
+      ],
+      "answer": "120",
+      "units": null,
+      "explanation": "Each committee counted 3! = 6 times in permutations.",
+      "check": {
+        "expr": "10*9*8/(3*2*1)",
+        "expected": 120,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-permutations"
+    ],
+    "equivalentForms": [
+      "{}_nC_r",
+      "C(n,r)"
+    ],
+    "sourceIds": [
+      "SRC-STP-016",
+      "SRC-STP-027",
+      "SRC-STP-041"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-016",
+        "SRC-STP-027",
+        "SRC-STP-041"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, MathWorld (C(4,2)=6 example), Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-permutations-repeated",
+    "name": "Arrangements with repeated items",
+    "expression": "\\frac{n!}{r_1!\\,r_2!\\cdots r_k!}",
+    "subject": "probability",
+    "topicId": "TOP-STP-permutations-combinations",
+    "subtopic": "Repeated items",
+    "category": "counting",
+    "recommendedGrade": 10,
+    "gradeRange": [
+      10,
+      12
+    ],
+    "description": "Divide n! by the factorial of each repeat count.",
+    "meaning": "Counts distinct words/arrangements.",
+    "variables": [
+      {
+        "symbol": "r_i",
+        "name": "number of identical items of type i",
+        "unit": "count"
+      }
+    ],
+    "conditions": [
+      "r_1 + … + r_k = n"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "Arrangements of STATISTICS (S×3, T×3, I×2, A, C).",
+      "given": [
+        "n = 10"
+      ],
+      "required": "Distinct arrangements",
+      "formula": "\\frac{n!}{r_1!r_2!\\cdots}",
+      "substitution": "\\frac{10!}{3!\\,3!\\,2!}",
+      "calculation": [
+        "3628800/72 = 50400"
+      ],
+      "answer": "50,400",
+      "units": null,
+      "explanation": "Divide out the identical swaps.",
+      "check": {
+        "expr": "3628800/(6*6*2)",
+        "expected": 50400,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-permutations"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-016"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-016"
+      ],
+      "recomputed": true,
+      "notes": "Only one fetched source (OpenStax Precalculus, DISTINCT = 10,080) states it; recomputed 8!/(2!2!) = 10080."
+    }
+  },
+  {
+    "id": "F-STP-binomial-pmf",
+    "name": "Binomial probability",
+    "expression": "P(X=k)=\\binom{n}{k}p^{k}(1-p)^{n-k}",
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "subtopic": "Binomial",
+    "category": "probability distributions",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "description": "Probability of exactly k successes in n independent trials.",
+    "meaning": "Counts which trials succeed (C(n,k)) times probability of each pattern.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "number of trials",
+        "unit": "count"
+      },
+      {
+        "symbol": "k",
+        "name": "number of successes",
+        "unit": "count"
+      },
+      {
+        "symbol": "p",
+        "name": "success probability",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Fixed n",
+      "Two outcomes per trial",
+      "Independent trials",
+      "Constant p"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "5 free throws at p = 0.7. P(exactly 4)?",
+      "given": [
+        "n=5, k=4, p=0.7"
+      ],
+      "required": "P(X=4)",
+      "formula": "P(X=k)=\\binom nk p^k(1-p)^{n-k}",
+      "substitution": "\\binom54(0.7)^4(0.3)",
+      "calculation": [
+        "5×0.2401×0.3 = 0.36015"
+      ],
+      "answer": "≈ 0.360",
+      "units": null,
+      "explanation": "Five ways, each 0.7⁴×0.3.",
+      "check": {
+        "expr": "5*0.7**4*0.3",
+        "expected": 0.36015,
+        "tolerance": 0.0001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-binomial-mean",
+      "F-STP-combinations"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-012",
+      "SRC-STP-025",
+      "SRC-STP-042"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-012",
+        "SRC-STP-025",
+        "SRC-STP-042"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax, MathWorld, Math is Fun agree."
+    }
+  },
+  {
+    "id": "F-STP-binomial-mean",
+    "name": "Mean of a binomial distribution",
+    "expression": "\\mu=np",
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "subtopic": "Binomial",
+    "category": "probability distributions",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "description": "Expected successes in n trials.",
+    "meaning": "Long-run average number of successes.",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "trials",
+        "unit": null
+      },
+      {
+        "symbol": "p",
+        "name": "success probability",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Binomial conditions"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "easy",
+      "problem": "n = 50, p = 0.2.",
+      "given": [
+        "n = 50",
+        "p = 0.2"
+      ],
+      "required": "Mean",
+      "formula": "\\mu=np",
+      "substitution": "50(0.2)",
+      "calculation": [
+        "10"
+      ],
+      "answer": "10",
+      "units": null,
+      "explanation": "n times p.",
+      "check": {
+        "expr": "50*0.2",
+        "expected": 10,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-binomial-variance"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-012",
+      "SRC-STP-025"
+    ],
+    "verification": {
+      "status": "VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-012",
+        "SRC-STP-025"
+      ],
+      "recomputed": true,
+      "notes": "OpenStax and MathWorld (Np) agree."
+    }
+  },
+  {
+    "id": "F-STP-binomial-variance",
+    "name": "Variance and SD of a binomial distribution",
+    "expression": "\\sigma^{2}=np(1-p),\\quad \\sigma=\\sqrt{np(1-p)}",
+    "subject": "probability",
+    "topicId": "TOP-STP-binomial-distribution",
+    "subtopic": "Binomial",
+    "category": "probability distributions",
+    "recommendedGrade": 12,
+    "gradeRange": [
+      11,
+      12
+    ],
+    "description": "Spread of the number of successes.",
+    "meaning": "Spread of the number of successes in n independent trials, where q = 1 − p; the mean is np and the variance npq.",
+    "variables": [
+      {
+        "symbol": "q",
+        "name": "failure probability = 1 − p",
+        "unit": null
+      }
+    ],
+    "conditions": [
+      "Binomial conditions"
+    ],
+    "restrictions": [],
+    "derivation": null,
+    "example": {
+      "level": "medium",
+      "problem": "n = 50, p = 0.2: SD?",
+      "given": [
+        "n = 50",
+        "p = 0.2"
+      ],
+      "required": "SD",
+      "formula": "\\sigma=\\sqrt{npq}",
+      "substitution": "\\sqrt{50(0.2)(0.8)}",
+      "calculation": [
+        "√8 ≈ 2.83"
+      ],
+      "answer": "≈ 2.83",
+      "units": null,
+      "explanation": "np(1−p) = 8.",
+      "check": {
+        "expr": "Math.sqrt(50*0.2*0.8)",
+        "expected": 2.8284,
+        "tolerance": 0.001
+      }
+    },
+    "relatedFormulaIds": [
+      "F-STP-binomial-mean"
+    ],
+    "equivalentForms": [],
+    "sourceIds": [
+      "SRC-STP-012"
+    ],
+    "verification": {
+      "status": "PARTIALLY_VERIFIED",
+      "sourcesChecked": [
+        "SRC-STP-012"
+      ],
+      "recomputed": true,
+      "notes": "Only OpenStax states npq explicitly among fetched pages; MathWorld page excerpt read gave the mean only."
+    }
+  }
+]

@@ -1,0 +1,1388 @@
+[
+  {
+    "id": "SRC-STP-001",
+    "title": "2.7 Measures of the Spread of the Data",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-7-measures-of-the-spread-of-the-data",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "variance",
+      "standard deviation",
+      "sample vs population"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: s uses n-1, sigma uses N; variance is mean squared deviation; units; s is point estimate for sigma. Does not cover empirical rule.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-002",
+    "title": "2.3 Measures of the Location of the Data",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-3-measures-of-the-location-of-the-data",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "quartiles",
+      "percentiles",
+      "IQR",
+      "outlier rule"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: quartiles as medians of lower/upper halves; percentile index i = k/100 (n+1); IQR = Q3 - Q1; 1.5 x IQR outlier test; 'potential outliers need investigation'. States one convention only.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-003",
+    "title": "2.5 Measures of the Center of the Data",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-5-measures-of-the-center-of-the-data",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "mean",
+      "median",
+      "mode",
+      "grouped mean"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: mode, bimodal, mean of frequency table = sum(f*m)/sum(f) with interval midpoint m. Does not discuss grouped median in detail.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-004",
+    "title": "2.4 Box Plots",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-4-box-plots",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "box plot",
+      "five-number summary"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: box plot built from min, Q1, median, Q3, max.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-005",
+    "title": "1.2 Data, Sampling, and Variation in Data and Sampling",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/1-2-data-sampling-and-variation-in-data-and-sampling",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "data types",
+      "sampling"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: qualitative/categorical vs quantitative; discrete (counted) vs continuous; simple random and stratified sampling definitions.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-006",
+    "title": "3.1 Terminology",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-1-terminology",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "sample space",
+      "events",
+      "complement"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: outcome, sample space S, event, complement A' with P(A)+P(A')=1; conditional probability notation introduced.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-007",
+    "title": "3.2 Independent and Mutually Exclusive Events",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-2-independent-and-mutually-exclusive-events",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "independent",
+      "mutually exclusive"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: independence conditions P(A|B)=P(A), P(A and B)=P(A)P(B); with/without replacement; independent and mutually exclusive are different ideas.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-008",
+    "title": "3.3 Two Basic Rules of Probability",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-3-two-basic-rules-of-probability",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "addition rule",
+      "multiplication rule"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: P(A and B)=P(B)P(A|B); P(A or B)=P(A)+P(B)-P(A and B); mutually exclusive special case. Page content fetched; some formulas rendered as images in markdown, cross-checked with search-listed text of same page.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-009",
+    "title": "3.4 Contingency Tables",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-4-contingency-tables",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "two-way tables",
+      "conditional probability"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: contingency table definition and use for conditional probability.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-010",
+    "title": "3.5 Tree and Venn Diagrams",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-5-tree-and-venn-diagrams",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "tree diagram",
+      "Venn diagram"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: tree diagram branches labelled with probabilities or frequencies; Venn diagrams.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-011",
+    "title": "4.2 Mean or Expected Value and Standard Deviation",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/4-2-mean-or-expected-value-and-standard-deviation",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "expected value",
+      "discrete random variable"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: expected value as long-term average of a discrete random variable.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-012",
+    "title": "4.3 Binomial Distribution",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/4-3-binomial-distribution",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "binomial distribution"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: fixed n, two outcomes, independent trials, constant p; mean np, variance npq, sd sqrt(npq); X ~ B(n,p).",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-013",
+    "title": "12.3 The Regression Equation",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/12-3-the-regression-equation",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "line of best fit",
+      "least squares"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: best-fit line minimizes sum of squared errors; y-hat = a + bx; a = ybar - b xbar; b = sum((x-xbar)(y-ybar))/sum((x-xbar)^2).",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-014",
+    "title": "7.1 The Central Limit Theorem for Sample Means (Averages)",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/7-1-the-central-limit-theorem-for-sample-means-averages",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "central limit theorem"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: sample means tend to normal with mean mu and sd sigma/sqrt(n) as n grows. College-level; enrichment only.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-015",
+    "title": "2.2 Histograms, Frequency Polygons, and Time Series Graphs",
+    "author": "Barbara Illowsky, Susan Dean",
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Introductory Statistics 2e",
+    "url": "https://openstax.org/books/introductory-statistics-2e/pages/2-2-histograms-frequency-polygons-and-time-series-graphs",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "histogram",
+      "frequency polygon",
+      "time series"
+    ],
+    "gradeRelevance": "College-level introductory textbook; content is accessible to advanced secondary students; no secondary grade level stated on the page",
+    "published": "2023-12-13",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: histogram has contiguous bars; rule of thumb for large data sets; frequency polygon.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY-NC-SA 4.0 (per page footer); attribution required if reused.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-016",
+    "title": "11.5 Counting Principles",
+    "author": null,
+    "institution": "OpenStax, Rice University",
+    "website": "OpenStax Precalculus 2e",
+    "url": "https://openstax.org/books/precalculus-2e/pages/11-5-counting-principles",
+    "tier": 1,
+    "type": "educational-explanation",
+    "subjects": [
+      "probability"
+    ],
+    "topics": [
+      "fundamental counting principle",
+      "permutations",
+      "combinations",
+      "arrangements with repeated items"
+    ],
+    "gradeRelevance": "College precalculus textbook; no secondary grade level stated",
+    "published": "2021-12-21",
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: Multiplication (Fundamental Counting) Principle; permutations of n distinct objects; combinations; permutations of non-distinct objects with example DISTINCT = 10,080. Formula glyphs rendered as images in markdown; values cross-checked via worked numeric examples on the page.",
+    "copyright": "Facts paraphrased; no text reproduced. OpenStax content is CC BY 4.0 (per page footer).",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-017",
+    "title": "1.3.3.7 Box Plot",
+    "author": null,
+    "institution": "NIST Information Technology Laboratory",
+    "website": "NIST/SEMATECH e-Handbook of Statistical Methods",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/boxplot.htm",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "box plot",
+      "fences",
+      "outliers"
+    ],
+    "gradeRelevance": "Professional reference; definitions suitable for teacher use; not a secondary-level text",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: box between quartiles, whiskers, fences using 1.5 x IQ and 3 x IQ; points beyond drawn individually.",
+    "copyright": "Facts paraphrased; no text reproduced. US government (NIST) publication.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-018",
+    "title": "7.1.6 What are outliers in the data?",
+    "author": null,
+    "institution": "NIST Information Technology Laboratory",
+    "website": "NIST/SEMATECH e-Handbook of Statistical Methods",
+    "url": "https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "outliers",
+      "fences"
+    ],
+    "gradeRelevance": "Professional reference; definitions suitable for teacher use; not a secondary-level text",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: outlier = abnormally distant observation (judgement); inner fences Q1-1.5IQ, Q3+1.5IQ; outer fences at 3 IQ.",
+    "copyright": "Facts paraphrased; no text reproduced. US government (NIST) publication.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-019",
+    "title": "1.3.6.6.1 Normal Distribution",
+    "author": null,
+    "institution": "NIST Information Technology Laboratory",
+    "website": "NIST/SEMATECH e-Handbook of Statistical Methods",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3661.htm",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "normal distribution"
+    ],
+    "gradeRelevance": "Professional reference; definitions suitable for teacher use; not a secondary-level text",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: pdf of the normal distribution with location mu and scale sigma; standard normal mu=0, sigma=1.",
+    "copyright": "Facts paraphrased; no text reproduced. US government (NIST) publication.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-020",
+    "title": "1.3.5.11 Measures of Skewness and Kurtosis",
+    "author": null,
+    "institution": "NIST Information Technology Laboratory",
+    "website": "NIST/SEMATECH e-Handbook of Statistical Methods",
+    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35b.htm",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "skewness",
+      "symmetry"
+    ],
+    "gradeRelevance": "Professional reference; definitions suitable for teacher use; not a secondary-level text",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: skewness describes asymmetry; right-skewed = long right tail; note that this page's SD uses N in the denominator for its skewness formula; histogram is a good tool for shape.",
+    "copyright": "Facts paraphrased; no text reproduced. US government (NIST) publication.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-021",
+    "title": "Quartile",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/Quartile.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "quartile conventions"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read table of quartile position methods (Minitab, Tukey, Moore & McCabe, Mendenhall & Sincich, Freund & Perles) - confirms there is no single universal quartile convention.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-022",
+    "title": "Variance",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/Variance.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "variance",
+      "sample variance"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: population variance sigma^2 = E[(X-mu)^2]; 1/N sample variance is biased; 1/(N-1) bias-corrected version; warns about notation confusion; var(aX+b)=a^2 var(X).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-023",
+    "title": "Bayes' Theorem",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/BayesTheorem.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "Bayes",
+      "total probability"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: P(B_j|A) = P(B_j)P(A|B_j)/P(A); partition form with sum in denominator; derivation uses P(A)=sum P(A_i)P(A|A_i).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-024",
+    "title": "Conditional Probability",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/ConditionalProbability.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "conditional probability"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: P(B|A)=P(A and B)/P(A) with P(A)>0; chain rule; leads to Bayes. Contains measure-theoretic material beyond secondary level (ignored).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-025",
+    "title": "Binomial Distribution",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/BinomialDistribution.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "binomial distribution"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: P(n|N) = C(N,n) p^n q^(N-n); independent Bernoulli trials; mean Np.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-026",
+    "title": "Permutation",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/Permutation.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "permutations"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: n! permutations of n elements; ordered selections nPk = n!/(n-k)!; example 4!/2! = 12.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-027",
+    "title": "Combination",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/Combination.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "combinations"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: C(n,k) unordered selections; example C(4,2)=6 with explicit listing.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-028",
+    "title": "Inclusion-Exclusion Principle",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/Inclusion-ExclusionPrinciple.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "addition rule",
+      "union"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: |A1 u ... u Ap| alternating sum of intersections; the two-set case underlies P(A or B)=P(A)+P(B)-P(A and B). Set-cardinality statement, not probability wording.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-029",
+    "title": "Correlation Coefficient",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/CorrelationCoefficient.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "correlation",
+      "Pearson r"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: ss_xx, ss_yy, ss_xy definitions; r^2 = ss_xy^2/(ss_xx ss_yy); known as Pearson's correlation. Sign of r given by sign of slope/ss_xy (stated indirectly).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-030",
+    "title": "Least Squares Fitting",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/LeastSquaresFitting.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "line of best fit"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: vertical offsets minimized; squares make outliers influential; slope formula via sums is given on the companion Correlation Coefficient page (b = (n sum xy - sum x sum y)/(n sum x^2 - (sum x)^2)).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-031",
+    "title": "Expectation Value",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/ExpectationValue.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "expected value"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: E[f(X)] = sum f(x) P(X=x) for discrete X; linearity E[aX+bY]=aE[X]+bE[Y].",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-032",
+    "title": "Interquartile Range",
+    "author": "Eric W. Weisstein",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/InterquartileRange.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "IQR",
+      "quartile conventions"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: IQR depends on quartile convention; states convention should be given; describes halves including median for odd n as its traditional convention.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-033",
+    "title": "Outlier",
+    "author": "Eric W. Weisstein, with contributions by John Renze",
+    "institution": "Wolfram Research",
+    "website": "Wolfram MathWorld",
+    "url": "https://mathworld.wolfram.com/Outlier.html",
+    "tier": 2,
+    "type": "formal-reference",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "outlier rule"
+    ],
+    "gradeRelevance": "Formal reference statement; teacher/reference use, enrichment at Grades 10-12",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "high",
+    "verificationNotes": "Read: convenient definition: beyond 1.5 x IQR above Q3 or below Q1; outliers can distort least squares fits.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-034",
+    "title": "Standard Deviation and Variance",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/standard-deviation.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "standard deviation",
+      "population vs sample"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: worked dog-height example (mean 394, var 21704, sd about 147.32 population; sample var 27130, sd about 164.7); divide by N for population, N-1 for sample (Bessel's correction); 68% / 95% remark for bell-shaped data.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-035",
+    "title": "Quartiles",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/quartiles.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "quartiles",
+      "IQR",
+      "box plot"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: median-of-halves method; for even n, halves include no shared value; example data; notes that different apps may differ (including/excluding the median).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-036",
+    "title": "Normal Distribution (and Standard Normal)",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/standard-normal-distribution.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "normal distribution",
+      "z-score",
+      "empirical rule"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: 68-95-99.7 rule; z = (x - mu)/sigma; standardizing; mean = median = mode for normal.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-037",
+    "title": "Conditional Probability",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/probability-events-conditional.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "conditional probability",
+      "dependent events",
+      "tree diagrams"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: with/without replacement; P(A and B)=P(A)P(B|A); P(B|A)=P(A and B)/P(A); tree-diagram total probability example; complement trick.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-038",
+    "title": "Mean, Median and Mode from Grouped Frequencies",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/frequency-grouped-mean-median-mode.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "grouped data",
+      "estimated mean"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: midpoint method gives estimated mean; median group and interpolation idea; estimated, not exact.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-039",
+    "title": "Correlation",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/correlation.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "correlation",
+      "causation"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: correlation vs causation; Pearson's correlation described stepwise; software functions. Did not read exact r range statement.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-040",
+    "title": "Least Squares Regression",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/least-squares-regression.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "line of best fit"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: y = mx + b; steps with sums; m = (N sum xy - sum x sum y)/(N sum x^2 - (sum x)^2) (formula in alt text).",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-041",
+    "title": "Combinations and Permutations",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/combinatorics/combinations-permutations.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "permutations",
+      "combinations"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: permutations with repetition n^r, without repetition n!/(n-r)!; combinations unordered. Example 16!/13! = 3,360.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-042",
+    "title": "The Binomial Distribution",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/binomial-distribution.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "binomial distribution"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: P(k out of n) = n!/(k!(n-k)!) p^k (1-p)^(n-k); conditions: independent, two outcomes, constant p.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-043",
+    "title": "Mutually Exclusive Events",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/probability-events-mutually-exclusive.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "mutually exclusive",
+      "addition rule"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: mutually exclusive cannot happen together; P(A or B)=P(A)+P(B); Kings and Hearts as non-exclusive example.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-044",
+    "title": "Independent Events",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/probability-events-independent.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "independent events"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: P(A and B)=P(A) x P(B) for independent events.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-045",
+    "title": "Bayes' Theorem",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/bayes-theorem.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "Bayes"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: P(A|B) = P(A)P(B|A)/P(B); bonfire example P(Fire|Smoke)=1% x 90% / 10% = 9%.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-046",
+    "title": "Random Variables - Mean, Variance, Standard Deviation",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/random-variables-mean-variance.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "discrete random variables",
+      "expected value"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: mu = sum x p; weighted die example.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-047",
+    "title": "Histograms",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/histograms.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "histogram"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: histogram groups values into ranges; bar height shows counts; differs from bar chart.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-048",
+    "title": "Scatter (XY) Plots",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/scatter-xy-plots.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "scatter plot",
+      "line of best fit"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: scatter plot of two variables; temperature vs ice cream sales example; line of best fit introduced.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-049",
+    "title": "Probability",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/probability.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "basic probability"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: P = favorable outcomes / total outcomes with equally likely outcomes.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-050",
+    "title": "Probability Tree Diagrams",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/probability-tree-diagrams.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "tree diagrams"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: tree diagrams to decide when to add and when to multiply.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-051",
+    "title": "Pie Chart",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/pie-charts.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "pie chart"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: pie slices show relative sizes; survey example.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-052",
+    "title": "Stem and Leaf Plots",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/data/stem-leaf-plots.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "stem-and-leaf"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: each value split into stem and leaf.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-053",
+    "title": "Factorial Function",
+    "author": "Rod Pierce",
+    "institution": "Math is Fun",
+    "website": "Math is Fun",
+    "url": "https://www.mathsisfun.com/numbers/factorial.html",
+    "tier": 3,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics",
+      "probability"
+    ],
+    "topics": [
+      "factorial"
+    ],
+    "gradeRelevance": "Plain-language explanation aimed at lower/upper secondary; page states no grade level",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: n! = product of whole numbers from n to 1; 4! = 24, 7! = 5040; 1! = 1.",
+    "copyright": "Facts paraphrased; no text reproduced. See site terms of use.",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-054",
+    "title": "2.4: The Normal Distribution (College Mathematics for Everyday Life)",
+    "author": "Inigo et al.",
+    "institution": "LibreTexts (Mathematics)",
+    "website": "LibreTexts",
+    "url": "https://math.libretexts.org/Bookshelves/Applied_Mathematics/Book%3A_College_Mathematics_for_Everyday_Life_(Inigo_et_al)/02%3A_Statistics_-_Part_2/2.04%3A_The_Normal_Distribution",
+    "tier": 2,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "normal distribution",
+      "empirical rule",
+      "z-score"
+    ],
+    "gradeRelevance": "College-level open textbook page; no secondary grade level stated",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: empirical rule 68/95/99.7 valid only for approximately normal data; worked test-score example; z-score to raw score.",
+    "copyright": "Facts paraphrased; no text reproduced. See LibreTexts license on page (CC BY / CC BY-NC-SA).",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-055",
+    "title": "5.2: Characteristics of the Normal Distribution and The Empirical Rule",
+    "author": "Hannah Seidler-Wright",
+    "institution": "Chaffey College (LibreTexts Statistics)",
+    "website": "LibreTexts",
+    "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Hannah_Seidler-Wright)/05%3A_Continuous_Probability_Distributions_and_The_Normal_Distribution/5.02%3A_Characteristics_of_the_Normal_Distribution_and_The_Empirical_Rule",
+    "tier": 2,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "normal distribution",
+      "empirical rule",
+      "z-scores"
+    ],
+    "gradeRelevance": "College-level open textbook page; no secondary grade level stated",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: empirical rule percentages as approximations; values beyond 2 SD described as unusual; z-scores section.",
+    "copyright": "Facts paraphrased; no text reproduced. See LibreTexts license on page (CC BY / CC BY-NC-SA).",
+    "researchArea": "stats-probability"
+  },
+  {
+    "id": "SRC-STP-056",
+    "title": "2.8: Measures of the Spread of the Data (OpenStax Introductory Statistics 1e, LibreTexts copy)",
+    "author": "OpenStax",
+    "institution": "LibreTexts (Statistics)",
+    "website": "LibreTexts",
+    "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_1e_(OpenStax)/02:_Descriptive_Statistics/2.08:_Measures_of_the_Spread_of_the_Data",
+    "tier": 2,
+    "type": "educational-explanation",
+    "subjects": [
+      "statistics"
+    ],
+    "topics": [
+      "standard deviation",
+      "sample vs population"
+    ],
+    "gradeRelevance": "College-level open textbook page; no secondary grade level stated",
+    "published": null,
+    "accessed": "2026-11-14",
+    "quality": "medium",
+    "verificationNotes": "Read: republished OpenStax text; not independent of SRC-STP-001 (same underlying text); used only as secondary confirmation of n-1 convention and note that dividing by n-1 gives a better estimate of population variance.",
+    "copyright": "Facts paraphrased; no text reproduced. See LibreTexts license on page (CC BY / CC BY-NC-SA).",
+    "researchArea": "stats-probability"
+  }
+]
