@@ -43,8 +43,8 @@ export function FormulaCard({ formulaRef, showContext = true, compact = false }:
           {showContext ? `${topic.title} · ` : ''}
           {formula.variables.length} {formula.variables.length === 1 ? 'variable' : 'variables'}
         </span>
-        <Link className="text-link" to={formulaHref(formula.id)} aria-label={`Open ${formula.title}`}>
-          Open <IconArrowRight size={13} />
+        <Link className="text-link" to={formulaHref(formula.id)} aria-label={`View details for ${formula.title}`}>
+          View details <IconArrowRight size={13} />
         </Link>
       </div>
     </article>

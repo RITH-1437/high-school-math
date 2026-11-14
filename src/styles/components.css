@@ -854,7 +854,7 @@
 
 .formula-card__title {
   font-family: var(--font-display);
-  font-size: 1.17rem;
+  font-size: var(--text-card-heading, clamp(1.15rem, 1.4vw, 1.35rem));
   font-weight: 550;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -1090,6 +1090,21 @@
   border-color: var(--accent);
 }
 
+.grade-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.grade-card__level {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin-top: 0.35rem;
+}
+
 .grade-card__number {
   font-family: var(--font-display);
   font-size: clamp(3.4rem, 5.5vw, 4.6rem);
@@ -1119,11 +1134,11 @@
 }
 
 .grade-card__title {
-  margin-top: 1.3rem;
+  margin-top: 0.85rem;
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 550;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .grade-card__foot {
@@ -1134,25 +1149,40 @@
   margin-top: auto;
   padding-top: 1.2rem;
   color: var(--faint);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
+}
+
+.grade-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color var(--dur-fast) var(--ease-soft);
+}
+
+.grade-card:hover .grade-card__action {
+  color: var(--accent-strong);
 }
 
 .grade-card__arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.9rem;
-  height: 1.9rem;
+  width: 1.75rem;
+  height: 1.75rem;
   border: 1px solid var(--line);
   border-radius: 50%;
   transition: background var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft),
-    border-color var(--dur-fast) var(--ease-soft);
+    border-color var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-soft);
 }
 
 .grade-card:hover .grade-card__arrow {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-ink);
+  transform: translateX(2px);
 }
 
 .subject-grid {

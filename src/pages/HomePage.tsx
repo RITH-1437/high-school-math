@@ -25,13 +25,11 @@ import { Reveal } from '../components/ui/Reveal'
 import { IconArrowRight, IconBookmark, IconSearch, IconShapes } from '../components/ui/Icons'
 
 const FLOATING = [
-  { symbol: 'π', top: '12%', left: '8%', size: '3.4rem', delay: '0s', color: '#D6A84B' },
-  { symbol: '∑', top: '65%', left: '6%', size: '2.8rem', delay: '1.2s', color: '#2457A7' },
-  { symbol: '√x', top: '16%', left: '88%', size: '2.5rem', delay: '0.6s', color: '#2457A7' },
-  { symbol: '∞', top: '48%', left: '92%', size: '2.7rem', delay: '1.8s', color: '#D6A84B' },
-  { symbol: 'θ', top: '78%', left: '85%', size: '2.8rem', delay: '2.4s', color: '#2457A7' },
-  { symbol: '∫', top: '9%', left: '52%', size: '3.0rem', delay: '3.0s', color: '#D6A84B' },
-  { symbol: 'Δ', top: '86%', left: '46%', size: '2.4rem', delay: '1.5s', color: '#D6A84B' },
+  { symbol: 'π', top: '15%', left: '3%', size: '3.2rem', delay: '0s', color: '#D6A84B' },
+  { symbol: '∑', top: '65%', left: '4%', size: '2.6rem', delay: '1.2s', color: '#2457A7' },
+  { symbol: '√x', top: '16%', right: '3%', size: '2.4rem', delay: '0.6s', color: '#2457A7' },
+  { symbol: '∞', top: '50%', right: '4%', size: '2.6rem', delay: '1.8s', color: '#D6A84B' },
+  { symbol: 'θ', top: '78%', right: '3%', size: '2.5rem', delay: '2.4s', color: '#2457A7' },
 ]
 
 const FEATURED_SHAPE_IDS = ['circle', 'triangle', 'cylinder', 'cone', 'sphere', 'cube']
@@ -97,11 +95,12 @@ export default function HomePage() {
               className="hero__symbol"
               style={{
                 top: item.top,
-                left: item.left,
+                left: 'left' in item ? (item as { left: string }).left : undefined,
+                right: 'right' in item ? (item as { right: string }).right : undefined,
                 fontSize: item.size,
                 animationDelay: item.delay,
                 color: item.color,
-                opacity: 0.28,
+                opacity: 0.22,
               }}
             >
               {item.symbol}
@@ -141,22 +140,22 @@ export default function HomePage() {
           </div>
 
           <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1, color: '#102A56' }}>
-            Explore Mathematics.{' '}
-            <span className="serif-italic" style={{ color: '#2457A7' }}>
+            Explore Mathematics.<br />
+            <span className="serif-italic hero__title-accent" style={{ color: '#2457A7' }}>
               Understand Every Formula.
             </span>
-            <span className="visually-hidden">Essential mathematics formulas</span>
+            <span className="visually-hidden">Essential mathematics formulas for Cambodian secondary education</span>
           </h1>
 
           <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2, color: '#64748B' }}>
-            Your complete mathematics companion aligned with the Cambodian national curriculum for Grades 7–12. Discover verified formulas, master step-by-step problem solving, and explore interactive geometry.
+            Learn mathematics through clear explanations, verified formulas, step-by-step examples, and interactive geometry for Cambodian Grades 7–12.
           </p>
 
           <div
             className="hero__actions hero__rise"
             style={{
               ['--i' as string]: 3,
-              marginTop: '2rem',
+              marginTop: '1.75rem',
               display: 'flex',
               gap: '0.85rem',
               flexWrap: 'wrap',
@@ -173,7 +172,7 @@ export default function HomePage() {
                 boxShadow: '0 4px 14px rgba(16, 42, 86, 0.18)',
               }}
             >
-              Explore Mathematics <IconArrowRight className="icon-arrow" size={18} />
+              Explore Grades <IconArrowRight className="icon-arrow" size={18} />
             </Link>
             <Link
               className="btn btn--outline btn--lg"
@@ -184,7 +183,7 @@ export default function HomePage() {
                 borderColor: '#CBD5E1',
               }}
             >
-              <IconShapes size={18} /> Browse Shapes &amp; Lab
+              <IconShapes size={18} /> Explore Shapes
             </Link>
           </div>
 
@@ -329,7 +328,7 @@ export default function HomePage() {
                 </div>
               </div>
             </Reveal>
-            <div className="grade-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            <div className="grade-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}>
               {lowerGrades.map((grade, index) => (
                 <Reveal key={grade.id} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5}>
                   <GradeCard grade={grade} />
@@ -383,7 +382,7 @@ export default function HomePage() {
                 </div>
               </div>
             </Reveal>
-            <div className="grade-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+            <div className="grade-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))' }}>
               {upperGrades.map((grade, index) => (
                 <Reveal key={grade.id} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5}>
                   <GradeCard grade={grade} />
@@ -550,19 +549,24 @@ export default function HomePage() {
           <Reveal>
             <div className="section-head">
               <div className="section-head__copy">
-                <span className="eyebrow">Learning resources</span>
-                <h2 id="method-heading">A three-pass method that actually sticks.</h2>
+                <span className="eyebrow">Learning Framework</span>
+                <h2 id="method-heading">A proven method for mastering high school mathematics.</h2>
+                <p className="section-head__intro">
+                  Designed around how students actually absorb and apply mathematical reasoning.
+                </p>
               </div>
             </div>
           </Reveal>
-          <ol className="method">
+          <ol className="method" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 210px), 1fr))', gap: '1.5rem' }}>
             {[
-              ['Understand', 'Read the introduction and theory. Ask why the formula is true before memorising it.'],
-              ['Follow', 'Step through a worked example one line at a time, then cover the solution and redo it.'],
-              ['Practise', 'Answer the exercises, read each explanation, and retry until you can explain every step.'],
+              ['Understand Concepts', 'Read foundational theory and definitions to see why formulas work before memorising them.'],
+              ['Learn Formulas', 'Internalise core equations, domain restrictions, variable meanings, and units.'],
+              ['Follow Examples', 'Step through 7-step worked examples line by line to build methodical problem-solving habits.'],
+              ['Practise Exercises', 'Solidify mastery with multi-format practice questions and immediate corrective guidance.'],
+              ['Explore Geometry', 'Interact with 2D planes and 3D solids in the Shape Lab to visualise dimensions and spatial relationships.'],
             ].map(([title, text], index) => (
               <Reveal as="li" key={title} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5} className="method__step">
-                <span className="method__num">{index + 1}</span>
+                <span className="method__num">0{index + 1}</span>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </Reveal>

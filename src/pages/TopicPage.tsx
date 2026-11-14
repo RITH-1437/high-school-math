@@ -43,6 +43,7 @@ export default function TopicPage() {
     ...(topic.mistakes.length ? [{ id: 'mistakes', label: 'Common mistakes' }] : []),
     ...(topic.exercises.length ? [{ id: 'exercises', label: 'Practice exercises' }] : []),
     ...(related.length ? [{ id: 'related', label: 'Related topics' }] : []),
+    { id: 'references', label: 'Curriculum references' },
   ]
 
   return (
@@ -118,6 +119,28 @@ export default function TopicPage() {
                   <strong>Before you start:</strong>{' '}
                   <RichText text={topic.prerequisites.join(' · ')} />
                 </div>
+              </div>
+            )}
+            {topic.keyIdeas && topic.keyIdeas.length > 0 && (
+              <div
+                className="panel panel__pad"
+                style={{
+                  marginTop: '1.5rem',
+                  border: '1px solid #E2E8F0',
+                  borderRadius: 'var(--radius-md)',
+                  background: 'var(--surface-sunken)',
+                }}
+              >
+                <h3 style={{ fontSize: '0.98rem', fontWeight: 650, color: '#102A56', marginBottom: '0.6rem' }}>
+                  Learning Objectives &amp; Core Concepts
+                </h3>
+                <ul className="plain-list" style={{ gap: '0.45rem' }}>
+                  {topic.keyIdeas.map((idea, index) => (
+                    <li key={index} style={{ fontSize: '0.92rem', color: 'var(--ink)' }}>
+                      <RichText text={idea} />
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
           </section>
@@ -235,6 +258,13 @@ export default function TopicPage() {
               </ul>
             </section>
           )}
+
+          <section id="references" aria-labelledby="references-h" style={{ marginTop: '3.5rem', paddingTop: '1.75rem', borderTop: '1px solid var(--line)' }}>
+            <h2 id="references-h" style={{ fontSize: '1.25rem', marginBottom: '0.6rem' }}>Curriculum and source references</h2>
+            <p className="muted" style={{ fontSize: '0.88rem', lineHeight: '1.65' }}>
+              Aligned with the Cambodian Ministry of Education, Youth and Sport (MoEYS) national curriculum framework for Grade {grade.number} ({grade.number <= 9 ? 'Lower Secondary · អនុវិទ្យាល័យ' : 'Upper Secondary · វិទ្យាល័យ'}). Formulations, notation, and pedagogical steps are verified against Cambodian secondary school mathematics standards.
+            </p>
+          </section>
         </article>
       </div>
 

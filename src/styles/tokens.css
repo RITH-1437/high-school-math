@@ -110,6 +110,16 @@
   --radius-xl: 34px;
   --radius-pill: 999px;
 
+  /* Fluid Typography Scale */
+  --text-hero: clamp(3.2rem, 6.5vw, 5.8rem);
+  --text-hero-mobile: clamp(2.2rem, 9vw, 3.4rem);
+  --text-page-title: clamp(2.4rem, 4.5vw, 3.5rem);
+  --text-section-title: clamp(1.75rem, 2.8vw, 2.25rem);
+  --text-card-heading: clamp(1.15rem, 1.4vw, 1.35rem);
+  --text-body: 1.05rem;
+  --text-body-mobile: 0.98rem;
+  --text-supporting: 0.875rem;
+
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
