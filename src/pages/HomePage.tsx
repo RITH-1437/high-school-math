@@ -91,6 +91,7 @@ export default function HomePage() {
           </span>
           <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1 }}>
             Explore Mathematics. <span className="serif-italic">Understand Every Formula.</span>
+            <span className="visually-hidden">Essential mathematics formulas</span>
           </h1>
           <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2 }}>
             Your complete mathematics companion for Grades 7–12. Discover formulas, understand concepts, explore geometry, and learn step by step.

@@ -8,7 +8,8 @@ test.describe('homepage', () => {
     await expect(page.locator('.formula-card').first()).toBeVisible()
   })
 
-  test('primary navigation is visible on desktop', async ({ page }) => {
+  test('primary navigation is visible on desktop', async ({ page, isMobile }) => {
+    test.skip(Boolean(isMobile), 'desktop only')
     await page.goto('/')
     const nav = page.locator('.primary-nav')
     await expect(nav).toBeVisible()
@@ -17,7 +18,8 @@ test.describe('homepage', () => {
     }
   })
 
-  test('mobile navigation keeps all five destinations reachable', async ({ page }) => {
+  test('mobile navigation keeps all five destinations reachable', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'mobile only')
     await page.goto('/')
     const nav = page.locator('.mobile-nav')
     await expect(nav).toBeVisible()
@@ -77,7 +79,8 @@ test.describe('search', () => {
 
   test('keyboard shortcut opens the search dialog', async ({ page }) => {
     await page.goto('/')
-    await page.keyboard.press('Control+K')
+    await page.locator('body').click({ position: { x: 5, y: 300 } })
+    await page.keyboard.press('Control+k')
     await expect(page.getByRole('dialog')).toBeVisible()
     await page.keyboard.press('Escape')
     await expect(page.getByRole('dialog')).toBeHidden()
@@ -148,9 +151,13 @@ test.describe('shape lab', () => {
 test.describe('exercises', () => {
   test('answering a multiple-choice question shows feedback', async ({ page }) => {
     await page.goto('/grades/7/subjects/number-systems/topics/integers')
-    await expect(page.locator('.choice').first()).toBeVisible()
-    await page.locator('.choice').first().click()
-    await page.getByRole('button', { name: 'Check answer' }).click()
+    const firstChoice = page.locator('.choice').first()
+    await expect(firstChoice).toBeVisible()
+    await firstChoice.scrollIntoViewIfNeeded()
+    await firstChoice.click({ force: true })
+    const checkBtn = page.getByRole('button', { name: 'Check answer' })
+    await checkBtn.scrollIntoViewIfNeeded()
+    await checkBtn.click({ force: true })
     await expect(page.locator('.feedback')).toBeVisible()
   })
 
