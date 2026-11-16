@@ -13,6 +13,17 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
+function syncFavicons(theme: Theme) {
+  if (typeof document === 'undefined') return
+  const iconHref = theme === 'dark' ? '/img/white-pi.png' : '/img/pi.png'
+  const iconLinks = document.querySelectorAll<HTMLLinkElement>(
+    'link[rel*="icon"], link[rel="apple-touch-icon"]'
+  )
+  iconLinks.forEach((link) => {
+    link.href = iconHref
+  })
+}
+
 function readInitialTheme(): Theme {
   if (typeof document === 'undefined') return 'light'
   const current = document.documentElement.getAttribute('data-theme')
@@ -26,7 +37,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(next)
     document.documentElement.setAttribute('data-theme', next)
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute('content', next === 'dark' ? '#0a0d0b' : '#0f1410')
+    if (meta) meta.setAttribute('content', next === 'dark' ? '#091B38' : '#102A56')
+    syncFavicons(next)
     try {
       localStorage.setItem(STORAGE_KEY, next)
     } catch {
@@ -39,6 +51,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [setTheme, theme])
 
   useEffect(() => {
+    // Synchronize favicons on mount with initial theme
+    syncFavicons(theme)
+
     // Follow the operating-system preference only when the user has not chosen yet.
     const media = window.matchMedia('(prefers-color-scheme: dark)')
     const onChange = (event: MediaQueryListEvent) => {
@@ -50,7 +65,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
     media.addEventListener('change', onChange)
     return () => media.removeEventListener('change', onChange)
-  }, [setTheme])
+  }, [setTheme, theme])
 
   const value = useMemo(() => ({ theme, setTheme, toggleTheme }), [theme, setTheme, toggleTheme])
 

@@ -483,7 +483,7 @@ export function Header() {
           <LanguageSwitcher />
           <button
             type="button"
-            className="icon-button"
+            className="icon-button theme-toggle"
             onClick={toggleTheme}
             aria-label={themeLabel}
             title={themeLabel}

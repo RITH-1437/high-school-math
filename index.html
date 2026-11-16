@@ -24,6 +24,11 @@
           document.documentElement.setAttribute('data-theme', theme)
           var meta = document.querySelector('meta[name="theme-color"]')
           if (meta) meta.setAttribute('content', theme === 'dark' ? '#091B38' : '#102A56')
+          var iconHref = theme === 'dark' ? '/img/white-pi.png' : '/img/pi.png'
+          var iconLinks = document.querySelectorAll('link[rel*="icon"], link[rel="apple-touch-icon"]')
+          for (var i = 0; i < iconLinks.length; i++) {
+            iconLinks[i].setAttribute('href', iconHref)
+          }
         } catch (error) {
           document.documentElement.setAttribute('data-theme', 'light')
         }
