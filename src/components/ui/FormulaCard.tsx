@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import type { FormulaRef } from '../../data'
-import { familyLabel, formulaHref, topicUrl } from '../../data'
+import { formulaHref, topicUrl } from '../../data'
+import { familyLabelFor, formulaContent, topicCopy } from '../../i18n/content'
+import { useI18n } from '../../lib/i18n'
 import { BookmarkButton } from './BookmarkButton'
 import { MathBlock } from './Math'
 import { IconArrowRight } from './Icons'
@@ -12,7 +14,10 @@ interface FormulaCardProps {
 }
 
 export function FormulaCard({ formulaRef, showContext = true, compact = false }: FormulaCardProps) {
-  const { formula, topic, grade, subject } = formulaRef
+  const { topic, grade, subject } = formulaRef
+  const { language, t, tn } = useI18n()
+  const formula = formulaContent(formulaRef.formula, language)
+  const topicTitle = topicCopy(topic, language).title
 
   return (
     <article className="formula-card" data-family={subject.family}>
@@ -21,10 +26,10 @@ export function FormulaCard({ formulaRef, showContext = true, compact = false }:
           <div className="formula-card__eyebrow">
             {showContext && (
               <Link className="badge badge--family" to={topicUrl({ topic, grade, subject, key: '' })}>
-                {familyLabel(subject.family)}
+                {familyLabelFor(subject.family, language)}
               </Link>
             )}
-            <span className="badge badge--outline">Grade {grade.number}</span>
+            <span className="badge badge--outline">{t('common.gradeN', { n: grade.number })}</span>
           </div>
           <h3 className="formula-card__title">
             <Link to={formulaHref(formula.id)}>{formula.title}</Link>
@@ -40,11 +45,11 @@ export function FormulaCard({ formulaRef, showContext = true, compact = false }:
       </div>
       <div className="formula-card__foot">
         <span>
-          {showContext ? `${topic.title} · ` : ''}
-          {formula.variables.length} {formula.variables.length === 1 ? 'variable' : 'variables'}
+          {showContext ? `${topicTitle} · ` : ''}
+          {tn('formula.variable', formula.variables.length)}
         </span>
-        <Link className="text-link" to={formulaHref(formula.id)} aria-label={`View details for ${formula.title}`}>
-          View details <IconArrowRight size={13} />
+        <Link className="text-link" to={formulaHref(formula.id)} aria-label={t('formula.viewDetailsFor', { title: formula.title })}>
+          {t('formula.viewDetails')} <IconArrowRight size={13} />
         </Link>
       </div>
     </article>

@@ -10,10 +10,14 @@ import { RichText } from '../components/ui/Math'
 import { ExercisePlayer } from '../components/exercises/ExercisePlayer'
 import { ShapeGlyph } from '../components/shapes/ShapeGlyph'
 import { IconArrowRight, IconPrint } from '../components/ui/Icons'
+import { shapeCopy, subjectCopy, topicContent, topicCopy } from '../i18n/content'
+import { useI18n } from '../lib/i18n'
+import { hasTopicDiagram, TopicDiagram } from '../components/ui/TopicDiagram'
 import NotFoundPage from './NotFoundPage'
 
 export default function TopicPage() {
   const { gradeId, subjectId, topicId } = useParams()
+  const { language, t } = useI18n()
   const ref = findTopicInSubject(gradeId, subjectId, topicId)
 
   useEffect(() => {
@@ -21,11 +25,15 @@ export default function TopicPage() {
   }, [ref])
 
   if (!ref) {
-    return <NotFoundPage message="That topic could not be found. It may belong to a different grade or subject." />
+    return <NotFoundPage message={t('topic.notFound')} />
   }
 
-  const { topic, grade, subject } = ref
+  const { grade, subject } = ref
+  const topic = topicContent(ref.topic, language)
+  const topicTitle = topicCopy(topic, language).title
+  const subjectTitle = subjectCopy(grade.id, subject, language).title
   const shape = findShape(topic.shapeId)
+  const shapeName = shape ? shapeCopy(shape, language).name : ''
   const related = topic.related
     .map((id) => findTopic(id))
     .filter((item): item is NonNullable<typeof item> => Boolean(item))
@@ -33,59 +41,61 @@ export default function TopicPage() {
   const position = siblings.findIndex((item) => item.id === topic.id)
   const previous = siblings[position - 1]
   const next = siblings[position + 1]
+  const showDiagram = hasTopicDiagram(topic.id)
 
   const sections = [
-    { id: 'introduction', label: 'Introduction' },
-    ...(topic.theory.length ? [{ id: 'theory', label: 'Theory' }] : []),
-    ...(topic.formulas.length ? [{ id: 'formulas', label: 'Formulas' }] : []),
-    ...(shape ? [{ id: 'diagram', label: 'Interactive diagram' }] : []),
-    ...(topic.examples.length ? [{ id: 'examples', label: 'Worked examples' }] : []),
-    ...(topic.mistakes.length ? [{ id: 'mistakes', label: 'Common mistakes' }] : []),
-    ...(topic.exercises.length ? [{ id: 'exercises', label: 'Practice exercises' }] : []),
-    ...(related.length ? [{ id: 'related', label: 'Related topics' }] : []),
-    { id: 'references', label: 'Curriculum references' },
+    { id: 'introduction', label: t('topic.introduction') },
+    ...(topic.theory.length ? [{ id: 'theory', label: t('topic.theory') }] : []),
+    ...(topic.formulas.length ? [{ id: 'formulas', label: t('topic.formulas') }] : []),
+    ...(showDiagram ? [{ id: 'visual-guide', label: t('topic.visualGuide') }] : []),
+    ...(shape ? [{ id: 'diagram', label: t('topic.diagram') }] : []),
+    ...(topic.examples.length ? [{ id: 'examples', label: t('topic.examples') }] : []),
+    ...(topic.mistakes.length ? [{ id: 'mistakes', label: t('topic.mistakes') }] : []),
+    ...(topic.exercises.length ? [{ id: 'exercises', label: t('topic.exercises') }] : []),
+    ...(related.length ? [{ id: 'related', label: t('topic.related') }] : []),
+    { id: 'references', label: t('topic.references') },
   ]
 
   return (
     <div data-family={subject.family}>
       <PageHero
         crumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Grades', to: '/grades' },
-          { label: `Grade ${grade.number}`, to: gradeHref(grade.id) },
-          { label: subject.title, to: subjectHref(grade.id, subject.id) },
-          { label: topic.title },
+          { label: t('common.home'), to: '/' },
+          { label: t('common.grades'), to: '/grades' },
+          { label: t('common.gradeN', { n: grade.number }), to: gradeHref(grade.id) },
+          { label: subjectTitle, to: subjectHref(grade.id, subject.id) },
+          { label: topicTitle },
         ]}
-        eyebrow={`Grade ${grade.number} · ${subject.title}`}
-        title={topic.title}
+        eyebrow={t('topic.eyebrow', { n: grade.number, subject: subjectTitle })}
+        title={topicTitle}
         wideTitle
-        intro={topic.subtitle}
+        intro={topicCopy(topic, language).subtitle}
         meta={
           <>
             <span>
-              <strong>{topic.formulas.length}</strong> formulas
+              <strong>{topic.formulas.length}</strong> {t('common.formulas').toLowerCase()}
             </span>
             <span>
-              <strong>{topic.examples.length}</strong> worked examples
+              <strong>{topic.examples.length}</strong> {t('common.examples').toLowerCase()}
             </span>
             <span>
-              <strong>{topic.exercises.length}</strong> exercises
+              <strong>{topic.exercises.length}</strong> {t('common.exercises').toLowerCase()}
             </span>
           </>
         }
         aside={
           <div className="cluster no-print">
-            <BookmarkButton kind="topic" id={topic.id} label={topic.title} onDark showLabel />
+            <BookmarkButton kind="topic" id={topic.id} label={topicTitle} onDark showLabel />
             <button type="button" className="btn btn--on-dark btn--sm" onClick={() => window.print()}>
-              <IconPrint size={15} /> Print
+              <IconPrint size={15} /> {t('topic.print')}
             </button>
           </div>
         }
       />
 
       <div className="container topic-layout">
-        <aside className="topic-toc no-print" aria-label="On this page">
-          <span className="eyebrow eyebrow--plain">On this page</span>
+        <aside className="topic-toc no-print" aria-label={t('topic.onThisPage')}>
+          <span className="eyebrow eyebrow--plain">{t('topic.onThisPage')}</span>
           <ol>
             {sections.map((section) => (
               <li key={section.id}>
@@ -95,7 +105,7 @@ export default function TopicPage() {
           </ol>
           {topic.keyIdeas && topic.keyIdeas.length > 0 && (
             <div className="topic-toc__ideas">
-              <span className="eyebrow eyebrow--plain">Key ideas</span>
+              <span className="eyebrow eyebrow--plain">{t('topic.keyIdeas')}</span>
               <ul>
                 {topic.keyIdeas.map((idea, index) => (
                   <li key={index}>
@@ -109,14 +119,25 @@ export default function TopicPage() {
 
         <article className="topic-body">
           <section id="introduction" aria-labelledby="introduction-h">
-            <h2 id="introduction-h">Introduction</h2>
+            <h2 id="introduction-h">{t('topic.introduction')}</h2>
             <p className="lead">
               <RichText text={topic.introduction} />
             </p>
+
+            <div className="bilingual-notice no-print">
+              <div>
+                <strong>{t('content.bannerTitle')}</strong>
+                <p>{t('content.bannerBody')}</p>
+              </div>
+              <Link className="text-link" to="/glossary">
+                {t('content.bannerGlossary')} <IconArrowRight size={14} />
+              </Link>
+            </div>
+
             {topic.prerequisites && topic.prerequisites.length > 0 && (
               <div className="callout callout--quiet" style={{ marginTop: '1.5rem' }}>
                 <div>
-                  <strong>Before you start:</strong>{' '}
+                  <strong>{t('topic.beforeYouStart')}</strong>{' '}
                   <RichText text={topic.prerequisites.join(' · ')} />
                 </div>
               </div>
@@ -132,7 +153,7 @@ export default function TopicPage() {
                 }}
               >
                 <h3 style={{ fontSize: '0.98rem', fontWeight: 650, color: '#102A56', marginBottom: '0.6rem' }}>
-                  Learning Objectives &amp; Core Concepts
+                  {t('topic.objectives')}
                 </h3>
                 <ul className="plain-list" style={{ gap: '0.45rem' }}>
                   {topic.keyIdeas.map((idea, index) => (
@@ -147,7 +168,7 @@ export default function TopicPage() {
 
           {topic.theory.length > 0 && (
             <section id="theory" aria-labelledby="theory-h">
-              <h2 id="theory-h">Theory and definitions</h2>
+              <h2 id="theory-h">{t('topic.theoryTitle')}</h2>
               {topic.theory.map((part) => (
                 <div key={part.title} className="theory-block">
                   <h3>{part.title}</h3>
@@ -172,7 +193,7 @@ export default function TopicPage() {
 
           {topic.formulas.length > 0 && (
             <section id="formulas" aria-labelledby="formulas-h">
-              <h2 id="formulas-h">Formulas</h2>
+              <h2 id="formulas-h">{t('topic.formulasTitle')}</h2>
               <div className="formula-stack">
                 {topic.formulas.map((formula) => (
                   <FormulaDetail key={formula.id} formula={formula} />
@@ -181,21 +202,30 @@ export default function TopicPage() {
             </section>
           )}
 
+          {showDiagram && (
+            <section id="visual-guide" aria-labelledby="visual-guide-h">
+              <h2 id="visual-guide-h">{t('topic.visualGuideTitle')}</h2>
+              <p className="muted" style={{ marginBlock: '-0.3rem 0.8rem', fontSize: '0.92rem' }}>
+                {t('topic.visualGuideCaption')}
+              </p>
+              <TopicDiagram topicId={topic.id} language={language} />
+            </section>
+          )}
+
           {shape && (
             <section id="diagram" aria-labelledby="diagram-h">
-              <h2 id="diagram-h">Interactive diagram</h2>
+              <h2 id="diagram-h">{t('topic.diagramTitle')}</h2>
               <Link className="diagram-card" to={shapeHref(shape.id)}>
                 <span className="diagram-card__preview">
                   <ShapeGlyph shape={shape} />
                 </span>
                 <span>
-                  <strong>Explore the {shape.name.toLowerCase()} in the Shape Lab</strong>
+                  <strong>{t('topic.exploreShape', { shape: shapeName })}</strong>
                   <span className="muted" style={{ display: 'block', marginTop: '0.35rem' }}>
-                    {topic.shapeCaption ??
-                      'Change the dimensions and watch the perimeter, area and volume update live.'}
+                    {topic.shapeCaption ?? t('topic.diagramCaption')}
                   </span>
                   <span className="text-link" style={{ marginTop: '0.75rem' }}>
-                    Open the Shape Lab <IconArrowRight size={14} />
+                    {t('topic.openLab')} <IconArrowRight size={14} />
                   </span>
                 </span>
               </Link>
@@ -204,7 +234,7 @@ export default function TopicPage() {
 
           {topic.examples.length > 0 && (
             <section id="examples" aria-labelledby="examples-h">
-              <h2 id="examples-h">Worked examples</h2>
+              <h2 id="examples-h">{t('topic.examplesTitle')}</h2>
               <div className="stack" style={{ gap: '1.5rem' }}>
                 {topic.examples.map((example, index) => (
                   <ExampleCard key={example.title} example={example} index={index} />
@@ -215,15 +245,15 @@ export default function TopicPage() {
 
           {topic.mistakes.length > 0 && (
             <section id="mistakes" aria-labelledby="mistakes-h">
-              <h2 id="mistakes-h">Common mistakes</h2>
+              <h2 id="mistakes-h">{t('topic.mistakesTitle')}</h2>
               <ul className="mistakes">
                 {topic.mistakes.map((item, index) => (
                   <li key={index}>
                     <p className="mistakes__wrong">
-                      <span>Mistake</span> <RichText text={item.mistake} />
+                      <span className="mistakes__tag mistakes__tag--wrong">{t('topic.mistake')}</span> <RichText text={item.mistake} />
                     </p>
                     <p className="mistakes__right">
-                      <span>Instead</span> <RichText text={item.correction} />
+                      <span className="mistakes__tag mistakes__tag--right">{t('topic.instead')}</span> <RichText text={item.correction} />
                     </p>
                   </li>
                 ))}
@@ -233,22 +263,23 @@ export default function TopicPage() {
 
           {topic.exercises.length > 0 && (
             <section id="exercises" aria-labelledby="exercises-h">
-              <h2 id="exercises-h">Practice exercises</h2>
+              <h2 id="exercises-h">{t('topic.exercisesTitle')}</h2>
               <ExercisePlayer key={topic.id} exercises={topic.exercises} topicId={topic.id} />
             </section>
           )}
 
           {related.length > 0 && (
             <section id="related" aria-labelledby="related-h">
-              <h2 id="related-h">Related topics</h2>
+              <h2 id="related-h">{t('topic.relatedTitle')}</h2>
               <ul className="related-list">
                 {related.map((item) => (
                   <li key={item.topic.id}>
                     <Link to={topicUrl(item)}>
                       <span>
-                        <strong>{item.topic.title}</strong>
+                        <strong>{topicCopy(item.topic, language).title}</strong>
                         <span className="muted" style={{ display: 'block', fontSize: '0.82rem' }}>
-                          Grade {item.grade.number} · {item.subject.title}
+                          {t('common.gradeN', { n: item.grade.number })} ·{' '}
+                          {subjectCopy(item.grade.id, item.subject, language).title}
                         </span>
                       </span>
                       <IconArrowRight size={15} />
@@ -260,20 +291,22 @@ export default function TopicPage() {
           )}
 
           <section id="references" aria-labelledby="references-h" style={{ marginTop: '3.5rem', paddingTop: '1.75rem', borderTop: '1px solid var(--line)' }}>
-            <h2 id="references-h" style={{ fontSize: '1.25rem', marginBottom: '0.6rem' }}>Curriculum and source references</h2>
+            <h2 id="references-h" style={{ fontSize: '1.25rem', marginBottom: '0.6rem' }}>
+              {t('topic.referencesTitle')}
+            </h2>
             <p className="muted" style={{ fontSize: '0.88rem', lineHeight: '1.65' }}>
-              Aligned with the Cambodian Ministry of Education, Youth and Sport (MoEYS) national curriculum framework for Grade {grade.number} ({grade.number <= 9 ? 'Lower Secondary · អនុវិទ្យាល័យ' : 'Upper Secondary · វិទ្យាល័យ'}). Formulations, notation, and pedagogical steps are verified against Cambodian secondary school mathematics standards.
+              {t('topic.referencesNote')}
             </p>
           </section>
         </article>
       </div>
 
-      <nav className="container pager no-print" aria-label="Topic navigation">
+      <nav className="container pager no-print" aria-label={t('topic.navigation')}>
         {previous ? (
           <Link className="pager__link" to={topicUrl({ topic: previous, grade, subject, key: '' })}>
             <span>
-              <small>Previous topic</small>
-              {previous.title}
+              <small>{t('topic.previousTopic')}</small>
+              {topicCopy(previous, language).title}
             </span>
           </Link>
         ) : (
@@ -282,8 +315,8 @@ export default function TopicPage() {
         {next ? (
           <Link className="pager__link pager__link--next" to={topicUrl({ topic: next, grade, subject, key: '' })}>
             <span>
-              <small>Next topic</small>
-              {next.title}
+              <small>{t('topic.nextTopic')}</small>
+              {topicCopy(next, language).title}
             </span>
             <IconArrowRight size={16} />
           </Link>

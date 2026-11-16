@@ -1,8 +1,12 @@
 import type { Formula } from '../../types/content'
+import { formulaContent } from '../../i18n/content'
+import { useI18n } from '../../lib/i18n'
 import { BookmarkButton } from './BookmarkButton'
 import { MathBlock, RichText } from './Math'
 
-export function FormulaDetail({ formula, headingLevel = 3 }: { formula: Formula; headingLevel?: 2 | 3 }) {
+export function FormulaDetail({ formula: rawFormula, headingLevel = 3 }: { formula: Formula; headingLevel?: 2 | 3 }) {
+  const { language, t } = useI18n()
+  const formula = formulaContent(rawFormula, language)
   const Heading = headingLevel === 2 ? 'h2' : 'h3'
   return (
     <article className="formula-detail" id={formula.id}>
@@ -18,20 +22,20 @@ export function FormulaDetail({ formula, headingLevel = 3 }: { formula: Formula;
       </p>
       {formula.spoken && (
         <p className="formula-detail__spoken">
-          <strong>In words:</strong> <RichText text={formula.spoken} />
+          <strong>{t('formula.inWords')}</strong> <RichText text={formula.spoken} />
         </p>
       )}
 
       <div className="formula-detail__grid">
         <div>
-          <h4 className="example-card__label">Variables</h4>
+          <h4 className="example-card__label">{t('formula.variables')}</h4>
           <div className="data-table-wrap">
             <table className="data-table">
               <thead>
                 <tr>
-                  <th scope="col">Symbol</th>
-                  <th scope="col">Meaning</th>
-                  <th scope="col">Unit</th>
+                  <th scope="col">{t('formula.symbol')}</th>
+                  <th scope="col">{t('formula.meaning')}</th>
+                  <th scope="col">{t('formula.unit')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -55,7 +59,7 @@ export function FormulaDetail({ formula, headingLevel = 3 }: { formula: Formula;
           <div>
             {formula.conditions && formula.conditions.length > 0 && (
               <>
-                <h4 className="example-card__label">Conditions and restrictions</h4>
+                <h4 className="example-card__label">{t('formula.conditions')}</h4>
                 <ul className="plain-list">
                   {formula.conditions.map((condition, index) => (
                     <li key={index}>

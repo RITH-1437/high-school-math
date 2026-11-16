@@ -8,3 +8,8 @@ playwright-report
 test-results
 .DS_Store
 *.log
+scratch/
+__pycache__/
+*.pyc
+.opencode/
+research/pdfs/*.pdf

@@ -1,25 +1,27 @@
 import { Link, useLocation } from 'react-router-dom'
 import { PageHero } from '../components/ui/PageHero'
 import { IconArrowRight } from '../components/ui/Icons'
+import { useI18n } from '../lib/i18n'
 
 export default function NotFoundPage({ message }: { message?: string }) {
   const location = useLocation()
+  const { t } = useI18n()
   return (
     <>
       <PageHero
-        eyebrow="404 · Page not found"
-        title="This page doesn’t add up."
-        intro={message ?? `We couldn’t find anything at ${location.pathname}. It may have moved, or the link may be mistyped.`}
+        eyebrow={t('notFound.eyebrow')}
+        title={t('notFound.title')}
+        intro={message ?? t('notFound.intro', { path: location.pathname })}
         aside={
           <div className="cluster">
             <Link className="btn btn--lime" to="/">
-              Go home
+              {t('notFound.goHome')}
             </Link>
             <Link className="btn btn--on-dark" to="/grades">
-              Browse grades <IconArrowRight size={15} />
+              {t('notFound.browseGrades')} <IconArrowRight size={15} />
             </Link>
             <Link className="btn btn--on-dark" to="/search">
-              Search
+              {t('notFound.search')}
             </Link>
           </div>
         }

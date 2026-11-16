@@ -13,6 +13,8 @@ import BookmarksPage from './pages/BookmarksPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 const ShapesPage = lazy(() => import('./pages/ShapesPage'))
+const ExamPage = lazy(() => import('./pages/ExamPage'))
+const GlossaryPage = lazy(() => import('./pages/GlossaryPage'))
 
 function Loading() {
   return (
@@ -52,6 +54,30 @@ export default function App() {
         />
         <Route path="search" element={<SearchPage />} />
         <Route path="bookmarks" element={<BookmarksPage />} />
+        <Route
+          path="exam"
+          element={
+            <Suspense fallback={<Loading />}>
+              <ExamPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="exams"
+          element={
+            <Suspense fallback={<Loading />}>
+              <ExamPage />
+            </Suspense>
+          }
+        />
+                <Route
+          path="glossary"
+          element={
+            <Suspense fallback={<Loading />}>
+              <GlossaryPage />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

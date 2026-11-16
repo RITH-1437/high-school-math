@@ -1,20 +1,24 @@
 import { NavLink } from 'react-router-dom'
+import type { TranslationKey } from '../../i18n/en'
 import { useBookmarks } from '../../lib/bookmarks'
-import { IconBookmark, IconGrades, IconHome, IconSearch, IconShapes } from '../ui/Icons'
+import { useI18n } from '../../lib/i18n'
+import { IconBookmark, IconExam, IconGrades, IconHome, IconSearch, IconShapes } from '../ui/Icons'
 
-const items = [
-  { to: '/', label: 'Home', icon: IconHome, end: true },
-  { to: '/grades', label: 'Grades', icon: IconGrades },
-  { to: '/shapes', label: 'Shapes', icon: IconShapes },
-  { to: '/search', label: 'Search', icon: IconSearch },
-  { to: '/bookmarks', label: 'Saved', icon: IconBookmark },
+const items: { to: string; label: TranslationKey; icon: typeof IconHome; end?: boolean }[] = [
+  { to: '/', label: 'nav.home', icon: IconHome, end: true },
+  { to: '/grades', label: 'nav.grades', icon: IconGrades },
+  { to: '/shapes', label: 'nav.shapes', icon: IconShapes },
+  { to: '/exam', label: 'nav.exams', icon: IconExam },
+  { to: '/search', label: 'nav.search', icon: IconSearch },
+  { to: '/bookmarks', label: 'nav.saved', icon: IconBookmark },
 ]
 
 export function MobileNav() {
   const { count } = useBookmarks()
+  const { t } = useI18n()
 
   return (
-    <nav className="mobile-nav" aria-label="Mobile primary navigation">
+    <nav className="mobile-nav" aria-label={t('nav.mobile')}>
       <ul className="mobile-nav__list">
         {items.map((item) => {
           const Icon = item.icon
@@ -42,9 +46,9 @@ export function MobileNav() {
                     />
                   )}
                 </span>
-                <span>{item.label}</span>
+                <span>{t(item.label)}</span>
                 {item.to === '/bookmarks' && count > 0 && (
-                  <span className="visually-hidden">{count} bookmarks saved</span>
+                  <span className="visually-hidden">{t('nav.bookmarksSaved', { count })}</span>
                 )}
               </NavLink>
             </li>

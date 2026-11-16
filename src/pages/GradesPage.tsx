@@ -3,25 +3,28 @@ import { grades, libraryStats } from '../data'
 import { GradeCard } from '../components/ui/GradeCard'
 import { PageHero } from '../components/ui/PageHero'
 import { Reveal } from '../components/ui/Reveal'
+import { useI18n } from '../lib/i18n'
 
 export default function GradesPage() {
+  const { t } = useI18n()
+
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Home', to: '/' }, { label: 'Grades' }]}
-        eyebrow="Grades 7–12"
-        title="Choose a grade"
-        intro="Each grade page lists its subjects, topics and featured formulas. Topics build on one another, so earlier grades make a good refresher."
+        crumbs={[{ label: t('common.home'), to: '/' }, { label: t('common.grades') }]}
+        eyebrow={t('grades.eyebrow')}
+        title={t('grades.title')}
+        intro={t('grades.intro')}
         meta={
           <>
             <span>
-              <strong>{libraryStats.subjectCount}</strong> subject sections
+              <strong>{libraryStats.subjectCount}</strong> {t('grades.metaSubjects')}
             </span>
             <span>
-              <strong>{libraryStats.topicCount}</strong> topics
+              <strong>{libraryStats.topicCount}</strong> {t('common.topics').toLowerCase()}
             </span>
             <span>
-              <strong>{libraryStats.formulaCount}</strong> formulas
+              <strong>{libraryStats.formulaCount}</strong> {t('common.formulas').toLowerCase()}
             </span>
           </>
         }
@@ -36,9 +39,8 @@ export default function GradesPage() {
             ))}
           </div>
           <p className="muted" style={{ marginTop: '2.5rem', maxWidth: '46rem', fontSize: '0.9rem' }}>
-            This library does not claim to follow any single official curriculum. Topic placement reflects a common
-            progression; your school may teach topics in a different order. Looking for something specific? Try{' '}
-            <Link to="/search">search</Link>.
+            {t('grades.disclaimer', { search: '' }).trim()}{' '}
+            <Link to="/search">{t('grades.searchLink')}</Link>.
           </p>
         </div>
       </section>

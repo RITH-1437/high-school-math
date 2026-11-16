@@ -1,69 +1,75 @@
 import { Link } from 'react-router-dom'
 import { grades } from '../../data'
+import { gradeCopy } from '../../i18n/content'
+import { useI18n } from '../../lib/i18n'
 import { Brand } from './Brand'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 export function Footer() {
+  const { language, t } = useI18n()
+
   return (
     <footer className="site-footer">
       <div className="container">
         <div className="footer-main">
           <div className="footer-brand">
             <Brand size={38} />
-            <p className="footer-tagline">
-              A living mathematics reference for Grades 7–12. Read the idea, follow the proof, turn the shape,
-              and practise until it clicks.
-            </p>
-            <p className="footer-note">
-              No accounts. No tracking. Bookmarks and progress stay in your browser.
-            </p>
+            <p className="footer-tagline">{t('footer.tagline')}</p>
+            <p className="footer-note">{t('footer.privacy')}</p>
+            <div className="footer-language">
+              <LanguageSwitcher onDark />
+            </div>
           </div>
 
           <div className="footer-column">
-            <h2>Explore</h2>
+            <h2>{t('footer.explore')}</h2>
             <ul className="footer-links">
               <li>
-                <Link to="/grades">All grades</Link>
+                <Link to="/grades">{t('footer.allGrades')}</Link>
               </li>
               <li>
-                <Link to="/shapes">Shape Lab</Link>
+                <Link to="/shapes">{t('footer.shapeLab')}</Link>
               </li>
               <li>
-                <Link to="/formulas">Formula index</Link>
+                <Link to="/formulas">{t('footer.formulaIndex')}</Link>
               </li>
               <li>
-                <Link to="/search">Search the library</Link>
+                <Link to="/search">{t('footer.searchLibrary')}</Link>
               </li>
               <li>
-                <Link to="/bookmarks">Your bookmarks</Link>
+                <Link to="/bookmarks">{t('footer.yourBookmarks')}</Link>
+              </li>
+              <li>
+                <Link to="/glossary">{t('footer.glossary')}</Link>
               </li>
             </ul>
           </div>
 
           <div className="footer-column">
-            <h2>Grades</h2>
+            <h2>{t('footer.grades')}</h2>
             <ul className="footer-links">
               {grades.map((grade) => (
                 <li key={grade.id}>
-                  <Link to={`/grades/${grade.id}`}>Grade {grade.number}</Link>
+                  <Link to={`/grades/${grade.id}`}>{gradeCopy(grade, language).title}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div className="footer-column">
-            <h2>How to use this site</h2>
+            <h2>{t('footer.howToUse')}</h2>
             <ul className="footer-links">
               <li>
-                <Link to="/#method">A three-pass study method</Link>
+                <Link to="/#method">{t('footer.studyMethod')}</Link>
               </li>
               <li>
-                <Link to="/#subjects">Browse by subject</Link>
+                <Link to="/#subjects">{t('footer.browseSubject')}</Link>
               </li>
               <li>
-                <Link to="/#shapes">Explore geometry</Link>
+                <Link to="/#shapes">{t('footer.exploreGeometry')}</Link>
               </li>
               <li>
-                <Link to="/search?q=quadratic%20formula">A worked formula</Link>
+                <Link to="/search?q=quadratic%20formula">{t('footer.workedFormula')}</Link>
               </li>
             </ul>
           </div>
@@ -71,9 +77,10 @@ export function Footer() {
 
         <div className="footer-bottom">
           <p>
-            © {new Date().getFullYear()} High School Math. Made for curious minds. <span className="footer-symbol">∀</span>
+            {t('footer.copyright', { year: new Date().getFullYear() })}{' '}
+            <span className="footer-symbol">∀</span>
           </p>
-          <p>Grades 7–12 · English · Works offline after first load</p>
+          <p>{t('footer.meta')}</p>
         </div>
       </div>
     </footer>

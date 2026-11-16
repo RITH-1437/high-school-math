@@ -1,4 +1,5 @@
 import { useBookmarks, type BookmarkKind } from '../../lib/bookmarks'
+import { useI18n } from '../../lib/i18n'
 import { IconBookmark } from './Icons'
 
 interface BookmarkButtonProps {
@@ -19,8 +20,9 @@ export function BookmarkButton({
   showLabel = false,
 }: BookmarkButtonProps) {
   const { isBookmarked, toggleBookmark } = useBookmarks()
+  const { t } = useI18n()
   const saved = isBookmarked(kind, id)
-  const action = saved ? 'Remove bookmark from' : 'Save bookmark for'
+  const action = saved ? t('bookmarks.removeFrom', { label }) : t('bookmarks.saveFor', { label })
 
   return (
     <button
@@ -34,15 +36,15 @@ export function BookmarkButton({
         .filter(Boolean)
         .join(' ')}
       aria-pressed={saved}
-      aria-label={`${action} ${label}`}
-      title={`${action} ${label}`}
+      aria-label={action}
+      title={action}
       onClick={(event) => {
         event.stopPropagation()
         toggleBookmark(kind, id)
       }}
     >
       <IconBookmark size={15} filled={saved} />
-      {!iconOnly && (showLabel || saved) && <span>{saved ? 'Saved' : 'Save'}</span>}
+      {!iconOnly && (showLabel || saved) && <span>{saved ? t('common.saved') : t('common.save')}</span>}
     </button>
   )
 }

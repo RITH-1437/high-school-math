@@ -16,6 +16,7 @@ them. This is documented, not hidden — see `reports/CONTENT_GAP_REPORT.md`.
 
 | If you want… | Read |
 |---|---|
+| Where to put a downloaded PDF source | `pdfs/README.md` |
 | The rules every record follows | `RESEARCH_METHODOLOGY.md` |
 | What is verified and what is not | `reports/MATHEMATICAL_ACCURACY_REPORT.md` |
 | What is missing | `reports/CONTENT_GAP_REPORT.md` |
@@ -45,6 +46,8 @@ Exit code is non-zero if validation finds errors.
 ```
 research/
 ├── README.md                     this file
+├── pdfs/                         downloaded PDF sources — put new PDFs here
+├── telegram-exports/             Telegram export inbox + extracted text
 ├── RESEARCH_METHODOLOGY.md       evidence rules, statuses, schemas
 ├── SOURCE_REGISTRY.md            generated
 ├── CURRICULUM_MAPPING.md         generated

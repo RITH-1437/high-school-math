@@ -51,6 +51,14 @@ export const IconShapes = (props: IconProps) => (
   </IconBase>
 )
 
+export const IconLanguage = (props: IconProps) => (
+  <IconBase {...props}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M3.4 9h17.2M3.4 15h17.2" />
+    <path d="M12 3c2.3 2.4 3.5 5.4 3.5 9s-1.2 6.6-3.5 9c-2.3-2.4-3.5-5.4-3.5-9S9.7 5.4 12 3z" />
+  </IconBase>
+)
+
 export const IconSearch = (props: IconProps) => (
   <IconBase {...props}>
     <circle cx="10.8" cy="10.8" r="6.8" />
@@ -225,5 +233,20 @@ export const IconEyeOff = (props: IconProps) => (
     <path d="M4 4 20 20" />
     <path d="M9.7 5.9A8.6 8.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-3 3.6M6.4 7.4A17.7 17.7 0 0 0 2.5 12S6 18.5 12 18.5a9 9 0 0 0 3.2-.6" />
     <path d="M10.5 10.7a2.8 2.8 0 0 0 3.7 3.7" />
+  </IconBase>
+)
+
+export const IconExam = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <path d="M14 2v6h6" />
+    <path d="m9 15 2 2 4-4" />
+  </IconBase>
+)
+
+export const IconCopy = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect width="13" height="13" x="8" y="8" rx="2" ry="2" />
+    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
   </IconBase>
 )

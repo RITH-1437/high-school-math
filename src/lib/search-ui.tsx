@@ -19,6 +19,7 @@ import {
   type SearchHit,
 } from './search'
 import { IconArrowRight, IconBook, IconClose, IconFormula, IconSearch, IconShapes } from '../components/ui/Icons'
+import { useI18n } from './i18n'
 
 interface SearchUIContextValue {
   isOpen: boolean
@@ -46,6 +47,7 @@ function Highlighted({ text, query }: { text: string; query: string }) {
 
 function SearchDialog() {
   const { isOpen, closeSearch } = useSearchUI()
+  const { language, t } = useI18n()
   const [query, setQuery] = useState('')
   const [activeIndex, setActiveIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -56,8 +58,8 @@ function SearchDialog() {
   const titleId = useId()
   const inputId = useId()
 
-  const results = useMemo(() => (query.trim() ? searchContent(query, { limit: 16 }) : []), [query])
-  const suggestions = useMemo(() => popularSearches(), [])
+  const results = useMemo(() => (query.trim() ? searchContent(query, { limit: 16, language }) : []), [query, language])
+  const suggestions = useMemo(() => popularSearches(language), [language])
 
   useEffect(() => {
     if (!isOpen) return
@@ -151,12 +153,12 @@ function SearchDialog() {
         onKeyDown={onDialogKeyDown}
       >
         <h2 id={titleId} className="visually-hidden">
-          Search the mathematics library
+          {t('search.dialogTitle')}
         </h2>
         <form className="search-dialog__head" onSubmit={onSubmit} role="search">
           <IconSearch size={21} />
           <label htmlFor={inputId} className="visually-hidden">
-            Search formulas, topics, shapes and subjects
+            {t('search.dialogInputLabel')}
           </label>
           <input
             ref={inputRef}
@@ -165,13 +167,13 @@ function SearchDialog() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             onKeyDown={onInputKeyDown}
-            placeholder="Search formulas, topics, shapes…"
+            placeholder={t('search.placeholder')}
             autoComplete="off"
             spellCheck={false}
             aria-controls="search-dialog-results"
             aria-activedescendant={results[activeIndex] ? `search-option-${activeIndex}` : undefined}
           />
-          <button type="button" className="icon-button" aria-label="Close search" onClick={closeSearch}>
+          <button type="button" className="icon-button" aria-label={t('search.dialogClose')} onClick={closeSearch}>
             <IconClose size={19} />
           </button>
         </form>
@@ -179,7 +181,7 @@ function SearchDialog() {
         <div className="search-dialog__body" id="search-dialog-results">
           {!query.trim() && (
             <div style={{ padding: '0.8rem 0.6rem 1.2rem' }}>
-              <div className="search-dialog__group-label">Try a search</div>
+              <div className="search-dialog__group-label">{t('search.dialogTry')}</div>
               <div className="cluster" style={{ paddingInline: '0.3rem' }}>
                 {suggestions.map((suggestion) => (
                   <button
@@ -196,9 +198,9 @@ function SearchDialog() {
                 ))}
               </div>
               <div style={{ padding: '1rem 0.3rem 0', color: 'var(--muted)', fontSize: '0.82rem' }}>
-                Search by formula name, topic, symbol, theorem, subject or shape. Try{' '}
+                {t('search.dialogHint')}{' '}
                 <button type="button" className="text-link" onClick={() => setQuery('sin cos tan')}>
-                  sin, cos and tan
+                  {t('search.dialogTrySin')}
                 </button>
                 .
               </div>
@@ -207,16 +209,16 @@ function SearchDialog() {
 
           {query.trim() && results.length === 0 && (
             <div className="search-dialog__empty">
-              <h3>No results for “{query.trim()}”</h3>
+              <h3>{t('search.noResults', { query: query.trim() })}</h3>
               <p>
-                Try a broader mathematical term, check the spelling, or browse a grade and subject directly.
+                {t('search.dialogEmptyBody')}
               </p>
               <div className="empty-state__actions">
                 <Link className="btn btn--sm btn--secondary" to="/grades" onClick={closeSearch}>
-                  Browse grades
+                  {t('search.dialogBrowse')}
                 </Link>
                 <Link className="btn btn--sm btn--secondary" to="/shapes" onClick={closeSearch}>
-                  Open Shape Lab
+                  {t('search.dialogOpenLab')}
                 </Link>
               </div>
             </div>
@@ -224,34 +226,44 @@ function SearchDialog() {
 
           {results.length > 0 && (
             <ul style={{ listStyle: 'none' }}>
-              {results.map((result, index) => (
-                <li key={result.id}>
-                  <Link
-                    to={result.href}
-                    id={`search-option-${index}`}
-                    className={`search-result${index === activeIndex ? ' is-active' : ''}`}
-                    aria-selected={index === activeIndex}
-                    role="option"
-                    onMouseEnter={() => setActiveIndex(index)}
-                    onClick={(event) => {
-                      event.preventDefault()
-                      openResult(result.href)
-                    }}
-                  >
-                    <span className="search-result__icon">{resultIcon(result.kind)}</span>
-                    <span className="search-result__body">
-                      <span className="search-result__title">
-                        <Highlighted text={result.title} query={query} />
-                        <span className="search-result__kind">{result.kind}</span>
+              {results.map((result, index) => {
+                const kindLabel =
+                  result.kind === 'formula'
+                    ? t('search.kindFormula')
+                    : result.kind === 'shape'
+                      ? t('search.kindShape')
+                      : result.kind === 'topic'
+                        ? t('search.kindTopic')
+                        : t('search.kindSubject')
+                return (
+                  <li key={result.id}>
+                    <Link
+                      to={result.href}
+                      id={`search-option-${index}`}
+                      className={`search-result${index === activeIndex ? ' is-active' : ''}`}
+                      aria-selected={index === activeIndex}
+                      role="option"
+                      onMouseEnter={() => setActiveIndex(index)}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        openResult(result.href)
+                      }}
+                    >
+                      <span className="search-result__icon">{resultIcon(result.kind)}</span>
+                      <span className="search-result__body">
+                        <span className="search-result__title">
+                          <Highlighted text={result.title} query={query} />
+                          <span className="search-result__kind">{kindLabel}</span>
+                        </span>
+                        <span className="search-result__path">
+                          {result.badges.slice(1).join(' · ')} — <Highlighted text={result.description} query={query} />
+                        </span>
                       </span>
-                      <span className="search-result__path">
-                        {result.badges.slice(1).join(' · ')} — <Highlighted text={result.description} query={query} />
-                      </span>
-                    </span>
-                    <IconArrowRight size={15} className="search-result__enter" />
-                  </Link>
-                </li>
-              ))}
+                      <IconArrowRight size={15} className="search-result__enter" />
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           )}
         </div>
@@ -260,13 +272,13 @@ function SearchDialog() {
           <div className="search-dialog__keys">
             <span>
               <kbd className="kbd">↑</kbd>
-              <kbd className="kbd">↓</kbd> navigate
+              <kbd className="kbd">↓</kbd> {t('search.navigate')}
             </span>
             <span>
-              <kbd className="kbd">↵</kbd> open
+              <kbd className="kbd">↵</kbd> {t('search.open')}
             </span>
             <span>
-              <kbd className="kbd">esc</kbd> close
+              <kbd className="kbd">esc</kbd> {t('search.closeKey')}
             </span>
           </div>
           {query.trim() && (
@@ -276,7 +288,7 @@ function SearchDialog() {
               onClick={closeSearch}
               style={{ fontSize: '0.74rem' }}
             >
-              All results <IconArrowRight size={13} />
+              {t('search.allResults')} <IconArrowRight size={13} />
             </Link>
           )}
         </div>

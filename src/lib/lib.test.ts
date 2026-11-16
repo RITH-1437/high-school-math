@@ -136,6 +136,45 @@ describe('searchContent', () => {
     expect(searchContent('')).toEqual([])
     expect(searchContent('   ')).toEqual([])
   })
+
+  it('searches successfully in Khmer language', () => {
+    const pythag = searchContent('ពីតាករ', { language: 'km' })
+    expect(pythag.length).toBeGreaterThan(0)
+    expect(pythag.some((h) => h.title.includes('ពីតាករ'))).toBe(true)
+
+    const pythagThm = searchContent('ទ្រឹស្តីបទពីតាករ', { language: 'km' })
+    expect(pythagThm.length).toBeGreaterThan(0)
+    expect(pythagThm[0].title).toBe('ទ្រឹស្តីបទពីតាករ')
+
+    const pythagFormula = searchContent('រូបមន្តពីតាករ', { language: 'km' })
+    expect(pythagFormula.length).toBeGreaterThan(0)
+
+    const quad = searchContent('សមីការដឺក្រេទីពីរ', { language: 'km' })
+    expect(quad.length).toBeGreaterThan(0)
+    expect(quad.some((h) => h.title.includes('សមីការដឺក្រេទីពីរ'))).toBe(true)
+
+    const deriv = searchContent('ដេរីវេ', { language: 'km' })
+    expect(deriv.length).toBeGreaterThan(0)
+    expect(deriv.some((h) => h.title.includes('ដេរីវេ'))).toBe(true)
+
+    const integ = searchContent('អាំងតេក្រាល', { language: 'km' })
+    expect(integ.length).toBeGreaterThan(0)
+    expect(integ.some((h) => h.title.includes('អាំងតេក្រាល'))).toBe(true)
+
+    const circleArea = searchContent('ផ្ទៃក្រឡារង្វង់', { language: 'km' })
+    expect(circleArea.length).toBeGreaterThan(0)
+
+    const cyl = searchContent('ស៊ីឡាំង', { language: 'km' })
+    expect(cyl.length).toBeGreaterThan(0)
+    expect(cyl.some((h) => h.kind === 'shape')).toBe(true)
+
+    const dist = searchContent('ចម្ងាយ', { language: 'km' })
+    expect(dist.length).toBeGreaterThan(0)
+
+    const grade10Khmer = searchContent('ថ្នាក់ទី១០', { language: 'km' })
+    expect(grade10Khmer.length).toBeGreaterThan(0)
+    expect(grade10Khmer.every((h) => h.kind === 'shape' || h.gradeId === '10')).toBe(true)
+  })
 })
 
 describe('highlightParts', () => {

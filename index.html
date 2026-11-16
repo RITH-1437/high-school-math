@@ -9,16 +9,13 @@
       content="High School Math is a modern mathematics library for Grades 7–12: formulas, theory, worked examples, exercises, and an interactive Shape Lab."
     />
     <meta name="color-scheme" content="light dark" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Noto+Serif+Khmer:wght@400;600;700&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="128x128" href="/img/favicon@2x.png" />
-    <link rel="icon" type="image/png" sizes="64x64" href="/img/favicon.png" />
-    <link rel="apple-touch-icon" href="/img/favicon@2x.png" />
+    <link rel="icon" type="image/png" href="/img/pi.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="/img/pi.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/img/pi.png" />
+    <link rel="apple-touch-icon" href="/img/pi.png" />
     <title>High School Math — Formulas, Theory &amp; Shapes, Grades 7–12</title>
     <script>
-      // Apply the saved theme before first paint to avoid a flash.
+      // Apply the saved theme and language before first paint to avoid a flash.
       (function () {
         try {
           var stored = localStorage.getItem('axiom.theme.v1')
@@ -29,6 +26,15 @@
           if (meta) meta.setAttribute('content', theme === 'dark' ? '#091B38' : '#102A56')
         } catch (error) {
           document.documentElement.setAttribute('data-theme', 'light')
+        }
+        try {
+          var lang = localStorage.getItem('axiom.lang.v1')
+          if (lang !== 'km' && lang !== 'en') lang = 'en'
+          document.documentElement.lang = lang
+          document.documentElement.setAttribute('data-lang', lang)
+        } catch (error) {
+          document.documentElement.lang = 'en'
+          document.documentElement.setAttribute('data-lang', 'en')
         }
       })()
     </script>

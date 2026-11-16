@@ -7,13 +7,17 @@ import { SubjectCard } from '../components/ui/SubjectCard'
 import { gradeFormulaCount, gradeTopicCount } from '../components/ui/GradeCard'
 import { Reveal } from '../components/ui/Reveal'
 import { IconArrowLeft, IconArrowRight } from '../components/ui/Icons'
+import { gradeCopy, topicCopy } from '../i18n/content'
+import { useI18n } from '../lib/i18n'
 import NotFoundPage from './NotFoundPage'
 
 export default function GradePage() {
   const { gradeId } = useParams()
+  const { language, t } = useI18n()
   const grade = getGrade(gradeId)
-  if (!grade) return <NotFoundPage message={`There is no Grade “${gradeId ?? ''}”. This library covers Grades 7 to 12.`} />
+  if (!grade) return <NotFoundPage message={t('grade.notFound', { id: gradeId ?? '' })} />
 
+  const copy = gradeCopy(grade, language)
   const index = grades.findIndex((g) => g.id === grade.id)
   const previous = grades[index - 1]
   const next = grades[index + 1]
@@ -32,35 +36,39 @@ export default function GradePage() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Home', to: '/' }, { label: 'Grades', to: '/grades' }, { label: `Grade ${grade.number}` }]}
-        eyebrow={`Grade ${grade.number}`}
-        title={grade.tagline}
+        crumbs={[
+          { label: t('common.home'), to: '/' },
+          { label: t('common.grades'), to: '/grades' },
+          { label: t('common.gradeN', { n: grade.number }) },
+        ]}
+        eyebrow={t('common.gradeN', { n: grade.number })}
+        title={copy.tagline}
         wideTitle
-        intro={grade.description}
+        intro={copy.description}
         meta={
           <>
             <span>
-              <strong>{grade.subjects.length}</strong> subjects
+              <strong>{grade.subjects.length}</strong> {t('common.subjects').toLowerCase()}
             </span>
             <span>
-              <strong>{gradeTopicCount(grade)}</strong> topics
+              <strong>{gradeTopicCount(grade)}</strong> {t('common.topics').toLowerCase()}
             </span>
             <span>
-              <strong>{gradeFormulaCount(grade)}</strong> formulas
+              <strong>{gradeFormulaCount(grade)}</strong> {t('common.formulas').toLowerCase()}
             </span>
           </>
         }
         aside={
           <>
-            <span className="eyebrow">This year’s focus</span>
+            <span className="eyebrow">{t('grade.thisYearFocus')}</span>
             <ul className="focus-list">
-              {grade.focus.map((item) => (
+              {copy.focus.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
             {start && startSubject && (
               <Link className="btn btn--lime" to={topicUrl({ topic: start, grade, subject: startSubject, key: '' })}>
-                Start with {start.title} <IconArrowRight size={15} />
+                {t('grade.startWith', { topic: topicCopy(start, language).title })} <IconArrowRight size={15} />
               </Link>
             )}
           </>
@@ -71,8 +79,8 @@ export default function GradePage() {
         <div className="container">
           <div className="section-head">
             <div className="section-head__copy">
-              <span className="eyebrow">Subjects</span>
-              <h2 id="subjects-heading">What you will study in Grade {grade.number}</h2>
+              <span className="eyebrow">{t('grade.subjectsEyebrow')}</span>
+              <h2 id="subjects-heading">{t('grade.whatYouStudy', { n: grade.number })}</h2>
             </div>
           </div>
           <div className="subject-grid">
@@ -90,8 +98,8 @@ export default function GradePage() {
           <div className="container">
             <div className="section-head">
               <div className="section-head__copy">
-                <span className="eyebrow">Featured formulas</span>
-                <h2 id="featured-heading">Key formulas for Grade {grade.number}</h2>
+                <span className="eyebrow">{t('grade.featuredEyebrow')}</span>
+                <h2 id="featured-heading">{t('grade.keyFormulas', { n: grade.number })}</h2>
               </div>
             </div>
             <div className="formula-shelf formula-shelf--three">
@@ -103,13 +111,13 @@ export default function GradePage() {
         </section>
       )}
 
-      <nav className="container pager" aria-label="Grade navigation">
+      <nav className="container pager" aria-label={t('grade.navigation')}>
         {previous ? (
           <Link className="pager__link" to={gradeHref(previous.id)}>
             <IconArrowLeft size={16} />
             <span>
-              <small>Previous</small>
-              Grade {previous.number}
+              <small>{t('common.previous')}</small>
+              {t('common.gradeN', { n: previous.number })}
             </span>
           </Link>
         ) : (
@@ -118,8 +126,8 @@ export default function GradePage() {
         {next ? (
           <Link className="pager__link pager__link--next" to={gradeHref(next.id)}>
             <span>
-              <small>Next</small>
-              Grade {next.number}
+              <small>{t('common.next')}</small>
+              {t('common.gradeN', { n: next.number })}
             </span>
             <IconArrowRight size={16} />
           </Link>

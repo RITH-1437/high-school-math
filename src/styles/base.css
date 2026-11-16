@@ -12,11 +12,14 @@ html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: auto;
   scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  max-width: 100vw;
+  overflow-x: clip;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -473,4 +476,50 @@ code {
   a {
     text-decoration: none;
   }
+}
+
+/* ------------------------------------------------------------------
+   Khmer typography
+   Khmer glyphs carry tall ascenders and stacked vowels, so headings need
+   more vertical room and must not inherit Latin negative tracking.
+   ------------------------------------------------------------------ */
+
+html[lang='km'] body {
+  line-height: 1.8;
+}
+
+html[lang='km'] h1,
+html[lang='km'] h2,
+html[lang='km'] h3,
+html[lang='km'] h4,
+html[lang='km'] h5,
+html[lang='km'] h6,
+html[lang='km'] .brand-name,
+html[lang='km'] .eyebrow {
+  letter-spacing: 0;
+}
+
+html[lang='km'] h1,
+html[lang='km'] h2 {
+  line-height: 1.45;
+}
+
+html[lang='km'] h3,
+html[lang='km'] h4 {
+  line-height: 1.55;
+}
+
+html[lang='km'] .eyebrow {
+  line-height: 1.7;
+}
+
+html[lang='km'] .btn,
+html[lang='km'] .badge,
+html[lang='km'] .nav-link,
+html[lang='km'] .mobile-nav__link {
+  line-height: 1.5;
+}
+
+html[lang='km'] .katex {
+  font-family: var(--font-math);
 }

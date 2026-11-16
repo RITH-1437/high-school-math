@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { Grade } from '../../types/content'
+import { gradeCopy } from '../../i18n/content'
+import { useI18n } from '../../lib/i18n'
 import { IconArrowRight } from './Icons'
 
 export function gradeTopicCount(grade: Grade): number {
@@ -16,16 +18,21 @@ export function gradeFormulaCount(grade: Grade): number {
 
 export function GradeCard({ grade }: { grade: Grade }) {
   const isLower = grade.number <= 9
-  const levelText = isLower ? 'Lower Secondary · អនុវិទ្យាល័យ' : 'Upper Secondary · វិទ្យាល័យ'
+  const { language, t } = useI18n()
+  const copy = gradeCopy(grade, language)
   const formulaCount = gradeFormulaCount(grade)
   const topicCount = gradeTopicCount(grade)
 
   return (
-    <Link className="grade-card" to={`/grades/${grade.id}`} aria-label={`Explore Grade ${grade.number}`}>
+    <Link
+      className="grade-card"
+      to={`/grades/${grade.id}`}
+      aria-label={t('grade.explore', { n: grade.number })}
+    >
       <div className="grade-card__top">
         <span className="grade-card__number">
           {String(grade.number).padStart(2, '0')}
-          <span>grade</span>
+          <span>{t('grade.badge')}</span>
         </span>
         <span
           className="badge badge--outline"
@@ -36,18 +43,18 @@ export function GradeCard({ grade }: { grade: Grade }) {
             borderColor: isLower ? 'rgba(36, 87, 167, 0.25)' : 'rgba(214, 168, 75, 0.35)',
           }}
         >
-          {isLower ? 'Grades 7–9' : 'Grades 10–12'}
+          {isLower ? t('grade.lowerRange') : t('grade.upperRange')}
         </span>
       </div>
-      <span className="grade-card__level">{levelText}</span>
-      <span className="grade-card__title">{grade.tagline}</span>
+      <span className="grade-card__level">{isLower ? t('grade.lowerLevel') : t('grade.upperLevel')}</span>
+      <span className="grade-card__title">{copy.tagline}</span>
       <span className="grade-card__label">
-        {grade.subjects.length} subjects · {topicCount} topics
+        {t('grade.summary', { subjects: grade.subjects.length, topics: topicCount })}
       </span>
       <span className="grade-card__foot">
-        <span>{formulaCount} formulas</span>
+        <span>{t('grade.formulaCount', { count: formulaCount })}</span>
         <span className="grade-card__action">
-          Explore Grade {grade.number}
+          {t('grade.explore', { n: grade.number })}
           <span className="grade-card__arrow">
             <IconArrowRight size={13} />
           </span>

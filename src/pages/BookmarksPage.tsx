@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { findFormula, findShape, findTopic, formulaHref, shapeHref, topicUrl } from '../data'
+import { formulaContent, shapeCopy, subjectCopy, topicCopy } from '../i18n/content'
 import { useBookmarks, type BookmarkKind } from '../lib/bookmarks'
+import { useI18n } from '../lib/i18n'
 import { BookmarkButton } from '../components/ui/BookmarkButton'
 import { EmptyState } from '../components/ui/EmptyState'
 import { MathBlock } from '../components/ui/Math'
@@ -23,6 +25,7 @@ type Filter = 'all' | BookmarkKind
 
 export default function BookmarksPage() {
   const { bookmarks, clearBookmarks, removeBookmark } = useBookmarks()
+  const { language, t } = useI18n()
   const [filter, setFilter] = useState<Filter>('all')
   const [confirming, setConfirming] = useState(false)
 
@@ -33,47 +36,56 @@ export default function BookmarksPage() {
       if (entry.kind === 'formula') {
         const ref = findFormula(entry.id)
         if (!ref) missing.push(entry)
-        else
+        else {
+          const localizedFormula = formulaContent(ref.formula, language)
+          const localizedTopic = topicCopy(ref.topic, language)
           resolved.push({
             key: `formula:${entry.id}`,
             kind: 'formula',
             id: entry.id,
-            title: ref.formula.title,
-            context: `Grade ${ref.grade.number} · ${ref.topic.title}`,
+            title: localizedFormula.title,
+            context: `${t('common.gradeN', { n: ref.grade.number })} · ${localizedTopic.title}`,
             href: formulaHref(entry.id),
             expression: ref.formula.expression,
             savedAt: entry.savedAt,
           })
+        }
       } else if (entry.kind === 'topic') {
         const ref = findTopic(entry.id)
         if (!ref) missing.push(entry)
-        else
+        else {
+          const localizedTopic = topicCopy(ref.topic, language)
+          const localizedSubject = subjectCopy(ref.grade.id, ref.subject, language)
           resolved.push({
             key: `topic:${entry.id}`,
             kind: 'topic',
             id: entry.id,
-            title: ref.topic.title,
-            context: `Grade ${ref.grade.number} · ${ref.subject.title}`,
+            title: localizedTopic.title,
+            context: `${t('common.gradeN', { n: ref.grade.number })} · ${localizedSubject.title}`,
             href: topicUrl(ref),
             savedAt: entry.savedAt,
           })
+        }
       } else {
         const shape = findShape(entry.id)
         if (!shape) missing.push(entry)
-        else
+        else {
+          const localizedShape = shapeCopy(shape, language)
+          const categoryLabel = shape.category === '2d' ? t('shapes.category2d') : t('shapes.category3d')
           resolved.push({
             key: `shape:${entry.id}`,
             kind: 'shape',
             id: entry.id,
-            title: shape.name,
-            context: `${shape.category === '2d' ? '2D shape' : '3D solid'} · Shape Lab`,
+            title: localizedShape.name,
+            context: `${categoryLabel} · ${t('shapes.eyebrow')}`,
             href: shapeHref(entry.id),
             savedAt: entry.savedAt,
           })
+        }
       }
     }
     return { items: resolved, orphans: missing }
-  }, [bookmarks])
+  }, [bookmarks, language, t])
 
   const counts = {
     all: items.length,
@@ -83,38 +95,44 @@ export default function BookmarksPage() {
   }
   const visible = filter === 'all' ? items : items.filter((item) => item.kind === filter)
 
+  const kindLabels: Record<BookmarkKind, string> = {
+    formula: t('search.kindFormula'),
+    topic: t('search.kindTopic'),
+    shape: t('search.kindShape'),
+  }
+
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Home', to: '/' }, { label: 'Bookmarks' }]}
-        eyebrow="Saved on this device"
-        title="Your bookmarks"
-        intro="Formulas, topics and shapes you’ve saved. They are stored only in this browser, so they stay private and survive a refresh."
+        crumbs={[{ label: t('common.home'), to: '/' }, { label: t('nav.bookmarks') }]}
+        eyebrow={t('bookmarks.eyebrow')}
+        title={t('bookmarks.title')}
+        intro={t('bookmarks.intro')}
       />
       <section className="section section--tight">
         <div className="container container--narrow">
           {items.length === 0 && orphans.length === 0 ? (
             <EmptyState
               icon={<IconBookmark size={22} />}
-              title="No bookmarks yet"
+              title={t('bookmarks.emptyTitle')}
               actions={[
-                { label: 'Browse grades', to: '/grades' },
-                { label: 'Explore shapes', to: '/shapes' },
-                { label: 'Search', to: '/search' },
+                { label: t('search.browseGrades'), to: '/grades' },
+                { label: t('home.ctaShapes'), to: '/shapes' },
+                { label: t('common.search'), to: '/search' },
               ]}
             >
-              Tap the bookmark icon on any formula, topic or shape to keep it here for quick access.
+              {t('bookmarks.emptyBody')}
             </EmptyState>
           ) : (
             <>
               <div className="filter-bar">
-                <div className="filter-group" role="group" aria-label="Filter bookmarks">
+                <div className="filter-group" role="group" aria-label={t('bookmarks.filterLabel')}>
                   {(
                     [
-                      ['all', 'All'],
-                      ['formula', 'Formulas'],
-                      ['topic', 'Topics'],
-                      ['shape', 'Shapes'],
+                      ['all', t('common.all')],
+                      ['formula', t('common.formulas')],
+                      ['topic', t('common.topics')],
+                      ['shape', t('common.shapes')],
                     ] as [Filter, string][]
                   ).map(([value, label]) => (
                     <button key={value} type="button" className="chip" aria-pressed={filter === value} onClick={() => setFilter(value)}>
@@ -123,8 +141,8 @@ export default function BookmarksPage() {
                   ))}
                 </div>
                 {confirming ? (
-                  <div className="cluster" role="alertdialog" aria-label="Confirm clearing all bookmarks">
-                    <span style={{ fontSize: '0.85rem' }}>Remove all {bookmarks.length} bookmarks?</span>
+                  <div className="cluster" role="alertdialog" aria-label={t('bookmarks.confirmLabel')}>
+                    <span style={{ fontSize: '0.85rem' }}>{t('bookmarks.confirmQuestion', { count: bookmarks.length })}</span>
                     <button
                       type="button"
                       className="btn btn--sm btn--primary"
@@ -133,29 +151,29 @@ export default function BookmarksPage() {
                         setConfirming(false)
                       }}
                     >
-                      Yes, clear
+                      {t('bookmarks.yesClear')}
                     </button>
                     <button type="button" className="btn btn--sm btn--ghost" onClick={() => setConfirming(false)}>
-                      Cancel
+                      {t('common.cancel')}
                     </button>
                   </div>
                 ) : (
                   <button type="button" className="btn btn--ghost btn--sm" onClick={() => setConfirming(true)}>
-                    Clear all
+                    {t('bookmarks.clearAll')}
                   </button>
                 )}
               </div>
 
               {visible.length === 0 ? (
                 <div style={{ marginTop: '2rem' }}>
-                  <EmptyState title="Nothing in this category yet">Save a few items and they’ll appear here.</EmptyState>
+                  <EmptyState title={t('bookmarks.emptyCategoryTitle')}>{t('bookmarks.emptyCategoryBody')}</EmptyState>
                 </div>
               ) : (
                 <ul className="bookmark-list">
                   {visible.map((item) => (
                     <li key={item.key} className="bookmark-item">
                       <Link to={item.href} className="bookmark-item__link">
-                        <span className="badge badge--outline">{item.kind}</span>
+                        <span className="badge badge--outline">{kindLabels[item.kind]}</span>
                         <span className="bookmark-item__title">{item.title}</span>
                         <span className="muted" style={{ fontSize: '0.8rem' }}>
                           {item.context}
@@ -175,13 +193,15 @@ export default function BookmarksPage() {
               {orphans.length > 0 && (
                 <div className="callout callout--warn" style={{ marginTop: '2rem' }}>
                   <div>
-                    {orphans.length} saved {orphans.length === 1 ? 'item is' : 'items are'} no longer in the library.{' '}
+                    {orphans.length === 1
+                      ? t('bookmarks.orphanOne')
+                      : t('bookmarks.orphanMany', { count: orphans.length })}{' '}
                     <button
                       type="button"
                       className="text-link"
                       onClick={() => orphans.forEach((orphan) => removeBookmark(orphan.kind, orphan.id))}
                     >
-                      Remove {orphans.length === 1 ? 'it' : 'them'}
+                      {orphans.length === 1 ? t('bookmarks.removeIt') : t('bookmarks.removeThem')}
                     </button>
                   </div>
                 </div>

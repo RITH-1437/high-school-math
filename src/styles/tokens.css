@@ -8,8 +8,8 @@
   color-scheme: light;
 
   /* Font stacks with Khmer script support */
-  --font-display: 'Fraunces Variable', 'Noto Serif Khmer', Georgia, serif;
-  --font-sans: 'Inter Variable', 'Noto Sans Khmer', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Fraunces Variable', 'Noto Serif Khmer Variable', Georgia, serif;
+  --font-sans: 'Inter Variable', 'Noto Sans Khmer Variable', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --font-math: 'KaTeX_Main', 'Fraunces Variable', serif;
 

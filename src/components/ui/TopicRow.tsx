@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import type { TopicRef } from '../../data'
 import { topicUrl } from '../../data'
+import { subjectCopy, topicCopy } from '../../i18n/content'
+import { useI18n } from '../../lib/i18n'
 import { IconArrowRight } from './Icons'
 
 interface TopicRowProps {
@@ -10,24 +12,28 @@ interface TopicRowProps {
 
 export function TopicRow({ topicRef, index }: TopicRowProps) {
   const { topic, grade, subject } = topicRef
+  const { language, t } = useI18n()
+  const copy = topicCopy(topic, language)
+  const subjectTitle = subjectCopy(grade.id, subject, language).title
+
   return (
     <li>
       <Link className="topic-row" to={topicUrl(topicRef)}>
         <span className="topic-row__index">{String(index + 1).padStart(2, '0')}</span>
         <span className="topic-row__body">
-          <span className="topic-row__title">{topic.title}</span>
+          <span className="topic-row__title">{copy.title}</span>
           <span className="topic-row__subtitle" style={{ display: 'block' }}>
-            {topic.subtitle}
+            {copy.subtitle}
           </span>
           <span className="topic-row__meta">
-            <span>{topic.formulas.length} formulas</span>
+            <span>{t('subject.formulaCount', { count: topic.formulas.length })}</span>
             <span aria-hidden="true">·</span>
-            <span>{topic.examples.length} worked examples</span>
+            <span>{t('subject.exampleCount', { count: topic.examples.length })}</span>
             <span aria-hidden="true">·</span>
-            <span>{topic.exercises.length} exercises</span>
+            <span>{t('subject.exerciseCount', { count: topic.exercises.length })}</span>
             <span aria-hidden="true">·</span>
             <span>
-              Grade {grade.number} / {subject.title}
+              {t('common.gradeN', { n: grade.number })} / {subjectTitle}
             </span>
           </span>
         </span>

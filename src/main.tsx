@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import '@fontsource-variable/fraunces/wght.css'
 import '@fontsource-variable/fraunces/wght-italic.css'
 import '@fontsource-variable/inter/wght.css'
+import '@fontsource-variable/noto-sans-khmer/wght.css'
+import '@fontsource-variable/noto-serif-khmer/wght.css'
 import 'katex/dist/katex.min.css'
 import './styles/tokens.css'
 import './styles/base.css'
@@ -11,6 +13,7 @@ import './styles/layout.css'
 import './styles/components.css'
 import './styles/pages.css'
 import App from './App'
+import { I18nProvider } from './lib/i18n'
 import { ThemeProvider } from './lib/theme'
 import { BookmarksProvider } from './lib/bookmarks'
 import { SearchProvider } from './lib/search-ui'
@@ -18,13 +21,15 @@ import { SearchProvider } from './lib/search-ui'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
-        <BookmarksProvider>
-          <SearchProvider>
-            <App />
-          </SearchProvider>
-        </BookmarksProvider>
-      </ThemeProvider>
+      <I18nProvider>
+        <ThemeProvider>
+          <BookmarksProvider>
+            <SearchProvider>
+              <App />
+            </SearchProvider>
+          </BookmarksProvider>
+        </ThemeProvider>
+      </I18nProvider>
     </BrowserRouter>
   </StrictMode>,
 )

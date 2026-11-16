@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useI18n } from '../../lib/i18n'
 import { IconChevronRight } from './Icons'
 
 export interface Crumb {
@@ -7,8 +8,9 @@ export interface Crumb {
 }
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
+  const { t } = useI18n()
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label={t('common.breadcrumb')}>
       <ol className="breadcrumbs">
         {items.map((item, index) => {
           const isLast = index === items.length - 1

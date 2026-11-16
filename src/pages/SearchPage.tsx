@@ -1,18 +1,19 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import type { GradeId, SearchResultKind, SubjectFamily } from '../types/content'
-import { grades } from '../data'
-import { highlightParts, popularSearches, resultsHref, searchContent, subjectFilterOptions, type SearchHit } from '../lib/search'
+import {
+  gradeOptions,
+  highlightParts,
+  popularSearches,
+  resultsHref,
+  searchContent,
+  subjectFilterOptions,
+  type SearchHit,
+} from '../lib/search'
 import { EmptyState } from '../components/ui/EmptyState'
 import { PageHero } from '../components/ui/PageHero'
 import { IconBook, IconFormula, IconSearch, IconShapes } from '../components/ui/Icons'
-
-const GROUPS: { kind: SearchResultKind; label: string }[] = [
-  { kind: 'formula', label: 'Formulas' },
-  { kind: 'topic', label: 'Topics' },
-  { kind: 'subject', label: 'Subjects' },
-  { kind: 'shape', label: 'Shapes' },
-]
+import { useI18n } from '../lib/i18n'
 
 function Highlight({ text, query }: { text: string; query: string }) {
   return (
@@ -52,18 +53,51 @@ function ResultItem({ hit, query }: { hit: SearchHit; query: string }) {
 
 export default function SearchPage() {
   const [params, setParams] = useSearchParams()
+  const { language, t } = useI18n()
   const query = params.get('q') ?? ''
+  const [inputValue, setInputValue] = useState(query)
   const grade = (params.get('grade') ?? 'all') as GradeId | 'all'
   const subject = (params.get('subject') ?? 'all') as SubjectFamily | 'all'
-  const subjects = useMemo(() => subjectFilterOptions(), [])
+  const gradeOpts = useMemo(() => gradeOptions(language), [language])
+  const subjects = useMemo(() => subjectFilterOptions(language), [language])
+
+  // Sync local input with query param on external navigation
+  useEffect(() => {
+    setInputValue(query)
+  }, [query])
+
+  // Smoothly debounce URL updates to prevent reload loops and preserve Khmer IME composition
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const currentParam = params.get('q') ?? ''
+      if (inputValue !== currentParam) {
+        const next = new URLSearchParams(params)
+        if (!inputValue.trim()) next.delete('q')
+        else next.set('q', inputValue)
+        setParams(next, { replace: true })
+      }
+    }, 200)
+    return () => clearTimeout(timer)
+  }, [inputValue, params, setParams])
 
   const hits = useMemo(
-    () => (query.trim() ? searchContent(query, { filters: { grade, subject } }) : []),
-    [query, grade, subject],
+    () => (query.trim() ? searchContent(query, { filters: { grade, subject }, language }) : []),
+    [query, grade, subject, language],
   )
+
+  const groups = useMemo(
+    () => [
+      { kind: 'formula' as SearchResultKind, label: t('search.groupFormulas') },
+      { kind: 'topic' as SearchResultKind, label: t('search.groupTopics') },
+      { kind: 'subject' as SearchResultKind, label: t('search.groupSubjects') },
+      { kind: 'shape' as SearchResultKind, label: t('search.groupShapes') },
+    ],
+    [t],
+  )
+
   const grouped = useMemo(
-    () => GROUPS.map((group) => ({ ...group, items: hits.filter((hit) => hit.kind === group.kind) })).filter((group) => group.items.length > 0),
-    [hits],
+    () => groups.map((group) => ({ ...group, items: hits.filter((hit) => hit.kind === group.kind) })).filter((group) => group.items.length > 0),
+    [hits, groups],
   )
 
   const update = (key: string, value: string) => {
@@ -78,22 +112,31 @@ export default function SearchPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Home', to: '/' }, { label: 'Search' }]}
-        eyebrow="Search"
-        title="Find any formula, topic or shape."
-        intro="Search by name, symbol or alternative term, for example “Pythagoras”, “area of a circle” or “sin cos tan”."
+        crumbs={[{ label: t('common.home'), to: '/' }, { label: t('search.eyebrow') }]}
+        eyebrow={t('search.eyebrow')}
+        title={t('search.title')}
+        intro={t('search.intro')}
         aside={
           <form className="search-field search-field--dark" role="search" style={{ width: '100%' }} onSubmit={(event) => event.preventDefault()}>
             <IconSearch size={20} />
             <label htmlFor="search-page-input" className="visually-hidden">
-              Search the library
+              {t('search.inputLabel')}
             </label>
             <input
               id="search-page-input"
               type="search"
-              value={query}
-              onChange={(event) => update('q', event.target.value)}
-              placeholder="Search formulas, topics, shapes…"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault()
+                  const next = new URLSearchParams(params)
+                  if (!inputValue.trim()) next.delete('q')
+                  else next.set('q', inputValue)
+                  setParams(next, { replace: true })
+                }
+              }}
+              placeholder={t('search.placeholder')}
               autoComplete="off"
               autoFocus
             />
@@ -106,21 +149,21 @@ export default function SearchPage() {
           <div className="filter-bar">
             <div className="filter-group">
               <label className="filter-group__label" htmlFor="search-grade">
-                Grade
+                {t('search.grade')}
               </label>
               <select id="search-grade" className="select" value={grade} onChange={(e) => update('grade', e.target.value)}>
-                <option value="all">All grades</option>
-                {grades.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.title}
+                <option value="all">{t('search.allGrades')}</option>
+                {gradeOpts.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {item.label}
                   </option>
                 ))}
               </select>
               <label className="filter-group__label" htmlFor="search-subject" style={{ marginLeft: '0.75rem' }}>
-                Subject
+                {t('search.subject')}
               </label>
               <select id="search-subject" className="select" value={subject} onChange={(e) => update('subject', e.target.value)}>
-                <option value="all">All subjects</option>
+                <option value="all">{t('search.allSubjects')}</option>
                 {subjects.map((item) => (
                   <option key={item.value} value={item.value}>
                     {item.label}
@@ -130,22 +173,24 @@ export default function SearchPage() {
             </div>
             {hasFilters && (
               <button type="button" className="btn btn--ghost btn--sm" onClick={() => setParams(query ? { q: query } : {}, { replace: true })}>
-                Clear filters
+                {t('search.clearFilters')}
               </button>
             )}
           </div>
 
           <p className="muted" style={{ margin: '1.5rem 0', fontSize: '0.85rem' }} aria-live="polite" role="status">
             {query.trim()
-              ? `${hits.length} ${hits.length === 1 ? 'result' : 'results'} for “${query.trim()}”`
-              : 'Type to search the whole library.'}
+              ? hits.length === 1
+                ? t('search.resultOne', { count: 1, query: query.trim() })
+                : t('search.resultMany', { count: hits.length, query: query.trim() })
+              : t('search.typeToSearch')}
           </p>
 
           {!query.trim() && (
-            <EmptyState title="What would you like to find?" icon={<IconSearch size={22} />}>
-              Try one of these popular searches.
-              <span className="empty-state__actions" style={{ display: 'flex' }}>
-                {popularSearches().map((term) => (
+            <EmptyState title={t('search.emptyTitle')} icon={<IconSearch size={22} />}>
+              {t('search.emptyBody')}
+              <span className="empty-state__actions" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.75rem' }}>
+                {popularSearches(language).map((term) => (
                   <Link key={term} className="chip" to={resultsHref(term)}>
                     {term}
                   </Link>
@@ -156,16 +201,14 @@ export default function SearchPage() {
 
           {query.trim() && hits.length === 0 && (
             <EmptyState
-              title={`No results for “${query.trim()}”`}
+              title={t('search.noResults', { query: query.trim() })}
               actions={[
-                { label: 'Browse grades', to: '/grades' },
-                { label: 'Open the Shape Lab', to: '/shapes' },
-                { label: 'Formula index', to: '/formulas' },
+                { label: t('search.browseGrades'), to: '/grades' },
+                { label: t('search.openShapeLab'), to: '/shapes' },
+                { label: t('search.formulaIndex'), to: '/formulas' },
               ]}
             >
-              {hasFilters
-                ? 'Your grade or subject filter may be too narrow. Clear the filters, or try a broader term.'
-                : 'Check the spelling, or try a broader term such as “triangle”, “quadratic” or “probability”.'}
+              {hasFilters ? t('search.noResultsFiltered') : t('search.noResultsGeneral')}
             </EmptyState>
           )}
 

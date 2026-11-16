@@ -1,19 +1,23 @@
 import { Link, useParams } from 'react-router-dom'
-import { getSubjectRef, gradeHref, topicUrl, subjectFamilyMeta, familyLabel } from '../data'
+import { getSubjectRef, gradeHref, topicUrl, subjectFamilyMeta } from '../data'
 import type { FormulaRef, TopicRef } from '../types/content'
 import { FormulaCard } from '../components/ui/FormulaCard'
 import { PageHero } from '../components/ui/PageHero'
 import { RichText } from '../components/ui/Math'
 import { TopicRow } from '../components/ui/TopicRow'
+import { familyLabelFor, subjectCopy, topicCopy } from '../i18n/content'
+import { useI18n } from '../lib/i18n'
 import NotFoundPage from './NotFoundPage'
 
 export default function SubjectPage() {
   const { gradeId, subjectId } = useParams()
+  const { language, t } = useI18n()
   const ref = getSubjectRef(gradeId ?? '', subjectId ?? '')
   if (!ref) {
-    return <NotFoundPage message="That subject doesn’t exist for this grade. Choose a grade to see its subjects." />
+    return <NotFoundPage message={t('subject.notFound')} />
   }
   const { grade, subject } = ref
+  const copy = subjectCopy(grade.id, subject, language)
 
   const topicRefs: TopicRef[] = subject.topics.map((topic) => ({
     topic,
@@ -32,27 +36,27 @@ export default function SubjectPage() {
     <div data-family={subject.family}>
       <PageHero
         crumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Grades', to: '/grades' },
-          { label: `Grade ${grade.number}`, to: gradeHref(grade.id) },
-          { label: subject.title },
+          { label: t('common.home'), to: '/' },
+          { label: t('common.grades'), to: '/grades' },
+          { label: t('common.gradeN', { n: grade.number }), to: gradeHref(grade.id) },
+          { label: copy.title },
         ]}
-        eyebrow={`Grade ${grade.number} · ${familyLabel(subject.family)}`}
-        title={subject.title}
-        intro={subject.description}
+        eyebrow={t('subject.eyebrow', { n: grade.number, family: familyLabelFor(subject.family, language) })}
+        title={copy.title}
+        intro={copy.description}
         meta={
           <>
             <span>
-              <strong>{ref.topicCount}</strong> topics
+              <strong>{ref.topicCount}</strong> {t('common.topics').toLowerCase()}
             </span>
             <span>
-              <strong>{ref.formulaCount}</strong> formulas
+              <strong>{ref.formulaCount}</strong> {t('common.formulas').toLowerCase()}
             </span>
             <span>
-              <strong>{exampleCount}</strong> worked examples
+              <strong>{exampleCount}</strong> {t('common.examples').toLowerCase()}
             </span>
             <span>
-              <strong>{exerciseCount}</strong> exercises
+              <strong>{exerciseCount}</strong> {t('common.exercises').toLowerCase()}
             </span>
           </>
         }
@@ -69,8 +73,8 @@ export default function SubjectPage() {
         <div className="container container--narrow">
           <div className="section-head">
             <div className="section-head__copy">
-              <span className="eyebrow">Topics</span>
-              <h2 id="topics-heading">Work through the topics in order</h2>
+              <span className="eyebrow">{t('subject.topicsEyebrow')}</span>
+              <h2 id="topics-heading">{t('subject.topicsTitle')}</h2>
             </div>
           </div>
           <ul className="topic-list">
@@ -86,8 +90,8 @@ export default function SubjectPage() {
           <div className="container">
             <div className="section-head">
               <div className="section-head__copy">
-                <span className="eyebrow">Formula previews</span>
-                <h2 id="previews-heading">A first look at the key formulas</h2>
+                <span className="eyebrow">{t('subject.previewsEyebrow')}</span>
+                <h2 id="previews-heading">{t('subject.previewsTitle')}</h2>
               </div>
             </div>
             <div className="formula-shelf formula-shelf--three">
@@ -104,8 +108,8 @@ export default function SubjectPage() {
           <div className="container container--narrow">
             <div className="section-head">
               <div className="section-head__copy">
-                <span className="eyebrow">Important theorems</span>
-                <h2 id="theorems-heading">Results you can rely on</h2>
+                <span className="eyebrow">{t('subject.theoremsEyebrow')}</span>
+                <h2 id="theorems-heading">{t('subject.theoremsTitle')}</h2>
               </div>
             </div>
             <div className="theorem-list">
@@ -131,20 +135,19 @@ export default function SubjectPage() {
         <div className="container container--narrow">
           <div className="section-head">
             <div className="section-head__copy">
-              <span className="eyebrow">Related examples and exercises</span>
-              <h2 id="practice-heading">Practise by topic</h2>
-              <p className="section-head__intro">
-                Every topic page has worked examples and a scored exercise set. Pick one to practise.
-              </p>
+              <span className="eyebrow">{t('subject.practiceEyebrow')}</span>
+              <h2 id="practice-heading">{t('subject.practiceTitle')}</h2>
+              <p className="section-head__intro">{t('subject.practiceIntro')}</p>
             </div>
           </div>
           <ul className="practice-list">
             {topicRefs.map((topicRef) => (
               <li key={topicRef.key}>
                 <Link to={`${topicUrl(topicRef)}#exercises`}>
-                  <span>{topicRef.topic.title}</span>
+                  <span>{topicCopy(topicRef.topic, language).title}</span>
                   <span className="faint">
-                    {topicRef.topic.examples.length} examples · {topicRef.topic.exercises.length} exercises
+                    {t('subject.examplesShort', { count: topicRef.topic.examples.length })} ·{' '}
+                    {t('subject.exercisesShort', { count: topicRef.topic.exercises.length })}
                   </span>
                 </Link>
               </li>
