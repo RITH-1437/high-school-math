@@ -25,7 +25,7 @@ type Filter = 'all' | BookmarkKind
 
 export default function BookmarksPage() {
   const { bookmarks, clearBookmarks, removeBookmark } = useBookmarks()
-  const { language, t } = useI18n()
+  const { language, t, num } = useI18n()
   const [filter, setFilter] = useState<Filter>('all')
   const [confirming, setConfirming] = useState(false)
 
@@ -136,7 +136,7 @@ export default function BookmarksPage() {
                     ] as [Filter, string][]
                   ).map(([value, label]) => (
                     <button key={value} type="button" className="chip" aria-pressed={filter === value} onClick={() => setFilter(value)}>
-                      {label} <span className="chip__count">{counts[value]}</span>
+                      {label} <span className="chip__count">{num(counts[value])}</span>
                     </button>
                   ))}
                 </div>

@@ -1,12 +1,20 @@
+import { kmGrade7 } from './km/grade7'
+import { kmGrade8 } from './km/grade8'
+import { kmGrade9 } from './km/grade9'
+import { kmGrade10 } from './km/grade10'
+import { kmGrade11 } from './km/grade11'
+import { kmGrade12 } from './km/grade12'
 import type {
   CommonMistake,
   ExampleStep,
+  Exercise,
   Formula,
   Grade,
   GradeId,
   Shape,
   Subject,
   SubjectFamily,
+  Theorem,
   TheorySection,
   Topic,
 } from '../types/content'
@@ -86,6 +94,19 @@ export interface LocalizedTheorySection {
   bullets?: string[]
 }
 
+/**
+ * Khmer copy for one exercise. Answers, tolerances and the correct option
+ * index are never localized: only the words around them change. `options`
+ * must keep the same length and order as the English options.
+ */
+export interface LocalizedExercise {
+  prompt?: string
+  hint?: string
+  explanation?: string
+  options?: string[]
+  answerUnit?: string
+}
+
 export interface LocalizedTopic {
   title?: string
   subtitle?: string
@@ -96,6 +117,25 @@ export interface LocalizedTopic {
   theory?: LocalizedTheorySection[]
   examples?: LocalizedExample[]
   mistakes?: LocalizedMistake[]
+  /** Keyed by exercise id. */
+  exercises?: Record<string, LocalizedExercise>
+}
+
+export interface LocalizedTheorem {
+  title: string
+  statement: string
+  note?: string
+}
+
+/**
+ * One grade's Khmer content, authored in `src/i18n/km/gradeN.ts`.
+ * Topic entries are merged over `kmTopicContent`, so a grade file may add only
+ * the fields that are still missing (for example exercises).
+ */
+export interface GradeTranslation {
+  topics: Record<string, LocalizedTopic>
+  /** Keyed by `<subjectId>:<English theorem title>`. */
+  theorems: Record<string, LocalizedTheorem>
 }
 
 
@@ -3007,9 +3047,56 @@ export function formulaContent(formula: Formula, language: Language): Formula {
   }
 }
 
+const KM_GRADE_FILES: GradeTranslation[] = [kmGrade7, kmGrade8, kmGrade9, kmGrade10, kmGrade11, kmGrade12]
+
+const KM_GRADE_TOPICS: Record<string, LocalizedTopic> = Object.assign(
+  {},
+  ...KM_GRADE_FILES.map((file) => file.topics),
+)
+
+const KM_THEOREMS: Record<string, LocalizedTheorem> = Object.assign(
+  {},
+  ...KM_GRADE_FILES.map((file) => file.theorems),
+)
+
+/** Khmer topic content: the grade file wins field-by-field over the legacy table. */
+export function kmTopicEntry(topicId: string): LocalizedTopic | undefined {
+  const legacy = kmTopicContent[topicId]
+  const graded = KM_GRADE_TOPICS[topicId]
+  if (!legacy && !graded) return undefined
+  return { ...legacy, ...graded }
+}
+
+/** True when a topic's long-form content (introduction and theory) exists in Khmer. */
+export function hasKhmerTopicContent(topicId: string): boolean {
+  const entry = kmTopicEntry(topicId)
+  return Boolean(entry?.introduction && entry.theory && entry.theory.length > 0)
+}
+
+export function exerciseContent(exercise: Exercise, km: LocalizedExercise | undefined): Exercise {
+  if (!km) return exercise
+  const base = {
+    ...exercise,
+    prompt: km.prompt ?? exercise.prompt,
+    hint: km.hint ?? exercise.hint,
+    explanation: km.explanation ?? exercise.explanation,
+  }
+  if (base.type === 'multiple-choice') {
+    const options = km.options && km.options.length === base.options.length ? km.options : base.options
+    return { ...base, options }
+  }
+  return { ...base, answerUnit: km.answerUnit ?? base.answerUnit }
+}
+
+export function theoremCopy(subjectId: string, theorem: Theorem, language: Language): Theorem {
+  if (language !== 'km') return theorem
+  const km = KM_THEOREMS[`${subjectId}:${theorem.title}`]
+  return km ? { ...theorem, ...km } : theorem
+}
+
 export function topicContent(topic: Topic, language: Language): Topic {
   if (language !== 'km') return topic
-  const km = kmTopicContent[topic.id]
+  const km = kmTopicEntry(topic.id)
   const copy = kmTopics[topic.id]
 
   const title = km?.title ?? copy?.title ?? topic.title
@@ -3034,6 +3121,7 @@ export function topicContent(topic: Topic, language: Language): Topic {
       })
     : topic.examples
   const mistakes = km?.mistakes ? (km.mistakes as CommonMistake[]) : topic.mistakes
+  const exercises = topic.exercises.map((exercise) => exerciseContent(exercise, km?.exercises?.[exercise.id]))
 
   return {
     ...topic,
@@ -3047,6 +3135,7 @@ export function topicContent(topic: Topic, language: Language): Topic {
     formulas,
     examples,
     mistakes,
+    exercises,
   }
 }
 

@@ -6,7 +6,7 @@ import { IconCheck, IconChevronRight } from './Icons'
 
 export function ExampleCard({ example, index }: { example: WorkedExample; index: number }) {
   const [revealed, setRevealed] = useState(1)
-  const { t } = useI18n()
+  const { t, num } = useI18n()
   const total = example.steps.length
   const done = revealed >= total
 
@@ -14,7 +14,7 @@ export function ExampleCard({ example, index }: { example: WorkedExample; index:
     <article className="example-card">
       <header className="example-card__head">
         <span className="example-card__index">
-          {t('example.label', { n: String(index + 1).padStart(2, '0') })}
+          {t('example.label', { n: num(String(index + 1).padStart(2, '0')) })}
         </span>
         <h3>{example.title}</h3>
       </header>
@@ -48,7 +48,7 @@ export function ExampleCard({ example, index }: { example: WorkedExample; index:
           {example.steps.slice(0, revealed).map((step, i) => (
             <li key={i} className="example-step">
               <span className="example-step__num" aria-hidden="true">
-                {i + 1}
+                {num(i + 1)}
               </span>
               <div>
                 <p>

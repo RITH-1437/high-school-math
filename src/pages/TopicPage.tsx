@@ -13,6 +13,9 @@ import { IconArrowRight, IconPrint } from '../components/ui/Icons'
 import { shapeCopy, subjectCopy, topicContent, topicCopy } from '../i18n/content'
 import { useI18n } from '../lib/i18n'
 import { hasTopicDiagram, TopicDiagram } from '../components/ui/TopicDiagram'
+import { visualsFor } from '../data/visuals'
+import { Flowchart } from '../components/ui/Flowchart'
+import { Graph } from '../components/ui/Graph'
 import NotFoundPage from './NotFoundPage'
 
 export default function TopicPage() {
@@ -42,12 +45,14 @@ export default function TopicPage() {
   const previous = siblings[position - 1]
   const next = siblings[position + 1]
   const showDiagram = hasTopicDiagram(topic.id)
+  const { flowcharts, graphs } = visualsFor(topic.id)
+  const hasVisualGuide = showDiagram || flowcharts.length > 0 || graphs.length > 0
 
   const sections = [
     { id: 'introduction', label: t('topic.introduction') },
     ...(topic.theory.length ? [{ id: 'theory', label: t('topic.theory') }] : []),
     ...(topic.formulas.length ? [{ id: 'formulas', label: t('topic.formulas') }] : []),
-    ...(showDiagram ? [{ id: 'visual-guide', label: t('topic.visualGuide') }] : []),
+    ...(hasVisualGuide ? [{ id: 'visual-guide', label: t('topic.visualGuide') }] : []),
     ...(shape ? [{ id: 'diagram', label: t('topic.diagram') }] : []),
     ...(topic.examples.length ? [{ id: 'examples', label: t('topic.examples') }] : []),
     ...(topic.mistakes.length ? [{ id: 'mistakes', label: t('topic.mistakes') }] : []),
@@ -202,13 +207,23 @@ export default function TopicPage() {
             </section>
           )}
 
-          {showDiagram && (
+          {hasVisualGuide && (
             <section id="visual-guide" aria-labelledby="visual-guide-h">
               <h2 id="visual-guide-h">{t('topic.visualGuideTitle')}</h2>
               <p className="muted" style={{ marginBlock: '-0.3rem 0.8rem', fontSize: '0.92rem' }}>
                 {t('topic.visualGuideCaption')}
               </p>
-              <TopicDiagram topicId={topic.id} language={language} />
+              {showDiagram && <TopicDiagram topicId={topic.id} language={language} />}
+              {(flowcharts.length > 0 || graphs.length > 0) && (
+                <div className="visual-stack" style={{ marginTop: showDiagram ? '1.5rem' : undefined }}>
+                  {flowcharts.map((chart) => (
+                    <Flowchart key={chart.id} chart={chart} />
+                  ))}
+                  {graphs.map((graph) => (
+                    <Graph key={graph.id} spec={graph} />
+                  ))}
+                </div>
+              )}
             </section>
           )}
 

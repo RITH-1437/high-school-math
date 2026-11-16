@@ -13,7 +13,7 @@ const PAGE_SIZE = 24
 export default function FormulasPage() {
   const [params, setParams] = useSearchParams()
   const [visible, setVisible] = useState(PAGE_SIZE)
-  const { language, t } = useI18n()
+  const { language, t, num } = useI18n()
   const grade = (params.get('grade') ?? 'all') as GradeId | 'all'
   const subject = params.get('subject') ?? 'all'
 
@@ -63,7 +63,7 @@ export default function FormulasPage() {
                   aria-pressed={grade === item.id}
                   onClick={() => update('grade', item.id)}
                 >
-                  {item.number}
+                  {num(item.number)}
                 </button>
               ))}
             </div>

@@ -93,6 +93,19 @@
 
   --focus: #2457A7;
   --focus-on-dark: #D6A84B;
+
+  /* Plots: graphs and flowcharts (AA contrast on --surface) */
+  --plot-1: #2457A7;
+  --plot-2: #C83B45;
+  --plot-3: #0F7A5C;
+  --plot-4: #8A5A00;
+  --plot-fill-1: rgba(36, 87, 167, 0.14);
+  --plot-fill-2: rgba(200, 59, 69, 0.12);
+  --plot-grid: #E8EDF4;
+  --plot-grid-major: #D3DCE8;
+  --plot-axis: #17263D;
+  --plot-label: #475569;
+  --plot-halo: #FFFFFF;
   --danger: #C83B45;
 
   /* Elevation & Shadows */
@@ -204,6 +217,18 @@
   --shadow-lg: 0 36px 100px -40px rgba(0, 0, 0, 0.9);
   --glow-blue: 0 0 60px rgba(57, 120, 214, 0.15);
   --glow-gold: 0 0 60px rgba(229, 190, 101, 0.15);
+
+  --plot-1: #7BB3FF;
+  --plot-2: #F28B94;
+  --plot-3: #5FD3A8;
+  --plot-4: #E5BE65;
+  --plot-fill-1: rgba(123, 179, 255, 0.18);
+  --plot-fill-2: rgba(242, 139, 148, 0.16);
+  --plot-grid: rgba(226, 232, 240, 0.08);
+  --plot-grid-major: rgba(226, 232, 240, 0.16);
+  --plot-axis: #E2E8F0;
+  --plot-label: #A9B6C9;
+  --plot-halo: #102A56;
 }
 
 /* Family accent helpers — used by subject and grade surfaces. */

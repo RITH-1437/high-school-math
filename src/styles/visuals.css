@@ -1,0 +1,400 @@
+/* ------------------------------------------------------------------
+   Visual guides: data-driven flowcharts and exact graphs
+   ------------------------------------------------------------------ */
+
+.visual-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Flowchart ------------------------------------------------------- */
+.flow {
+  margin: 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.flow__head {
+  margin-bottom: 1.1rem;
+}
+
+.flow__title {
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--ink);
+  margin: 0;
+}
+
+.flow__summary {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.flow__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.6rem;
+}
+
+.flow__node {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Connector arrow to the next node */
+.flow__node:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 1.4rem;
+  bottom: -1.45rem;
+  width: 0;
+  height: 1.3rem;
+  border-left: 1.5px solid var(--line-strong);
+}
+
+.flow__node:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: calc(1.4rem - 4px);
+  bottom: -1.55rem;
+  border: 4.5px solid transparent;
+  border-top: 6px solid var(--line-strong);
+  border-bottom: 0;
+}
+
+.flow__card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.85rem;
+  align-items: baseline;
+  padding: 0.8rem 1rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.flow__kind {
+  grid-row: span 2;
+  min-width: 4.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.flow__text {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.flow__math {
+  grid-column: 2;
+  overflow-x: auto;
+  margin-top: 0.35rem;
+}
+
+.flow__math .katex-display {
+  margin: 0.2rem 0;
+  text-align: left;
+}
+
+.flow__node--start .flow__card,
+.flow__node--end .flow__card {
+  background: var(--surface);
+  border-color: var(--line-strong);
+  border-radius: 999px;
+}
+
+.flow__node--start .flow__kind,
+.flow__node--end .flow__kind {
+  color: var(--plot-1);
+}
+
+.flow__node--decision .flow__card {
+  border-style: dashed;
+  border-color: var(--plot-4);
+}
+
+.flow__node--decision .flow__kind {
+  color: var(--plot-4);
+}
+
+.flow__branches {
+  list-style: none;
+  margin: 0 0 0 1.4rem;
+  padding: 0 0 0 1rem;
+  border-left: 1.5px solid var(--line-strong);
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.flow__branch {
+  padding: 0.65rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.flow__branch p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.flow__branch .katex-display {
+  margin: 0.35rem 0 0;
+  text-align: left;
+  overflow-x: auto;
+}
+
+.flow__branch-label {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--plot-1);
+}
+
+@media (max-width: 560px) {
+  .flow__card {
+    grid-template-columns: 1fr;
+  }
+
+  .flow__kind {
+    grid-row: auto;
+    margin-bottom: 0.2rem;
+  }
+
+  .flow__math {
+    grid-column: 1;
+  }
+
+  .flow__branches {
+    margin-left: 0.6rem;
+    padding-left: 0.75rem;
+  }
+}
+
+/* Graph ----------------------------------------------------------- */
+.graph {
+  margin: 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+
+.graph__head {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 0.85rem;
+}
+
+.graph__title {
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.graph__caption {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.graph__svg {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  margin-inline: auto;
+  font-family: var(--font-sans);
+}
+
+.graph__grid line {
+  stroke: var(--plot-grid);
+  stroke-width: 1;
+}
+
+.graph__axes line {
+  stroke: var(--plot-axis);
+  stroke-width: 1.3;
+}
+
+.graph__arrowhead {
+  fill: var(--plot-axis);
+}
+
+.graph__tick {
+  font-size: 11px;
+  fill: var(--plot-label);
+  font-variant-numeric: tabular-nums;
+}
+
+.graph__axis-name {
+  font-size: 13px;
+  font-style: italic;
+  font-family: var(--font-math, serif);
+  fill: var(--plot-axis);
+}
+
+.graph__curve {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.graph__line {
+  stroke-width: 1.8;
+}
+
+.graph__curve.is-dashed,
+.graph__line.is-dashed {
+  stroke-dasharray: 6 5;
+  stroke-width: 1.6;
+}
+
+.graph__area {
+  stroke: none;
+}
+
+.graph__point {
+  stroke: var(--plot-halo);
+  stroke-width: 2;
+}
+
+.graph__point.is-open {
+  fill: var(--plot-halo) !important;
+  stroke-width: 2;
+}
+
+.graph__point-label {
+  font-size: 12px;
+  font-weight: 650;
+  paint-order: stroke;
+  stroke: var(--plot-halo);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.plot-c1 { --plot-c: var(--plot-1); --plot-f: var(--plot-fill-1); }
+.plot-c2 { --plot-c: var(--plot-2); --plot-f: var(--plot-fill-2); }
+.plot-c3 { --plot-c: var(--plot-3); --plot-f: var(--plot-fill-1); }
+.plot-c4 { --plot-c: var(--plot-4); --plot-f: var(--plot-fill-2); }
+
+.graph__curve.plot-c1, .graph__curve.plot-c2, .graph__curve.plot-c3, .graph__curve.plot-c4,
+.graph__line.plot-c1, .graph__line.plot-c2, .graph__line.plot-c3, .graph__line.plot-c4 {
+  stroke: var(--plot-c);
+}
+
+.graph__area.plot-c1, .graph__area.plot-c2, .graph__area.plot-c3, .graph__area.plot-c4 {
+  fill: var(--plot-f);
+}
+
+g.plot-c1 .graph__point, g.plot-c2 .graph__point, g.plot-c3 .graph__point, g.plot-c4 .graph__point {
+  fill: var(--plot-c);
+}
+
+g.plot-c1 .graph__point.is-open, g.plot-c2 .graph__point.is-open,
+g.plot-c3 .graph__point.is-open, g.plot-c4 .graph__point.is-open {
+  stroke: var(--plot-c);
+}
+
+g[class^='plot-c'] .graph__point-label {
+  fill: var(--plot-c);
+}
+
+.graph__legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.graph__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.graph__swatch {
+  width: 1.4rem;
+  height: 0;
+  border-top: 2.5px solid var(--plot-c);
+}
+
+.graph__swatch.is-dashed {
+  border-top-style: dashed;
+}
+
+/* Study path ------------------------------------------------------ */
+.study-path {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 0.6rem;
+  counter-reset: study;
+}
+
+.study-path a {
+  display: grid;
+  gap: 0.2rem;
+  min-height: 44px;
+  height: 100%;
+  padding: 0.7rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 160ms ease;
+}
+
+.study-path a:hover {
+  border-color: var(--line-strong);
+}
+
+.study-path a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.study-path strong {
+  font-size: 0.88rem;
+}
+
+.study-path strong::before {
+  counter-increment: study;
+  content: counter(study) '. ';
+  color: var(--plot-1);
+}
+
+.study-path span {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .study-path a {
+    transition: none;
+  }
+}

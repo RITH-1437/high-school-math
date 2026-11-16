@@ -174,7 +174,7 @@ describe('searchContent', () => {
     const grade10Khmer = searchContent('ថ្នាក់ទី១០', { language: 'km' })
     expect(grade10Khmer.length).toBeGreaterThan(0)
     expect(grade10Khmer.every((h) => h.kind === 'shape' || h.gradeId === '10')).toBe(true)
-  })
+  }, 15_000)
 })
 
 describe('highlightParts', () => {

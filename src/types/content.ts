@@ -170,6 +170,138 @@ export interface Grade {
 }
 
 /* ------------------------------------------------------------------ */
+/* Flowcharts                                                         */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Text fields may contain inline `$...$` math. `math` holds display LaTeX
+ * without delimiters. Every `*Km` field is the Khmer counterpart and falls
+ * back to the English field when omitted.
+ */
+export interface FlowBranch {
+  /** Short answer to the decision, e.g. "Yes", "0/0", "Order matters". */
+  label: string
+  labelKm?: string
+  /** What to do on this branch. */
+  text: string
+  textKm?: string
+  math?: string
+}
+
+export type FlowNodeKind = 'start' | 'step' | 'decision' | 'end'
+
+export interface FlowNode {
+  kind: FlowNodeKind
+  text: string
+  textKm?: string
+  math?: string
+  /** Required (two or more) for `decision`, forbidden otherwise. */
+  branches?: FlowBranch[]
+}
+
+export interface Flowchart {
+  /** Globally unique kebab-case id, e.g. `flow-solve-linear-equation`. */
+  id: string
+  /** Topic IDs this flowchart is shown on. */
+  topicIds: string[]
+  title: string
+  titleKm?: string
+  /** One sentence: when to use this flowchart. */
+  summary: string
+  summaryKm?: string
+  /** Read top to bottom. The first node is `start`, the last is `end`. */
+  nodes: FlowNode[]
+}
+
+/* ------------------------------------------------------------------ */
+/* Graphs (exact coordinate-plane plots)                              */
+/* ------------------------------------------------------------------ */
+
+/** Palette slot: 1 blue, 2 red, 3 green, 4 gold. */
+export type PlotColor = 1 | 2 | 3 | 4
+
+export interface GraphCurve {
+  /** y = fn(x). Return NaN/Infinity where undefined; the path breaks there. */
+  fn: (x: number) => number
+  /** Plain-text legend label, e.g. "y = x² − 4". No LaTeX. */
+  label?: string
+  color?: PlotColor
+  /** Restrict sampling, e.g. [0, Infinity) for √x. Defaults to the x-range. */
+  domain?: [number, number]
+  dashed?: boolean
+}
+
+export interface GraphParametric {
+  x: (t: number) => number
+  y: (t: number) => number
+  t: [number, number]
+  label?: string
+  color?: PlotColor
+  dashed?: boolean
+}
+
+export interface GraphLine {
+  /** `vertical` x = c, `horizontal` y = c, `segment` from → to, `line` through two points (extended). */
+  kind: 'vertical' | 'horizontal' | 'segment' | 'line'
+  at?: number
+  from?: [number, number]
+  to?: [number, number]
+  label?: string
+  color?: PlotColor
+  dashed?: boolean
+  /** Draw an arrowhead at `to` (vectors). */
+  arrow?: boolean
+}
+
+export interface GraphPoint {
+  x: number
+  y: number
+  /** Name, e.g. "A". Shown as "A(1, 2)" when `showCoords` is not false. */
+  label?: string
+  showCoords?: boolean
+  color?: PlotColor
+  /** Hollow marker for excluded points (holes, open interval ends). */
+  open?: boolean
+  /** Label placement relative to the point. Defaults to 'ne'. */
+  anchor?: 'ne' | 'nw' | 'se' | 'sw' | 'n' | 's' | 'e' | 'w'
+}
+
+export interface GraphArea {
+  /** Upper boundary. */
+  fn: (x: number) => number
+  /** Lower boundary; defaults to y = 0. */
+  lower?: (x: number) => number
+  from: number
+  to: number
+  color?: PlotColor
+  label?: string
+}
+
+export interface GraphSpec {
+  id: string
+  title: string
+  titleKm?: string
+  /** Plain-language description of what the graph shows (also the accessible description). */
+  caption: string
+  captionKm?: string
+  xRange: [number, number]
+  yRange: [number, number]
+  /** Tick spacing; defaults to 1. */
+  xStep?: number
+  yStep?: number
+  /** Axis names; default "x" and "y". */
+  xLabel?: string
+  yLabel?: string
+  /** Use the same scale on both axes (circles look round). Default true. */
+  equalScale?: boolean
+  curves?: GraphCurve[]
+  parametric?: GraphParametric[]
+  lines?: GraphLine[]
+  points?: GraphPoint[]
+  areas?: GraphArea[]
+}
+
+/* ------------------------------------------------------------------ */
 /* Shapes                                                             */
 /* ------------------------------------------------------------------ */
 

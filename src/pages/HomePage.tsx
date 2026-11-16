@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
+import type { SubjectFamily } from '../types/content'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   featuredFormulas,
@@ -19,7 +20,7 @@ import { popularSearches, resultsHref } from '../lib/search'
 import { getRecentVisits, type RecentVisit } from '../lib/progress'
 import { useBookmarks } from '../lib/bookmarks'
 import { useI18n } from '../lib/i18n'
-import { familyLabelFor, shapeCopy, topicCopy } from '../i18n/content'
+import { familyLabelFor, formulaCopy, shapeCopy, topicCopy } from '../i18n/content'
 import { GradeCard, gradeFormulaCount } from '../components/ui/GradeCard'
 import { FormulaCard } from '../components/ui/FormulaCard'
 import { ShapeCard } from '../components/shapes/ShapeCard'
@@ -34,6 +35,18 @@ const FLOATING = [
   { symbol: 'θ', top: '78%', right: '3%', size: '2.5rem', delay: '2.4s', color: '#2457A7' },
 ]
 
+/** Khmer descriptions for the subject-family cards (English lives in the data layer). */
+const KM_FAMILY_DESCRIPTIONS: Record<SubjectFamily, string> = {
+  number: 'មូលដ្ឋាននៃបរិមាណ៖ ចំនួនគត់ ចំនួនសនិទាន ចំនួនពិត ស្វ័យគុណ និងឫស។',
+  algebra: 'រចនាសម្ព័ន្ធ សមីការ អនុគមន៍ និងសិល្បៈនៃការរកចំនួនមិនស្គាល់។',
+  geometry: 'រាង លំហ ការវាស់វែង និងការវែកញែកតាមហេតុផល ដែលបង្ហាញជារូបភាព។',
+  trigonometry: 'មុំ ត្រីកោណ និងលំនាំខួបដែលពិពណ៌នាពិភពលោកជុំវិញយើង។',
+  'statistics-probability': 'ការយល់ដឹងពីទិន្នន័យ បម្រែបម្រួល ឱកាស និងភាពមិនប្រាកដប្រជា។',
+  'coordinate-geometry': 'កន្លែងដែលពិជគណិត និងធរណីមាត្រជួបគ្នាលើប្លង់។',
+  'vectors-matrices': 'ទិសដៅ បម្លែង និងប្រព័ន្ធសមីការ ដែលសរសេរយ៉ាងខ្លីជាតារាងចំនួន។',
+  advanced: 'លីមីត អត្រាបម្រែបម្រួល និងការបូកសរុប៖ ច្រកចូលទៅកាន់គណិតវិភាគ។',
+}
+
 const FEATURED_SHAPE_IDS = ['circle', 'triangle', 'cylinder', 'cone', 'sphere', 'cube']
 
 export default function HomePage() {
@@ -41,7 +54,7 @@ export default function HomePage() {
   const [recents, setRecents] = useState<RecentVisit[]>([])
   const navigate = useNavigate()
   const { bookmarks } = useBookmarks()
-  const { language, t } = useI18n()
+  const { language, t, num } = useI18n()
   const isKhmer = language === 'km'
 
   useEffect(() => {
@@ -161,7 +174,7 @@ export default function HomePage() {
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder={t('home.searchPlaceholder')}
+                placeholder={isKhmer ? 'សាកល្បង “ទ្រឹស្តីបទពីតាករ”, “សមីការដឺក្រេទីពីរ” ឬ “មាឌកោណ”' : t('home.searchPlaceholder')}
                 autoComplete="off"
               />
               <button
@@ -188,23 +201,23 @@ export default function HomePage() {
           <dl className="hero__stats hero__rise" style={{ ['--i' as string]: 5 }}>
             <div>
               <dt>{t('home.statsGrades')}</dt>
-              <dd>{libraryStats.gradeCount}</dd>
+              <dd>{num(libraryStats.gradeCount)}</dd>
             </div>
             <div>
               <dt>{t('home.statsTopics')}</dt>
-              <dd>{libraryStats.topicCount}</dd>
+              <dd>{num(libraryStats.topicCount)}</dd>
             </div>
             <div>
               <dt>{t('home.statsFormulas')}</dt>
-              <dd>{libraryStats.formulaCount}</dd>
+              <dd>{num(libraryStats.formulaCount)}</dd>
             </div>
             <div>
               <dt>{t('home.statsQuestions')}</dt>
-              <dd>{libraryStats.exerciseCount}</dd>
+              <dd>{num(libraryStats.exerciseCount)}</dd>
             </div>
             <div>
               <dt>{t('home.statsShapes')}</dt>
-              <dd>{libraryStats.shapeCount}</dd>
+              <dd>{num(libraryStats.shapeCount)}</dd>
             </div>
           </dl>
         </div>
@@ -326,15 +339,18 @@ export default function HomePage() {
                     {item.meta?.mark}
                   </span>
                   <span className="family-card__title">{familyLabelFor(item.family, language)}</span>
-                  <span className="family-card__desc">{item.meta?.description}</span>
+                  <span className="family-card__desc">
+                    {isKhmer ? KM_FAMILY_DESCRIPTIONS[item.family] : item.meta?.description}
+                  </span>
                   <span className="family-card__foot">
                     {t('home.familyFoot', {
                       topics: item.topics,
                       formulas: item.formulas,
-                      range:
+                      range: num(
                         item.gradeNumbers.length > 1
                           ? `${item.gradeNumbers[0]}–${item.gradeNumbers[item.gradeNumbers.length - 1]}`
                           : String(item.gradeNumbers[0]),
+                      ),
                     })}
                   </span>
                 </Link>
@@ -408,9 +424,14 @@ export default function HomePage() {
                     : 'Auto-generate authentic Cambodian examination papers for Grades 7–12 with Grade 9 Diploma and Grade 12 Bac II standards, interactive timed self-testing, and printable MoEYS exam sheets.'}
                 </p>
               </div>
-              <Link className="btn btn--primary" to="/exam">
-                <IconExam size={16} /> {isKhmer ? 'ចូលទៅកាន់មន្ទីរពិសោធន៍ប្រឡង' : 'Open Exam Lab'}
-              </Link>
+              <div className="cluster">
+                <Link className="btn btn--primary" to="/exam">
+                  <IconExam size={16} /> {isKhmer ? 'ចូលទៅកាន់មន្ទីរពិសោធន៍ប្រឡង' : 'Open Exam Lab'}
+                </Link>
+                <Link className="btn btn--secondary" to="/bacii">
+                  {isKhmer ? 'មគ្គុទ្ទេសក៍ប្រឡងបាក់ឌុប' : 'BacII Guide'} <IconArrowRight size={16} />
+                </Link>
+              </div>
             </div>
           </Reveal>
 
@@ -418,10 +439,10 @@ export default function HomePage() {
             <Link to="/exam" style={{ textDecoration: 'none' }}>
               <div className="panel panel__pad home-exam-card">
                 <span className="badge badge--outline" style={{ fontWeight: 600, marginBottom: '0.75rem' }}>
-                  {isKhmer ? 'ឌីប្លូម · ថ្នាក់ទី ៩' : 'Diploma · Grade 9'}
+                  {isKhmer ? 'ឌីប្លូម · ថ្នាក់ទី៩' : 'Diploma · Grade 9'}
                 </span>
                 <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--ink)' }}>
-                  {isKhmer ? 'វិញ្ញាសាប្រឡងឌីប្លូម (Grade 9 Diploma)' : 'Grade 9 Diploma Exam Paper'}
+                  {isKhmer ? 'វិញ្ញាសាប្រឡងឌីប្លូម' : 'Grade 9 Diploma Exam Paper'}
                 </h3>
                 <p style={{ margin: 0, fontSize: '0.92rem', color: 'var(--muted)', lineHeight: 1.55 }}>
                   {isKhmer
@@ -431,17 +452,17 @@ export default function HomePage() {
               </div>
             </Link>
 
-            <Link to="/exam" style={{ textDecoration: 'none' }}>
+            <Link to="/bacii" style={{ textDecoration: 'none' }}>
               <div className="panel panel__pad home-exam-card">
                 <span className="badge badge--outline" style={{ fontWeight: 600, marginBottom: '0.75rem' }}>
-                  {isKhmer ? 'បាក់ឌុប · ថ្នាក់ទី ១២' : 'Bac II · Grade 12'}
+                  {isKhmer ? 'បាក់ឌុប · ថ្នាក់ទី១២' : 'Bac II · Grade 12'}
                 </span>
                 <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--ink)' }}>
-                  {isKhmer ? 'វិញ្ញាសាប្រឡងបាក់ឌុប (Grade 12 Bac II)' : 'Grade 12 Bac II Exam Paper'}
+                  {isKhmer ? 'វិញ្ញាសាប្រឡងបាក់ឌុប' : 'Grade 12 Bac II Exam Paper'}
                 </h3>
                 <p style={{ margin: 0, fontSize: '0.92rem', color: 'var(--muted)', lineHeight: 1.55 }}>
                   {isKhmer
-                    ? 'វិញ្ញាសា ១០០ ពិន្ទុ រយៈពេល ១៥០ នាទី គ្របដណ្ដប់លើចំនួនកុំផ្លិច លីមីត ដេរីវេ អាំងតេក្រាល ធរណីមាត្រក្នុងលំហ និងប្រូបាប។'
+                    ? 'វិញ្ញាសា ១០០ ពិន្ទុ រយៈពេល ១៥០ នាទី គ្របដណ្ដប់លើចំនួនកុំផ្លិច លីមីត ដេរីវេ អាំងតេក្រាល ធរណីមាត្រក្នុងលំហ និងប្រូបាប៊ីលីតេ។'
                     : 'Official 100-mark, 150-minute examination covering complex numbers, limits, calculus, 3D vectors, and probability.'}
                 </p>
               </div>
@@ -450,7 +471,7 @@ export default function HomePage() {
             <Link to="/exam" style={{ textDecoration: 'none' }}>
               <div className="panel panel__pad home-exam-card">
                 <span className="badge badge--outline" style={{ fontWeight: 600, marginBottom: '0.75rem' }}>
-                  {isKhmer ? 'ប្រឡងឆមាស · ថ្នាក់ទី ៧-១១' : 'Semester Exams · Grades 7–11'}
+                  {isKhmer ? 'ប្រឡងឆមាស · ថ្នាក់ទី៧–១១' : 'Semester Exams · Grades 7–11'}
                 </span>
                 <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--ink)' }}>
                   {isKhmer ? 'វិញ្ញាសាប្រឡងឆមាសទី១ និងទី២' : 'Semester Assessment Papers'}
@@ -499,7 +520,7 @@ export default function HomePage() {
                     } else {
                       const ref = findFormula(visit.id)
                       if (!ref) return null
-                      label = ref.formula.title
+                      label = formulaCopy(ref.formula, language).title
                       href = formulaHref(ref.formula.id)
                       kind = t('home.recentFormula')
                     }
@@ -554,7 +575,7 @@ export default function HomePage() {
               [t('home.method5Title'), t('home.method5Text')],
             ].map(([title, text], index) => (
               <Reveal as="li" key={title} delay={Math.min(index, 5) as 0 | 1 | 2 | 3 | 4 | 5} className="method__step">
-                <span className="method__num">0{index + 1}</span>
+                <span className="method__num">{num(`0${index + 1}`)}</span>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </Reveal>

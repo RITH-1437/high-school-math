@@ -113,3 +113,45 @@ export interface ExamAttempt {
   summary?: ExamScoreSummary
   isSubmitted: boolean
 }
+
+/* ------------------------------------------------------------------ */
+/* BacII tracks and past-paper research                               */
+/* ------------------------------------------------------------------ */
+
+/** Grade 12 streams: Science (វិទ្យាសាស្ត្រពិត) and Social Science (វិទ្យាសាស្ត្រសង្គម). */
+export type BacTrack = 'science' | 'social'
+
+export const BAC_TRACKS: BacTrack[] = ['science', 'social']
+
+/** A recurring kind of BacII question, used to tag every part of every paper. */
+export type BacPartKind =
+  | 'limits'
+  | 'continuity'
+  | 'integrals'
+  | 'probability'
+  | 'conics'
+  | 'differential-equations'
+  | 'function-study'
+  | 'complex-numbers'
+  | 'vectors-3d'
+
+export interface BacPaperPart {
+  kind: BacPartKind
+  marks: number
+  /** Short variant tag, e.g. 'ellipse', 'parabola', 'rational-oblique', 'exponential'. */
+  variant?: string
+}
+
+export interface BacPaperRecord {
+  track: BacTrack
+  year: number
+  /** e.g. 'Session 1' when a year had two sittings. */
+  session?: string
+  /** 'official' = national exam paper; 'mock' = practice paper in the same format. */
+  kind: 'official' | 'mock'
+  durationMinutes: number
+  totalMarks: number
+  parts: BacPaperPart[]
+  /** Where the paper is in this repository. */
+  source: string
+}

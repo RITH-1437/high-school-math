@@ -6,7 +6,7 @@ import { Reveal } from '../components/ui/Reveal'
 import { useI18n } from '../lib/i18n'
 
 export default function GradesPage() {
-  const { t } = useI18n()
+  const { t, num } = useI18n()
 
   return (
     <>
@@ -18,13 +18,13 @@ export default function GradesPage() {
         meta={
           <>
             <span>
-              <strong>{libraryStats.subjectCount}</strong> {t('grades.metaSubjects')}
+              <strong>{num(libraryStats.subjectCount)}</strong> {t('grades.metaSubjects')}
             </span>
             <span>
-              <strong>{libraryStats.topicCount}</strong> {t('common.topics').toLowerCase()}
+              <strong>{num(libraryStats.topicCount)}</strong> {t('common.topics').toLowerCase()}
             </span>
             <span>
-              <strong>{libraryStats.formulaCount}</strong> {t('common.formulas').toLowerCase()}
+              <strong>{num(libraryStats.formulaCount)}</strong> {t('common.formulas').toLowerCase()}
             </span>
           </>
         }

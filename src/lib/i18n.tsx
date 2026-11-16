@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { flushSync } from 'react-dom'
 import type { ReactNode } from 'react'
 import { en, type TranslationKey } from '../i18n/en'
 import { km } from '../i18n/km'
@@ -29,18 +30,39 @@ interface I18nContextValue {
   toggleLanguage: () => void
   isKhmer: boolean
   t: (key: TranslationKey, values?: TranslationValues) => string
+  /** A number written in the current language's digits. */
+  num: (value: number | string) => string
   tn: (base: PluralKey, count: number, values?: TranslationValues) => string
 }
 
 const I18nContext = createContext<I18nContextValue | null>(null)
 
-function interpolate(template: string, values?: TranslationValues): string {
+const KHMER_DIGITS = ['០', '១', '២', '៣', '៤', '៥', '៦', '៧', '៨', '៩']
+
+/** Write Western digits as Khmer digits (០–៩). Other characters are untouched. */
+export function toKhmerNumerals(value: number | string): string {
+  return String(value).replace(/[0-9]/g, (d) => KHMER_DIGITS[Number(d)])
+}
+
+/** Numbers in running text follow the interface language; strings are left alone. */
+export function localizeNumber(value: number | string, language: Language): string {
+  return language === 'km' ? toKhmerNumerals(value) : String(value)
+}
+
+function interpolate(template: string, values: TranslationValues | undefined, language: Language): string {
   if (!values) return template
   return template.replace(/\{(\w+)\}/g, (match, name: string) => {
     const value = values[name]
-    return value === undefined ? match : String(value)
+    if (value === undefined) return match
+    return typeof value === 'number' ? localizeNumber(value, language) : value
   })
 }
+
+function prefersReducedMotion(): boolean {
+  return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true
+}
+
+type ViewTransitionDocument = Document & { startViewTransition?: (update: () => void) => unknown }
 
 function readInitialLanguage(): Language {
   if (typeof document === 'undefined') return 'en'
@@ -57,9 +79,18 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(readInitialLanguage)
 
   const setLanguage = useCallback((next: Language) => {
-    setLanguageState(next)
-    document.documentElement.lang = next
-    document.documentElement.setAttribute('data-lang', next)
+    const apply = () => {
+      setLanguageState(next)
+      document.documentElement.lang = next
+      document.documentElement.setAttribute('data-lang', next)
+    }
+    // Cross-fade the whole page instead of letting text and fonts jump in place.
+    const doc = document as ViewTransitionDocument
+    if (doc.startViewTransition && !prefersReducedMotion()) {
+      doc.startViewTransition(() => flushSync(apply))
+    } else {
+      apply()
+    }
     try {
       localStorage.setItem(STORAGE_KEY, next)
     } catch {
@@ -72,7 +103,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, [language, setLanguage])
 
   const t = useCallback(
-    (key: TranslationKey, values?: TranslationValues) => interpolate(DICTIONARIES[language][key] ?? en[key], values),
+    (key: TranslationKey, values?: TranslationValues) =>
+      interpolate(DICTIONARIES[language][key] ?? en[key], values, language),
     [language],
   )
 
@@ -92,6 +124,21 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     if (description) description.setAttribute('content', t('meta.description'))
   }, [language, t])
 
+  const num = useCallback((value: number | string) => localizeNumber(value, language), [language])
+
+  useEffect(() => {
+    // Warm the Khmer fonts once the page is idle so the first switch does not flash.
+    const fonts = (document as Document & { fonts?: FontFaceSet }).fonts
+    if (!fonts?.load) return
+    const warm = () => {
+      void fonts.load('1em "Noto Sans Khmer Variable"', 'ក').catch(() => undefined)
+      void fonts.load('1em "Noto Serif Khmer Variable"', 'ក').catch(() => undefined)
+    }
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback
+    if (idle) idle(warm)
+    else window.setTimeout(warm, 1200)
+  }, [])
+
   useEffect(() => {
     // Keep a second tab in sync when the language changes elsewhere.
     const onStorage = (event: StorageEvent) => {
@@ -103,8 +150,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   }, [setLanguage])
 
   const value = useMemo(
-    () => ({ language, setLanguage, toggleLanguage, isKhmer: language === 'km', t, tn }),
-    [language, setLanguage, toggleLanguage, t, tn],
+    () => ({ language, setLanguage, toggleLanguage, isKhmer: language === 'km', t, num, tn }),
+    [language, setLanguage, toggleLanguage, t, num, tn],
   )
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>

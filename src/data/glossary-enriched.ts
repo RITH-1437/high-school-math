@@ -25,6 +25,31 @@ export interface EnrichedTerm extends GlossaryTerm {
   examFocus?: 'diploma' | 'bac2'
 }
 
+const ETYMOLOGY_PREFIX_KM: { prefix: string; km: string }[] = [
+  { prefix: 'Fr. ', km: 'បារាំង៖ ' },
+  { prefix: 'Greek ', km: 'ក្រិក៖ ' },
+  { prefix: 'Lat. ', km: 'ឡាតាំង៖ ' },
+  { prefix: 'Skt. ', km: 'សំស្ក្រឹត៖ ' },
+]
+
+/**
+ * Etymology label for the active language. The source word itself (e.g. the
+ * French "entier relatif") is kept; only the language prefix is localized.
+ */
+export function etymologyLabel(etymology: TermEtymology, isKhmer: boolean): string {
+  if (!isKhmer) return etymology.label
+  const match = ETYMOLOGY_PREFIX_KM.find(({ prefix }) => etymology.label.startsWith(prefix))
+  return match ? match.km + etymology.label.slice(match.prefix.length) : etymology.label
+}
+
+/**
+ * Definition text for the active language, falling back to English only when
+ * no Khmer definition exists.
+ */
+export function termDefinition(term: GlossaryTerm, isKhmer: boolean): string | undefined {
+  return isKhmer ? term.noteKm ?? term.note : term.note
+}
+
 /**
  * Extract leading Khmer consonant according to standard dictionary order.
  */

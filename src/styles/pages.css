@@ -13,6 +13,16 @@
   border-bottom: 1px solid #E2E8F0;
 }
 
+/* The light hero sits on white paper, so its text must use dark ink.
+   The global --hero-* tokens are white because they serve the navy page
+   heroes; re-scope them here so the home title is never white-on-white. */
+:root:not([data-theme='dark']) .hero {
+  --hero-ink: var(--ink);
+  --hero-muted: var(--ink-soft);
+  --hero-faint: var(--muted);
+  --hero-line: var(--line);
+}
+
 [data-theme='dark'] .hero {
   background:
     radial-gradient(ellipse 70% 60% at 50% -10%, rgba(36, 87, 167, 0.22), transparent 70%),

@@ -15,6 +15,7 @@ import NotFoundPage from './pages/NotFoundPage'
 const ShapesPage = lazy(() => import('./pages/ShapesPage'))
 const ExamPage = lazy(() => import('./pages/ExamPage'))
 const GlossaryPage = lazy(() => import('./pages/GlossaryPage'))
+const BaciiPage = lazy(() => import('./pages/BaciiPage'))
 
 function Loading() {
   return (
@@ -70,7 +71,23 @@ export default function App() {
             </Suspense>
           }
         />
-                <Route
+        <Route
+          path="bacii"
+          element={
+            <Suspense fallback={<Loading />}>
+              <BaciiPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="bacii/:track"
+          element={
+            <Suspense fallback={<Loading />}>
+              <BaciiPage />
+            </Suspense>
+          }
+        />
+        <Route
           path="glossary"
           element={
             <Suspense fallback={<Loading />}>

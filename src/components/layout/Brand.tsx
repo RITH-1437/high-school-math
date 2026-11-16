@@ -8,6 +8,7 @@ interface BrandProps {
 
 export function BrandMark({ size = 36 }: { size?: number }) {
   const { theme } = useTheme()
+  const { isKhmer } = useI18n()
   const isDark = theme === 'dark'
   const logoSrc = isDark ? '/img/white-pi.png' : '/img/pi.png'
 
@@ -31,7 +32,7 @@ export function BrandMark({ size = 36 }: { size?: number }) {
     >
       <img
         src={logoSrc}
-        alt="High School Math Pi Logo"
+        alt={isKhmer ? 'និមិត្តសញ្ញា π របស់ High School Math' : 'High School Math Pi Logo'}
         width={size}
         height={size}
         className="brand-mark"

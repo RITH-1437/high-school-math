@@ -6,6 +6,9 @@ import { useI18n } from '../../lib/i18n'
 import { MathBlock, RichText } from '../ui/Math'
 import { IconCheck, IconClose, IconRotate } from '../ui/Icons'
 
+/** Option letters as printed in Khmer textbooks and exam papers. */
+const KHMER_OPTION_LETTERS = ['ក', 'ខ', 'គ', 'ឃ', 'ង', 'ច']
+
 interface Answer {
   choice?: number
   text?: string
@@ -13,7 +16,7 @@ interface Answer {
 }
 
 export function ExercisePlayer({ exercises, topicId }: { exercises: Exercise[]; topicId: string }) {
-  const { t } = useI18n()
+  const { t, num, isKhmer } = useI18n()
   const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<Record<string, Answer>>({})
   const [draftChoice, setDraftChoice] = useState<number | null>(null)
@@ -106,8 +109,8 @@ export function ExercisePlayer({ exercises, topicId }: { exercises: Exercise[]; 
             {t('exercise.scoreSummary')}
           </h3>
           <p className="exercise-summary__score">
-            <strong>{correctCount}</strong> / {total}
-            <span> · {percent}%</span>
+            <strong>{num(correctCount)}</strong> / {num(total)}
+            <span> · {num(percent)}%</span>
           </p>
           <p className="muted">
             {percent === 100
@@ -196,7 +199,11 @@ export function ExercisePlayer({ exercises, topicId }: { exercises: Exercise[]; 
                     checked={selected}
                     onChange={() => setDraftChoice(optionIndex)}
                   />
-                  <span className="choice__letter">{String.fromCharCode(65 + optionIndex)}</span>
+                  <span className="choice__letter">
+                    {isKhmer && optionIndex < KHMER_OPTION_LETTERS.length
+                      ? KHMER_OPTION_LETTERS[optionIndex]
+                      : String.fromCharCode(65 + optionIndex)}
+                  </span>
                   <span className="choice__text">
                     <RichText text={option} />
                   </span>

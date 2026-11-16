@@ -14,6 +14,64 @@ import { EmptyState } from '../components/ui/EmptyState'
 import { PageHero } from '../components/ui/PageHero'
 import { IconBook, IconFormula, IconSearch, IconShapes } from '../components/ui/Icons'
 import { useI18n } from '../lib/i18n'
+import { findFormula, findShape, findTopic, getSubjectRef } from '../data'
+import { formulaContent, shapeCopy, subjectCopy, topicContent } from '../i18n/content'
+import type { Language } from '../i18n/types'
+
+const KHMER_SCRIPT = /[ក-៿]/
+
+/** The first candidate written in Khmer script, otherwise the English fallback. */
+function preferKhmer(fallback: string, ...candidates: (string | undefined)[]): string {
+  return candidates.find((text) => text && KHMER_SCRIPT.test(text)) ?? fallback
+}
+
+/** Result cards render plain text, so skip long-form copy that carries inline LaTeX. */
+function plainOnly(text: string | undefined): string | undefined {
+  return text && !text.includes('$') ? text : undefined
+}
+
+/**
+ * Search documents carry Khmer titles, but some descriptions fall back to the
+ * English source. Re-read the localized copy for the hit so Khmer mode shows
+ * Khmer wherever a translation exists.
+ */
+function localizeHit(hit: SearchHit, language: Language): SearchHit {
+  if (language !== 'km') return hit
+  const [kind, ...rest] = hit.id.split(':')
+  if (kind === 'formula') {
+    const ref = findFormula(rest[0])
+    if (!ref) return hit
+    const formula = formulaContent(ref.formula, 'km')
+    return {
+      ...hit,
+      title: preferKhmer(hit.title, formula.title),
+      description: preferKhmer(hit.description, formula.description, plainOnly(formula.spoken)),
+    }
+  }
+  if (kind === 'topic') {
+    const ref = findTopic(rest[0])
+    if (!ref) return hit
+    const topic = topicContent(ref.topic, 'km')
+    return {
+      ...hit,
+      title: preferKhmer(hit.title, topic.title),
+      description: preferKhmer(hit.description, topic.subtitle, plainOnly(topic.introduction)),
+    }
+  }
+  if (kind === 'subject') {
+    const ref = getSubjectRef(rest[0], rest[1])
+    if (!ref) return hit
+    const copy = subjectCopy(ref.grade.id, ref.subject, 'km')
+    return { ...hit, title: preferKhmer(hit.title, copy.title), description: preferKhmer(hit.description, copy.description) }
+  }
+  if (kind === 'shape') {
+    const shape = findShape(rest[0])
+    if (!shape) return hit
+    const copy = shapeCopy(shape, 'km')
+    return { ...hit, title: preferKhmer(hit.title, copy.name), description: preferKhmer(hit.description, copy.tagline) }
+  }
+  return hit
+}
 
 function Highlight({ text, query }: { text: string; query: string }) {
   return (
@@ -25,7 +83,9 @@ function Highlight({ text, query }: { text: string; query: string }) {
   )
 }
 
-function ResultItem({ hit, query }: { hit: SearchHit; query: string }) {
+function ResultItem({ hit: rawHit, query }: { hit: SearchHit; query: string }) {
+  const { language } = useI18n()
+  const hit = localizeHit(rawHit, language)
   const icon = hit.kind === 'formula' ? <IconFormula size={16} /> : hit.kind === 'shape' ? <IconShapes size={16} /> : <IconBook size={16} />
   return (
     <li>
@@ -53,7 +113,7 @@ function ResultItem({ hit, query }: { hit: SearchHit; query: string }) {
 
 export default function SearchPage() {
   const [params, setParams] = useSearchParams()
-  const { language, t } = useI18n()
+  const { language, isKhmer, t, num } = useI18n()
   const query = params.get('q') ?? ''
   const [inputValue, setInputValue] = useState(query)
   const grade = (params.get('grade') ?? 'all') as GradeId | 'all'
@@ -136,7 +196,7 @@ export default function SearchPage() {
                   setParams(next, { replace: true })
                 }
               }}
-              placeholder={t('search.placeholder')}
+              placeholder={isKhmer ? 'ស្វែងរករូបមន្ត ប្រធានបទ ឬរាង…' : t('search.placeholder')}
               autoComplete="off"
               autoFocus
             />
@@ -215,7 +275,7 @@ export default function SearchPage() {
           {grouped.map((group) => (
             <section key={group.kind} className="result-group" aria-labelledby={`group-${group.kind}`}>
               <h2 id={`group-${group.kind}`} className="result-group__title">
-                {group.label} <span>{group.items.length}</span>
+                {group.label} <span>{num(group.items.length)}</span>
               </h2>
               <ul className="result-list">
                 {group.items.slice(0, 30).map((hit) => (

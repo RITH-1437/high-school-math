@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { MobileNav } from './MobileNav'
+import { useI18n } from '../../lib/i18n'
 
 function ScrollToTop() {
   const location = useLocation()
@@ -24,11 +25,12 @@ function ScrollToTop() {
 
 export function RootLayout() {
   const location = useLocation()
+  const { isKhmer } = useI18n()
 
   return (
     <div className="site-shell">
       <a className="skip-link" href="#main-content">
-        Skip to content
+        {isKhmer ? 'រំលងទៅខ្លឹមសារ' : 'Skip to content'}
       </a>
       <ScrollToTop />
       <Header />

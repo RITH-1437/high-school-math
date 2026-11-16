@@ -12,14 +12,14 @@ interface TopicRowProps {
 
 export function TopicRow({ topicRef, index }: TopicRowProps) {
   const { topic, grade, subject } = topicRef
-  const { language, t } = useI18n()
+  const { language, t, num } = useI18n()
   const copy = topicCopy(topic, language)
   const subjectTitle = subjectCopy(grade.id, subject, language).title
 
   return (
     <li>
       <Link className="topic-row" to={topicUrl(topicRef)}>
-        <span className="topic-row__index">{String(index + 1).padStart(2, '0')}</span>
+        <span className="topic-row__index">{num(String(index + 1).padStart(2, '0'))}</span>
         <span className="topic-row__body">
           <span className="topic-row__title">{copy.title}</span>
           <span className="topic-row__subtitle" style={{ display: 'block' }}>

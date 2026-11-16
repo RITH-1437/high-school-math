@@ -7,7 +7,7 @@ import { IconArrowRight, IconChevronRight } from './Icons'
 
 export function SubjectCard({ grade, subject }: { grade: Grade; subject: Subject }) {
   const family = subjectFamilyMeta.get(subject.family)
-  const { language, t } = useI18n()
+  const { language, t, num } = useI18n()
   const copy = subjectCopy(grade.id, subject, language)
   const formulaCount = subject.topics.reduce((total, topic) => total + topic.formulas.length, 0)
 
@@ -29,7 +29,7 @@ export function SubjectCard({ grade, subject }: { grade: Grade; subject: Subject
             <Link to={topicHref(grade.id, subject.id, topic.id)}>
               <span>{topicCopy(topic, language).title}</span>
               <span>
-                {String(index + 1).padStart(2, '0')}
+                {num(String(index + 1).padStart(2, '0'))}
                 <IconChevronRight size={11} style={{ display: 'inline', marginLeft: 4, verticalAlign: 'middle' }} />
               </span>
             </Link>
