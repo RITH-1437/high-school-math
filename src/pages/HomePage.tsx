@@ -77,21 +77,7 @@ export default function HomePage() {
 
   return (
     <>
-      <section
-        className="hero"
-        style={{
-          background:
-            'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(234, 242, 255, 0.8), transparent 70%), linear-gradient(180deg, #FFFFFF 0%, #F7F9FC 100%)',
-          color: '#17263D',
-          borderBottom: '1px solid #E2E8F0',
-          ['--hero-bg' as string]: '#FFFFFF',
-          ['--hero-ink' as string]: '#102A56',
-          ['--hero-muted' as string]: '#64748B',
-          ['--hero-faint' as string]: '#94A3B8',
-          ['--hero-line' as string]: 'rgba(16, 42, 86, 0.08)',
-          ['--hero-accent' as string]: '#2457A7',
-        }}
-      >
+      <section className="hero">
         <div className="hero__symbols" aria-hidden="true">
           {FLOATING.map((item) => (
             <span
@@ -113,22 +99,7 @@ export default function HomePage() {
         </div>
         <div className="container hero__inner">
           <div className="hero__rise" style={{ ['--i' as string]: 0 }}>
-            <span
-              className="hero-kicker"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                padding: '0.3rem 0.95rem 0.3rem 0.35rem',
-                borderRadius: 'var(--radius-pill)',
-                background: 'rgba(234, 242, 255, 0.9)',
-                border: '1px solid rgba(36, 87, 167, 0.25)',
-                fontSize: '0.84rem',
-                fontWeight: 500,
-                color: '#102A56',
-                boxShadow: '0 1px 3px rgba(16, 42, 86, 0.06)',
-              }}
-            >
+            <span className="hero-kicker">
               <span
                 className="badge badge--cultural"
                 style={{
@@ -143,15 +114,15 @@ export default function HomePage() {
             </span>
           </div>
 
-          <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1, color: '#102A56' }}>
+          <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1 }}>
             {t('home.titleA')}<br />
-            <span className="serif-italic hero__title-accent" style={{ color: '#2457A7' }}>
+            <span className="serif-italic hero__title-accent">
               {t('home.titleB')}
             </span>
             <span className="visually-hidden">{t('home.titleSr')}</span>
           </h1>
 
-          <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2, color: '#64748B' }}>
+          <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2 }}>
             {t('home.lead')}
           </p>
 
@@ -166,27 +137,10 @@ export default function HomePage() {
               justifyContent: 'center',
             }}
           >
-            <Link
-              className="btn btn--primary btn--lg"
-              to="/grades"
-              style={{
-                background: '#102A56',
-                color: '#FFFFFF',
-                borderColor: '#102A56',
-                boxShadow: '0 4px 14px rgba(16, 42, 86, 0.18)',
-              }}
-            >
+            <Link className="btn btn--primary btn--lg" to="/grades">
               {t('home.ctaGrades')} <IconArrowRight className="icon-arrow" size={18} />
             </Link>
-            <Link
-              className="btn btn--outline btn--lg"
-              to="/shapes"
-              style={{
-                background: '#FFFFFF',
-                color: '#17263D',
-                borderColor: '#CBD5E1',
-              }}
-            >
+            <Link className="btn btn--outline btn--lg" to="/shapes">
               <IconShapes size={18} /> {t('home.ctaShapes')}
             </Link>
           </div>
@@ -197,15 +151,8 @@ export default function HomePage() {
             onSubmit={onSubmit}
             role="search"
           >
-            <div
-              className="search-field"
-              style={{
-                background: '#FFFFFF',
-                borderColor: '#CBD5E1',
-                boxShadow: '0 4px 20px -4px rgba(16, 42, 86, 0.08)',
-              }}
-            >
-              <IconSearch size={20} style={{ color: '#2457A7' }} />
+            <div className="search-field">
+              <IconSearch size={20} style={{ color: 'var(--accent)' }} />
               <label htmlFor="hero-search" className="visually-hidden">
                 {t('home.searchLabel')}
               </label>
@@ -216,13 +163,11 @@ export default function HomePage() {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={t('home.searchPlaceholder')}
                 autoComplete="off"
-                style={{ color: '#17263D' }}
               />
               <button
                 type="submit"
                 className="search-field__submit"
                 aria-label={t('home.searchButton')}
-                style={{ background: '#102A56', color: '#FFFFFF' }}
               >
                 <IconArrowRight size={18} />
               </button>
@@ -233,11 +178,6 @@ export default function HomePage() {
                   key={term}
                   className="chip chip--sm"
                   to={resultsHref(term)}
-                  style={{
-                    background: '#FFFFFF',
-                    borderColor: '#E2E8F0',
-                    color: '#243B5A',
-                  }}
                 >
                   {term}
                 </Link>
@@ -245,29 +185,26 @@ export default function HomePage() {
             </div>
           </form>
 
-          <dl
-            className="hero__stats hero__rise"
-            style={{ ['--i' as string]: 5, borderColor: '#E2E8F0' }}
-          >
+          <dl className="hero__stats hero__rise" style={{ ['--i' as string]: 5 }}>
             <div>
-              <dt style={{ color: '#64748B' }}>{t('home.statsGrades')}</dt>
-              <dd style={{ color: '#102A56' }}>{libraryStats.gradeCount}</dd>
+              <dt>{t('home.statsGrades')}</dt>
+              <dd>{libraryStats.gradeCount}</dd>
             </div>
             <div>
-              <dt style={{ color: '#64748B' }}>{t('home.statsTopics')}</dt>
-              <dd style={{ color: '#102A56' }}>{libraryStats.topicCount}</dd>
+              <dt>{t('home.statsTopics')}</dt>
+              <dd>{libraryStats.topicCount}</dd>
             </div>
             <div>
-              <dt style={{ color: '#64748B' }}>{t('home.statsFormulas')}</dt>
-              <dd style={{ color: '#102A56' }}>{libraryStats.formulaCount}</dd>
+              <dt>{t('home.statsFormulas')}</dt>
+              <dd>{libraryStats.formulaCount}</dd>
             </div>
             <div>
-              <dt style={{ color: '#64748B' }}>{t('home.statsQuestions')}</dt>
-              <dd style={{ color: '#102A56' }}>{libraryStats.exerciseCount}</dd>
+              <dt>{t('home.statsQuestions')}</dt>
+              <dd>{libraryStats.exerciseCount}</dd>
             </div>
             <div>
-              <dt style={{ color: '#64748B' }}>{t('home.statsShapes')}</dt>
-              <dd style={{ color: '#102A56' }}>{libraryStats.shapeCount}</dd>
+              <dt>{t('home.statsShapes')}</dt>
+              <dd>{libraryStats.shapeCount}</dd>
             </div>
           </dl>
         </div>
@@ -291,44 +228,29 @@ export default function HomePage() {
           </Reveal>
 
           {/* Lower Secondary Track (Grades 7–9) */}
-          <div className="curriculum-stage" style={{ marginBottom: '3.5rem' }}>
+          <div className="curriculum-stage">
             <Reveal>
-              <div
-                className="curriculum-stage__header"
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '1rem',
-                  padding: '1.25rem 1.5rem',
-                  marginBottom: '1.5rem',
-                  borderRadius: 'var(--radius-md)',
-                  background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  boxShadow: 'var(--shadow-sm)',
-                }}
-              >
+              <div className="curriculum-stage__header">
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.35rem' }}>
-                    <span className="badge badge--accent" style={{ background: '#EAF2FF', color: '#2457A7' }}>
+                  <div className="curriculum-stage__meta">
+                    <span className="badge badge--outline">
                       {t('home.lowerBadge')}
                     </span>
-                    <span className="badge badge--cultural" style={{ background: '#C83B45', color: '#FFFFFF' }}>
+                    <span className="badge badge--outline">
                       {t('home.lowerTrack')}
                     </span>
-                    <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 650, color: '#102A56' }}>
+                    <h3 className="curriculum-stage__title">
                       {t('home.lowerTitle')}
                     </h3>
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.92rem', color: '#64748B' }}>
+                  <p className="curriculum-stage__desc">
                     {t('home.lowerDesc')}
                   </p>
                 </div>
-                <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.82rem', color: '#64748B' }}>
-                  <span><strong style={{ color: '#102A56' }}>{t('home.lowerGrades', { count: lowerGrades.length })}</strong></span>
-                  <span><strong style={{ color: '#102A56' }}>{t('home.lowerSubjects', { count: lowerGrades.reduce((sum, g) => sum + g.subjects.length, 0) })}</strong></span>
-                  <span><strong style={{ color: '#102A56' }}>{t('home.lowerFormulas', { count: lowerGrades.reduce((sum, g) => sum + gradeFormulaCount(g), 0) })}</strong></span>
+                <div className="curriculum-stage__stats">
+                  <span><strong>{t('home.lowerGrades', { count: lowerGrades.length })}</strong></span>
+                  <span><strong>{t('home.lowerSubjects', { count: lowerGrades.reduce((sum, g) => sum + g.subjects.length, 0) })}</strong></span>
+                  <span><strong>{t('home.lowerFormulas', { count: lowerGrades.reduce((sum, g) => sum + gradeFormulaCount(g), 0) })}</strong></span>
                 </div>
               </div>
             </Reveal>
@@ -344,45 +266,30 @@ export default function HomePage() {
           {/* Upper Secondary Track (Grades 10–12) */}
           <div className="curriculum-stage">
             <Reveal>
-              <div
-                className="curriculum-stage__header"
-                style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '1rem',
-                  padding: '1.25rem 1.5rem',
-                  marginBottom: '1.5rem',
-                  borderRadius: 'var(--radius-md)',
-                  background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  boxShadow: 'var(--shadow-sm)',
-                }}
-              >
+              <div className="curriculum-stage__header">
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '0.35rem' }}>
-                    <span className="badge badge--accent" style={{ background: '#EAF2FF', color: '#2457A7' }}>
+                  <div className="curriculum-stage__meta">
+                    <span className="badge badge--outline">
                       {t('home.upperBadge')}
                     </span>
-                    <span className="badge badge--cultural" style={{ background: '#C83B45', color: '#FFFFFF' }}>
+                    <span className="badge badge--outline">
                       {t('home.upperTrack')}
                     </span>
-                    <span className="badge" style={{ background: '#FEF3C7', color: '#92400E', borderColor: '#FDE68A' }}>
+                    <span className="badge badge--outline">
                       {t('home.upperTrackNote')}
                     </span>
-                    <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: 650, color: '#102A56' }}>
+                    <h3 className="curriculum-stage__title">
                       {t('home.upperTitle')}
                     </h3>
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.92rem', color: '#64748B' }}>
+                  <p className="curriculum-stage__desc">
                     {t('home.upperDesc')}
                   </p>
                 </div>
-                <div style={{ display: 'flex', gap: '1.25rem', fontSize: '0.82rem', color: '#64748B' }}>
-                  <span><strong style={{ color: '#102A56' }}>{t('home.upperGrades', { count: upperGrades.length })}</strong></span>
-                  <span><strong style={{ color: '#102A56' }}>{t('home.upperSubjects', { count: upperGrades.reduce((sum, g) => sum + g.subjects.length, 0) })}</strong></span>
-                  <span><strong style={{ color: '#102A56' }}>{t('home.upperFormulas', { count: upperGrades.reduce((sum, g) => sum + gradeFormulaCount(g), 0) })}</strong></span>
+                <div className="curriculum-stage__stats">
+                  <span><strong>{t('home.upperGrades', { count: upperGrades.length })}</strong></span>
+                  <span><strong>{t('home.upperSubjects', { count: upperGrades.reduce((sum, g) => sum + g.subjects.length, 0) })}</strong></span>
+                  <span><strong>{t('home.upperFormulas', { count: upperGrades.reduce((sum, g) => sum + gradeFormulaCount(g), 0) })}</strong></span>
                 </div>
               </div>
             </Reveal>
@@ -509,8 +416,8 @@ export default function HomePage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '1.25rem', marginTop: '1.5rem' }}>
             <Link to="/exam" style={{ textDecoration: 'none' }}>
-              <div className="panel panel__pad" style={{ height: '100%', borderLeft: '4px solid #C83B45' }}>
-                <span className="badge" style={{ background: 'rgba(200, 59, 69, 0.12)', color: '#C83B45', fontWeight: 700, marginBottom: '0.75rem' }}>
+              <div className="panel panel__pad home-exam-card">
+                <span className="badge badge--outline" style={{ fontWeight: 600, marginBottom: '0.75rem' }}>
                   {isKhmer ? 'ឌីប្លូម · ថ្នាក់ទី ៩' : 'Diploma · Grade 9'}
                 </span>
                 <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--ink)' }}>
@@ -525,8 +432,8 @@ export default function HomePage() {
             </Link>
 
             <Link to="/exam" style={{ textDecoration: 'none' }}>
-              <div className="panel panel__pad" style={{ height: '100%', borderLeft: '4px solid #D6A84B' }}>
-                <span className="badge" style={{ background: 'rgba(214, 168, 75, 0.15)', color: '#B45309', fontWeight: 700, marginBottom: '0.75rem' }}>
+              <div className="panel panel__pad home-exam-card">
+                <span className="badge badge--outline" style={{ fontWeight: 600, marginBottom: '0.75rem' }}>
                   {isKhmer ? 'បាក់ឌុប · ថ្នាក់ទី ១២' : 'Bac II · Grade 12'}
                 </span>
                 <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--ink)' }}>
@@ -541,8 +448,8 @@ export default function HomePage() {
             </Link>
 
             <Link to="/exam" style={{ textDecoration: 'none' }}>
-              <div className="panel panel__pad" style={{ height: '100%', borderLeft: '4px solid #2457A7' }}>
-                <span className="badge" style={{ background: 'rgba(36, 87, 167, 0.12)', color: '#2457A7', fontWeight: 700, marginBottom: '0.75rem' }}>
+              <div className="panel panel__pad home-exam-card">
+                <span className="badge badge--outline" style={{ fontWeight: 600, marginBottom: '0.75rem' }}>
                   {isKhmer ? 'ប្រឡងឆមាស · ថ្នាក់ទី ៧-១១' : 'Semester Exams · Grades 7–11'}
                 </span>
                 <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.5rem', color: 'var(--ink)' }}>

@@ -34,15 +34,7 @@ export function GradeCard({ grade }: { grade: Grade }) {
           {String(grade.number).padStart(2, '0')}
           <span>{t('grade.badge')}</span>
         </span>
-        <span
-          className="badge badge--outline"
-          style={{
-            fontSize: '0.68rem',
-            background: isLower ? '#EAF2FF' : '#FEF3C7',
-            color: isLower ? '#2457A7' : '#92400E',
-            borderColor: isLower ? 'rgba(36, 87, 167, 0.25)' : 'rgba(214, 168, 75, 0.35)',
-          }}
-        >
+        <span className="badge badge--outline" style={{ fontSize: '0.68rem' }}>
           {isLower ? t('grade.lowerRange') : t('grade.upperRange')}
         </span>
       </div>

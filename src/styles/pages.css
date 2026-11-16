@@ -7,9 +7,16 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 60% 70% at 80% 10%, rgba(214, 168, 75, 0.12), transparent 60%),
-    radial-gradient(ellipse 50% 60% at 5% 90%, rgba(24, 61, 115, 0.45), transparent 60%),
-    var(--hero-bg);
+    radial-gradient(ellipse 70% 60% at 50% -10%, rgba(234, 242, 255, 0.8), transparent 70%),
+    linear-gradient(180deg, #FFFFFF 0%, #F7F9FC 100%);
+  color: #17263D;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+[data-theme='dark'] .hero {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% -10%, rgba(36, 87, 167, 0.22), transparent 70%),
+    linear-gradient(180deg, #061328 0%, #091B38 100%);
   color: var(--hero-ink);
   border-bottom: 1px solid var(--hero-line);
 }
@@ -181,6 +188,77 @@
 }
 
 /* Home sections ---------------------------------------------------- */
+.curriculum-stage {
+  margin-bottom: 3.5rem;
+}
+
+.curriculum-stage:last-child {
+  margin-bottom: 0;
+}
+
+.curriculum-stage__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--dur-mid) var(--ease-soft), box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+.curriculum-stage__header:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.curriculum-stage__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+
+.curriculum-stage__title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.curriculum-stage__desc {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.curriculum-stage__stats {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.curriculum-stage__stats strong {
+  color: var(--ink);
+}
+
+.home-exam-card {
+  height: 100%;
+  transition: transform var(--dur-mid) var(--ease-out), border-color var(--dur-mid) var(--ease-soft), box-shadow var(--dur-mid) var(--ease-soft);
+}
+
+.home-exam-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+
 .family-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -216,11 +294,19 @@
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 50%;
-  background: var(--family-soft);
-  color: var(--family);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
   font-family: var(--font-display);
   font-style: italic;
   font-size: 1.25rem;
+  transition: background var(--dur-mid) var(--ease-soft), color var(--dur-mid) var(--ease-soft), border-color var(--dur-mid) var(--ease-soft);
+}
+
+.family-card:hover .family-card__mark {
+  background: var(--family-soft);
+  color: var(--family);
+  border-color: transparent;
 }
 
 .family-card__title {
@@ -872,21 +958,34 @@
 .flowchart-step-badge {
   display: inline-block;
   font-size: 0.78rem;
-  font-weight: 750;
+  font-weight: 650;
   padding: 0.2rem 0.55rem;
   border-radius: 4px;
   margin-bottom: 0.5rem;
   letter-spacing: 0.02em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  transition: all var(--dur-fast) var(--ease-soft);
 }
 
-.flowchart-step-badge--blue {
+.flowchart-step-badge--blue,
+.flowchart-step-badge--gold {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.flowchart-step-card:hover .flowchart-step-badge--blue {
   background: var(--accent-soft);
   color: var(--accent);
+  border-color: transparent;
 }
 
-.flowchart-step-badge--gold {
+.flowchart-step-card:hover .flowchart-step-badge--gold {
   background: var(--academic-gold-soft);
   color: #B45309;
+  border-color: transparent;
 }
 
 .flowchart-step-rule {
@@ -2367,7 +2466,12 @@
 
 .flashcard:hover {
   box-shadow: var(--shadow-md);
-  border-color: var(--academic-gold, #D6A84B);
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+}
+
+[data-theme='dark'] .flashcard:hover {
+  border-color: var(--line-strong);
 }
 
 .flashcard__secret {

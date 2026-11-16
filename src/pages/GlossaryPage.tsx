@@ -658,11 +658,9 @@ export default function GlossaryPage() {
                   <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <span
-                        className="badge"
+                        className="badge badge--outline"
                         style={{
-                          background: grpMeta.bg,
-                          color: grpMeta.color,
-                          fontWeight: 700,
+                          fontWeight: 600,
                           fontSize: '0.72rem',
                         }}
                       >
