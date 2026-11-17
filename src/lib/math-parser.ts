@@ -7,6 +7,8 @@
 export interface ConicAnalysis {
   type: 'parabola' | 'ellipse' | 'circle' | 'hyperbola' | 'line'
   orientation?: 'horizontal' | 'vertical'
+  openingDirection?: 'upward' | 'downward' | 'right' | 'left'
+  openingDirectionKm?: string
   center?: { x: number; y: number }
   vertex?: { x: number; y: number }
   vertices?: { x: number; y: number }[]
@@ -14,13 +16,21 @@ export interface ConicAnalysis {
   focus?: { x: number; y: number }
   foci?: { x: number; y: number }[]
   directrix?: { axis: 'x' | 'y'; val: number }
+  directrices?: { axis: 'x' | 'y'; val: number }[]
   axisOfSymmetry?: { axis: 'x' | 'y'; val: number }
+  majorAxis?: { line: string; length: number; axis: 'x' | 'y'; val: number }
+  minorAxis?: { line: string; length: number; axis: 'x' | 'y'; val: number }
   asymptotes?: { slope: number; m: number; b: number; label: string; fn: (x: number) => number }[]
   a?: number
   b?: number
   c?: number
   e?: number
   p?: number
+  latusRectum?: number
+  domain?: string
+  range?: string
+  domainKm?: string
+  rangeKm?: string
   radius?: number
   standardLatex: string
   nameEn: string
@@ -456,9 +466,11 @@ export function exprToLatex(raw: string): string {
   s = s.replace(/²/g, '^{2}')
   s = s.replace(/³/g, '^{3}')
   s = s.replace(/π/gi, '\\pi')
-  // fractions like (expr)/num or expr/num
+  // fractions like ((x-2)^2)/25 or (x-2)^2/25 or x^2/9 or 1/x
+  s = s.replace(/\(([^)]+)\)\^([0-9a-zA-Z.]+)\s*\/\s*([0-9a-zA-Z.]+)/g, '\\frac{($1)^{$2}}{$3}')
   s = s.replace(/\(([^)]+)\)\s*\/\s*([0-9a-zA-Z.]+)/g, '\\frac{$1}{$2}')
-  s = s.replace(/([0-9a-zA-Z_]+)\^2\s*\/\s*([0-9a-zA-Z.]+)/g, '\\frac{$1^{2}}{$2}')
+  s = s.replace(/([0-9a-zA-Z_]+)\^([0-9a-zA-Z.]+)\s*\/\s*([0-9a-zA-Z.]+)/g, '\\frac{$1^{$2}}{$3}')
+  s = s.replace(/([0-9a-zA-Z_]+)\s*\/\s*([0-9a-zA-Z.]+)/g, '\\frac{$1}{$2}')
   s = s.replace(/\^([0-9a-zA-Z]+)/g, '^{$1}')
   s = s.replace(/\*/g, ' \\cdot ')
   s = s.replace(/\bsqrt\(([^)]+)\)/g, '\\sqrt{$1}')
@@ -476,6 +488,18 @@ export function exprToLatex(raw: string): string {
 function cleanZero(n: number): number {
   const rounded = Math.round(n * 100) / 100
   return Object.is(rounded, -0) || Math.abs(rounded) < 1e-12 ? 0 : rounded
+}
+
+function formatLinearTerm(varName: string, offset: number): string {
+  if (offset === 0) return varName
+  if (offset > 0) return `(${varName} - ${offset})`
+  return `(${varName} + ${Math.abs(offset)})`
+}
+
+function formatSquaredTerm(varName: string, offset: number): string {
+  if (offset === 0) return `${varName}^{2}`
+  if (offset > 0) return `(${varName} - ${offset})^{2}`
+  return `(${varName} + ${Math.abs(offset)})^{2}`
 }
 
 /** Identifies conic section type and calculates exact geometric elements according to MoEYS curriculum. */
@@ -533,18 +557,40 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
       const roundedH = cleanZero(h)
       const roundedK = cleanZero(k)
       const roundedP = cleanZero(p)
+      const latusRectum = cleanZero(Math.abs(4 * roundedP))
+      const isRight = roundedP > 0
+      const openingDirection = isRight ? 'right' : 'left'
+      const openingDirectionKm = isRight ? 'បែរទៅស្តាំ' : 'បែរទៅឆ្វេង'
+      const domain = isRight ? `[${roundedH}, +∞)` : `(-∞, ${roundedH}]`
+      const range = '(-∞, +∞)'
+
+      const ySq = formatSquaredTerm('y', roundedK)
+      const xLin = formatLinearTerm('x', roundedH)
+      const coeff = cleanZero(4 * roundedP)
+      const standardLatex =
+        roundedH === 0
+          ? `${ySq} = ${coeff === 1 ? 'x' : coeff === -1 ? '-x' : `${coeff}x`}`
+          : `${ySq} = ${coeff === 1 ? '' : coeff === -1 ? '-' : `${coeff}`}${xLin}`
+
       const rawRange = Math.max(Math.abs(roundedH), Math.abs(roundedH + roundedP), Math.abs(roundedK)) + 4
       const sRange = Math.max(10, Math.ceil(rawRange / 5) * 5)
 
       return {
         type: 'parabola',
         orientation: 'horizontal',
+        openingDirection,
+        openingDirectionKm,
         vertex: { x: roundedH, y: roundedK },
         focus: { x: cleanZero(roundedH + roundedP), y: roundedK },
         directrix: { axis: 'x', val: cleanZero(roundedH - roundedP) },
         axisOfSymmetry: { axis: 'y', val: roundedK },
         p: roundedP,
-        standardLatex: `(y - ${roundedK})^{2} = ${cleanZero(4 * roundedP)}(x - ${roundedH})`,
+        latusRectum,
+        domain,
+        range,
+        domainKm: domain,
+        rangeKm: 'ℝ',
+        standardLatex,
         nameEn: 'Horizontal Parabola',
         nameKm: 'ប៉ារ៉ាបូលដេក (អ័ក្សឆ្លុះស្របនឹងអ័ក្ស x)',
         suggestedRange: sRange,
@@ -561,18 +607,40 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
       const roundedH = cleanZero(h)
       const roundedK = cleanZero(k)
       const roundedP = cleanZero(p)
+      const latusRectum = cleanZero(Math.abs(4 * roundedP))
+      const isUpward = roundedP > 0
+      const openingDirection = isUpward ? 'upward' : 'downward'
+      const openingDirectionKm = isUpward ? 'បែរទៅលើ' : 'បែរទៅក្រោម'
+      const domain = '(-∞, +∞)'
+      const range = isUpward ? `[${roundedK}, +∞)` : `(-∞, ${roundedK}]`
+
+      const xSq = formatSquaredTerm('x', roundedH)
+      const yLin = formatLinearTerm('y', roundedK)
+      const coeff = cleanZero(4 * roundedP)
+      const standardLatex =
+        roundedK === 0
+          ? `${xSq} = ${coeff === 1 ? 'y' : coeff === -1 ? '-y' : `${coeff}y`}`
+          : `${xSq} = ${coeff === 1 ? '' : coeff === -1 ? '-' : `${coeff}`}${yLin}`
+
       const rawRange = Math.max(Math.abs(roundedH), Math.abs(roundedK), Math.abs(roundedK + roundedP)) + 4
       const sRange = Math.max(10, Math.ceil(rawRange / 5) * 5)
 
       return {
         type: 'parabola',
         orientation: 'vertical',
+        openingDirection,
+        openingDirectionKm,
         vertex: { x: roundedH, y: roundedK },
         focus: { x: roundedH, y: cleanZero(roundedK + roundedP) },
         directrix: { axis: 'y', val: cleanZero(roundedK - roundedP) },
         axisOfSymmetry: { axis: 'x', val: roundedH },
         p: roundedP,
-        standardLatex: `(x - ${roundedH})^{2} = ${cleanZero(4 * roundedP)}(y - ${roundedK})`,
+        latusRectum,
+        domain,
+        range,
+        domainKm: 'ℝ',
+        rangeKm: range,
+        standardLatex,
         nameEn: 'Vertical Parabola',
         nameKm: 'ប៉ារ៉ាបូលឈរ (អ័ក្សឆ្លុះស្របនឹងអ័ក្ស y)',
         suggestedRange: sRange,
@@ -595,11 +663,19 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
         const radius = cleanZero(rx)
         const rawRange = Math.max(Math.abs(roundedH), Math.abs(roundedK)) + radius + 2
         const sRange = Math.max(10, Math.ceil(rawRange / 5) * 5)
+        const xSq = formatSquaredTerm('x', roundedH)
+        const ySq = formatSquaredTerm('y', roundedK)
+        const r2 = cleanZero(radius * radius)
+
         return {
           type: 'circle',
           center: { x: roundedH, y: roundedK },
           radius,
-          standardLatex: `(x - ${roundedH})^{2} + (y - ${roundedK})^{2} = ${cleanZero(radius * radius)}`,
+          domain: `[${cleanZero(roundedH - radius)}, ${cleanZero(roundedH + radius)}]`,
+          range: `[${cleanZero(roundedK - radius)}, ${cleanZero(roundedK + radius)}]`,
+          domainKm: `[${cleanZero(roundedH - radius)}, ${cleanZero(roundedH + radius)}]`,
+          rangeKm: `[${cleanZero(roundedK - radius)}, ${cleanZero(roundedK + radius)}]`,
+          standardLatex: `${xSq} + ${ySq} = ${r2}`,
           nameEn: 'Circle',
           nameKm: 'រង្វង់ (Circle)',
           suggestedRange: sRange,
@@ -647,11 +723,50 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
             { x: roundedH, y: cleanZero(roundedK + roundedC) },
           ]
 
+      const majorAxis = {
+        line: horizontal ? `y = ${roundedK}` : `x = ${roundedH}`,
+        length: cleanZero(2 * roundedA),
+        axis: horizontal ? ('y' as const) : ('x' as const),
+        val: horizontal ? roundedK : roundedH,
+      }
+
+      const minorAxis = {
+        line: horizontal ? `x = ${roundedH}` : `y = ${roundedK}`,
+        length: cleanZero(2 * roundedB),
+        axis: horizontal ? ('x' as const) : ('y' as const),
+        val: horizontal ? roundedH : roundedK,
+      }
+
+      const dirDist = roundedE > 0 ? cleanZero(roundedA / roundedE) : 0
+      const directrices = horizontal
+        ? [
+            { axis: 'x' as const, val: cleanZero(roundedH - dirDist) },
+            { axis: 'x' as const, val: cleanZero(roundedH + dirDist) },
+          ]
+        : [
+            { axis: 'y' as const, val: cleanZero(roundedK - dirDist) },
+            { axis: 'y' as const, val: cleanZero(roundedK + dirDist) },
+          ]
+
+      const domain = horizontal
+        ? `[${cleanZero(roundedH - roundedA)}, ${cleanZero(roundedH + roundedA)}]`
+        : `[${cleanZero(roundedH - roundedB)}, ${cleanZero(roundedH + roundedB)}]`
+
+      const range = horizontal
+        ? `[${cleanZero(roundedK - roundedB)}, ${cleanZero(roundedK + roundedB)}]`
+        : `[${cleanZero(roundedK - roundedA)}, ${cleanZero(roundedK + roundedA)}]`
+
       const rawRange = Math.max(Math.abs(roundedH) + roundedA, Math.abs(roundedK) + roundedA) + 3
       const sRange = Math.max(10, Math.ceil(rawRange / 5) * 5)
 
       const a2 = cleanZero(a * a)
       const b2 = cleanZero(b * b)
+      const xSq = formatSquaredTerm('x', roundedH)
+      const ySq = formatSquaredTerm('y', roundedK)
+
+      const standardLatex = horizontal
+        ? `\\frac{${xSq}}{${a2}} + \\frac{${ySq}}{${b2}} = 1`
+        : `\\frac{${ySq}}{${a2}} + \\frac{${xSq}}{${b2}} = 1`
 
       return {
         type: 'ellipse',
@@ -661,12 +776,17 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
         b: roundedB,
         c: roundedC,
         e: roundedE,
+        majorAxis,
+        minorAxis,
+        directrices,
         vertices,
         coVertices,
         foci,
-        standardLatex: horizontal
-          ? `\\frac{(x - ${roundedH})^{2}}{${a2}} + \\frac{(y - ${roundedK})^{2}}{${b2}} = 1`
-          : `\\frac{(y - ${roundedK})^{2}}{${a2}} + \\frac{(x - ${roundedH})^{2}}{${b2}} = 1`,
+        domain,
+        range,
+        domainKm: domain,
+        rangeKm: range,
+        standardLatex,
         nameEn: horizontal ? 'Horizontal Ellipse' : 'Vertical Ellipse',
         nameKm: horizontal ? 'អេលីបមានអ័ក្សធំដេក (ស្របនឹងអ័ក្ស x)' : 'អេលីបមានអ័ក្សធំឈរ (ស្របនឹងអ័ក្ស y)',
         suggestedRange: sRange,
@@ -713,6 +833,20 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
             { x: roundedH, y: cleanZero(roundedK + roundedC) },
           ]
 
+      const majorAxis = {
+        line: horizontal ? `y = ${roundedK}` : `x = ${roundedH}`,
+        length: cleanZero(2 * roundedA),
+        axis: horizontal ? ('y' as const) : ('x' as const),
+        val: horizontal ? roundedK : roundedH,
+      }
+
+      const minorAxis = {
+        line: horizontal ? `x = ${roundedH}` : `y = ${roundedK}`,
+        length: cleanZero(2 * roundedB),
+        axis: horizontal ? ('x' as const) : ('y' as const),
+        val: horizontal ? roundedH : roundedK,
+      }
+
       const slope = horizontal ? b / a : a / b
       const roundedSlope = cleanZero(slope)
 
@@ -735,6 +869,9 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
 
       const a2 = cleanZero(a * a)
       const b2 = cleanZero(b * b)
+      const xSq = formatSquaredTerm('x', roundedH)
+      const ySq = formatSquaredTerm('y', roundedK)
+
       const rawRange = Math.max(Math.abs(roundedH) + roundedC, Math.abs(roundedK) + roundedC) + 3
       const sRange = Math.max(10, Math.ceil(rawRange / 5) * 5)
 
@@ -746,12 +883,14 @@ export function detectConic(F: (x: number, y: number) => number): ConicAnalysis 
         b: roundedB,
         c: roundedC,
         e: roundedE,
+        majorAxis,
+        minorAxis,
         vertices,
         foci,
         asymptotes,
         standardLatex: horizontal
-          ? `\\frac{(x - ${roundedH})^{2}}{${a2}} - \\frac{(y - ${roundedK})^{2}}{${b2}} = 1`
-          : `\\frac{(y - ${roundedK})^{2}}{${a2}} - \\frac{(x - ${roundedH})^{2}}{${b2}} = 1`,
+          ? `\\frac{${xSq}}{${a2}} - \\frac{${ySq}}{${b2}} = 1`
+          : `\\frac{${ySq}}{${a2}} - \\frac{${xSq}}{${b2}} = 1`,
         nameEn: horizontal ? 'Horizontal Hyperbola' : 'Vertical Hyperbola',
         nameKm: horizontal ? 'អ៊ីពែបូលមានអ័ក្សទទឹងដេក (ស្របនឹងអ័ក្ស x)' : 'អ៊ីពែបូលមានអ័ក្សទទឹងឈរ (ស្របនឹងអ័ក្ស y)',
         suggestedRange: sRange,
@@ -880,35 +1019,35 @@ export function analyzeEquation(
 
         if (conic.orientation === 'horizontal') {
           stepsEn.push(
-            `Identify standard horizontal parabola form: (y − k)² = 4p(x − h) with vertex V(${v.x}, ${v.y}) and p = ${p}.`,
+            `Identify standard horizontal parabola form: ${conic.standardLatex} with vertex V(${v.x}, ${v.y}) and focal parameter p = ${p}.`,
             `The parabola opens ${p > 0 ? 'to the right' : 'to the left'} with horizontal axis of symmetry ${axis.axis} = ${axis.val}.`,
             `Plot the focus at F(${conic.focus!.x}, ${conic.focus!.y}) inside the curve (distance |p| = ${Math.abs(p)} from vertex).`,
-            `Draw the vertical directrix line ${dir.axis} = ${dir.val} outside the curve (distance |p| from vertex).`,
-            `Plot sample points using y values around k = ${v.y} to sketch the symmetric curve.`,
+            `Draw the vertical directrix line ${dir.axis} = ${dir.val} outside the curve and latus rectum chord of length |4p| = ${conic.latusRectum}.`,
+            `Domain: ${conic.domain}, Range: ${conic.range}. Plot sample points using y values around k = ${v.y} to sketch the symmetric curve.`,
           )
           stepsKm.push(
-            `កំណត់ទម្រង់ស្តង់ដាប៉ារ៉ាបូលដេក៖ (y − k)² = 4p(x − h) ដែលមានកំពូល V(${v.x}, ${v.y}) និងប៉ារ៉ាម៉ែត្រកំណុំ p = ${p}។`,
+            `កំណត់ទម្រង់ស្តង់ដាប៉ារ៉ាបូលដេក៖ ${conic.standardLatex} ដែលមានកំពូល V(${v.x}, ${v.y}) និងប៉ារ៉ាម៉ែត្រកំណុំ p = ${p}។`,
             `ប៉ារ៉ាបូលនេះបែរខ្នង${p > 0 ? 'ទៅស្តាំ' : 'ទៅឆ្វេង'} ដោយមានអ័ក្សឆ្លុះដេក ${axis.axis} = ${axis.val}។`,
             `សម្គាល់កំណុំ F(${conic.focus!.x}, ${conic.focus!.y}) នៅខាងក្នុងខ្សែកោង (ចម្ងាយ |p| = ${Math.abs(p)} ពីកំពូល)។`,
-            `គូសបន្ទាត់ប្រាប់ទិសឈរ ${dir.axis} = ${dir.val} នៅខាងក្រៅខ្សែកោង (ចម្ងាយ |p| ពីកំពូល)។`,
-            `គណនាចំណុចមួយចំនួននៅសងខាងអ័ក្សឆ្លុះ រួចគូសខ្សែកោងប៉ារ៉ាបូលស៊ីមេទ្រី។`,
+            `គូសបន្ទាត់ប្រាប់ទិសឈរ ${dir.axis} = ${dir.val} និងអង្កត់ឡាទុសរ៉ិចទុមប្រវែង |4p| = ${conic.latusRectum}។`,
+            `ដែនកំណត់៖ ${conic.domainKm}, សំណុំតម្លៃ៖ ${conic.rangeKm}។ ដៅចំណុចគំរូសងខាងអ័ក្សឆ្លុះ រួចគូសខ្សែកោងប៉ារ៉ាបូលស៊ីមេទ្រី។`,
           )
         } else {
           isQuadratic = true
           extrema.push({ x: v.x, y: v.y, kind: p > 0 ? 'min' : 'max' })
           stepsEn.push(
-            `Identify standard vertical parabola form: (x − h)² = 4p(y − k) with vertex V(${v.x}, ${v.y}) and p = ${p}.`,
+            `Identify standard vertical parabola form: ${conic.standardLatex} with vertex V(${v.x}, ${v.y}) and focal parameter p = ${p}.`,
             `The parabola opens ${p > 0 ? 'upward (U-shape)' : 'downward'} with vertical axis of symmetry ${axis.axis} = ${axis.val}.`,
             `Plot the focus at F(${conic.focus!.x}, ${conic.focus!.y}) inside the curve (distance |p| = ${Math.abs(p)} from vertex).`,
-            `Draw the horizontal directrix line ${dir.axis} = ${dir.val} outside the curve.`,
-            `Plot the intercepts and vertex, and draw the smooth symmetric curve.`,
+            `Draw the horizontal directrix line ${dir.axis} = ${dir.val} outside the curve and latus rectum chord of length |4p| = ${conic.latusRectum}.`,
+            `Domain: ${conic.domain}, Range: ${conic.range}. Plot the vertex, intercepts, and sketch the smooth symmetric curve.`,
           )
           stepsKm.push(
-            `កំណត់ទម្រង់ស្តង់ដាប៉ារ៉ាបូលឈរ៖ (x − h)² = 4p(y − k) ដែលមានកំពូល V(${v.x}, ${v.y}) និងប៉ារ៉ាម៉ែត្រកំណុំ p = ${p}។`,
+            `កំណត់ទម្រង់ស្តង់ដាប៉ារ៉ាបូលឈរ៖ ${conic.standardLatex} ដែលមានកំពូល V(${v.x}, ${v.y}) និងប៉ារ៉ាម៉ែត្រកំណុំ p = ${p}។`,
             `ប៉ារ៉ាបូលនេះបែរខ្នង${p > 0 ? 'ទៅលើ' : 'ទៅក្រោម'} ដោយមានអ័ក្សឆ្លុះឈរ ${axis.axis} = ${axis.val}។`,
             `សម្គាល់កំណុំ F(${conic.focus!.x}, ${conic.focus!.y}) នៅខាងក្នុងខ្សែកោង (ចម្ងាយ |p| = ${Math.abs(p)} ពីកំពូល)។`,
-            `គូសបន្ទាត់ប្រាប់ទិសដេក ${dir.axis} = ${dir.val} នៅខាងក្រៅខ្សែកោង។`,
-            `ដៅកំពូល ចំណុចប្រសព្វអ័ក្ស រួចគូសខ្សែកោងប៉ារ៉ាបូលស៊ីមេទ្រី។`,
+            `គូសបន្ទាត់ប្រាប់ទិសដេក ${dir.axis} = ${dir.val} និងអង្កត់ឡាទុសរ៉ិចទុមប្រវែង |4p| = ${conic.latusRectum}។`,
+            `ដែនកំណត់៖ ${conic.domainKm}, សំណុំតម្លៃ៖ ${conic.rangeKm}។ ដៅកំពូល ចំណុចប្រសព្វអ័ក្ស រួចគូសខ្សែកោងប៉ារ៉ាបូលស៊ីមេទ្រី។`,
           )
         }
         break
@@ -922,14 +1061,14 @@ export function analyzeEquation(
 
         stepsEn.push(
           `Identify the standard ellipse form: ${conic.standardLatex} with center C(${c.x}, ${c.y}).`,
-          `Major axis is ${horiz ? 'horizontal (parallel to x-axis)' : 'vertical (parallel to y-axis)'}: semi-major a = ${conic.a}, semi-minor b = ${conic.b}.`,
+          `Major axis is ${horiz ? 'horizontal (parallel to x-axis)' : 'vertical (parallel to y-axis)'}: semi-major a = ${conic.a} (length 2a = ${conic.majorAxis?.length}), semi-minor b = ${conic.b} (length 2b = ${conic.minorAxis?.length}).`,
           `Calculate focal distance c = √(a² − b²) = ${conic.c}, giving eccentricity e = c/a ≈ ${conic.e}.`,
           `Plot major vertices V₁(${v[0].x}, ${v[0].y}), V₂(${v[1].x}, ${v[1].y}) and co-vertices B₁(${coV[0].x}, ${coV[0].y}), B₂(${coV[1].x}, ${coV[1].y}).`,
           `Plot foci F₁(${f[0].x}, ${f[0].y}), F₂(${f[1].x}, ${f[1].y}) on the major axis and draw the smooth oval.`,
         )
         stepsKm.push(
           `កំណត់ទម្រង់ស្តង់ដាអេលីប៖ ${conic.standardLatex} ដែលមានផ្ចិត C(${c.x}, ${c.y})។`,
-          `អ័ក្សធំស្ថិតនៅតាមទិស${horiz ? 'ដេក (ស្របនឹងអ័ក្ស x)' : 'ឈរ (ស្របនឹងអ័ក្ស y)'}៖ ប្រវែងពាក់កណ្ដាលអ័ក្សធំ a = ${conic.a}, ពាក់កណ្ដាលអ័ក្សតូច b = ${conic.b}។`,
+          `អ័ក្សធំស្ថិតនៅតាមទិស${horiz ? 'ដេក (ស្របនឹងអ័ក្ស x)' : 'ឈរ (ស្របនឹងអ័ក្ស y)'}៖ ពាក់កណ្ដាលអ័ក្សធំ a = ${conic.a} (ប្រវែង 2a = ${conic.majorAxis?.length}), ពាក់កណ្ដាលអ័ក្សតូច b = ${conic.b} (ប្រវែង 2b = ${conic.minorAxis?.length})។`,
           `គណនាចម្ងាយពីផ្ចិតទៅកំណុំ c = √(a² − b²) = ${conic.c} និងអ៊ិចសង់ទ្រីស៊ីតេ e = c/a ≈ ${conic.e}។`,
           `សម្គាល់កំពូលអ័ក្សធំ V₁(${v[0].x}, ${v[0].y}), V₂(${v[1].x}, ${v[1].y}) និងកំពូលអ័ក្សតូច B₁(${coV[0].x}, ${coV[0].y}), B₂(${coV[1].x}, ${coV[1].y})។`,
           `សម្គាល់កំណុំ F₁(${f[0].x}, ${f[0].y}), F₂(${f[1].x}, ${f[1].y}) នៅលើអ័ក្សធំ រួចគូសខ្សែកោងអេលីបរលូន។`,

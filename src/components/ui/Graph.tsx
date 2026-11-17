@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { useId, useRef, useState } from 'react'
 import type { GraphLine, GraphPoint, GraphSpec, PlotColor } from '../../types/content'
 import { useI18n } from '../../lib/i18n'
 
@@ -250,20 +250,32 @@ const ANCHOR_OFFSET: Record<NonNullable<GraphPoint['anchor']>, [number, number, 
   w: [-10, 4, 'end'],
 }
 
+export interface GraphProps {
+  spec: GraphSpec
+  interactive?: boolean
+  onPan?: (dx: number, dy: number) => void
+  onZoom?: (factor: number) => void
+}
+
 /**
  * An exact coordinate-plane plot: every curve is sampled from its function and
  * every point is placed by its real coordinates, so what students read off the
  * grid is mathematically true. Colours come from the --plot-* tokens and adapt
  * to the dark theme.
  */
-export function Graph({ spec }: { spec: GraphSpec }) {
+export function Graph({ spec, interactive = false, onPan, onZoom }: GraphProps) {
   const { isKhmer } = useI18n()
   const uid = useId().replace(/:/g, '')
+  const svgRef = useRef<SVGSVGElement>(null)
+  const [hoverCoord, setHoverCoord] = useState<{ x: number; y: number } | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const dragStartRef = useRef<{ clientX: number; clientY: number } | null>(null)
+
   const clipId = `${spec.id}-clip-${uid}`
   const arrowId = `${spec.id}-arrow-${uid}`
   const [x0, x1] = spec.xRange
   const [y0, y1] = spec.yRange
-  const { width, height, sx, sy } = graphGeometry(spec)
+  const { width, height, innerW, innerH, sx, sy } = graphGeometry(spec)
   const ySpan = y1 - y0
   const xStep = spec.xStep ?? 1
   const yStep = spec.yStep ?? 1
@@ -294,6 +306,82 @@ export function Graph({ spec }: { spec: GraphSpec }) {
     return [x0, ay + m * (x0 - ax), x1, ay + m * (x1 - ax)]
   }
 
+  const handlePointerDown = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (!interactive) return
+    if (e.button !== 0 && e.pointerType === 'mouse') return
+    try {
+      ;(e.currentTarget as Element).setPointerCapture?.(e.pointerId)
+    } catch {
+      // Ignore
+    }
+    setIsDragging(true)
+    dragStartRef.current = { clientX: e.clientX, clientY: e.clientY }
+  }
+
+  const handlePointerMove = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (!interactive) return
+    const svg = svgRef.current
+    if (!svg) return
+    const rect = svg.getBoundingClientRect()
+    if (rect.width <= 0 || rect.height <= 0) return
+
+    if (isDragging && dragStartRef.current && onPan) {
+      const screenDx = e.clientX - dragStartRef.current.clientX
+      const screenDy = e.clientY - dragStartRef.current.clientY
+      dragStartRef.current = { clientX: e.clientX, clientY: e.clientY }
+      const mathDx = -(screenDx / rect.width) * (x1 - x0)
+      const mathDy = (screenDy / rect.height) * (y1 - y0)
+      onPan(mathDx, mathDy)
+      return
+    }
+
+    const clientX = e.clientX - rect.left
+    const clientY = e.clientY - rect.top
+    const scaleX = width / rect.width
+    const scaleY = height / rect.height
+    const svgX = clientX * scaleX
+    const svgY = clientY * scaleY
+
+    const mathX = x0 + ((svgX - PAD.left) / innerW) * (x1 - x0)
+    const mathY = y1 - ((svgY - PAD.top) / innerH) * (y1 - y0)
+
+    if (mathX >= x0 && mathX <= x1 && mathY >= y0 && mathY <= y1) {
+      setHoverCoord({
+        x: Math.round(mathX * 100) / 100,
+        y: Math.round(mathY * 100) / 100,
+      })
+    } else {
+      setHoverCoord(null)
+    }
+  }
+
+  const handlePointerUp = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (!interactive) return
+    setIsDragging(false)
+    dragStartRef.current = null
+    try {
+      ;(e.currentTarget as Element).releasePointerCapture?.(e.pointerId)
+    } catch {
+      // Ignore
+    }
+  }
+
+  const handlePointerLeave = () => {
+    if (!isDragging) {
+      setHoverCoord(null)
+    }
+  }
+
+  const handleWheel = (e: React.WheelEvent<SVGSVGElement>) => {
+    if (!interactive || !onZoom) return
+    e.preventDefault()
+    if (e.deltaY < 0) {
+      onZoom(0.85)
+    } else if (e.deltaY > 0) {
+      onZoom(1.18)
+    }
+  }
+
   return (
     <figure className="graph">
       <figcaption className="graph__head">
@@ -301,10 +389,17 @@ export function Graph({ spec }: { spec: GraphSpec }) {
         <span className="graph__caption">{caption}</span>
       </figcaption>
       <svg
-        className="graph__svg"
+        ref={svgRef}
+        className={`graph__svg${interactive ? ' is-interactive' : ''}${isDragging ? ' is-dragging' : ''}`}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
         aria-label={`${title}. ${caption}${pointsText ? ` ${pointsText}.` : ''}`}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onPointerLeave={handlePointerLeave}
+        onWheel={handleWheel}
       >
         <defs>
           <clipPath id={clipId}>
@@ -450,6 +545,68 @@ export function Graph({ spec }: { spec: GraphSpec }) {
             )
           })}
         </g>
+
+        {hoverCoord && (
+          <g className="graph__crosshair" pointerEvents="none" aria-hidden="true">
+            <line
+              x1={sx(x0)}
+              x2={sx(x1)}
+              y1={sy(hoverCoord.y)}
+              y2={sy(hoverCoord.y)}
+              stroke="var(--plot-1, #2457A7)"
+              strokeWidth="1.2"
+              strokeDasharray="4 3"
+              opacity="0.55"
+            />
+            <line
+              x1={sx(hoverCoord.x)}
+              x2={sx(hoverCoord.x)}
+              y1={sy(y0)}
+              y2={sy(y1)}
+              stroke="var(--plot-1, #2457A7)"
+              strokeWidth="1.2"
+              strokeDasharray="4 3"
+              opacity="0.55"
+            />
+            <circle
+              cx={sx(hoverCoord.x)}
+              cy={sy(hoverCoord.y)}
+              r="5"
+              fill="var(--plot-1, #2457A7)"
+              stroke="#fff"
+              strokeWidth="2"
+            />
+            <g
+              transform={`translate(${Math.min(
+                Math.max(sx(hoverCoord.x) + 10, PAD.left + 5),
+                width - PAD.right - 95,
+              )}, ${Math.max(sy(hoverCoord.y) - 30, PAD.top + 5)})`}
+            >
+              <rect
+                x="0"
+                y="0"
+                width="90"
+                height="24"
+                rx="5"
+                fill="var(--surface, #ffffff)"
+                stroke="var(--line, #CBD5E1)"
+                strokeWidth="1.2"
+                filter="drop-shadow(0 2px 4px rgba(0,0,0,0.12))"
+              />
+              <text
+                x="45"
+                y="16"
+                textAnchor="middle"
+                fill="var(--ink, #102A56)"
+                fontSize="11.5"
+                fontWeight="700"
+                fontFamily="var(--font-mono, monospace)"
+              >
+                ({formatCoord(hoverCoord.x)}, {formatCoord(hoverCoord.y)})
+              </text>
+            </g>
+          </g>
+        )}
       </svg>
       {legend.length > 0 && (
         <ul className="graph__legend">

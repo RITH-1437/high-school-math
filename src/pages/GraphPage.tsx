@@ -18,19 +18,61 @@ import {
   parseEquation,
 } from '../lib/math-parser'
 
-const PRESETS = [
-  { label: 'y = x + 2', expr: 'y = x + 2', group: 'linear', nameEn: 'Linear (Default)', nameKm: 'អនុគមន៍លីនេអ៊ែរ' },
-  { label: 'y = x² − 4', expr: 'y = x^2 - 4', group: 'quadratic', nameEn: 'Parabola (Vertical)', nameKm: 'ប៉ារ៉ាបូលឈរ (U-shape)' },
-  { label: 'y² = 4x', expr: 'y^2 = 4x', group: 'conics', nameEn: 'Parabola (Horizontal)', nameKm: 'ប៉ារ៉ាបូលដេក (y² = 4px)' },
-  { label: 'x = y² − 4', expr: 'x = y^2 - 4', group: 'conics', nameEn: 'Parabola (x = y² - 4)', nameKm: 'ប៉ារ៉ាបូលដេក (x = y² - 4)' },
-  { label: '(y²)/25 + x² = 25', expr: '(y^2)/25 + x^2 = 25', group: 'conics', nameEn: 'Ellipse (User Equation)', nameKm: 'អេលីប (a=25, b=5)' },
-  { label: 'x² − y² = 4', expr: 'x^2 - y^2 = 4', group: 'conics', nameEn: 'Hyperbola (Horizontal)', nameKm: 'អ៊ីពែបូលដេក (x² - y² = 4)' },
-  { label: '(y²)/25 − x² = 1', expr: '(y^2)/25 - x^2 = 1', group: 'conics', nameEn: 'Hyperbola (Vertical)', nameKm: 'អ៊ីពែបូលឈរ' },
-  { label: 'x² + y² = 25', expr: 'x^2 + y^2 = 25', group: 'conics', nameEn: 'Circle (R = 5)', nameKm: 'រង្វង់ (R = 5)' },
-  { label: 'y = 1 / x', expr: 'y = 1 / x', group: 'rational', nameEn: 'Hyperbola (Rational)', nameKm: 'អនុគមន៍ប្រភាគ (អ៊ីពែបូល)' },
-  { label: 'y = sin(x)', expr: 'y = sin(x)', group: 'trig', nameEn: 'Sine wave', nameKm: 'អនុគមន៍ស៊ីនុស' },
-  { label: 'y = √(x + 4)', expr: 'y = sqrt(x + 4)', group: 'root', nameEn: 'Square root', nameKm: 'អនុគមន៍ឫសការេ' },
-  { label: 'y = |x − 2| − 1', expr: 'y = |x - 2| - 1', group: 'abs', nameEn: 'V-shape', nameKm: 'អនុគមន៍តម្លៃដាច់ខាត' },
+export type ConicMode = 'all' | 'parabola' | 'ellipse' | 'circle' | 'hyperbola' | 'functions'
+
+export interface GraphPreset {
+  label: string
+  expr: string
+  mode: ConicMode
+  nameEn: string
+  nameKm: string
+  suggestedRange?: number
+}
+
+const PRESETS: GraphPreset[] = [
+  // Parabola examples (Section 2)
+  { label: 'y = x²', expr: 'y = x^2', mode: 'parabola', nameEn: 'Standard vertical parabola (y = x²)', nameKm: 'ប៉ារ៉ាបូលឈរស្តង់ដា (y = x²)' },
+  { label: 'y = 2x² − 4', expr: 'y = 2x^2 - 4', mode: 'parabola', nameEn: 'Vertical parabola (y = 2x² − 4)', nameKm: 'ប៉ារ៉ាបូលឈរ (y = 2x² − 4)' },
+  { label: 'y = (x − 2)² + 3', expr: 'y = (x - 2)^2 + 3', mode: 'parabola', nameEn: 'Vertex form (V(2, 3))', nameKm: 'ទម្រង់កំពូល V(2, 3)' },
+  { label: 'x = (y − 1)²', expr: 'x = (y - 1)^2', mode: 'parabola', nameEn: 'Horizontal parabola (x = (y − 1)²)', nameKm: 'ប៉ារ៉ាបូលដេក (x = (y − 1)²)' },
+  { label: 'x² = 8y', expr: 'x^2 = 8y', mode: 'parabola', nameEn: 'Focus-directrix form (x² = 8y, p = 2)', nameKm: 'ទម្រង់កំណុំ x² = 8y (p = 2)' },
+  { label: 'y² = 4x', expr: 'y^2 = 4x', mode: 'parabola', nameEn: 'Standard horizontal (y² = 4px, p = 1)', nameKm: 'ប៉ារ៉ាបូលដេកស្តង់ដា (y² = 4x)' },
+  { label: 'x = y² − 4', expr: 'x = y^2 - 4', mode: 'parabola', nameEn: 'Horizontal translated (x = y² − 4)', nameKm: 'ប៉ារ៉ាបូលដេករំកិល (x = y² − 4)' },
+
+  // Ellipse examples (Section 3)
+  { label: 'x²/9 + y²/4 = 1', expr: 'x^2/9 + y^2/4 = 1', mode: 'ellipse', nameEn: 'Standard horizontal ellipse (a = 3, b = 2)', nameKm: 'អេលីបដេក (a = 3, b = 2)' },
+  { label: 'x²/16 + y²/9 = 1', expr: 'x^2/16 + y^2/9 = 1', mode: 'ellipse', nameEn: 'Horizontal ellipse (a = 4, b = 3)', nameKm: 'អេលីបដេក (a = 4, b = 3)' },
+  { label: '(x − 2)²/25 + (y + 1)²/9 = 1', expr: '(x - 2)^2/25 + (y + 1)^2/9 = 1', mode: 'ellipse', nameEn: 'Translated horizontal ellipse C(2, −1)', nameKm: 'អេលីបរំកិល C(2, −1)' },
+  { label: '(x − 1)²/4 + (y − 2)²/16 = 1', expr: '(x - 1)^2/4 + (y - 2)^2/16 = 1', mode: 'ellipse', nameEn: 'Translated vertical ellipse C(1, 2)', nameKm: 'អេលីបឈររំកិល C(1, 2)' },
+  { label: '(y²)/25 + x² = 25', expr: '(y^2)/25 + x^2 = 25', mode: 'ellipse', nameEn: 'Vertical ellipse (a = 25, b = 5)', nameKm: 'អេលីបឈរ (a = 25, b = 5)', suggestedRange: 30 },
+  { label: 'x²/25 + y²/9 = 1', expr: 'x^2/25 + y^2/9 = 1', mode: 'ellipse', nameEn: 'Horizontal ellipse (a = 5, b = 3)', nameKm: 'អេលីបដេក (a = 5, b = 3)' },
+
+  // Circle examples
+  { label: 'x² + y² = 4', expr: 'x^2 + y^2 = 4', mode: 'circle', nameEn: 'Standard circle (R = 2)', nameKm: 'រង្វង់ស្តង់ដា (R = 2)' },
+  { label: 'x² + y² = 25', expr: 'x^2 + y^2 = 25', mode: 'circle', nameEn: 'Standard circle (R = 5)', nameKm: 'រង្វង់ស្តង់ដា (R = 5)' },
+  { label: '(x − 2)² + (y + 3)² = 16', expr: '(x - 2)^2 + (y + 3)^2 = 16', mode: 'circle', nameEn: 'Translated circle C(2, −3), R = 4', nameKm: 'រង្វង់រំកិល C(2, −3), R = 4' },
+
+  // Hyperbola examples
+  { label: 'x²/9 − y²/4 = 1', expr: 'x^2/9 - y^2/4 = 1', mode: 'hyperbola', nameEn: 'Standard horizontal hyperbola', nameKm: 'អ៊ីពែបូលដេក (a = 3, b = 2)' },
+  { label: '(y²)/25 − x² = 1', expr: '(y^2)/25 - x^2 = 1', mode: 'hyperbola', nameEn: 'Standard vertical hyperbola', nameKm: 'អ៊ីពែបូលឈរ (a = 5, b = 1)' },
+  { label: 'x² − y² = 4', expr: 'x^2 - y^2 = 4', mode: 'hyperbola', nameEn: 'Equilateral hyperbola (x² − y² = 4)', nameKm: 'អ៊ីពែបូលសម័ង្ស (x² − y² = 4)' },
+  { label: '(x − 2)²/16 − (y + 1)²/9 = 1', expr: '(x - 2)^2/16 - (y + 1)^2/9 = 1', mode: 'hyperbola', nameEn: 'Translated hyperbola C(2, −1)', nameKm: 'អ៊ីពែបូលរំកិល C(2, −1)' },
+
+  // Basic functions
+  { label: 'y = x + 2', expr: 'y = x + 2', mode: 'functions', nameEn: 'Linear function (Line)', nameKm: 'អនុគមន៍លីនេអ៊ែរ' },
+  { label: 'y = 1 / x', expr: 'y = 1 / x', mode: 'functions', nameEn: 'Rational function (1/x)', nameKm: 'អនុគមន៍ប្រភាគ (1/x)' },
+  { label: 'y = sin(x)', expr: 'y = sin(x)', mode: 'functions', nameEn: 'Sine wave', nameKm: 'អនុគមន៍ស៊ីនុស' },
+  { label: 'y = √(x + 4)', expr: 'y = sqrt(x + 4)', mode: 'functions', nameEn: 'Square root', nameKm: 'អនុគមន៍ឫសការេ' },
+  { label: 'y = |x − 2| − 1', expr: 'y = |x - 2| - 1', mode: 'functions', nameEn: 'Absolute value (V-shape)', nameKm: 'អនុគមន៍តម្លៃដាច់ខាត' },
+]
+
+const MODES: { id: ConicMode; nameEn: string; nameKm: string }[] = [
+  { id: 'all', nameEn: 'All Types', nameKm: 'ទាំងអស់' },
+  { id: 'parabola', nameEn: 'Parabola', nameKm: 'ប៉ារ៉ាបូល' },
+  { id: 'ellipse', nameEn: 'Ellipse', nameKm: 'អេលីប' },
+  { id: 'circle', nameEn: 'Circle', nameKm: 'រង្វង់' },
+  { id: 'hyperbola', nameEn: 'Hyperbola', nameKm: 'អ៊ីពែបូល' },
+  { id: 'functions', nameEn: 'Basic Functions', nameKm: 'អនុគមន៍មូលដ្ឋាន' },
 ]
 
 /** The parser reports English diagnostics; mirror them for the Khmer interface. */
@@ -58,8 +100,10 @@ function translateParseError(message: string): string {
 
 export default function GraphPage() {
   const { isKhmer, num } = useI18n()
-  const [equation, setEquation] = useState('y = x + 2')
-  const [rangePreset, setRangePreset] = useState<number>(10)
+  const [equation, setEquation] = useState('y = x^2')
+  const [activeMode, setActiveMode] = useState<ConicMode>('all')
+  const [viewportCenter, setViewportCenter] = useState<{ x: number; y: number }>({ x: 0, y: 0 })
+  const [zoomSpan, setZoomSpan] = useState<number>(10)
   const [tracerX, setTracerX] = useState(1)
   const [showTable, setShowTable] = useState(true)
 
@@ -68,13 +112,55 @@ export default function GraphPage() {
   const { parsedEq, analysis, parseError } = useMemo(() => {
     try {
       const parsed = parseEquation(equation)
-      const analyzed = analyzeEquation(parsed, equation, [-rangePreset, rangePreset])
+      const analyzed = analyzeEquation(parsed, equation, [
+        viewportCenter.x - zoomSpan,
+        viewportCenter.x + zoomSpan,
+      ])
       return { parsedEq: parsed, analysis: analyzed, parseError: null }
     } catch (err: unknown) {
       const raw = err instanceof Error ? err.message : 'Invalid formula expression'
       return { parsedEq: null, analysis: null, parseError: isKhmer ? translateParseError(raw) : raw }
     }
-  }, [equation, rangePreset, isKhmer])
+  }, [equation, viewportCenter, zoomSpan, isKhmer])
+
+  const handlePan = useCallback((dx: number, dy: number) => {
+    setViewportCenter((prev) => ({
+      x: Math.round((prev.x + dx) * 100) / 100,
+      y: Math.round((prev.y + dy) * 100) / 100,
+    }))
+  }, [])
+
+  const handleZoom = useCallback((factor: number) => {
+    setZoomSpan((prev) => Math.max(2, Math.min(100, Math.round(prev * factor * 10) / 10)))
+  }, [])
+
+  const handleZoomIn = () => setZoomSpan((prev) => Math.max(2, Math.round(prev * 0.75 * 10) / 10))
+  const handleZoomOut = () => setZoomSpan((prev) => Math.min(100, Math.round(prev * 1.33 * 10) / 10))
+
+  const handleAutoFit = () => {
+    if (analysis?.suggestedRange) {
+      setZoomSpan(analysis.suggestedRange)
+    }
+    if (analysis?.conic?.center) {
+      setViewportCenter({ x: analysis.conic.center.x, y: analysis.conic.center.y })
+    } else if (analysis?.conic?.vertex) {
+      setViewportCenter({ x: analysis.conic.vertex.x, y: analysis.conic.vertex.y })
+    } else {
+      setViewportCenter({ x: 0, y: 0 })
+    }
+  }
+
+  const handleReset = () => {
+    setEquation('y = x + 2')
+    setViewportCenter({ x: 0, y: 0 })
+    setZoomSpan(10)
+    setTracerX(1)
+  }
+
+  const filteredPresets = useMemo(() => {
+    if (activeMode === 'all') return PRESETS
+    return PRESETS.filter((p) => p.mode === activeMode)
+  }, [activeMode])
 
   const graphSpec = useMemo<GraphSpec | null>(() => {
     if (!parsedEq || !analysis) return null
@@ -82,7 +168,12 @@ export default function GraphPage() {
     const points: GraphPoint[] = []
     const lines: GraphLine[] = []
 
-    // 1. Conic points and lines
+    const x0 = viewportCenter.x - zoomSpan
+    const x1 = viewportCenter.x + zoomSpan
+    const y0 = viewportCenter.y - zoomSpan
+    const y1 = viewportCenter.y + zoomSpan
+
+    // 1. Conic points and reference lines
     if (analysis.conic) {
       const conic = analysis.conic
 
@@ -158,7 +249,7 @@ export default function GraphPage() {
         })
       }
 
-      // Parabola directrix & axis of symmetry
+      // Parabola directrix line
       if (conic.directrix) {
         lines.push({
           kind: conic.directrix.axis === 'x' ? 'vertical' : 'horizontal',
@@ -171,12 +262,14 @@ export default function GraphPage() {
           dashed: true,
         })
       }
+
+      // Parabola axis of symmetry
       if (conic.axisOfSymmetry) {
         lines.push({
           kind: conic.axisOfSymmetry.axis === 'x' ? 'vertical' : 'horizontal',
           at: conic.axisOfSymmetry.val,
           label: pick(
-            `Axis ${conic.axisOfSymmetry.axis} = ${conic.axisOfSymmetry.val}`,
+            `Axis of symmetry ${conic.axisOfSymmetry.axis} = ${conic.axisOfSymmetry.val}`,
             `អ័ក្សឆ្លុះ ${conic.axisOfSymmetry.axis} = ${num(conic.axisOfSymmetry.val)}`,
           ),
           color: 3,
@@ -184,12 +277,66 @@ export default function GraphPage() {
         })
       }
 
+      // Ellipse major axis line segment
+      if (conic.type === 'ellipse' && conic.vertices && conic.vertices.length >= 2) {
+        lines.push({
+          kind: 'segment',
+          from: [conic.vertices[0].x, conic.vertices[0].y],
+          to: [conic.vertices[1].x, conic.vertices[1].y],
+          label: pick(
+            `Major axis (2a = ${conic.majorAxis?.length ?? 0})`,
+            `អ័ក្សធំ (2a = ${num(conic.majorAxis?.length ?? 0)})`,
+          ),
+          color: 1,
+          dashed: true,
+        })
+      }
+
+      // Ellipse minor axis line segment
+      if (conic.type === 'ellipse' && conic.coVertices && conic.coVertices.length >= 2) {
+        lines.push({
+          kind: 'segment',
+          from: [conic.coVertices[0].x, conic.coVertices[0].y],
+          to: [conic.coVertices[1].x, conic.coVertices[1].y],
+          label: pick(
+            `Minor axis (2b = ${conic.minorAxis?.length ?? 0})`,
+            `អ័ក្សតូច (2b = ${num(conic.minorAxis?.length ?? 0)})`,
+          ),
+          color: 3,
+          dashed: true,
+        })
+      }
+
+      // Ellipse directrices (if within viewport)
+      if (conic.type === 'ellipse') {
+        for (const dir of conic.directrices ?? []) {
+          const val = dir.val
+          if (dir.axis === 'x' && val >= x0 - 2 && val <= x1 + 2) {
+            lines.push({
+              kind: 'vertical',
+              at: val,
+              label: pick(`Directrix x = ${val}`, `បន្ទាត់ប្រាប់ទិស x = ${num(val)}`),
+              color: 2,
+              dashed: true,
+            })
+          } else if (dir.axis === 'y' && val >= y0 - 2 && val <= y1 + 2) {
+            lines.push({
+              kind: 'horizontal',
+              at: val,
+              label: pick(`Directrix y = ${val}`, `បន្ទាត់ប្រាប់ទិស y = ${num(val)}`),
+              color: 2,
+              dashed: true,
+            })
+          }
+        }
+      }
+
       // Hyperbola asymptotes
       for (const asy of conic.asymptotes ?? []) {
         lines.push({
           kind: 'line',
-          from: [-rangePreset, asy.fn(-rangePreset)],
-          to: [rangePreset, asy.fn(rangePreset)],
+          from: [x0, asy.fn(x0)],
+          to: [x1, asy.fn(x1)],
           label: asy.label,
           color: 3,
           dashed: true,
@@ -210,7 +357,7 @@ export default function GraphPage() {
 
       // X-intercepts
       for (const rx of analysis.xIntercepts) {
-        if (rx >= -rangePreset && rx <= rangePreset) {
+        if (rx >= x0 && rx <= x1) {
           points.push({
             x: rx,
             y: 0,
@@ -226,7 +373,7 @@ export default function GraphPage() {
       if (analysis.vertex) {
         const vx = analysis.vertex.x
         const vy = analysis.vertex.y
-        if (vx >= -rangePreset && vx <= rangePreset && vy >= -rangePreset && vy <= rangePreset) {
+        if (vx >= x0 && vx <= x1 && vy >= y0 && vy <= y1) {
           points.push({
             x: vx,
             y: vy,
@@ -242,7 +389,7 @@ export default function GraphPage() {
     // Interactive Tracer Point for explicit y=f(x)
     if (parsedEq.fn1D) {
       const tracerY = parsedEq.fn1D(tracerX)
-      if (Number.isFinite(tracerY) && tracerY >= -rangePreset * 1.5 && tracerY <= rangePreset * 1.5) {
+      if (Number.isFinite(tracerY) && tracerY >= y0 * 1.5 && tracerY <= y1 * 1.5) {
         points.push({
           x: Math.round(tracerX * 100) / 100,
           y: Math.round(tracerY * 100) / 100,
@@ -256,9 +403,10 @@ export default function GraphPage() {
 
     const clean = cleanEquationInput(equation)
 
-    // Determine curves, parametric or implicit representation
+    // Smooth curve representation:
+    // 1. Explicit 1D functions (y = f(x)) are evaluated smoothly across the domain
     const curves =
-      parsedEq.type === 'explicit_y' && parsedEq.fn1D && !analysis.isConic
+      parsedEq.type === 'explicit_y' && parsedEq.fn1D
         ? [
             {
               fn: parsedEq.fn1D,
@@ -268,22 +416,23 @@ export default function GraphPage() {
           ]
         : []
 
+    // 2. Explicit horizontal functions (x = g(y)) are drawn parametrically
     const parametric =
       parsedEq.type === 'explicit_x' && parsedEq.fnX
         ? [
             {
               x: (t: number) => parsedEq.fnX!(t),
               y: (t: number) => t,
-              t: [-rangePreset, rangePreset] as [number, number],
+              t: [y0, y1] as [number, number],
               label: equation,
               color: 1 as const,
             },
           ]
         : []
 
-    // For conics or implicit equations, use Marching Squares implicit contour rendering
+    // 3. Implicit 2D equations (ellipses, hyperbolas, circles, general F(x,y)=0)
     const implicit =
-      parsedEq.type === 'implicit' || analysis.isConic || (parsedEq.type === 'explicit_x' && parametric.length === 0)
+      parsedEq.type === 'implicit' || (parsedEq.type === 'explicit_x' && parametric.length === 0)
         ? [
             {
               fn: parsedEq.fn2D,
@@ -293,19 +442,19 @@ export default function GraphPage() {
           ]
         : []
 
-    const xStep = rangePreset >= 25 ? 5 : rangePreset >= 15 ? 2 : 1
-    const yStep = rangePreset >= 25 ? 5 : rangePreset >= 15 ? 2 : 1
+    const span = zoomSpan * 2
+    const step = span > 40 ? 5 : span > 20 ? 2 : span > 8 ? 1 : 0.5
 
     return {
       id: 'dynamic-graph-plotter',
       title: `Graph of ${clean}`,
       titleKm: `ក្រាហ្វនៃ ${clean}`,
-      caption: `Exact coordinate plane graph with domain [−${rangePreset}, ${rangePreset}].`,
-      captionKm: `ប្លង់កូអ័រដោនេពិតប្រាកដក្នុងដែនកំណត់ [−${rangePreset}, ${rangePreset}]។`,
-      xRange: [-rangePreset, rangePreset],
-      yRange: [-rangePreset, rangePreset],
-      xStep,
-      yStep,
+      caption: `Exact coordinate plane graph with domain [${formatVal(x0)}, ${formatVal(x1)}].`,
+      captionKm: `ប្លង់កូអ័រដោនេពិតប្រាកដក្នុងដែនកំណត់ [${formatVal(x0)}, ${formatVal(x1)}]។`,
+      xRange: [x0, x1],
+      yRange: [y0, y1],
+      xStep: step,
+      yStep: step,
       equalScale: true,
       curves,
       parametric,
@@ -313,7 +462,7 @@ export default function GraphPage() {
       lines,
       points,
     }
-  }, [parsedEq, analysis, equation, rangePreset, tracerX, pick, num])
+  }, [parsedEq, analysis, equation, viewportCenter, zoomSpan, tracerX, pick, num])
 
   const tracerYVal = parsedEq?.fn1D ? parsedEq.fn1D(tracerX) : NaN
 
@@ -327,13 +476,34 @@ export default function GraphPage() {
         eyebrow={pick('Interactive Tool · Grades 7–12 · Conics', 'ឧបករណ៍អន្តរកម្ម · ថ្នាក់ទី៧–១២ · កោនិក')}
         title={pick('Interactive Function & Conics Grapher', 'ម៉ាស៊ីនគូសក្រាហ្វ អនុគមន៍ និងកោនិក')}
         intro={pick(
-          'Input any explicit or implicit equation including lines, parabolas (y = x² − 4, y² = 4x), hyperbolas (x² − y² = 4), ellipses ((y²)/25 + x² = 25), circles, and trigonometric functions to plot exact Cartesian graphs with complete geometric elements.',
-          'បញ្ចូលសមីការទូទៅ ឬស្តង់ដាររួមមាន បន្ទាត់ ប៉ារ៉ាបូល (ឈរ ឬដេក y² = 4x) អ៊ីពែបូល (x² − y² = 4) អេលីប ((y²)/25 + x² = 25) រង្វង់ និងអនុគមន៍ត្រីកោណមាត្រ ដើម្បីបង្កើតក្រាហ្វកូអ័រដោនេ និងធាតុធរណីមាត្រពេញលេញ។',
+          'Input any explicit or implicit equation including parabolas (y = x², x² = 8y, y² = 4x), ellipses (x²/9 + y²/4 = 1, (x−2)²/25 + (y+1)²/9 = 1), circles, hyperbolas, and functions. Features pan, zoom, coordinate inspection, and authentic Cambodian MoEYS geometric properties.',
+          'បញ្ចូលសមីការទូទៅ ឬស្តង់ដាររួមមាន ប៉ារ៉ាបូល (y = x², x² = 8y, y² = 4x) អេលីប (x²/9 + y²/4 = 1, (x−2)²/25 + (y+1)²/9 = 1) រង្វង់ អ៊ីពែបូល និងអនុគមន៍នានា។ មានមុខងារអូសរំកិល ពង្រីកបង្រួម មើលកូអ័រដោនេ និងគណនាលក្ខណៈធរណីមាត្រតាមកម្មវិធីសិក្សាជាតិ។',
         )}
       />
 
       <div className="page-wrap graph-page__content">
-        {/* Top Control Bar: Equation Input & Preset Chips */}
+        {/* Conic Sections Mode Selector Tabs */}
+        <nav className="graph-mode-nav" aria-label={pick('Conic Sections Mode', 'ប្រភេទក្រាហ្វ និងកោនិក')}>
+          <div className="graph-mode-selector" role="tablist">
+            {MODES.map((m) => (
+              <button
+                key={m.id}
+                type="button"
+                role="tab"
+                aria-selected={activeMode === m.id}
+                onClick={() => setActiveMode(m.id)}
+                className={`graph-mode-tab${activeMode === m.id ? ' is-active' : ''}`}
+              >
+                <span className="graph-mode-tab__name">{pick(m.nameEn, m.nameKm)}</span>
+                <span className="graph-mode-tab__count">
+                  {m.id === 'all' ? PRESETS.length : PRESETS.filter((p) => p.mode === m.id).length}
+                </span>
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        {/* Top Control Bar: Equation Input & Filtered Preset Chips */}
         <section className="graph-controls-panel" aria-labelledby="controls-heading">
           <h2 id="controls-heading" className="visually-hidden">
             {pick('Equation Controls', 'ផ្ទាំងបញ្ជាសមីការ')}
@@ -344,7 +514,7 @@ export default function GraphPage() {
               <span className="graph-input-label__icon">
                 <IconFunction size={18} />
               </span>
-              <span>{pick('Enter Equation or Expression (e.g. conics, parabolas, hyperbolas):', 'បញ្ចូលសមីការ ឬកន្សោមគណិតវិទ្យា (កោនិក ប៉ារ៉ាបូល អ៊ីពែបូល អេលីប)៖')}</span>
+              <span>{pick('Enter Equation or Expression (e.g. conics, parabolas, ellipses, hyperbolas):', 'បញ្ចូលសមីការ ឬកន្សោមគណិតវិទ្យា (កោនិក ប៉ារ៉ាបូល អេលីប អ៊ីពែបូល)៖')}</span>
             </label>
 
             <div className="graph-input-row">
@@ -354,7 +524,7 @@ export default function GraphPage() {
                   type="text"
                   value={equation}
                   onChange={(e) => setEquation(e.target.value)}
-                  placeholder={pick('e.g. (y^2)/25 + x^2 = 25, y^2 = 4x, x^2 - y^2 = 4', 'ឧ. (y^2)/25 + x^2 = 25, y^2 = 4x, x^2 - y^2 = 4')}
+                  placeholder={pick('e.g. y = x^2, x^2 = 8y, x^2/9 + y^2/4 = 1, (x-2)^2/25 + (y+1)^2/9 = 1', 'ឧ. y = x^2, x^2 = 8y, x^2/9 + y^2/4 = 1')}
                   className={`graph-input-field${parseError ? ' has-error' : ''}`}
                   autoComplete="off"
                   spellCheck="false"
@@ -385,18 +555,23 @@ export default function GraphPage() {
               </div>
             )}
 
-            {/* Preset chips */}
+            {/* Filtered Preset chips */}
             <div className="graph-presets-bar">
-              <span className="graph-presets-label">{pick('Presets:', 'គំរូសមីការ៖')}</span>
+              <span className="graph-presets-label">
+                {pick(
+                  `Presets (${activeMode === 'all' ? 'All' : MODES.find((m) => m.id === activeMode)?.nameEn}):`,
+                  `គំរូសមីការ (${activeMode === 'all' ? 'ទាំងអស់' : MODES.find((m) => m.id === activeMode)?.nameKm})៖`,
+                )}
+              </span>
               <div className="graph-presets-list">
-                {PRESETS.map((preset) => (
+                {filteredPresets.map((preset) => (
                   <button
                     key={preset.expr}
                     type="button"
                     onClick={() => {
                       setEquation(preset.expr)
-                      if (preset.expr.includes('/25') || preset.expr.includes('25')) {
-                        setRangePreset(30)
+                      if (preset.suggestedRange) {
+                        setZoomSpan(preset.suggestedRange)
                       }
                     }}
                     className={`preset-chip${equation.trim() === preset.expr ? ' is-active' : ''}`}
@@ -407,36 +582,101 @@ export default function GraphPage() {
                 ))}
               </div>
             </div>
+
+            {/* Educational Quick Reference Card for Selected Mode */}
+            {activeMode === 'parabola' && (
+              <div className="graph-mode-guide">
+                <div className="graph-mode-guide__header">
+                  <strong>{pick('Parabola Quick Reference', 'មេរៀនសង្ខេបស្តីពីប៉ារ៉ាបូល')}</strong>
+                  <span className="graph-mode-guide__badge">{pick('Grades 10–12 MoEYS', 'ថ្នាក់ទី១០–១២')}</span>
+                </div>
+                <div className="graph-mode-guide__grid">
+                  <div className="graph-mode-guide__col">
+                    <span className="guide-title">{pick('Vertical Parabola (អ័ក្សឈរ)', 'ប៉ារ៉ាបូលឈរ')}</span>
+                    <code>(x − h)² = 4p(y − k)</code>
+                    <p>{pick('Vertex V(h, k) · Focus F(h, k+p) · Directrix y = k−p · Axis x = h', 'កំពូល V(h, k) · កំណុំ F(h, k+p) · បន្ទាត់ប្រាប់ទិស y = k−p')}</p>
+                  </div>
+                  <div className="graph-mode-guide__col">
+                    <span className="guide-title">{pick('Horizontal Parabola (អ័ក្សដេក)', 'ប៉ារ៉ាបូលដេក')}</span>
+                    <code>(y − k)² = 4p(x − h)</code>
+                    <p>{pick('Vertex V(h, k) · Focus F(h+p, k) · Directrix x = h−p · Axis y = k', 'កំពូល V(h, k) · កំណុំ F(h+p, k) · បន្ទាត់ប្រាប់ទិស x = h−p')}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeMode === 'ellipse' && (
+              <div className="graph-mode-guide">
+                <div className="graph-mode-guide__header">
+                  <strong>{pick('Ellipse Quick Reference', 'មេរៀនសង្ខេបស្តីពីអេលីប')}</strong>
+                  <span className="graph-mode-guide__badge">{pick('Grade 12 MoEYS', 'ថ្នាក់ទី១២')}</span>
+                </div>
+                <div className="graph-mode-guide__grid">
+                  <div className="graph-mode-guide__col">
+                    <span className="guide-title">{pick('Horizontal Ellipse (a > b)', 'អេលីបមានអ័ក្សធំដេក')}</span>
+                    <code>(x − h)²/a² + (y − k)²/b² = 1</code>
+                    <p>{pick('Center C(h, k) · Foci (h±c, k) · Vertices (h±a, k) · c² = a² − b²', 'ផ្ចិត C(h, k) · កំណុំ F(h±c, k) · កំពូល V(h±a, k)')}</p>
+                  </div>
+                  <div className="graph-mode-guide__col">
+                    <span className="guide-title">{pick('Vertical Ellipse (a > b)', 'អេលីបមានអ័ក្សធំឈរ')}</span>
+                    <code>(y − k)²/a² + (x − h)²/b² = 1</code>
+                    <p>{pick('Center C(h, k) · Foci (h, k±c) · Vertices (h, k±a) · Eccentricity e = c/a < 1', 'ផ្ចិត C(h, k) · កំណុំ F(h, k±c) · អ៊ិចសង់ទ្រីស៊ីតេ e = c/a')}</p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* Main Grid: Graph Visualizer on Left/Center, Key Metrics on Right */}
+        {/* Main Grid: Interactive Graph on Left/Center, Key Metrics on Right */}
         <div className="graph-grid-layout">
           {/* Main Visualizer Figure */}
           <div className="graph-viewport-column">
             <div className="graph-viewport-card">
-              {/* Toolbar above the graph: Zoom/Range & Grid */}
+              {/* Toolbar above the graph: Zoom, Range, Auto-fit & Reset */}
               <div className="graph-toolbar">
                 <div className="graph-toolbar__group">
                   <span className="graph-toolbar__label">
                     <IconZoom size={14} />
-                    <span>{pick('Grid Viewport:', 'ទំហំដែនក្រឡា៖')}</span>
+                    <span>{pick('Viewport Controls:', 'ពង្រីក/បង្រួម និងដែនក្រឡា៖')}</span>
                   </span>
+
                   <div className="graph-toolbar__btn-group">
+                    <button
+                      type="button"
+                      onClick={handleZoomIn}
+                      className="graph-range-btn graph-zoom-btn"
+                      title={pick('Zoom in (+)', 'ពង្រីក (+)')}
+                      aria-label={pick('Zoom in', 'ពង្រីក')}
+                    >
+                      +
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleZoomOut}
+                      className="graph-range-btn graph-zoom-btn"
+                      title={pick('Zoom out (−)', 'បង្រួម (−)')}
+                      aria-label={pick('Zoom out', 'បង្រួម')}
+                    >
+                      −
+                    </button>
                     {([6, 10, 15, 30] as const).map((r) => (
                       <button
                         key={r}
                         type="button"
-                        onClick={() => setRangePreset(r)}
-                        className={`graph-range-btn${rangePreset === r ? ' is-active' : ''}`}
+                        onClick={() => {
+                          setZoomSpan(r)
+                          setViewportCenter({ x: 0, y: 0 })
+                        }}
+                        className={`graph-range-btn${zoomSpan === r && viewportCenter.x === 0 && viewportCenter.y === 0 ? ' is-active' : ''}`}
                       >
                         ±{num(r)}
                       </button>
                     ))}
-                    {analysis?.suggestedRange && analysis.suggestedRange !== rangePreset && (
+                    {analysis?.suggestedRange && analysis.suggestedRange !== zoomSpan && (
                       <button
                         type="button"
-                        onClick={() => setRangePreset(analysis.suggestedRange!)}
+                        onClick={handleAutoFit}
                         className="graph-range-btn is-suggested"
                         title={pick(
                           `Auto-fit to ±${analysis.suggestedRange}`,
@@ -451,11 +691,7 @@ export default function GraphPage() {
 
                 <button
                   type="button"
-                  onClick={() => {
-                    setEquation('y = x + 2')
-                    setRangePreset(10)
-                    setTracerX(1)
-                  }}
+                  onClick={handleReset}
                   className="graph-reset-btn"
                   title={pick('Reset to y = x + 2', 'កំណត់ឡើងវិញ y = x + 2')}
                 >
@@ -464,10 +700,20 @@ export default function GraphPage() {
                 </button>
               </div>
 
-              {/* Render the Exact SVG Graph */}
+              {/* Pan & Drag Instruction Note */}
+              <div className="graph-interaction-hint" aria-hidden="true">
+                <span>{pick('💡 Tip: Drag to pan · Scroll to zoom · Hover to inspect coordinates', '💡 ជំនួយ៖ អូសដើម្បីរំកិល · រមូរដើម្បីពង្រីកបង្រួម · ដាក់កណ្តុរលើដើម្បីមើលកូអ័រដោនេ')}</span>
+              </div>
+
+              {/* Render the Exact SVG Graph with Pan/Drag/Hover enabled */}
               {graphSpec ? (
                 <div className="graph-render-wrapper">
-                  <Graph spec={graphSpec} />
+                  <Graph
+                    spec={graphSpec}
+                    interactive
+                    onPan={handlePan}
+                    onZoom={handleZoom}
+                  />
                 </div>
               ) : (
                 <div className="graph-empty-state">
@@ -475,7 +721,7 @@ export default function GraphPage() {
                 </div>
               )}
 
-              {/* Interactive Tracer Slider */}
+              {/* Interactive Tracer Slider for 1D Functions */}
               {parsedEq?.fn1D && (
                 <div className="graph-tracer-box">
                   <div className="graph-tracer-header">
@@ -492,8 +738,8 @@ export default function GraphPage() {
                   </div>
                   <input
                     type="range"
-                    min={-rangePreset}
-                    max={rangePreset}
+                    min={viewportCenter.x - zoomSpan}
+                    max={viewportCenter.x + zoomSpan}
                     step={0.5}
                     value={tracerX}
                     onChange={(e) => setTracerX(parseFloat(e.target.value))}
@@ -501,9 +747,9 @@ export default function GraphPage() {
                     aria-label={pick('Move tracer x along graph', 'រំកិលចំណុច x លើក្រាហ្វ')}
                   />
                   <div className="graph-tracer-scale">
-                    <span>−{rangePreset}</span>
-                    <span>0</span>
-                    <span>+{rangePreset}</span>
+                    <span>{formatVal(viewportCenter.x - zoomSpan)}</span>
+                    <span>{formatVal(viewportCenter.x)}</span>
+                    <span>{formatVal(viewportCenter.x + zoomSpan)}</span>
                   </div>
                 </div>
               )}
@@ -544,7 +790,7 @@ export default function GraphPage() {
                     </li>
                   )}
 
-                  {/* Conic Center or Vertex */}
+                  {/* Conic Center */}
                   {analysis.conic?.center && (
                     <li className="graph-prop-item">
                       <span className="graph-prop-item__label">{pick('Center C(h, k)', 'ផ្ចិត C(h, k)')}</span>
@@ -554,6 +800,7 @@ export default function GraphPage() {
                     </li>
                   )}
 
+                  {/* Vertex for Parabola */}
                   {analysis.conic?.vertex && (
                     <li className="graph-prop-item">
                       <span className="graph-prop-item__label">{pick('Vertex V(h, k)', 'កំពូល V(h, k)')}</span>
@@ -563,7 +810,26 @@ export default function GraphPage() {
                     </li>
                   )}
 
-                  {/* Focus / Foci */}
+                  {/* Opening Direction for Parabola */}
+                  {analysis.conic?.openingDirection && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Opening Direction', 'ទិសបែរខ្នង')}</span>
+                      <strong className="graph-prop-item__val">
+                        {pick(
+                          analysis.conic.openingDirection === 'upward'
+                            ? 'Upward (U-shape)'
+                            : analysis.conic.openingDirection === 'downward'
+                              ? 'Downward'
+                              : analysis.conic.openingDirection === 'right'
+                                ? 'To the right (positive x)'
+                                : 'To the left (negative x)',
+                          analysis.conic.openingDirectionKm ?? '',
+                        )}
+                      </strong>
+                    </li>
+                  )}
+
+                  {/* Focus for Parabola */}
                   {analysis.conic?.focus && (
                     <li className="graph-prop-item">
                       <span className="graph-prop-item__label">{pick('Focus F', 'កំណុំ F')}</span>
@@ -573,6 +839,7 @@ export default function GraphPage() {
                     </li>
                   )}
 
+                  {/* Foci for Ellipse / Hyperbola */}
                   {analysis.conic?.foci && analysis.conic.foci.length > 0 && (
                     <li className="graph-prop-item">
                       <span className="graph-prop-item__label">{pick('Foci F₁, F₂', 'កំណុំ F₁, F₂')}</span>
@@ -588,6 +855,16 @@ export default function GraphPage() {
                       <span className="graph-prop-item__label">{pick('Vertices V₁, V₂', 'កំពូល V₁, V₂')}</span>
                       <strong className="graph-prop-item__val graph-prop-item__val--gold">
                         {analysis.conic.vertices.map((v, i) => `V${num(i + 1)}(${num(v.x)}, ${num(v.y)})`).join('; ')}
+                      </strong>
+                    </li>
+                  )}
+
+                  {/* Co-vertices for Ellipse */}
+                  {analysis.conic?.coVertices && analysis.conic.coVertices.length > 0 && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Co-vertices B₁, B₂', 'កំពូលអ័ក្សតូច B₁, B₂')}</span>
+                      <strong className="graph-prop-item__val">
+                        {analysis.conic.coVertices.map((b, i) => `B${num(i + 1)}(${num(b.x)}, ${num(b.y)})`).join('; ')}
                       </strong>
                     </li>
                   )}
@@ -612,6 +889,58 @@ export default function GraphPage() {
                     </li>
                   )}
 
+                  {/* Parameter p and Latus Rectum for Parabola */}
+                  {analysis.conic?.p !== undefined && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Focal Parameter & Latus Rectum', 'ប៉ារ៉ាម៉ែត្រកំណុំ និងឡាទុសរ៉ិចទុម')}</span>
+                      <strong className="graph-prop-item__val">
+                        p = {num(analysis.conic.p)}, |4p| = {num(analysis.conic.latusRectum ?? Math.abs(analysis.conic.p * 4))}
+                      </strong>
+                    </li>
+                  )}
+
+                  {/* Major and Minor Axes for Ellipse */}
+                  {analysis.conic?.majorAxis && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Major Axis (2a)', 'អ័ក្សធំ (2a)')}</span>
+                      <strong className="graph-prop-item__val graph-prop-item__val--blue">
+                        {analysis.conic.majorAxis.line} (2a = {num(analysis.conic.majorAxis.length)})
+                      </strong>
+                    </li>
+                  )}
+
+                  {analysis.conic?.minorAxis && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Minor Axis (2b)', 'អ័ក្សតូច (2b)')}</span>
+                      <strong className="graph-prop-item__val">
+                        {analysis.conic.minorAxis.line} (2b = {num(analysis.conic.minorAxis.length)})
+                      </strong>
+                    </li>
+                  )}
+
+                  {/* Semi-axes & Eccentricity */}
+                  {analysis.conic?.a !== undefined && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Semi-axes (a, b) & Eccentricity', 'ពាក់កណ្ដាលអ័ក្ស (a, b) និងអ៊ិចសង់ទ្រីស៊ីតេ')}</span>
+                      <strong className="graph-prop-item__val">
+                        a = {num(analysis.conic.a)}, b = {num(analysis.conic.b ?? 0)}{' '}
+                        {analysis.conic.e !== undefined && (
+                          <span className="graph-prop-sub">(e = {num(analysis.conic.e)})</span>
+                        )}
+                      </strong>
+                    </li>
+                  )}
+
+                  {/* Directrices for Ellipse */}
+                  {analysis.conic?.directrices && analysis.conic.directrices.length > 0 && (
+                    <li className="graph-prop-item">
+                      <span className="graph-prop-item__label">{pick('Directrices', 'បន្ទាត់ប្រាប់ទិស')}</span>
+                      <strong className="graph-prop-item__val">
+                        {analysis.conic.directrices.map((d) => `${d.axis} = ${num(d.val)}`).join('; ')}
+                      </strong>
+                    </li>
+                  )}
+
                   {/* Asymptotes for Hyperbola */}
                   {analysis.conic?.asymptotes && analysis.conic.asymptotes.length > 0 && (
                     <li className="graph-prop-item">
@@ -622,15 +951,12 @@ export default function GraphPage() {
                     </li>
                   )}
 
-                  {/* Semi-axes & Eccentricity */}
-                  {analysis.conic?.a !== undefined && (
+                  {/* Domain & Range */}
+                  {analysis.conic?.domain && (
                     <li className="graph-prop-item">
-                      <span className="graph-prop-item__label">{pick('Semi-axes (a, b)', 'ពាក់កណ្ដាលអ័ក្ស (a, b)')}</span>
+                      <span className="graph-prop-item__label">{pick('Domain & Range', 'ដែនកំណត់ និងសំណុំតម្លៃ')}</span>
                       <strong className="graph-prop-item__val">
-                        a = {num(analysis.conic.a)}, b = {num(analysis.conic.b ?? 0)}{' '}
-                        {analysis.conic.e !== undefined && (
-                          <span className="graph-prop-sub">(e = {num(analysis.conic.e)})</span>
-                        )}
+                        D = {analysis.conic.domain}, R = {analysis.conic.range}
                       </strong>
                     </li>
                   )}
@@ -753,7 +1079,14 @@ export default function GraphPage() {
                           <td className="col-notes">
                             {row.label ? (
                               <span className="tag-pill tag-pill--blue">
-                                {pick(row.label, row.label === 'Vertex' ? 'កំពូល' : row.label === 'y-intercept' ? 'កាត់អ័ក្ស y' : 'កាត់អ័ក្ស x')}
+                                {pick(
+                                  row.label,
+                                  row.label === 'Vertex'
+                                    ? 'កំពូល'
+                                    : row.label === 'y-intercept'
+                                      ? 'កាត់អ័ក្ស y'
+                                      : 'កាត់អ័ក្ស x',
+                                )}
                               </span>
                             ) : isYInt ? (
                               <span className="tag-pill tag-pill--blue">
@@ -779,4 +1112,9 @@ export default function GraphPage() {
       </div>
     </div>
   )
+}
+
+function formatVal(v: number): string {
+  const rounded = Math.round(v * 100) / 100
+  return Object.is(rounded, -0) ? '0' : String(rounded)
 }

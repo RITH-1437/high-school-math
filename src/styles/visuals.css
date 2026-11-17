@@ -222,6 +222,16 @@
   font-family: var(--font-sans);
 }
 
+.graph__svg.is-interactive {
+  cursor: crosshair;
+  touch-action: none;
+  user-select: none;
+}
+
+.graph__svg.is-dragging {
+  cursor: grabbing;
+}
+
 .graph__grid line {
   stroke: var(--plot-grid);
   stroke-width: 1;

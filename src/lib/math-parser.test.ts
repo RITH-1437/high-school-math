@@ -233,4 +233,175 @@ describe('parseEquation and conic sections', () => {
     expect(analysis.stepsKm[0]).toContain('ទម្រង់ស្តង់ដាអេលីប')
     expect(analysis.stepsKm[2]).toContain('ចម្ងាយពីផ្ចិតទៅកំណុំ')
   })
+
+  describe('Parabola verification (Section 2 & 11)', () => {
+    it('detects standard vertical parabola y = x^2', () => {
+      const parsed = parseEquation('y = x^2')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic).not.toBeNull()
+      expect(conic?.type).toBe('parabola')
+      expect(conic?.orientation).toBe('vertical')
+      expect(conic?.openingDirection).toBe('upward')
+      expect(conic?.vertex).toEqual({ x: 0, y: 0 })
+      expect(conic?.focus).toEqual({ x: 0, y: 0.25 })
+      expect(conic?.directrix).toEqual({ axis: 'y', val: -0.25 })
+      expect(conic?.axisOfSymmetry).toEqual({ axis: 'x', val: 0 })
+      expect(conic?.p).toBe(0.25)
+      expect(conic?.latusRectum).toBe(1)
+      expect(conic?.range).toBe('[0, +∞)')
+    })
+
+    it('detects vertical parabola y = 2x^2 - 4', () => {
+      const parsed = parseEquation('y = 2x^2 - 4')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic?.type).toBe('parabola')
+      expect(conic?.orientation).toBe('vertical')
+      expect(conic?.vertex).toEqual({ x: 0, y: -4 })
+      expect(conic?.p).toBe(0.13)
+      expect(conic?.openingDirection).toBe('upward')
+      expect(conic?.axisOfSymmetry).toEqual({ axis: 'x', val: 0 })
+    })
+
+    it('detects translated vertex form y = (x - 2)^2 + 3', () => {
+      const parsed = parseEquation('y = (x - 2)^2 + 3')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic).not.toBeNull()
+      expect(conic?.vertex).toEqual({ x: 2, y: 3 })
+      expect(conic?.openingDirection).toBe('upward')
+      expect(conic?.axisOfSymmetry).toEqual({ axis: 'x', val: 2 })
+      expect(conic?.focus).toEqual({ x: 2, y: 3.25 })
+      expect(conic?.directrix).toEqual({ axis: 'y', val: 2.75 })
+      expect(conic?.p).toBe(0.25)
+      expect(conic?.latusRectum).toBe(1)
+      expect(conic?.range).toBe('[3, +∞)')
+    })
+
+    it('detects horizontal parabola x = (y - 1)^2', () => {
+      const parsed = parseEquation('x = (y - 1)^2')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic?.type).toBe('parabola')
+      expect(conic?.orientation).toBe('horizontal')
+      expect(conic?.vertex).toEqual({ x: 0, y: 1 })
+      expect(conic?.focus).toEqual({ x: 0.25, y: 1 })
+      expect(conic?.directrix).toEqual({ axis: 'x', val: -0.25 })
+      expect(conic?.axisOfSymmetry).toEqual({ axis: 'y', val: 1 })
+      expect(conic?.openingDirection).toBe('right')
+      expect(conic?.domain).toBe('[0, +∞)')
+    })
+
+    it('detects focus-directrix vertical parabola x^2 = 8y', () => {
+      const parsed = parseEquation('x^2 = 8y')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic?.type).toBe('parabola')
+      expect(conic?.orientation).toBe('vertical')
+      expect(conic?.vertex).toEqual({ x: 0, y: 0 })
+      expect(conic?.p).toBe(2)
+      expect(conic?.focus).toEqual({ x: 0, y: 2 })
+      expect(conic?.directrix).toEqual({ axis: 'y', val: -2 })
+      expect(conic?.axisOfSymmetry).toEqual({ axis: 'x', val: 0 })
+      expect(conic?.latusRectum).toBe(8)
+      expect(conic?.openingDirection).toBe('upward')
+    })
+  })
+
+  describe('Ellipse verification (Section 3 & 11)', () => {
+    it('detects standard horizontal ellipse x^2/9 + y^2/4 = 1', () => {
+      const parsed = parseEquation('x^2/9 + y^2/4 = 1')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic).not.toBeNull()
+      expect(conic?.type).toBe('ellipse')
+      expect(conic?.orientation).toBe('horizontal')
+      expect(conic?.center).toEqual({ x: 0, y: 0 })
+      expect(conic?.a).toBe(3)
+      expect(conic?.b).toBe(2)
+      expect(conic?.majorAxis?.length).toBe(6)
+      expect(conic?.minorAxis?.length).toBe(4)
+      expect(conic?.vertices).toEqual([
+        { x: -3, y: 0 },
+        { x: 3, y: 0 },
+      ])
+      expect(conic?.coVertices).toEqual([
+        { x: 0, y: -2 },
+        { x: 0, y: 2 },
+      ])
+      expect(conic?.c).toBeCloseTo(Math.sqrt(5), 2)
+      expect(conic?.e).toBeCloseTo(Math.sqrt(5) / 3, 2)
+    })
+
+    it('detects horizontal ellipse x^2/16 + y^2/9 = 1', () => {
+      const parsed = parseEquation('x^2/16 + y^2/9 = 1')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic?.type).toBe('ellipse')
+      expect(conic?.a).toBe(4)
+      expect(conic?.b).toBe(3)
+      expect(conic?.majorAxis?.length).toBe(8)
+      expect(conic?.minorAxis?.length).toBe(6)
+      expect(conic?.c).toBeCloseTo(Math.sqrt(7), 2)
+    })
+
+    it('detects translated horizontal ellipse (x-2)^2/25 + (y+1)^2/9 = 1', () => {
+      const parsed = parseEquation('(x-2)^2/25 + (y+1)^2/9 = 1')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic?.type).toBe('ellipse')
+      expect(conic?.orientation).toBe('horizontal')
+      expect(conic?.center).toEqual({ x: 2, y: -1 })
+      expect(conic?.a).toBe(5)
+      expect(conic?.b).toBe(3)
+      expect(conic?.c).toBe(4)
+      expect(conic?.e).toBe(0.8)
+      expect(conic?.vertices).toEqual([
+        { x: -3, y: -1 },
+        { x: 7, y: -1 },
+      ])
+      expect(conic?.coVertices).toEqual([
+        { x: 2, y: -4 },
+        { x: 2, y: 2 },
+      ])
+      expect(conic?.foci).toEqual([
+        { x: -2, y: -1 },
+        { x: 6, y: -1 },
+      ])
+      expect(conic?.majorAxis?.line).toBe('y = -1')
+      expect(conic?.minorAxis?.line).toBe('x = 2')
+    })
+
+    it('detects translated vertical ellipse (x-1)^2/4 + (y-2)^2/16 = 1', () => {
+      const parsed = parseEquation('(x-1)^2/4 + (y-2)^2/16 = 1')
+      const conic = detectConic(parsed.fn2D)
+      expect(conic?.type).toBe('ellipse')
+      expect(conic?.orientation).toBe('vertical')
+      expect(conic?.center).toEqual({ x: 1, y: 2 })
+      expect(conic?.a).toBe(4)
+      expect(conic?.b).toBe(2)
+      expect(conic?.c).toBeCloseTo(Math.sqrt(12), 2)
+      expect(conic?.vertices).toEqual([
+        { x: 1, y: -2 },
+        { x: 1, y: 6 },
+      ])
+      expect(conic?.coVertices).toEqual([
+        { x: -1, y: 2 },
+        { x: 3, y: 2 },
+      ])
+      expect(conic?.majorAxis?.line).toBe('x = 1')
+      expect(conic?.minorAxis?.line).toBe('y = 2')
+    })
+
+    it('detects circle x^2 + y^2 = 4 and x^2 + y^2 = 25', () => {
+      const c1 = detectConic(parseEquation('x^2 + y^2 = 4').fn2D)
+      expect(c1?.type).toBe('circle')
+      expect(c1?.radius).toBe(2)
+
+      const c2 = detectConic(parseEquation('x^2 + y^2 = 25').fn2D)
+      expect(c2?.type).toBe('circle')
+      expect(c2?.radius).toBe(5)
+    })
+  })
+
+  describe('Degenerate and non-conics', () => {
+    it('returns null for empty or non-quadratic curves', () => {
+      expect(detectConic(parseEquation('x^2 + y^2 = -5').fn2D)).toBeNull()
+      expect(detectConic(parseEquation('y = x^3').fn2D)).toBeNull()
+      expect(detectConic(parseEquation('y = sin(x)').fn2D)).toBeNull()
+    })
+  })
 })
