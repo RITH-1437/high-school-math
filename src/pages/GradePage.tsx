@@ -43,6 +43,7 @@ export default function GradePage() {
         ]}
         eyebrow={t('common.gradeN', { n: grade.number })}
         title={copy.tagline}
+        titlePrefix={`${t('common.gradeN', { n: grade.number })}:`}
         wideTitle
         intro={copy.description}
         meta={

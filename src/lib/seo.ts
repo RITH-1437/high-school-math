@@ -206,6 +206,16 @@ function siteIdentityLd(description: string): Record<string, unknown>[] {
 /* Route resolution                                                    */
 /* ------------------------------------------------------------------ */
 
+/** Formula titles reused by more than one formula in the same grade (disambiguated with the topic). */
+const AMBIGUOUS_FORMULA_TITLES = (() => {
+  const counts = new Map<string, number>()
+  for (const ref of formulaRefs) {
+    const key = `${ref.grade.id}|${ref.formula.title.toLowerCase()}`
+    counts.set(key, (counts.get(key) ?? 0) + 1)
+  }
+  return new Set([...counts].filter(([, count]) => count > 1).map(([key]) => key))
+})()
+
 const HOME: Crumb = { name: 'Home', path: '/' }
 const GRADES: Crumb = { name: 'Grades', path: '/grades' }
 
@@ -257,9 +267,8 @@ export function notFoundMeta(pathname: string): RouteMeta {
 
 export function homeDescription(): string {
   return (
-    `Free English and Khmer (ភាសាខ្មែរ) mathematics library for Cambodian students in Grades 7–12: ` +
-    `${libraryStats.formulaCount} formulas, ${libraryStats.topicCount} lessons with worked examples and exercises, ` +
-    `BacII exam guides and an interactive Shape Lab.`
+    `Free Khmer & English math library for Cambodian students in Grades 7–12: ${libraryStats.formulaCount} formulas, ` +
+    `${libraryStats.topicCount} lessons with worked examples, exercises, BacII guides and a Shape Lab.`
   )
 }
 
@@ -387,7 +396,11 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
       const description = `${formula.title} (${grade.title} ${topic.title}): ${toPlainText(formula.description)}`
       return page(
         formulaPath,
-        withBrand(`${formula.title} — ${grade.title} Formula`),
+        withBrand(
+          AMBIGUOUS_FORMULA_TITLES.has(`${grade.id}|${formula.title.toLowerCase()}`)
+            ? `${formula.title} (${topic.title}) — ${grade.title}`
+            : `${formula.title} — ${grade.title} Formula`,
+        ),
         description,
         [
           HOME,

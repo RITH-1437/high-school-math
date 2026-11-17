@@ -4,44 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#102A56" />
-    <meta
-      name="description"
-      content="High School Math is a modern mathematics library for Grades 7–12: formulas, theory, worked examples, exercises, and an interactive Shape Lab."
-    />
     <meta name="color-scheme" content="light dark" />
     <meta name="google-site-verification" content="1iTKwNVl9rQdavMT2BrVnM1tq3mf3-RB2G0A5yN48hE" />
     <meta name="msvalidate.01" content="EBCA5D7316B137603F51B6A3C9BA9265" />
+    <!--
+      Route-specific tags. In production every page's region is replaced at
+      build time by scripts/prerender.ts; at runtime <SeoHead> keeps them in
+      sync. The defaults below describe the home page (used by `npm run dev`).
+    -->
+    <!--seo:start-->
+    <title>High School Math — Grade 7–12 Mathematics for Cambodian Students</title>
+    <meta
+      name="description"
+      content="Free English and Khmer mathematics library for Cambodian students in Grades 7–12: formulas, lessons with worked examples and exercises, BacII exam guides and an interactive Shape Lab."
+    />
+    <meta name="robots" content="index,follow" />
     <link rel="canonical" href="https://math-high-school.vercel.app/" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <meta property="og:site_name" content="High School Math" />
     <meta property="og:type" content="website" />
+    <meta property="og:title" content="High School Math — Grade 7–12 Mathematics for Cambodian Students" />
     <meta property="og:url" content="https://math-high-school.vercel.app/" />
-    <meta property="og:title" content="High School Math — Formulas, Theory &amp; Shapes, Grades 7–12" />
-    <meta
-      property="og:description"
-      content="High School Math is a modern mathematics library for Grades 7–12: formulas, theory, worked examples, exercises, and an interactive Shape Lab."
-    />
-    <meta property="og:image" content="https://math-high-school.vercel.app/img/pi.png" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="High School Math — Formulas, Theory &amp; Shapes, Grades 7–12" />
-    <meta
-      name="twitter:description"
-      content="High School Math is a modern mathematics library for Grades 7–12: formulas, theory, worked examples, exercises, and an interactive Shape Lab."
-    />
-    <meta name="twitter:image" content="https://math-high-school.vercel.app/img/pi.png" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "High School Math",
-        "url": "https://math-high-school.vercel.app/",
-        "description": "High School Math is a modern mathematics library for Grades 7–12: formulas, theory, worked examples, exercises, and an interactive Shape Lab."
+    <meta property="og:image" content="https://math-high-school.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!--seo:end-->
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/icons/pi-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/pi-192.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/pi-96.png" data-theme-icon />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <style>
+      /* Prerendered first paint: show static content without entrance animations. */
+      html[data-boot] .page-enter,
+      html[data-boot] .hero__rise {
+        animation: none !important;
       }
-    </script>
-    <link rel="icon" type="image/png" href="/img/pi.png" />
-    <link rel="icon" type="image/png" sizes="128x128" href="/img/pi.png" />
-    <link rel="icon" type="image/png" sizes="64x64" href="/img/pi.png" />
-    <link rel="apple-touch-icon" href="/img/pi.png" />
-    <title>High School Math — Formulas, Theory &amp; Shapes, Grades 7–12</title>
+      html[data-boot] .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      /* Static HTML is English; Khmer readers wait for the client render instead of a language flash. */
+      html[data-lang='km'] [data-ssr] {
+        visibility: hidden;
+      }
+    </style>
     <script>
       // Apply the saved theme and language before first paint to avoid a flash.
       (function () {
@@ -52,11 +60,8 @@
           document.documentElement.setAttribute('data-theme', theme)
           var meta = document.querySelector('meta[name="theme-color"]')
           if (meta) meta.setAttribute('content', theme === 'dark' ? '#091B38' : '#102A56')
-          var iconHref = theme === 'dark' ? '/img/white-pi.png' : '/img/pi.png'
-          var iconLinks = document.querySelectorAll('link[rel*="icon"], link[rel="apple-touch-icon"]')
-          for (var i = 0; i < iconLinks.length; i++) {
-            iconLinks[i].setAttribute('href', iconHref)
-          }
+          var themeIcon = document.querySelector('link[data-theme-icon]')
+          if (themeIcon) themeIcon.setAttribute('href', theme === 'dark' ? '/icons/pi-dark-96.png' : '/icons/pi-96.png')
         } catch (error) {
           document.documentElement.setAttribute('data-theme', 'light')
         }
@@ -73,7 +78,7 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -98,6 +98,9 @@ export const km: Record<TranslationKey, string> = {
   'footer.exploreGeometry': 'ស្វែងយល់ធរណីមាត្រ',
   'footer.workedFormula': 'រូបមន្តគំរូដំណោះស្រាយ',
   'footer.glossary': 'វចនានុក្រមគណិតវិទ្យាខ្មែរ',
+  'footer.grapher': 'ម៉ាស៊ីនគូសក្រាហ្វ',
+  'footer.baciiGuide': 'មគ្គុទ្ទេសក៍ប្រឡងបាក់ឌុប',
+  'footer.examPapers': 'មន្ទីរពិសោធន៍ប្រឡង',
   'footer.copyright': '© {year} High School Math។ សម្រាប់ចិត្តចង់ដឹង។',
   'footer.meta': 'ថ្នាក់ទី៧–១២ · ខ្មែរ និង English · ដំណើរការបានក្រោយពេលផ្ទុកដំបូង',
 
@@ -106,7 +109,7 @@ export const km: Record<TranslationKey, string> = {
   'home.kickerText': 'អនុវិទ្យាល័យ–វិទ្យាល័យ · ថ្នាក់ទី៧–១២',
   'home.titleA': 'ស្វែងយល់គណិតវិទ្យា។',
   'home.titleB': 'យល់ច្បាស់គ្រប់រូបមន្ត។',
-  'home.titleSr': 'រូបមន្តគណិតវិទ្យាសំខាន់ៗសម្រាប់ការសិក្សាអនុវិទ្យាល័យ និងវិទ្យាល័យកម្ពុជា',
+  'home.titleSr': 'High School Math៖ រូបមន្តគណិតវិទ្យាសំខាន់ៗសម្រាប់ការសិក្សាអនុវិទ្យាល័យ និងវិទ្យាល័យកម្ពុជា ថ្នាក់ទី៧–១២',
   'home.lead':
     'រៀនគណិតវិទ្យាតាមការពន្យល់ច្បាស់លាស់ រូបមន្តដែលបានផ្ទៀងផ្ទាត់ ឧទាហរណ៍ជាជំហានៗ និងធរណីមាត្រអន្តរកម្ម សម្រាប់ថ្នាក់ទី៧–១២ នៅកម្ពុជា។',
   'home.ctaGrades': 'ស្វែងយល់ថ្នាក់រៀន',

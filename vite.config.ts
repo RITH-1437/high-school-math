@@ -2,6 +2,7 @@ import { defineConfig, type Plugin } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { generateSitemap } from './scripts/generate-sitemap'
+import { prerender } from './scripts/prerender'
 
 function sitemapPlugin(): Plugin {
   return {
@@ -10,9 +11,11 @@ function sitemapPlugin(): Plugin {
     buildStart() {
       generateSitemap()
     },
-    closeBundle() {
+    async closeBundle() {
       const distDir = path.resolve(__dirname, './dist')
-      generateSitemap(distDir)
+      const sitemap = generateSitemap(distDir)
+      const result = await prerender(distDir, __dirname)
+      console.log(`[seo] sitemap: ${sitemap.count} URLs · prerendered ${result.count} pages + 404.html in ${result.ms} ms`)
     },
   }
 }
@@ -26,6 +29,7 @@ export default defineConfig({
   },
   build: {
     target: 'es2020',
+    manifest: true,
     cssCodeSplit: true,
     rollupOptions: {
       output: {

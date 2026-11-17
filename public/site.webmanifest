@@ -1,0 +1,16 @@
+{
+  "name": "High School Math",
+  "short_name": "HS Math",
+  "description": "Mathematics formulas, lessons and exercises for Grades 7–12, in English and Khmer.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F0",
+  "theme_color": "#102A56",
+  "lang": "en",
+  "icons": [
+    { "src": "/icons/pi-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/pi-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/pi-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

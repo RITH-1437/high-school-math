@@ -42,6 +42,15 @@ export function Footer() {
               <li>
                 <Link to="/glossary">{t('footer.glossary')}</Link>
               </li>
+              <li>
+                <Link to="/graph">{t('footer.grapher')}</Link>
+              </li>
+              <li>
+                <Link to="/bacii">{t('footer.baciiGuide')}</Link>
+              </li>
+              <li>
+                <Link to="/exam">{t('footer.examPapers')}</Link>
+              </li>
             </ul>
           </div>
 

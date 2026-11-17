@@ -1,13 +1,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { grades } from '../src/data/index'
-import { shapes } from '../src/data/shapes'
+import { listIndexableRoutes, SITE_ORIGIN } from '../src/lib/seo'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-export const DEFAULT_PRODUCTION_ORIGIN = 'https://math-high-school.vercel.app'
+export const DEFAULT_PRODUCTION_ORIGIN = SITE_ORIGIN
 
 export interface SitemapEntry {
   path: string
@@ -15,52 +14,12 @@ export interface SitemapEntry {
   changefreq: string
 }
 
+/**
+ * Indexable URLs only. Utility pages (search, bookmarks) are `noindex` and
+ * deliberately excluded; the list is derived from content in src/lib/seo.ts.
+ */
 export function buildSitemapEntries(): SitemapEntry[] {
-  const entries: SitemapEntry[] = []
-
-  function add(urlPath: string, priority = '0.7', changefreq = 'weekly') {
-    const cleanPath = urlPath.startsWith('/') ? urlPath : `/${urlPath}`
-    if (!entries.some((e) => e.path === cleanPath)) {
-      entries.push({ path: cleanPath, priority, changefreq })
-    }
-  }
-
-  // 1. Core top-level pages
-  add('/', '1.0', 'daily')
-  add('/grades', '0.9', 'weekly')
-  add('/formulas', '0.9', 'weekly')
-  add('/shapes', '0.9', 'weekly')
-  add('/graph', '0.9', 'weekly')
-  add('/bacii', '0.9', 'weekly')
-  add('/bacii/science', '0.8', 'weekly')
-  add('/bacii/social', '0.8', 'weekly')
-  add('/exam', '0.9', 'weekly')
-  add('/glossary', '0.8', 'weekly')
-  add('/search', '0.7', 'weekly')
-
-  // 2. Grade pages & sub-routes
-  for (const grade of grades) {
-    add(`/grades/${grade.id}`, '0.8', 'weekly')
-
-    for (const subject of grade.subjects) {
-      add(`/grades/${grade.id}/subjects/${subject.id}`, '0.8', 'weekly')
-
-      for (const topic of subject.topics) {
-        add(`/grades/${grade.id}/subjects/${subject.id}/topics/${topic.id}`, '0.7', 'weekly')
-
-        for (const formula of topic.formulas) {
-          add(`/formulas/${formula.id}`, '0.7', 'weekly')
-        }
-      }
-    }
-  }
-
-  // 3. Shape Lab detail pages
-  for (const shape of shapes) {
-    add(`/shapes/${shape.id}`, '0.6', 'monthly')
-  }
-
-  return entries
+  return listIndexableRoutes()
 }
 
 export function generateSitemapXml(

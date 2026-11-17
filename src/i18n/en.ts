@@ -95,6 +95,9 @@ export const en = {
   'footer.exploreGeometry': 'Explore geometry',
   'footer.workedFormula': 'A worked formula',
   'footer.glossary': 'Khmer maths glossary',
+  'footer.grapher': 'Function & conics grapher',
+  'footer.baciiGuide': 'BacII exam guide',
+  'footer.examPapers': 'Exam practice papers',
   'footer.copyright': '© {year} High School Math. Made for curious minds.',
   'footer.meta': 'Grades 7–12 · Khmer and English · Works offline after first load',
 
@@ -103,7 +106,7 @@ export const en = {
   'home.kickerText': 'Cambodian secondary · Grades 7–12',
   'home.titleA': 'Explore Mathematics.',
   'home.titleB': 'Understand Every Formula.',
-  'home.titleSr': 'Essential mathematics formulas for Cambodian secondary education',
+  'home.titleSr': 'High School Math: essential mathematics formulas for Cambodian secondary education, Grades 7–12',
   'home.lead':
     'Learn mathematics through clear explanations, verified formulas, step-by-step examples, and interactive geometry for Cambodian Grades 7–12.',
   'home.ctaGrades': 'Explore Grades',
