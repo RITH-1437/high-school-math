@@ -5,7 +5,7 @@ import { FormulaCard } from '../components/ui/FormulaCard'
 import { PageHero } from '../components/ui/PageHero'
 import { RichText } from '../components/ui/Math'
 import { TopicRow } from '../components/ui/TopicRow'
-import { familyLabelFor, subjectCopy, topicCopy } from '../i18n/content'
+import { familyLabelFor, subjectCopy, theoremCopy, topicCopy } from '../i18n/content'
 import { useI18n } from '../lib/i18n'
 import NotFoundPage from './NotFoundPage'
 
@@ -113,19 +113,22 @@ export default function SubjectPage() {
               </div>
             </div>
             <div className="theorem-list">
-              {subject.theorems.map((theorem) => (
-                <article key={theorem.title} className="theorem">
-                  <h3>{theorem.title}</h3>
-                  <p>
-                    <RichText text={theorem.statement} />
-                  </p>
-                  {theorem.note && (
-                    <p className="muted" style={{ marginTop: '0.5rem', fontSize: '0.88rem' }}>
-                      <RichText text={theorem.note} />
+              {subject.theorems.map((rawTheorem) => {
+                const theorem = theoremCopy(subject.id, rawTheorem, language)
+                return (
+                  <article key={rawTheorem.title} className="theorem">
+                    <h3>{theorem.title}</h3>
+                    <p>
+                      <RichText text={theorem.statement} />
                     </p>
-                  )}
-                </article>
-              ))}
+                    {theorem.note && (
+                      <p className="muted" style={{ marginTop: '0.5rem', fontSize: '0.88rem' }}>
+                        <RichText text={theorem.note} />
+                      </p>
+                    )}
+                  </article>
+                )
+              })}
             </div>
           </div>
         </section>

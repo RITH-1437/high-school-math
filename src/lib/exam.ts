@@ -1,6 +1,8 @@
 import { getGrade, grades } from '../data'
 import { isNumericAnswerCorrect } from './format'
 import type { Exercise, GradeId, Topic } from '../types/content'
+import { exerciseContent, kmTopicEntry } from '../i18n/content'
+import type { Language } from '../i18n/types'
 import type {
   ExamAttempt,
   ExamGradeClassification,
@@ -114,6 +116,7 @@ interface GenerateExamOptions {
   gradeId?: GradeId
   examType?: ExamType
   seed?: number
+  language?: Language
 }
 
 interface SectionBlueprint {
@@ -338,8 +341,13 @@ export function generateExamPaper(options: GenerateExamOptions = {}): ExamPaper 
         subjectTitle: item.subjectTitle,
         marks: mark,
       }
+      const localizedExercise =
+        options.language === 'km'
+          ? exerciseContent(item.exercise, kmTopicEntry(item.topic.id)?.exercises?.[item.exercise.id])
+          : item.exercise
+
       return {
-        ...item.exercise,
+        ...localizedExercise,
         ...meta,
       } as ExamQuestion
     })

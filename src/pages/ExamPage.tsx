@@ -32,8 +32,9 @@ export default function ExamPage() {
       gradeId,
       examType: getRecommendedExamType(gradeId),
       seed,
+      language: isKhmer ? 'km' : 'en',
     })
-  }, [gradeId, seed])
+  }, [gradeId, seed, isKhmer])
 
   // Interactive testing state
   const [currentIndex, setCurrentIndex] = useState(0)

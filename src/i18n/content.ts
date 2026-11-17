@@ -4,6 +4,8 @@ import { kmGrade9 } from './km/grade9'
 import { kmGrade10 } from './km/grade10'
 import { kmGrade11 } from './km/grade11'
 import { kmGrade12 } from './km/grade12'
+import { kmTheorems } from './theorems-km'
+import { localizeVariable } from './variables-km'
 import type {
   CommonMistake,
   ExampleStep,
@@ -3025,24 +3027,25 @@ export function formulaCopy(formula: Formula, language: Language): FormulaCopy {
 export function formulaContent(formula: Formula, language: Language): Formula {
   if (language !== 'km') return formula
   const km = kmFormulaContent[formula.id]
-  if (!km) return formula
 
   return {
     ...formula,
-    title: km.title ?? formula.title,
-    description: km.description ?? formula.description,
-    spoken: km.spoken ?? formula.spoken,
-    conditions: km.conditions ?? formula.conditions,
-    notes: km.notes ?? formula.notes,
+    title: km?.title ?? formula.title,
+    description: km?.description ?? formula.description,
+    spoken: km?.spoken ?? formula.spoken,
+    conditions: km?.conditions ?? formula.conditions,
+    notes: km?.notes ?? formula.notes,
     variables: formula.variables.map((v) => {
-      const kv = km.variables?.[v.symbol]
-      if (!kv) return v
-      return {
-        ...v,
-        name: kv.name,
-        note: kv.note !== undefined ? kv.note : v.note,
-        unit: kv.unit !== undefined ? kv.unit : v.unit,
+      const kv = km?.variables?.[v.symbol]
+      if (kv) {
+        return {
+          ...v,
+          name: kv.name,
+          note: kv.note !== undefined ? kv.note : v.note,
+          unit: kv.unit !== undefined ? kv.unit : v.unit,
+        }
       }
+      return localizeVariable(v, language)
     }),
   }
 }
@@ -3090,7 +3093,7 @@ export function exerciseContent(exercise: Exercise, km: LocalizedExercise | unde
 
 export function theoremCopy(subjectId: string, theorem: Theorem, language: Language): Theorem {
   if (language !== 'km') return theorem
-  const km = KM_THEOREMS[`${subjectId}:${theorem.title}`]
+  const km = KM_THEOREMS[`${subjectId}:${theorem.title}`] ?? KM_THEOREMS[theorem.title] ?? kmTheorems[theorem.title]
   return km ? { ...theorem, ...km } : theorem
 }
 

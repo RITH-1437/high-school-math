@@ -4,6 +4,8 @@ import {
   enrichedGlossaryTerms,
   KHMER_CONSONANTS_ALPHABET,
   ENGLISH_ALPHABET,
+  etymologyLabel,
+  termDefinition,
   type EnrichedTerm,
   type IndexingSystem,
   type GlossaryViewMode,
@@ -583,7 +585,7 @@ export default function GlossaryPage() {
                             )}
                             {term.etymology && (
                               <span className="glossary-badge glossary-badge--etym">
-                                {term.etymology.label}
+                                {etymologyLabel(term.etymology, isKhmer)}
                               </span>
                             )}
                           </div>
@@ -607,9 +609,9 @@ export default function GlossaryPage() {
                           )}
 
                           {/* Definition & Context */}
-                          {term.note && (
+                          {termDefinition(term, isKhmer) && (
                             <div className="glossary-entry__definition" style={{ marginTop: '0.65rem' }}>
-                              <RichText text={term.note} />
+                              <RichText text={termDefinition(term, isKhmer)!} />
                             </div>
                           )}
                         </div>
@@ -713,7 +715,7 @@ export default function GlossaryPage() {
 
                     {term.etymology && (
                       <span className="glossary-badge glossary-badge--etym" style={{ marginBottom: '0.75rem' }}>
-                        {term.etymology.label}
+                        {etymologyLabel(term.etymology, isKhmer)}
                       </span>
                     )}
 
@@ -725,9 +727,9 @@ export default function GlossaryPage() {
                             <MathBlock tex={term.symbol} display={false} />
                           </div>
                         )}
-                        {term.note && (
+                        {termDefinition(term, isKhmer) && (
                           <div style={{ fontSize: '0.88rem', color: 'var(--muted)', lineHeight: 1.55 }}>
-                            <RichText text={term.note} />
+                            <RichText text={termDefinition(term, isKhmer)!} />
                           </div>
                         )}
                       </div>
