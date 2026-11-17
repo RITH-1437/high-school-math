@@ -102,11 +102,10 @@ export const en = {
   'footer.meta': 'Grades 7–12 · Khmer and English · Works offline after first load',
 
   /* Home ------------------------------------------------------------- */
-  'home.kickerBadge': 'For Cambodian students',
-  'home.kickerText': 'Cambodian secondary · Grades 7–12',
+  'home.kickerBadge': 'Math High School',
+  'home.kickerText': 'Grade 7–12 Mathematics for Cambodian Students',
   'home.titleA': 'Explore Mathematics.',
   'home.titleB': 'Understand Every Formula.',
-  'home.titleSr': 'High School Math: essential mathematics formulas for Cambodian secondary education, Grades 7–12',
   'home.lead':
     'Learn mathematics through clear explanations, verified formulas, step-by-step examples, and interactive geometry for Cambodian Grades 7–12.',
   'home.ctaGrades': 'Explore Grades',

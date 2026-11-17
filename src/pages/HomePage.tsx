@@ -111,28 +111,32 @@ export default function HomePage() {
           ))}
         </div>
         <div className="container hero__inner">
-          <div className="hero__rise" style={{ ['--i' as string]: 0 }}>
-            <span className="hero-kicker">
-              <span
-                className="badge badge--cultural"
-                style={{
-                  background: '#C83B45',
-                  color: '#FFFFFF',
-                  borderColor: 'transparent',
-                }}
-              >
-                {t('home.kickerBadge')}
-              </span>{' '}
-              {t('home.kickerText')}
+          <h1 className="hero__heading" style={{ margin: 0, padding: 0 }}>
+            <span className="hero__rise" style={{ ['--i' as string]: 0, display: 'inline-block' }}>
+              <span className="hero-kicker">
+                <span
+                  className="badge badge--cultural"
+                  style={{
+                    background: '#C83B45',
+                    color: '#FFFFFF',
+                    borderColor: 'transparent',
+                  }}
+                >
+                  {t('home.kickerBadge')}
+                </span>{' '}
+                {t('home.kickerText')}
+              </span>
             </span>
-          </div>
 
-          <h1 className="hero__title hero__rise" style={{ ['--i' as string]: 1 }}>
-            {t('home.titleA')}<br />
-            <span className="serif-italic hero__title-accent">
-              {t('home.titleB')}
+            <span
+              className="hero__title hero__rise"
+              style={{ ['--i' as string]: 1, display: 'block' }}
+            >
+              {t('home.titleA')}<br />
+              <span className="serif-italic hero__title-accent">
+                {t('home.titleB')}
+              </span>
             </span>
-            <span className="visually-hidden">{t('home.titleSr')}</span>
           </h1>
 
           <p className="hero__lead hero__rise" style={{ ['--i' as string]: 2 }}>

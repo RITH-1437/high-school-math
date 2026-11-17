@@ -167,4 +167,21 @@ describe('SEO & Sitemap generation', () => {
     expect(truncate('word '.repeat(80)).length).toBeLessThanOrEqual(158)
     expect(serializeJsonLd([{ name: '</script><script>' }])).not.toContain('</script>')
   })
+
+  it('prerendered home page has exactly one visible H1 with Math High School branding', () => {
+    const indexPath = path.resolve(__dirname, '../../dist/index.html')
+    if (fs.existsSync(indexPath)) {
+      const html = fs.readFileSync(indexPath, 'utf-8')
+      const h1Matches = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/gi) || []
+      expect(h1Matches.length).toBe(1)
+      const h1 = h1Matches[0]
+      expect(h1).toBeDefined()
+      if (!h1) return
+      expect(h1).toContain('Math High School')
+      expect(h1).toContain('Grade 7–12 Mathematics')
+      expect(h1).not.toContain('visually-hidden')
+      const plainText = h1.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+      expect(plainText.length).toBeLessThanOrEqual(150)
+    }
+  })
 })

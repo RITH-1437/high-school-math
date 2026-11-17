@@ -762,7 +762,8 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.document-title-block h1 {
+.document-title-block h1,
+.document-title-block h2 {
   font-size: 1.6rem;
   font-weight: 800;
   margin: 0 0 0.35rem;

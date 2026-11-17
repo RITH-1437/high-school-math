@@ -910,7 +910,7 @@ export default function ExamPage() {
 
             {/* Document Title & Meta Box */}
             <div className="document-title-block">
-              <h1>{paper.titleKm}</h1>
+              <h2>{paper.titleKm}</h2>
               <div style={{ fontSize: '1.05rem', color: '#475569', fontWeight: 600 }}>
                 {paper.title}
               </div>
