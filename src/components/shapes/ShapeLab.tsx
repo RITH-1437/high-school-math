@@ -56,7 +56,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
           {shape.category === '2d' ? (
             <Shape2D shape={shape} dimensions={dims} showLabels={showLabels} highlight={highlight} />
           ) : (
-            <Shape3D shape={shape} dimensions={dims} showLabels={showLabels} />
+            <Shape3D shape={shape} dimensions={dims} showLabels={showLabels} highlight={highlight} />
           )}
         </div>
         <div className="lab__toolbar">

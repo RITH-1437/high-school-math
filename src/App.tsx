@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import type { ComponentType } from 'react'
 import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { RootLayout } from './components/layout/RootLayout'
 import HomePage from './pages/HomePage'
@@ -12,11 +13,49 @@ import SearchPage from './pages/SearchPage'
 import BookmarksPage from './pages/BookmarksPage'
 import NotFoundPage from './pages/NotFoundPage'
 
-const ShapesPage = lazy(() => import('./pages/ShapesPage'))
-const ExamPage = lazy(() => import('./pages/ExamPage'))
-const GlossaryPage = lazy(() => import('./pages/GlossaryPage'))
-const BaciiPage = lazy(() => import('./pages/BaciiPage'))
-const GraphPage = lazy(() => import('./pages/GraphPage'))
+type PageModule = { default: ComponentType }
+
+/**
+ * `React.lazy` with an explicit preload. When a prerendered page boots, the
+ * matching chunk is loaded before the first client render so Suspense never
+ * swaps the static HTML for a loading spinner.
+ */
+function lazyPage(factory: () => Promise<PageModule>) {
+  let loaded: ComponentType | null = null
+  const Lazy = lazy(factory)
+  const preload = () =>
+    factory().then((module) => {
+      loaded = module.default
+    })
+  function Page() {
+    const Loaded = loaded
+    return Loaded ? <Loaded /> : <Lazy />
+  }
+  return Object.assign(Page, { preload })
+}
+
+const ShapesPage = lazyPage(() => import('./pages/ShapesPage'))
+const ExamPage = lazyPage(() => import('./pages/ExamPage'))
+const GlossaryPage = lazyPage(() => import('./pages/GlossaryPage'))
+const BaciiPage = lazyPage(() => import('./pages/BaciiPage'))
+const GraphPage = lazyPage(() => import('./pages/GraphPage'))
+
+const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
+  shapes: ShapesPage,
+  exam: ExamPage,
+  exams: ExamPage,
+  glossary: GlossaryPage,
+  bacii: BaciiPage,
+  graph: GraphPage,
+  plotter: GraphPage,
+}
+
+/** Loads the code-split page for a pathname, if it has one. Never rejects. */
+export function preloadRoute(pathname: string): Promise<void> {
+  const section = pathname.split('/').filter(Boolean)[0] ?? ''
+  const page = LAZY_SECTIONS[section]
+  return page ? page.preload().catch(() => undefined) : Promise.resolve()
+}
 
 function Loading() {
   return (

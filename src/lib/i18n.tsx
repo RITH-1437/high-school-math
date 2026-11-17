@@ -119,10 +119,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = language
     document.documentElement.setAttribute('data-lang', language)
-    document.title = t('meta.title')
-    const description = document.querySelector('meta[name="description"]')
-    if (description) description.setAttribute('content', t('meta.description'))
-  }, [language, t])
+    // Title, description and canonical are route-specific and owned by <SeoHead>.
+  }, [language])
 
   const num = useCallback((value: number | string) => localizeNumber(value, language), [language])
 

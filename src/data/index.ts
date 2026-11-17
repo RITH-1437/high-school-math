@@ -16,6 +16,7 @@ import { grade10 } from './grades/grade10'
 import { grade11 } from './grades/grade11'
 import { grade12 } from './grades/grade12'
 import { shapes } from './shapes'
+export { shapes }
 
 export const grades: Grade[] = [grade7, grade8, grade9, grade10, grade11, grade12]
 

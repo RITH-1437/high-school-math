@@ -10,7 +10,7 @@ export function BrandMark({ size = 36 }: { size?: number }) {
   const { theme } = useTheme()
   const { isKhmer } = useI18n()
   const isDark = theme === 'dark'
-  const logoSrc = isDark ? '/img/white-pi.png' : '/img/pi.png'
+  const logoSrc = isDark ? '/icons/white-pi-mark-96.png' : '/icons/pi-mark-96.png'
 
   return (
     <span

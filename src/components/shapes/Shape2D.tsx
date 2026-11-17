@@ -15,6 +15,7 @@ interface Guide2D {
   label?: string
   dimensionKey?: string
   offset?: Vec2
+  lineOffset?: Vec2
   dashed?: boolean
 }
 
@@ -64,7 +65,7 @@ function buildSpec(shape: Shape, dims: ShapeDimensions, language: Language = 'en
             to: { x: base, y: 0 },
             label: dimensionText(shape, dims, 'base'),
             dimensionKey: 'base',
-            offset: { x: 0, y: 22 },
+            offset: { x: 0, y: 24 },
           },
           {
             from: { x: apex, y: 0 },
@@ -73,6 +74,15 @@ function buildSpec(shape: Shape, dims: ShapeDimensions, language: Language = 'en
             dimensionKey: 'height',
             offset: { x: 20, y: 0 },
             dashed: true,
+          },
+          {
+            from: { x: 0, y: 0 },
+            to: { x: apex, y: 0 },
+            label: dimensionText(shape, dims, 'apexOffset'),
+            dimensionKey: 'apexOffset',
+            lineOffset: { x: 0, y: -10 },
+            offset: { x: 0, y: -14 },
+            dashed: false,
           },
         ],
       }
@@ -438,11 +448,11 @@ export function Shape2D({
       >
         <defs>
           <pattern id={`grid-${uid}`} width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(201,238,110,0.07)" strokeWidth="1" />
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(57, 120, 214, 0.12)" strokeWidth="1" />
           </pattern>
           <linearGradient id={`fill-${uid}`} x1="0" y1="0" x2="0.9" y2="1">
-            <stop offset="0%" stopColor="#c9ee6e" stopOpacity="0.17" />
-            <stop offset="100%" stopColor="#1b5c43" stopOpacity="0.2" />
+            <stop offset="0%" stopColor="#3978d6" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#102a56" stopOpacity="0.28" />
           </linearGradient>
         </defs>
         <rect width={viewWidth} height={viewHeight} fill={`url(#grid-${uid})`} opacity="0.85" />
@@ -451,7 +461,7 @@ export function Shape2D({
           <polygon
             points={pointsAttribute}
             fill={`url(#fill-${uid})`}
-            stroke="#e8f4cf"
+            stroke="#eaf2ff"
             strokeWidth="1.8"
             strokeLinejoin="round"
           />
@@ -462,7 +472,7 @@ export function Shape2D({
             cy={toScreen({ x: 0, y: 0 }).y}
             r={spec.circle.radius * scale}
             fill={`url(#fill-${uid})`}
-            stroke="#e8f4cf"
+            stroke="#eaf2ff"
             strokeWidth="1.8"
           />
         )}
@@ -470,7 +480,7 @@ export function Shape2D({
           <path
             d={`M ${toScreen({ x: -spec.semicircle.radius, y: 0 }).x} ${toScreen({ x: 0, y: 0 }).y} A ${spec.semicircle.radius * scale} ${spec.semicircle.radius * scale} 0 0 1 ${toScreen({ x: spec.semicircle.radius, y: 0 }).x} ${toScreen({ x: 0, y: 0 }).y} Z`}
             fill={`url(#fill-${uid})`}
-            stroke="#e8f4cf"
+            stroke="#eaf2ff"
             strokeWidth="1.8"
           />
         )}
@@ -480,16 +490,19 @@ export function Shape2D({
             cx={toScreen(spec.center).x}
             cy={toScreen(spec.center).y}
             r="3"
-            fill="#c9ee6e"
-            stroke="#0d1310"
+            fill="#38bdf8"
+            stroke="#091b38"
             strokeWidth="1"
           />
         )}
 
         {showLabels &&
           spec.guides.map((guide, index) => {
-            const start = toScreen(guide.from)
-            const end = toScreen(guide.to)
+            const startRaw = toScreen(guide.from)
+            const endRaw = toScreen(guide.to)
+            const lOff = guide.lineOffset ?? { x: 0, y: 0 }
+            const start = { x: startRaw.x + lOff.x, y: startRaw.y + lOff.y }
+            const end = { x: endRaw.x + lOff.x, y: endRaw.y + lOff.y }
             const midpoint = { x: (start.x + end.x) / 2, y: (start.y + end.y) / 2 }
             const labelPoint = {
               x: midpoint.x + (guide.offset?.x ?? 0),
@@ -503,10 +516,10 @@ export function Shape2D({
                   y1={start.y}
                   x2={end.x}
                   y2={end.y}
-                  stroke={isHighlighted ? '#e8ffab' : 'rgba(201,238,110,0.58)'}
-                  strokeWidth={isHighlighted ? 2.2 : 1}
+                  stroke={isHighlighted ? '#93c5fd' : '#38bdf8'}
+                  strokeWidth={isHighlighted ? 2.5 : 1.6}
                   strokeDasharray={guide.dashed ? '4 5' : undefined}
-                  opacity={guide.dashed ? 0.9 : 1}
+                  opacity={guide.dashed ? 0.95 : 1}
                 />
                 {guide.label && (
                   <text
@@ -514,8 +527,8 @@ export function Shape2D({
                     y={labelPoint.y}
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    fill={isHighlighted ? '#e8ffab' : '#f0eee3'}
-                    stroke="#0d1310"
+                    fill={isHighlighted ? '#bfdbfe' : '#eaf2ff'}
+                    stroke="#091b38"
                     strokeWidth="4"
                     paintOrder="stroke"
                     fontFamily="Inter Variable, Inter, sans-serif"
@@ -525,8 +538,8 @@ export function Shape2D({
                     {guide.label}
                   </text>
                 )}
-                <circle cx={start.x} cy={start.y} r="2" fill="rgba(201,238,110,.8)" />
-                <circle cx={end.x} cy={end.y} r="2" fill="rgba(201,238,110,.8)" />
+                <circle cx={start.x} cy={start.y} r={isHighlighted ? 3 : 2.2} fill={isHighlighted ? '#bfdbfe' : '#38bdf8'} />
+                <circle cx={end.x} cy={end.y} r={isHighlighted ? 3 : 2.2} fill={isHighlighted ? '#bfdbfe' : '#38bdf8'} />
               </g>
             )
           })}
@@ -553,8 +566,8 @@ export function Shape2DGlyph({ shape }: { shape: Shape }) {
     <svg viewBox="0 0 160 120" aria-hidden="true" focusable="false">
       <defs>
         <linearGradient id={`card-${uid}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#c9ee6e" stopOpacity=".18" />
-          <stop offset="100%" stopColor="#1b5c43" stopOpacity=".12" />
+          <stop offset="0%" stopColor="#3978d6" stopOpacity=".2" />
+          <stop offset="100%" stopColor="#102a56" stopOpacity=".15" />
         </linearGradient>
       </defs>
       {spec.polygon && (
@@ -572,14 +585,14 @@ export function Shape2DGlyph({ shape }: { shape: Shape }) {
             })
             .join(' ')}
           fill={`url(#card-${uid})`}
-          stroke="#c9ee6e"
+          stroke="#3978d6"
           strokeWidth="1.5"
           strokeLinejoin="round"
         />
       )}
-      {spec.circle && <circle cx="80" cy="60" r="37" fill={`url(#card-${uid})`} stroke="#c9ee6e" strokeWidth="1.5" />}
+      {spec.circle && <circle cx="80" cy="60" r="37" fill={`url(#card-${uid})`} stroke="#3978d6" strokeWidth="1.5" />}
       {spec.semicircle && (
-        <path d="M 42 74 A 38 38 0 0 1 118 74 Z" fill={`url(#card-${uid})`} stroke="#c9ee6e" strokeWidth="1.5" />
+        <path d="M 42 74 A 38 38 0 0 1 118 74 Z" fill={`url(#card-${uid})`} stroke="#3978d6" strokeWidth="1.5" />
       )}
     </svg>
   )

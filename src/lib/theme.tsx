@@ -13,13 +13,15 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
+/**
+ * Swaps only the theme-aware tab icon. The static square icons (favicon.ico,
+ * 48/96/192px PNGs, apple-touch-icon) stay fixed so search engines always see
+ * the same π favicon.
+ */
 function syncFavicons(theme: Theme) {
   if (typeof document === 'undefined') return
-  const iconHref = theme === 'dark' ? '/img/white-pi.png' : '/img/pi.png'
-  const iconLinks = document.querySelectorAll<HTMLLinkElement>(
-    'link[rel*="icon"], link[rel="apple-touch-icon"]'
-  )
-  iconLinks.forEach((link) => {
+  const iconHref = theme === 'dark' ? '/icons/pi-dark-96.png' : '/icons/pi-96.png'
+  document.querySelectorAll<HTMLLinkElement>('link[data-theme-icon]').forEach((link) => {
     link.href = iconHref
   })
 }

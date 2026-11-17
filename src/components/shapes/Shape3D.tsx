@@ -10,6 +10,7 @@ interface Guide {
   from: Vec3
   to: Vec3
   label: string
+  dimensionKey?: string
 }
 
 interface Mesh {
@@ -54,12 +55,12 @@ function boxMesh(l: number, h: number, w: number, mode: 'cube' | 'cuboid'): Mesh
   const guides: Guide[] =
     mode === 'cube'
       ? [
-          { from: [-x, -y, z], to: [x, -y, z], label: `a = ${formatNumber(l)}` },
+          { from: [-x, -y, z], to: [x, -y, z], label: `a = ${formatNumber(l)}`, dimensionKey: 'side' },
         ]
       : [
-          { from: [-x, -y, z], to: [x, -y, z], label: `l = ${formatNumber(l)}` },
-          { from: [x, -y, z], to: [x, y, z], label: `h = ${formatNumber(h)}` },
-          { from: [x, -y, -z], to: [x, -y, z], label: `w = ${formatNumber(w)}` },
+          { from: [-x, -y, z], to: [x, -y, z], label: `l = ${formatNumber(l)}`, dimensionKey: 'length' },
+          { from: [x, -y, z], to: [x, y, z], label: `h = ${formatNumber(h)}`, dimensionKey: 'height' },
+          { from: [x, -y, -z], to: [x, -y, z], label: `w = ${formatNumber(w)}`, dimensionKey: 'width' },
         ]
   return { vertices, faces, guides, labels: [] }
 }
@@ -103,7 +104,7 @@ function sphereMesh(r: number): Mesh {
   return {
     vertices,
     faces,
-    guides: [{ from: [0, 0, 0], to: [r, 0, 0], label: `r = ${formatNumber(r)}` }],
+    guides: [{ from: [0, 0, 0], to: [r, 0, 0], label: `r = ${formatNumber(r)}`, dimensionKey: 'radius' }],
     strokeAlpha: 0.11,
   }
 }
@@ -138,8 +139,8 @@ function cylinderMesh(r: number, h: number): Mesh {
     vertices,
     faces,
     guides: [
-      { from: [0, yTop, 0], to: [r, yTop, 0], label: `r = ${formatNumber(r)}` },
-      { from: [r, yBottom, 0], to: [r, yTop, 0], label: `h = ${formatNumber(h)}` },
+      { from: [0, yTop, 0], to: [r, yTop, 0], label: `r = ${formatNumber(r)}`, dimensionKey: 'radius' },
+      { from: [r, yBottom, 0], to: [r, yTop, 0], label: `h = ${formatNumber(h)}`, dimensionKey: 'height' },
     ],
     strokeAlpha: 0.16,
   }
@@ -169,8 +170,8 @@ function coneMesh(r: number, h: number): Mesh {
     vertices,
     faces,
     guides: [
-      { from: [0, yBase, 0], to: [r, yBase, 0], label: `r = ${formatNumber(r)}` },
-      { from: [0, yBase, 0], to: [0, h / 2, 0], label: `h = ${formatNumber(h)}` },
+      { from: [0, yBase, 0], to: [r, yBase, 0], label: `r = ${formatNumber(r)}`, dimensionKey: 'radius' },
+      { from: [0, yBase, 0], to: [0, h / 2, 0], label: `h = ${formatNumber(h)}`, dimensionKey: 'height' },
     ],
     strokeAlpha: 0.15,
   }
@@ -197,8 +198,8 @@ function pyramidMesh(base: number, h: number): Mesh {
     vertices,
     faces,
     guides: [
-      { from: [-b, yBase, b], to: [b, yBase, b], label: `b = ${formatNumber(base)}` },
-      { from: [0, yBase, 0], to: [0, h / 2, 0], label: `h = ${formatNumber(h)}` },
+      { from: [-b, yBase, b], to: [b, yBase, b], label: `b = ${formatNumber(base)}`, dimensionKey: 'base' },
+      { from: [0, yBase, 0], to: [0, h / 2, 0], label: `h = ${formatNumber(h)}`, dimensionKey: 'height' },
     ],
     strokeAlpha: 0.24,
   }
@@ -227,9 +228,9 @@ function triangularPrismMesh(base: number, triangleHeight: number, length: numbe
     vertices,
     faces,
     guides: [
-      { from: [0, -halfHeight, halfLength], to: [0, halfHeight, halfLength], label: `h = ${formatNumber(triangleHeight)}` },
-      { from: [-halfBase, -halfHeight, halfLength], to: [halfBase, -halfHeight, halfLength], label: `b = ${formatNumber(base)}` },
-      { from: [halfBase, -halfHeight, -halfLength], to: [halfBase, -halfHeight, halfLength], label: `l = ${formatNumber(length)}` },
+      { from: [0, -halfHeight, halfLength], to: [0, halfHeight, halfLength], label: `h = ${formatNumber(triangleHeight)}`, dimensionKey: 'triangleHeight' },
+      { from: [-halfBase, -halfHeight, halfLength], to: [halfBase, -halfHeight, halfLength], label: `b = ${formatNumber(base)}`, dimensionKey: 'base' },
+      { from: [halfBase, -halfHeight, -halfLength], to: [halfBase, -halfHeight, halfLength], label: `l = ${formatNumber(length)}`, dimensionKey: 'length' },
     ],
     strokeAlpha: 0.25,
   }
@@ -283,11 +284,13 @@ export function Shape3D({
   shape,
   dimensions,
   showLabels,
+  highlight,
   className = '',
 }: {
   shape: Shape
   dimensions: ShapeDimensions
   showLabels: boolean
+  highlight?: string
   className?: string
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -385,10 +388,10 @@ export function Shape3D({
       }
       context.closePath()
       const shade = 0.38 + 0.62 * brightness
-      context.fillStyle = `rgb(${Math.round(31 * shade + 5)}, ${Math.round(88 * shade + 10)}, ${Math.round(65 * shade + 8)})`
+      context.fillStyle = `rgb(${Math.round(20 * shade + 10)}, ${Math.round(50 * shade + 25)}, ${Math.round(110 * shade + 45)})`
       context.fill()
       if (mesh.strokeAlpha) {
-        context.strokeStyle = `rgba(201, 238, 110, ${mesh.strokeAlpha})`
+        context.strokeStyle = `rgba(56, 189, 248, ${mesh.strokeAlpha})`
         context.lineWidth = 0.8
         context.stroke()
       }
@@ -396,7 +399,7 @@ export function Shape3D({
 
     // Ground reference ellipse gives the object a sense of place without pretending to be a shadow.
     context.save()
-    context.strokeStyle = 'rgba(201, 238, 110, 0.16)'
+    context.strokeStyle = 'rgba(57, 120, 214, 0.22)'
     context.lineWidth = 1
     context.beginPath()
     context.ellipse(cx, cy + Math.min(width, height) * 0.3, Math.min(width, height) * 0.23, Math.min(width, height) * 0.055, 0, 0, Math.PI * 2)
@@ -407,11 +410,12 @@ export function Shape3D({
       context.font = '500 11px "Inter Variable", Inter, sans-serif'
       context.textBaseline = 'middle'
       for (const guide of mesh.guides) {
+        const isHighlighted = highlight === guide.dimensionKey
         const start = project(rotatePoint([guide.from[0] / maxExtent, guide.from[1] / maxExtent, guide.from[2] / maxExtent], yaw, pitch))
         const end = project(rotatePoint([guide.to[0] / maxExtent, guide.to[1] / maxExtent, guide.to[2] / maxExtent], yaw, pitch))
         context.save()
-        context.strokeStyle = 'rgba(201, 238, 110, 0.72)'
-        context.lineWidth = 1.2
+        context.strokeStyle = isHighlighted ? '#93c5fd' : '#38bdf8'
+        context.lineWidth = isHighlighted ? 2.4 : 1.5
         context.setLineDash([4, 4])
         context.beginPath()
         context.moveTo(start.x, start.y)
@@ -421,11 +425,11 @@ export function Shape3D({
 
         const labelX = (start.x + end.x) / 2
         const labelY = (start.y + end.y) / 2 - 14
-        drawLabel(context, guide.label, labelX, labelY)
+        drawLabel(context, guide.label, labelX, labelY, isHighlighted)
         context.save()
-        context.fillStyle = 'rgba(201, 238, 110, 0.9)'
+        context.fillStyle = isHighlighted ? '#bfdbfe' : '#38bdf8'
         context.beginPath()
-        context.arc(end.x, end.y, 2.4, 0, Math.PI * 2)
+        context.arc(end.x, end.y, isHighlighted ? 3.2 : 2.4, 0, Math.PI * 2)
         context.fill()
         context.restore()
       }
@@ -436,7 +440,7 @@ export function Shape3D({
       context.font = '13px Inter, sans-serif'
       context.fillText(t('lab.previewUnavailable'), 16, 28)
     }
-  }, [mesh, size, yaw, pitch, zoom, showLabels, t])
+  }, [mesh, size, yaw, pitch, zoom, showLabels, highlight, t])
 
   if (!mesh) {
     return (
@@ -569,7 +573,13 @@ function normalOf(points: Vec3[]): Vec3 {
   return [normal[0] / length, normal[1] / length, normal[2] / length]
 }
 
-function drawLabel(context: CanvasRenderingContext2D, text: string, x: number, y: number) {
+function drawLabel(
+  context: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  isHighlighted = false,
+) {
   const metrics = context.measureText(text)
   const paddingX = 7
   const paddingY = 5
@@ -578,14 +588,14 @@ function drawLabel(context: CanvasRenderingContext2D, text: string, x: number, y
   const left = Math.max(6, Math.min(x - width / 2, context.canvas.width - width - 6))
   const top = Math.max(6, y - height / 2)
   context.save()
-  context.fillStyle = 'rgba(12, 18, 14, 0.86)'
-  context.strokeStyle = 'rgba(201, 238, 110, 0.26)'
-  context.lineWidth = 1
+  context.fillStyle = 'rgba(9, 27, 56, 0.88)'
+  context.strokeStyle = isHighlighted ? '#93c5fd' : 'rgba(56, 189, 248, 0.45)'
+  context.lineWidth = isHighlighted ? 1.5 : 1
   context.beginPath()
   context.roundRect(left, top, width, height, 5)
   context.fill()
   context.stroke()
-  context.fillStyle = '#f0eee3'
+  context.fillStyle = isHighlighted ? '#bfdbfe' : '#eaf2ff'
   context.fillText(text, left + paddingX, top + height / 2 + paddingY / 2)
   context.restore()
 }
@@ -593,13 +603,13 @@ function drawLabel(context: CanvasRenderingContext2D, text: string, x: number, y
 /** A compact static isometric preview for 3D shape cards. */
 export function Shape3DGlyph({ shapeId }: { shapeId: string }) {
   const common = {
-    fill: 'rgba(201,238,110,0.09)',
-    stroke: '#c9ee6e',
+    fill: 'rgba(57, 120, 214, 0.12)',
+    stroke: '#3978d6',
     strokeWidth: 1.35,
     strokeLinejoin: 'round' as const,
     strokeLinecap: 'round' as const,
   }
-  const line = { stroke: 'rgba(201,238,110,0.55)', strokeWidth: 1, strokeLinecap: 'round' as const }
+  const line = { stroke: '#38bdf8', strokeWidth: 1.1, strokeLinecap: 'round' as const }
 
   return (
     <svg viewBox="0 0 160 120" aria-hidden="true" focusable="false">
@@ -634,7 +644,7 @@ export function Shape3DGlyph({ shapeId }: { shapeId: string }) {
         <>
           <path d="M35 82 56 34l22 48Z" {...common} />
           <path d="m56 34 45-14 22 48-23 14M35 82l43 0 45-14M78 82V34" {...line} fill="none" />
-          <path d="M35 82 56 34l22 48Z" fill="none" stroke="#c9ee6e" strokeWidth="1.1" />
+          <path d="M35 82 56 34l22 48Z" fill="none" stroke="#3978d6" strokeWidth="1.1" />
         </>
       )}
       {(shapeId === 'cube' || shapeId === 'cuboid' || shapeId === 'rectangular-prism') && (
