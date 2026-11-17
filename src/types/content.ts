@@ -277,6 +277,20 @@ export interface GraphArea {
   label?: string
 }
 
+export interface GraphImplicit {
+  fn: (x: number, y: number) => number
+  label?: string
+  color?: PlotColor
+  dashed?: boolean
+}
+
+export interface GraphPath {
+  d: string
+  label?: string
+  color?: PlotColor
+  dashed?: boolean
+}
+
 export interface GraphSpec {
   id: string
   title: string
@@ -296,6 +310,8 @@ export interface GraphSpec {
   equalScale?: boolean
   curves?: GraphCurve[]
   parametric?: GraphParametric[]
+  implicit?: GraphImplicit[]
+  paths?: GraphPath[]
   lines?: GraphLine[]
   points?: GraphPoint[]
   areas?: GraphArea[]

@@ -68,6 +68,175 @@ function samplePath(
   return d.trim()
 }
 
+function interpContour(vA: number, vB: number, pA: number, pB: number): number {
+  if (Math.abs(vB - vA) < 1e-12) return pA
+  const t = Math.max(0, Math.min(1, -vA / (vB - vA)))
+  return pA + t * (pB - pA)
+}
+
+/**
+ * Traces zero-crossings of F(x, y) = 0 via Marching Squares and chains segments
+ * into clean SVG polyline paths. Works for any implicit equation (conics, ellipses,
+ * hyperbolas, circles, and implicit algebraic curves).
+ */
+export function sampleImplicitContour(
+  fn: (x: number, y: number) => number,
+  x0: number,
+  x1: number,
+  y0: number,
+  y1: number,
+  sx: (x: number) => number,
+  sy: (y: number) => number,
+  gridRes = 140,
+): string {
+  const GRID_X = gridRes
+  const GRID_Y = gridRes
+  const vals = new Float64Array((GRID_X + 1) * (GRID_Y + 1))
+  const dx = (x1 - x0) / GRID_X
+  const dy = (y1 - y0) / GRID_Y
+  for (let j = 0; j <= GRID_Y; j++) {
+    const y = y0 + j * dy
+    for (let i = 0; i <= GRID_X; i++) {
+      const x = x0 + i * dx
+      const v = fn(x, y)
+      vals[j * (GRID_X + 1) + i] = Number.isFinite(v) ? v : NaN
+    }
+  }
+
+  const segments: [{ x: number; y: number }, { x: number; y: number }][] = []
+  for (let j = 0; j < GRID_Y; j++) {
+    const yB = y0 + j * dy
+    const yT = yB + dy
+    for (let i = 0; i < GRID_X; i++) {
+      const xL = x0 + i * dx
+      const xR = xL + dx
+
+      const v0 = vals[j * (GRID_X + 1) + i]
+      const v1 = vals[j * (GRID_X + 1) + (i + 1)]
+      const v2 = vals[(j + 1) * (GRID_X + 1) + (i + 1)]
+      const v3 = vals[(j + 1) * (GRID_X + 1) + i]
+
+      if (!Number.isFinite(v0) || !Number.isFinite(v1) || !Number.isFinite(v2) || !Number.isFinite(v3)) continue
+
+      let idx = 0
+      if (v0 > 0) idx |= 1
+      if (v1 > 0) idx |= 2
+      if (v2 > 0) idx |= 4
+      if (v3 > 0) idx |= 8
+
+      if (idx === 0 || idx === 15) continue
+
+      const pBottom = { x: interpContour(v0, v1, xL, xR), y: yB }
+      const pRight = { x: xR, y: interpContour(v1, v2, yB, yT) }
+      const pTop = { x: interpContour(v3, v2, xL, xR), y: yT }
+      const pLeft = { x: xL, y: interpContour(v0, v3, yB, yT) }
+
+      const edgePts = [pBottom, pRight, pTop, pLeft]
+
+      const pairs: [number, number][] = []
+      switch (idx) {
+        case 1: pairs.push([3, 0]); break
+        case 2: pairs.push([0, 1]); break
+        case 3: pairs.push([3, 1]); break
+        case 4: pairs.push([1, 2]); break
+        case 5: {
+          const vc = (v0 + v1 + v2 + v3) / 4
+          if (vc > 0) { pairs.push([3, 2]); pairs.push([0, 1]); }
+          else { pairs.push([3, 0]); pairs.push([1, 2]); }
+          break
+        }
+        case 6: pairs.push([0, 2]); break
+        case 7: pairs.push([3, 2]); break
+        case 8: pairs.push([2, 3]); break
+        case 9: pairs.push([2, 0]); break
+        case 10: {
+          const vc = (v0 + v1 + v2 + v3) / 4
+          if (vc > 0) { pairs.push([0, 3]); pairs.push([2, 1]); }
+          else { pairs.push([0, 1]); pairs.push([2, 3]); }
+          break
+        }
+        case 11: pairs.push([2, 1]); break
+        case 12: pairs.push([1, 3]); break
+        case 13: pairs.push([1, 0]); break
+        case 14: pairs.push([0, 3]); break
+      }
+
+      for (const [e1, e2] of pairs) {
+        segments.push([edgePts[e1], edgePts[e2]])
+      }
+    }
+  }
+
+  if (segments.length === 0) return ''
+
+  const tol = Math.max(dx, dy) * 1.5
+  const remaining = new Set(segments.map((_, i) => i))
+  const polylines: { x: number; y: number }[][] = []
+
+  while (remaining.size > 0) {
+    const firstIdx = remaining.values().next().value!
+    remaining.delete(firstIdx)
+    const seg = segments[firstIdx]
+    const poly = [seg[0], seg[1]]
+
+    let extended = true
+    while (extended) {
+      extended = false
+      const tail = poly[poly.length - 1]
+      for (const idx of remaining) {
+        const s = segments[idx]
+        const d0 = Math.hypot(s[0].x - tail.x, s[0].y - tail.y)
+        const d1 = Math.hypot(s[1].x - tail.x, s[1].y - tail.y)
+        if (d0 < tol) {
+          poly.push(s[1])
+          remaining.delete(idx)
+          extended = true
+          break
+        } else if (d1 < tol) {
+          poly.push(s[0])
+          remaining.delete(idx)
+          extended = true
+          break
+        }
+      }
+    }
+
+    extended = true
+    while (extended) {
+      extended = false
+      const head = poly[0]
+      for (const idx of remaining) {
+        const s = segments[idx]
+        const d0 = Math.hypot(s[0].x - head.x, s[0].y - head.y)
+        const d1 = Math.hypot(s[1].x - head.x, s[1].y - head.y)
+        if (d1 < tol) {
+          poly.unshift(s[0])
+          remaining.delete(idx)
+          extended = true
+          break
+        } else if (d0 < tol) {
+          poly.unshift(s[1])
+          remaining.delete(idx)
+          extended = true
+          break
+        }
+      }
+    }
+
+    polylines.push(poly)
+  }
+
+  let d = ''
+  for (const poly of polylines) {
+    if (poly.length < 2) continue
+    d += `M${sx(poly[0].x).toFixed(2)} ${sy(poly[0].y).toFixed(2)} `
+    for (let k = 1; k < poly.length; k++) {
+      d += `L${sx(poly[k].x).toFixed(2)} ${sy(poly[k].y).toFixed(2)} `
+    }
+  }
+  return d.trim()
+}
+
 const colorClass = (c: PlotColor | undefined, fallback: PlotColor) => `plot-c${c ?? fallback}`
 
 const ANCHOR_OFFSET: Record<NonNullable<GraphPoint['anchor']>, [number, number, 'start' | 'middle' | 'end']> = {
@@ -107,6 +276,8 @@ export function Graph({ spec }: { spec: GraphSpec }) {
   const legend = [
     ...(spec.curves ?? []).map((c, i) => ({ label: c.label, color: c.color ?? (((i % 4) + 1) as PlotColor), dashed: c.dashed })),
     ...(spec.parametric ?? []).map((c) => ({ label: c.label, color: c.color ?? 1, dashed: c.dashed })),
+    ...(spec.implicit ?? []).map((c, i) => ({ label: c.label, color: c.color ?? (((i % 4) + 1) as PlotColor), dashed: c.dashed })),
+    ...(spec.paths ?? []).map((c, i) => ({ label: c.label, color: c.color ?? (((i % 4) + 1) as PlotColor), dashed: c.dashed })),
     ...(spec.lines ?? []).filter((l) => l.dashed && l.label).map((l) => ({ label: l.label, color: l.color ?? 2, dashed: true })),
   ].filter((item): item is { label: string; color: PlotColor; dashed: boolean | undefined } => Boolean(item.label))
   const pointsText = (spec.points ?? []).map(pointLabel).filter(Boolean).join(', ')
@@ -203,6 +374,26 @@ export function Graph({ spec }: { spec: GraphSpec }) {
               key={`p${i}`}
               d={samplePath(curve.x, curve.y, curve.t[0], curve.t[1], sx, sy, ySpan)}
               className={`graph__curve ${colorClass(curve.color, 1)}${curve.dashed ? ' is-dashed' : ''}`}
+            />
+          ))}
+
+          {(spec.implicit ?? []).map((imp, i) => {
+            const d = sampleImplicitContour(imp.fn, x0, x1, y0, y1, sx, sy)
+            if (!d) return null
+            return (
+              <path
+                key={`imp${i}`}
+                d={d}
+                className={`graph__curve ${colorClass(imp.color, ((i % 4) + 1) as PlotColor)}${imp.dashed ? ' is-dashed' : ''}`}
+              />
+            )
+          })}
+
+          {(spec.paths ?? []).map((pathItem, i) => (
+            <path
+              key={`path${i}`}
+              d={pathItem.d}
+              className={`graph__curve ${colorClass(pathItem.color, ((i % 4) + 1) as PlotColor)}${pathItem.dashed ? ' is-dashed' : ''}`}
             />
           ))}
         </g>

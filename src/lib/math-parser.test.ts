@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import {
+  analyzeEquation,
   analyzeFunction,
   cleanEquationInput,
+  detectConic,
   exprToLatex,
   insertImplicitMultiplication,
+  parseEquation,
   parseMathExpression,
 } from './math-parser'
 
@@ -131,5 +134,103 @@ describe('analyzeFunction', () => {
     const analysis = analyzeFunction(parseMathExpression('y = 1 / x'), 'y = 1 / x', [-10, 10])
     expect(analysis.table.find((row) => row.x === 0)?.y).toBeNull()
     expect(analysis.yIntercept).toBeNull()
+  })
+})
+
+describe('parseEquation and conic sections', () => {
+  it('parses implicit ellipse (y^2)/25 + x^2 = 25 accurately', () => {
+    const parsed = parseEquation('(y^2)/25 + x^2 = 25')
+    expect(parsed.type).toBe('implicit')
+    expect(parsed.fn2D(0, 25)).toBeCloseTo(0, 5)
+    expect(parsed.fn2D(0, -25)).toBeCloseTo(0, 5)
+    expect(parsed.fn2D(5, 0)).toBeCloseTo(0, 5)
+    expect(parsed.fn2D(-5, 0)).toBeCloseTo(0, 5)
+
+    const conic = detectConic(parsed.fn2D)
+    expect(conic).not.toBeNull()
+    expect(conic?.type).toBe('ellipse')
+    expect(conic?.orientation).toBe('vertical')
+    expect(conic?.a).toBe(25)
+    expect(conic?.b).toBe(5)
+    expect(conic?.vertices).toEqual([
+      { x: 0, y: -25 },
+      { x: 0, y: 25 },
+    ])
+    expect(conic?.suggestedRange).toBe(30)
+  })
+
+  it('detects and analyzes horizontal parabola y^2 = 4x', () => {
+    const parsed = parseEquation('y^2 = 4x')
+    expect(parsed.type).toBe('implicit')
+    expect(parsed.fn2D(1, 2)).toBeCloseTo(0, 5)
+    expect(parsed.fn2D(1, -2)).toBeCloseTo(0, 5)
+
+    const conic = detectConic(parsed.fn2D)
+    expect(conic).not.toBeNull()
+    expect(conic?.type).toBe('parabola')
+    expect(conic?.orientation).toBe('horizontal')
+    expect(conic?.vertex).toEqual({ x: 0, y: 0 })
+    expect(conic?.p).toBe(1)
+    expect(conic?.focus).toEqual({ x: 1, y: 0 })
+    expect(conic?.directrix).toEqual({ axis: 'x', val: -1 })
+    expect(conic?.axisOfSymmetry).toEqual({ axis: 'y', val: 0 })
+  })
+
+  it('detects horizontal parabola x = y^2 - 4', () => {
+    const parsed = parseEquation('x = y^2 - 4')
+    expect(parsed.type).toBe('explicit_x')
+    expect(parsed.fnX!(0)).toBe(-4)
+    expect(parsed.fnX!(2)).toBe(0)
+
+    const conic = detectConic(parsed.fn2D)
+    expect(conic?.type).toBe('parabola')
+    expect(conic?.orientation).toBe('horizontal')
+    expect(conic?.vertex).toEqual({ x: -4, y: 0 })
+    expect(conic?.p).toBe(0.25)
+  })
+
+  it('detects horizontal hyperbola x^2 - y^2 = 4', () => {
+    const parsed = parseEquation('x^2 - y^2 = 4')
+    const conic = detectConic(parsed.fn2D)
+    expect(conic?.type).toBe('hyperbola')
+    expect(conic?.orientation).toBe('horizontal')
+    expect(conic?.a).toBe(2)
+    expect(conic?.b).toBe(2)
+    expect(conic?.vertices).toEqual([
+      { x: -2, y: 0 },
+      { x: 2, y: 0 },
+    ])
+    expect(conic?.asymptotes).toHaveLength(2)
+  })
+
+  it('detects vertical hyperbola (y^2)/25 - x^2 = 1', () => {
+    const parsed = parseEquation('(y^2)/25 - x^2 = 1')
+    const conic = detectConic(parsed.fn2D)
+    expect(conic?.type).toBe('hyperbola')
+    expect(conic?.orientation).toBe('vertical')
+    expect(conic?.a).toBe(5)
+    expect(conic?.b).toBe(1)
+    expect(conic?.vertices).toEqual([
+      { x: 0, y: -5 },
+      { x: 0, y: 5 },
+    ])
+  })
+
+  it('detects circle x^2 + y^2 = 25', () => {
+    const parsed = parseEquation('x^2 + y^2 = 25')
+    const conic = detectConic(parsed.fn2D)
+    expect(conic?.type).toBe('circle')
+    expect(conic?.center).toEqual({ x: 0, y: 0 })
+    expect(conic?.radius).toBe(5)
+  })
+
+  it('provides authentic Khmer MoEYS steps in analyzeEquation', () => {
+    const parsed = parseEquation('(y^2)/25 + x^2 = 25')
+    const analysis = analyzeEquation(parsed, '(y^2)/25 + x^2 = 25', [-30, 30])
+    expect(analysis.isConic).toBe(true)
+    expect(analysis.conic?.nameKm).toContain('អេលីប')
+    expect(analysis.stepsKm.length).toBeGreaterThanOrEqual(4)
+    expect(analysis.stepsKm[0]).toContain('ទម្រង់ស្តង់ដាអេលីប')
+    expect(analysis.stepsKm[2]).toContain('ចម្ងាយពីផ្ចិតទៅកំណុំ')
   })
 })
