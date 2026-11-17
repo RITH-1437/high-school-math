@@ -15,7 +15,7 @@ describe('SEO & Sitemap generation', () => {
 
   it('generates all expected route entries without duplicates', () => {
     const entries = buildSitemapEntries()
-    expect(entries.length).toBe(402)
+    expect(entries.length).toBe(409)
 
     // Check unique paths
     const paths = entries.map((e) => e.path)
@@ -50,7 +50,7 @@ describe('SEO & Sitemap generation', () => {
 
     // Count URLs in XML
     const matches = xml.match(/<loc>/g)
-    expect(matches?.length).toBe(402)
+    expect(matches?.length).toBe(409)
   })
 
   it('supports custom base URLs without trailing slash issues', () => {
@@ -72,7 +72,7 @@ describe('SEO & Sitemap generation', () => {
     const testDir = path.resolve(__dirname, '../../scratch/test-seo')
     const res = generateSitemap(testDir)
 
-    expect(res.count).toBe(402)
+    expect(res.count).toBe(409)
     expect(fs.existsSync(res.path)).toBe(true)
 
     const content = fs.readFileSync(res.path, 'utf-8')

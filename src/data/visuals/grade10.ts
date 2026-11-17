@@ -5,6 +5,65 @@ import type { TopicVisuals } from './types'
  * Rendered in the topic page's "Visual guide" section.
  */
 export const grade10Visuals: TopicVisuals = {
+  'mathematical-logic': {
+    flowcharts: [
+      {
+        id: 'flowchart-logic-truth-evaluation',
+        title: 'Evaluating Compound Proposition Truth Value',
+        titleKm: 'ការកំណត់តម្លៃភាពពិតនៃសំណើសមាស',
+        summary:
+          'Decision flowchart for evaluating logical operations (AND, OR, implication) using truth values 1 and 0.',
+        summaryKm:
+          'គំនូសតាងលំហូរសម្រាប់កំណត់តម្លៃភាពពិតនៃឈ្នាប់តក្កវិទ្យា (និង, ឬ, នាំឱ្យ) ដោយប្រើតម្លៃ ១ និង ០។',
+        topicIds: ['mathematical-logic'],
+        nodes: [
+          {
+            kind: 'start',
+            text: 'Identify the primary logical connective in the compound statement.',
+            textKm: 'កំណត់ឈ្នាប់តក្កវិទ្យាចម្បងនៅក្នុងសំណើសមាស។',
+          },
+          {
+            kind: 'decision',
+            text: 'Which connective links the propositions $p$ and $q$?',
+            textKm: 'តើឈ្នាប់មួយណាភ្ជាប់សំណើ $p$ និង $q$?',
+            branches: [
+              {
+                label: 'Conjunction (AND)',
+                labelKm: 'ឈ្នាប់ និង (AND)',
+                text: 'True ($1$) only if both $p=1$ and $q=1$. If either is $0$, the result is $0$.',
+                textKm: 'ពិត ($1$) លុះត្រាតែ $p=1$ និង $q=1$ ទាំងពីរ។ បើមានមួយស្មើ $0$ លទ្ធផលគឺ $0$។',
+                math: String.raw`p \land q`,
+              },
+              {
+                label: 'Disjunction (OR)',
+                labelKm: 'ឈ្នាប់ ឬ (OR)',
+                text: 'True ($1$) if at least one is $1$. False ($0$) only when both $p=0$ and $q=0$.',
+                textKm: 'ពិត ($1$) បើមានយ៉ាងហោចណាស់មួយស្មើ $1$។ មិនពិត ($0$) តែពេល $p=0$ និង $q=0$ ទាំងពីរ។',
+                math: String.raw`p \lor q`,
+              },
+              {
+                label: 'Implication (IF-THEN)',
+                labelKm: 'ឈ្នាប់ នាំឱ្យ (IF-THEN)',
+                text: 'False ($0$) only when $p=1$ and $q=0$. In all other cases, the result is $1$.',
+                textKm: 'មិនពិត ($0$) តែពេល $p=1$ ហើយ $q=0$ ប៉ុណ្ណោះ។ ករណីផ្សេងទៀតទាំងអស់ លទ្ធផលគឺ $1$។',
+                math: String.raw`p \Rightarrow q`,
+              },
+            ],
+          },
+          {
+            kind: 'step',
+            text: 'Substitute the input truth values ($1$ or $0$) and compute the result step-by-step.',
+            textKm: 'ជំនួសតម្លៃភាពពិត ($1$ ឬ $0$) នៃសំណើនីមួយៗ រួចគណនាតាមលំដាប់លំដោយ។',
+          },
+          {
+            kind: 'end',
+            text: 'The compound statement evaluates definitively to either $1$ (True) or $0$ (False).',
+            textKm: 'សំណើសមាសទទួលបានតម្លៃភាពពិតច្បាស់លាស់ គឺ $1$ (ពិត) ឬ $0$ (មិនពិត)។',
+          },
+        ],
+      },
+    ],
+  },
   'quadratic-equations': {
     graphs: [
       {

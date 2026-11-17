@@ -8,6 +8,7 @@ export const grade10: Grade = {
   description:
     'Grade 10 turns algebra into a study of functions, adds formal geometric proof and circle theorems, and introduces right-triangle and general triangle trigonometry. Statistics shifts from describing data to measuring spread and reasoning with probability rules.',
   focus: [
+    'Mathematical logic, propositions, truth values (1 and 0), and truth tables',
     'Quadratic equations, the discriminant, and completing the square',
     'Function families, transformations, and exponential models',
     'Deductive proof, isometries, and circle theorems',
@@ -20,7 +21,7 @@ export const grade10: Grade = {
       family: 'algebra',
       title: 'Algebra',
       description:
-        'Quadratics, function families, exponential models, and systems of inequalities. The emphasis is on connecting an equation to its graph and choosing a method deliberately.',
+        'Mathematical logic, truth tables, quadratics, function families, exponential models, and systems of inequalities. The emphasis is on logical reasoning, connecting an equation to its graph, and choosing a method deliberately.',
       theorems: [
         {
           title: 'Quadratic formula theorem',
@@ -36,6 +37,358 @@ export const grade10: Grade = {
         },
       ],
       topics: [
+        {
+          id: 'mathematical-logic',
+          title: 'Mathematical Logic and Truth Tables',
+          subtitle:
+            'Propositions, logical operations (AND, OR, NOT, implication, equivalence), and truth value tables using 1 (true) and 0 (false).',
+          introduction:
+            'Mathematical logic provides the formal foundation for mathematical reasoning and proof. A proposition is a declarative sentence that is definitively either true (represented by $1$) or false (represented by $0$), but never both at the same time. By connecting propositions using logical operators—negation (NOT, $\\neg p$), conjunction (AND, $p \\land q$), disjunction (OR, $p \\lor q$), implication (IF...THEN, $p \\Rightarrow q$), and equivalence (IF AND ONLY IF, $p \\Leftrightarrow q$)—we evaluate compound statements systematically using truth tables.',
+          prerequisites: [
+            'Basic set notation and operations',
+            'Evaluating algebraic expressions',
+            'Understanding mathematical definitions and proofs',
+          ],
+          keyIdeas: [
+            'A proposition $p$ has a single truth value: $1$ (True) or $0$ (False).',
+            'Negation $\\neg p$ inverts truth value: if $p = 1$, $\\neg p = 0$; if $p = 0$, $\\neg p = 1$.',
+            'Conjunction $p \\land q$ (AND): $1 \\land 1 = 1$; if either statement is $0$, $p \\land q = 0$ ($1 \\text{ and } 0 \\text{ is } 0$).',
+            'Disjunction $p \\lor q$ (OR): $0 \\lor 0 = 0$; if either statement is $1$, $p \\lor q = 1$ ($1 \\text{ or } 0 \\text{ is } 1$).',
+            'Implication $p \\Rightarrow q$ is false ($0$) only when a true premise leads to a false conclusion ($1 \\Rightarrow 0 = 0$); otherwise it is true ($1$).',
+            'Equivalence $p \\Leftrightarrow q$ is true ($1$) when $p$ and $q$ share the same truth value ($1 \\Leftrightarrow 1 = 1$, $0 \\Leftrightarrow 0 = 1$).',
+            'Quantifiers define scope: universal ($\\forall$, "for all") and existential ($\\exists$, "there exists").',
+          ],
+          theory: [
+            {
+              title: 'Propositions and Truth Values (1 and 0)',
+              body: [
+                'In mathematical logic, a proposition (or statement) is an assertion that is either true or false, but cannot be both simultaneously. In the Cambodian high school MoEYS curriculum, truth values are represented numerically: $1$ denotes True (ពិត) and $0$ denotes False (មិនពិត).',
+                'Sentences that express personal opinions ("Math is easy"), questions ("What is $x$?"), or commands ("Solve the equation") are not propositions because they cannot be assigned a definitive truth value of $1$ or $0$. Similarly, open sentences like "$x + 3 = 8$" become propositions only after a specific value is assigned to the variable $x$ or when bounded by a quantifier.',
+                'Compound propositions are formed by joining two or more simple propositions using logical connectives. The truth value of a compound proposition depends entirely on the truth values of its component propositions.',
+              ],
+              bullets: [
+                '$1$ represents True; $0$ represents False.',
+                'Every proposition satisfies the law of the excluded middle: it is either $1$ or $0$.',
+                'No proposition can be both $1$ and $0$ at the same time (law of non-contradiction).',
+              ],
+            },
+            {
+              title: 'Conjunction (AND) and Disjunction (OR)',
+              body: [
+                'The conjunction of propositions $p$ and $q$ is written $p \\land q$ (read "$p$ and $q$"). It is true ($1$) if and only if both $p$ and $q$ are true. If at least one proposition is false ($0$), the whole conjunction is false ($0$). Therefore: $1 \\land 1 = 1$, $1 \\land 0 = 0$, $0 \\land 1 = 0$, and $0 \\land 0 = 0$.',
+                'The disjunction of propositions $p$ and $q$ is written $p \\lor q$ (read "$p$ or $q$"). In mathematics, this represents the inclusive OR: it is true ($1$) whenever at least one component proposition is true, and is false ($0$) only when both components are false ($0$). Therefore: $1 \\lor 1 = 1$, $1 \\lor 0 = 1$, $0 \\lor 1 = 1$, and $0 \\lor 0 = 0$.',
+              ],
+              bullets: [
+                'Conjunction (AND, $\\land$): $1 \\land 1 = 1$; all other combinations give $0$.',
+                'Disjunction (OR, $\\lor$): $0 \\lor 0 = 0$; all other combinations give $1$.',
+                'Both operations are commutative: $p \\land q \\Leftrightarrow q \\land p$ and $p \\lor q \\Leftrightarrow q \\lor p$.',
+              ],
+            },
+            {
+              title: 'Negation, Implication (Conditional), and Equivalence',
+              body: [
+                'The negation of proposition $p$ is written $\\neg p$ or $\\bar{p}$ (read "not $p$"). It flips the truth value: if $p = 1$, then $\\neg p = 0$; if $p = 0$, then $\\neg p = 1$. The double negation rule states that $\\neg(\\neg p) \\Leftrightarrow p$.',
+                'The conditional (implication) $p \\Rightarrow q$ (read "if $p$, then $q$") asserts that whenever $p$ is true, $q$ must also be true. In logic, an implication is false ($0$) in only one case: when the premise $p$ is true ($1$) but the conclusion $q$ is false ($0$). That is, $1 \\Rightarrow 0 = 0$. In all other cases ($1 \\Rightarrow 1 = 1$, $0 \\Rightarrow 1 = 1$, $0 \\Rightarrow 0 = 1$), the implication is true ($1$). Notice that if $p = 0$, $p \\Rightarrow q$ is automatically true regardless of $q$ (vacuous truth). Logically, $p \\Rightarrow q$ is equivalent to $\\neg p \\lor q$.',
+                'The biconditional (equivalence) $p \\Leftrightarrow q$ (read "$p$ if and only if $q$") means $(p \\Rightarrow q) \\land (q \\Rightarrow p)$. It is true ($1$) when $p$ and $q$ have the same truth value ($1 \\Leftrightarrow 1 = 1$ and $0 \\Leftrightarrow 0 = 1$) and false ($0$) when they differ ($1 \\Leftrightarrow 0 = 0$ and $0 \\Leftrightarrow 1 = 0$).',
+              ],
+              bullets: [
+                'Negation: $\\neg 1 = 0$ and $\\neg 0 = 1$.',
+                'Implication ($p \\Rightarrow q$): only $1 \\Rightarrow 0$ is $0$; otherwise $1$.',
+                'Contrapositive: $p \\Rightarrow q$ is logically equivalent to $\\neg q \\Rightarrow \\neg p$.',
+                'Equivalence ($p \\Leftrightarrow q$): $1$ when values match; $0$ when they differ.',
+              ],
+            },
+            {
+              title: 'Truth Tables, De Morgan\'s Laws, and Quantifiers',
+              body: [
+                'A truth table lists all possible truth values ($1$ and $0$) of input propositions and calculates the resulting truth value for compound expressions across $2^n$ combinations for $n$ variables. A statement that is always true ($1$) for every row is called a tautology; a statement that is always false ($0$) is a contradiction.',
+                'De Morgan\'s laws describe how negation distributes across AND and OR: $\\neg(p \\land q) \\Leftrightarrow \\neg p \\lor \\neg q$ and $\\neg(p \\lor q) \\Leftrightarrow \\neg p \\land \\neg q$. Negating an "AND" turns it into an "OR" of negations, and negating an "OR" turns it into an "AND" of negations.',
+                'Quantifiers extend propositions over sets: the universal quantifier $\\forall$ ("for all") asserts a condition holds for every element in a domain, while the existential quantifier $\\exists$ ("there exists") asserts it holds for at least one element. Negation swaps the quantifier: $\\neg(\\forall x, P(x)) \\Leftrightarrow \\exists x, \\neg P(x)$ and $\\neg(\\exists x, P(x)) \\Leftrightarrow \\forall x, \\neg P(x)$.',
+              ],
+              bullets: [
+                'For $n$ propositions, a complete truth table requires $2^n$ rows.',
+                'De Morgan: $\\neg(p \\land q) \\Leftrightarrow \\neg p \\lor \\neg q$ and $\\neg(p \\lor q) \\Leftrightarrow \\neg p \\land \\neg q$.',
+                'Quantifier negations: $\\neg(\\forall x, P(x)) \\Leftrightarrow \\exists x, \\neg P(x)$ and $\\neg(\\exists x, P(x)) \\Leftrightarrow \\forall x, \\neg P(x)$.',
+              ],
+            },
+          ],
+          formulas: [
+            {
+              id: 'g10-logic-conjunction-and',
+              title: 'Conjunction (AND)',
+              expression: String.raw`p \land q = \begin{cases} 1 & \text{if } p = 1 \text{ and } q = 1 \\ 0 & \text{otherwise} \end{cases}`,
+              description:
+                'Evaluates to true ($1$) only when both component propositions $p$ and $q$ are true ($1$); otherwise evaluates to false ($0$).',
+              spoken: 'p and q equals one if both p and q are one, zero otherwise.',
+              variables: [
+                { symbol: 'p', name: 'first proposition', note: 'truth value 1 or 0' },
+                { symbol: 'q', name: 'second proposition', note: 'truth value 1 or 0' },
+                { symbol: String.raw`p \land q`, name: 'conjunction of p and q', note: '1 if both are 1; 0 otherwise' },
+              ],
+              tags: ['logic', 'conjunction', 'and', 'grade 10', 'truth table'],
+            },
+            {
+              id: 'g10-logic-disjunction-or',
+              title: 'Disjunction (OR)',
+              expression: String.raw`p \lor q = \begin{cases} 0 & \text{if } p = 0 \text{ and } q = 0 \\ 1 & \text{otherwise} \end{cases}`,
+              description:
+                'Evaluates to false ($0$) only when both component propositions $p$ and $q$ are false ($0$); otherwise evaluates to true ($1$).',
+              spoken: 'p or q equals zero if both p and q are zero, one otherwise.',
+              variables: [
+                { symbol: 'p', name: 'first proposition', note: 'truth value 1 or 0' },
+                { symbol: 'q', name: 'second proposition', note: 'truth value 1 or 0' },
+                { symbol: String.raw`p \lor q`, name: 'disjunction of p and q', note: '0 if both are 0; 1 otherwise' },
+              ],
+              tags: ['logic', 'disjunction', 'or', 'grade 10', 'truth table'],
+            },
+            {
+              id: 'g10-logic-negation-not',
+              title: 'Negation (NOT)',
+              expression: String.raw`\neg p = 1 - p`,
+              description:
+                'Inverts the truth value of a proposition: changes $1$ (true) to $0$ (false), and $0$ (false) to $1$ (true).',
+              spoken: 'not p equals one minus p.',
+              variables: [
+                { symbol: 'p', name: 'proposition', note: 'truth value 1 or 0' },
+                { symbol: String.raw`\neg p`, name: 'negation of p', note: 'reverses 1 to 0 and 0 to 1' },
+              ],
+              tags: ['logic', 'negation', 'not', 'grade 10', 'truth table'],
+            },
+            {
+              id: 'g10-logic-conditional-implication',
+              title: 'Conditional (Implication)',
+              expression: String.raw`(p \Rightarrow q) \iff (\neg p \lor q)`,
+              description:
+                'An implication is false ($0$) only when a true antecedent leads to a false consequent ($1 \\Rightarrow 0 = 0$); otherwise it is true ($1$).',
+              spoken: 'p implies q is equivalent to not p or q.',
+              variables: [
+                { symbol: 'p', name: 'antecedent premise', note: 'truth value 1 or 0' },
+                { symbol: 'q', name: 'consequent conclusion', note: 'truth value 1 or 0' },
+                { symbol: String.raw`p \Rightarrow q`, name: 'conditional statement', note: '0 only when 1 implies 0; 1 otherwise' },
+              ],
+              tags: ['logic', 'implication', 'conditional', 'grade 10'],
+            },
+            {
+              id: 'g10-logic-biconditional-equivalence',
+              title: 'Biconditional (Equivalence)',
+              expression: String.raw`(p \Leftrightarrow q) \iff ((p \Rightarrow q) \land (q \Rightarrow p))`,
+              description:
+                'True ($1$) when both propositions share the identical truth value ($1 \\Leftrightarrow 1 = 1$, $0 \\Leftrightarrow 0 = 1$); false ($0$) when they differ.',
+              spoken: 'p equivalent to q is equivalent to p implies q and q implies p.',
+              variables: [
+                { symbol: 'p', name: 'first proposition', note: 'truth value 1 or 0' },
+                { symbol: 'q', name: 'second proposition', note: 'truth value 1 or 0' },
+                { symbol: String.raw`p \Leftrightarrow q`, name: 'biconditional statement', note: '1 when truth values match; 0 otherwise' },
+              ],
+              tags: ['logic', 'equivalence', 'biconditional', 'grade 10'],
+            },
+            {
+              id: 'g10-logic-demorgan-laws',
+              title: "De Morgan's Laws for Logic",
+              expression: String.raw`\neg(p \land q) \iff (\neg p \lor \neg q)`,
+              description:
+                'The negation of a conjunction is the disjunction of the negations, and the negation of a disjunction is the conjunction of the negations.',
+              spoken: 'not of p and q is equivalent to not p or not q.',
+              variables: [
+                { symbol: 'p', name: 'first proposition', note: 'truth value 1 or 0' },
+                { symbol: 'q', name: 'second proposition', note: 'truth value 1 or 0' },
+              ],
+              tags: ['logic', 'demorgan', 'laws', 'grade 10'],
+            },
+          ],
+          examples: [
+            {
+              title: 'Evaluating a compound proposition',
+              problem:
+                'Given propositions $p$, $q$, and $r$ with truth values $p = 1$, $q = 0$, and $r = 1$, determine the truth value of $(p \\land \\neg q) \\lor (q \\land r)$.',
+              given: [
+                '$p = 1$ (True)',
+                '$q = 0$ (False)',
+                '$r = 1$ (True)',
+              ],
+              steps: [
+                {
+                  text: 'Find the negation of $q$. Since $q = 0$, its negation is $\\neg q = 1$.',
+                  math: String.raw`\neg q = \neg 0 = 1`,
+                },
+                {
+                  text: 'Evaluate the first conjunction $p \\land \\neg q$. Since $p = 1$ and $\\neg q = 1$, both are true ($1 \\text{ and } 1 \\text{ is } 1$).',
+                  math: String.raw`p \land \neg q = 1 \land 1 = 1`,
+                },
+                {
+                  text: 'Evaluate the second conjunction $q \\land r$. Since $q = 0$ and $r = 1$, at least one is false ($0 \\text{ and } 1 \\text{ is } 0$).',
+                  math: String.raw`q \land r = 0 \land 1 = 0`,
+                },
+                {
+                  text: 'Combine both parts using the disjunction (OR). Since $1 \\lor 0 = 1$ ($1 \\text{ or } 0 \\text{ is } 1$), the compound statement is true.',
+                  math: String.raw`(p \land \neg q) \lor (q \land r) = 1 \lor 0 = 1`,
+                },
+              ],
+              answer: 'The truth value is $1$ (True).',
+            },
+            {
+              title: 'Constructing a truth table for implication',
+              problem:
+                'Construct the truth table for the compound statement $(p \\land q) \\Rightarrow p$ across all four possible combinations of $p$ and $q$, and determine whether it is a tautology.',
+              given: [
+                'Two propositions $p$ and $q$, giving $2^2 = 4$ combinations: $(1, 1)$, $(1, 0)$, $(0, 1)$, $(0, 0)$.',
+              ],
+              steps: [
+                {
+                  text: 'Compute $p \\land q$ for each row: $1 \\land 1 = 1$, $1 \\land 0 = 0$, $0 \\land 1 = 0$, and $0 \\land 0 = 0$.',
+                  math: String.raw`p \land q \in \{1, 0, 0, 0\}`,
+                },
+                {
+                  text: 'Evaluate the implication $(p \\land q) \\Rightarrow p$ row by row: for $(1, 1)$, $1 \\Rightarrow 1 = 1$; for $(1, 0)$, $0 \\Rightarrow 1 = 1$; for $(0, 1)$, $0 \\Rightarrow 0 = 1$; for $(0, 0)$, $0 \\Rightarrow 0 = 1$.',
+                  math: String.raw`(p \land q) \Rightarrow p = 1 \quad \text{for all rows}`,
+                },
+              ],
+              answer:
+                'The expression evaluates to $1$ in every row of the truth table, which proves $(p \\land q) \\Rightarrow p$ is a tautology (always true).',
+            },
+            {
+              title: 'Negating a quantified statement',
+              problem:
+                'State the negation of the proposition: "For all real numbers $x$, $x^2 + 1 > 0$".',
+              given: [
+                'Universal proposition: $P: \\forall x \\in \\mathbb{R}, x^2 + 1 > 0$.',
+              ],
+              steps: [
+                {
+                  text: 'Apply the rule for negating a universal quantifier: $\\neg(\\forall x \\in E, P(x)) \\Leftrightarrow \\exists x \\in E, \\neg P(x)$.',
+                  math: String.raw`\neg(\forall x \in \mathbb{R}, x^2 + 1 > 0) \iff \exists x \in \mathbb{R}, \neg(x^2 + 1 > 0)`,
+                },
+                {
+                  text: 'Negate the inequality condition: the negation of $> 0$ is $\\le 0$.',
+                  math: String.raw`\neg(x^2 + 1 > 0) \iff x^2 + 1 \le 0`,
+                },
+              ],
+              answer:
+                'The negation is $\\exists x \\in \\mathbb{R}, x^2 + 1 \\le 0$ ("There exists a real number $x$ such that $x^2 + 1 \\le 0$").',
+            },
+          ],
+          mistakes: [
+            {
+              mistake: 'Assuming that $0 \\Rightarrow 1$ is false ($0$).',
+              correction:
+                'In formal logic, $p \\Rightarrow q$ is false only when $p = 1$ and $q = 0$. When the premise $p$ is false ($0$), the implication $0 \\Rightarrow 1$ is true ($1$).',
+            },
+            {
+              mistake: 'Negating $p \\land q$ as $\\neg p \\land \\neg q$.',
+              correction:
+                'By De Morgan\'s laws, the negation of AND is OR: $\\neg(p \\land q) \\Leftrightarrow \\neg p \\lor \\neg q$. Both components are negated and the connective flips.',
+            },
+            {
+              mistake: 'Confusing the converse $q \\Rightarrow p$ with the contrapositive $\\neg q \\Rightarrow \\neg p$.',
+              correction:
+                'An implication $p \\Rightarrow q$ is not always equivalent to its converse $q \\Rightarrow p$, but it is always logically equivalent to its contrapositive $\\neg q \\Rightarrow \\neg p$.',
+            },
+            {
+              mistake: 'Negating a universal statement $\\forall x, P(x)$ as $\\forall x, \\neg P(x)$.',
+              correction:
+                'To disprove that all elements satisfy a property, you only need one counterexample: the negation is $\\exists x, \\neg P(x)$, not "all $x$ do not satisfy $P(x)$".',
+            },
+          ],
+          exercises: [
+            {
+              id: 'g10-logic-ex-1',
+              type: 'multiple-choice',
+              prompt: 'If $p = 1$ (True) and $q = 0$ (False), what is the truth value of the conjunction $p \\land q$?',
+              options: [
+                '$0$ (False), because both propositions must be $1$',
+                '$1$ (True), because $p$ is $1$',
+                'Indeterminate without knowing context',
+                'Both $1$ and $0$',
+              ],
+              correctOption: 0,
+              hint: 'Recall that $1 \\text{ and } 0 \\text{ is } 0$.',
+              explanation:
+                'A conjunction $p \\land q$ is true ($1$) only when both $p = 1$ and $q = 1$. Since $q = 0$, $1 \\land 0 = 0$.',
+              difficulty: 'easy',
+            },
+            {
+              id: 'g10-logic-ex-2',
+              type: 'numeric',
+              prompt: 'If proposition $p = 1$ and proposition $q = 0$, compute the truth value of the disjunction $p \\lor q$ (enter 1 for true, 0 for false).',
+              answer: 1,
+              tolerance: 0,
+              hint: 'In disjunction (OR), $1 \\text{ or } 0 \\text{ is } 1$.',
+              explanation:
+                'The disjunction $p \\lor q$ is true ($1$) if at least one proposition is true ($1$). Since $p = 1$, $1 \\lor 0 = 1$.',
+              difficulty: 'easy',
+            },
+            {
+              id: 'g10-logic-ex-3',
+              type: 'numeric',
+              prompt: 'Given propositions $p = 0$, $q = 1$, and $r = 0$, evaluate the truth value of the compound statement $(p \\Rightarrow q) \\land (\\neg r \\lor p)$ (enter 1 for true, 0 for false).',
+              answer: 1,
+              tolerance: 0,
+              hint: 'First find $0 \\Rightarrow 1$, then $\\neg 0 \\lor 0$, then combine with AND.',
+              explanation:
+                'First, $p \\Rightarrow q$ is $0 \\Rightarrow 1 = 1$. Second, $\\neg r = \\neg 0 = 1$, so $\\neg r \\lor p = 1 \\lor 0 = 1$. Finally, $1 \\land 1 = 1$. The truth value is $1$.',
+              difficulty: 'medium',
+            },
+            {
+              id: 'g10-logic-ex-4',
+              type: 'multiple-choice',
+              prompt: 'Which of the following compound propositions is logically equivalent to the conditional statement $p \\Rightarrow q$?',
+              options: [
+                '$\\neg p \\lor q$',
+                '$p \\land \\neg q$',
+                '$\\neg p \\land q$',
+                '$q \\Rightarrow p$',
+              ],
+              correctOption: 0,
+              hint: 'Consider which expression is false only when $p = 1$ and $q = 0$.',
+              explanation:
+                'The conditional $p \\Rightarrow q$ is false only when $p = 1$ and $q = 0$. The expression $\\neg p \\lor q$ is also false only when $\\neg p = 0$ (so $p = 1$) and $q = 0$. Hence $(p \\Rightarrow q) \\Leftrightarrow (\\neg p \\lor q)$.',
+              difficulty: 'medium',
+            },
+            {
+              id: 'g10-logic-ex-5',
+              type: 'multiple-choice',
+              prompt: 'What is the logical negation of the quantified statement $\\forall x \\in \\mathbb{R}, x^2 + 1 > 0$?',
+              options: [
+                '$\\exists x \\in \\mathbb{R}, x^2 + 1 \\le 0$',
+                '$\\forall x \\in \\mathbb{R}, x^2 + 1 \\le 0$',
+                '$\\exists x \\in \\mathbb{R}, x^2 + 1 < 0$',
+                '$\\forall x \\notin \\mathbb{R}, x^2 + 1 > 0$',
+              ],
+              correctOption: 0,
+              hint: 'Negating a universal quantifier $\\forall$ switches it to an existential quantifier $\\exists$, and $> 0$ becomes $\\le 0$.',
+              explanation:
+                'Negating $\\forall x \\in \\mathbb{R}, P(x)$ yields $\\exists x \\in \\mathbb{R}, \\neg P(x)$. The negation of $x^2 + 1 > 0$ is $x^2 + 1 \\le 0$.',
+              difficulty: 'hard',
+            },
+            {
+              id: 'g10-logic-ex-6',
+              type: 'numeric',
+              prompt: 'In a truth table with 4 rows for $(p \\land \\neg q) \\land (p \\Rightarrow q)$, how many rows have a truth value of 1 (true)?',
+              answer: 0,
+              tolerance: 0,
+              hint: 'Notice that $p \\land \\neg q$ means $p = 1$ and $q = 0$, but what is $p \\Rightarrow q$ in that case?',
+              explanation:
+                '$p \\land \\neg q$ is true only when $p = 1$ and $q = 0$. However, when $p = 1$ and $q = 0$, $p \\Rightarrow q = 0$. Thus their conjunction is $1 \\land 0 = 0$ in that row, and $0$ in all other rows. It is a contradiction, so $0$ rows have value $1$.',
+              difficulty: 'hard',
+            },
+          ],
+          related: [
+            'geometric-proofs',
+            'systems-of-inequalities',
+            'probability-rules-and-counting',
+          ],
+          aliases: [
+            'mathematical logic',
+            'truth tables',
+            'propositions',
+            'boolean logic',
+            'logical connectives',
+            'implication',
+            'negation',
+            'conjunction',
+            'disjunction',
+          ],
+        },
         {
           id: 'quadratic-equations',
           title: 'Quadratic Equations',

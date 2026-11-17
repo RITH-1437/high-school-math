@@ -5,6 +5,9 @@
  */
 export const SEARCH_SYNONYMS: Record<string, string[]> = {
   // Named theorems and formulas
+  logic: ['mathematical logic', 'truth table', 'proposition', 'connective', 'conjunction', 'disjunction', 'implication'],
+  'truth-table': ['logic', 'truth value', 'boolean', 'propositions'],
+  proposition: ['logic', 'statement', 'truth table'],
   pythagoras: ['pythagorean', 'pythagoras theorem', 'pythagorean theorem'],
   pythagorean: ['pythagoras'],
   hypotenuse: ['pythagorean', 'right triangle'],
@@ -207,6 +210,10 @@ export const SEARCH_SYNONYMS: Record<string, string[]> = {
   'នព្វន្ធ': ['arithmetic', 'arithmetic sequence', 'ស្វ៊ីតនព្វន្ធ'],
   'ធរណីមាត្រ': ['geometry'],
   'ពិជគណិត': ['algebra'],
+  'តក្កវិទ្យា': ['logic', 'mathematical logic', 'សំណើ', 'តារាងភាពពិត', 'ឈ្នាប់'],
+  'សំណើ': ['proposition', 'statement', 'តក្កវិទ្យា', 'តម្លៃភាពពិត'],
+  'តារាងភាពពិត': ['truth table', 'តក្កវិទ្យា', 'សំណើ'],
+  'ឈ្នាប់តក្កវិទ្យា': ['logical connectives', 'និង', 'ឬ', 'មិន', 'នាំឱ្យ', 'សមមូល'],
   'ស្ថិតិ': ['statistics', 'មធ្យម', 'មេដ្យាន', 'ម៉ូដ', 'វ៉ារ្យ៉ង់', 'គម្លាតស្តង់ដារ'],
   'មធ្យម': ['mean', 'average'],
   'មេដ្យាន': ['median'],

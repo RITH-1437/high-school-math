@@ -1213,6 +1213,48 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://math-high-school.vercel.app/grades/10/subjects/algebra/topics/mathematical-logic</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-high-school.vercel.app/formulas/g10-logic-conjunction-and</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-high-school.vercel.app/formulas/g10-logic-disjunction-or</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-high-school.vercel.app/formulas/g10-logic-negation-not</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-high-school.vercel.app/formulas/g10-logic-conditional-implication</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-high-school.vercel.app/formulas/g10-logic-biconditional-equivalence</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://math-high-school.vercel.app/formulas/g10-logic-demorgan-laws</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://math-high-school.vercel.app/grades/10/subjects/algebra/topics/quadratic-equations</loc>
     <lastmod>2026-11-17</lastmod>
     <changefreq>weekly</changefreq>

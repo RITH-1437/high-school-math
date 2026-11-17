@@ -78,6 +78,30 @@ const METADATA_MAP: Record<
     examFocus?: 'diploma' | 'bac2'
   }
 > = {
+  'Proposition / Statement': {
+    symbol: 'p, q \\in \\{0, 1\\}',
+    partOfSpeech: 'n',
+    lesson: {
+      grade: '10',
+      gradeLabelEn: 'Grade 10',
+      gradeLabelKm: 'ថ្នាក់ទី ១០',
+      topicTitleEn: 'Mathematical Logic',
+      topicTitleKm: 'តក្កវិទ្យា និងតារាងតម្លៃភាពពិត',
+      path: '/grades/10/subjects/algebra/topics/mathematical-logic',
+    },
+  },
+  'Truth table': {
+    symbol: 'p \\land q, p \\lor q',
+    partOfSpeech: 'n',
+    lesson: {
+      grade: '10',
+      gradeLabelEn: 'Grade 10',
+      gradeLabelKm: 'ថ្នាក់ទី ១០',
+      topicTitleEn: 'Mathematical Logic',
+      topicTitleKm: 'តក្កវិទ្យា និងតារាងតម្លៃភាពពិត',
+      path: '/grades/10/subjects/algebra/topics/mathematical-logic',
+    },
+  },
   'Natural number': {
     symbol: '\\mathbb{N} = \\{1, 2, 3, \\dots\\}',
     partOfSpeech: 'n',
