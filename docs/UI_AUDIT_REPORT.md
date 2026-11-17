@@ -1,7 +1,7 @@
 # UI Audit Report — High School Math (Cambodian National Curriculum)
 
 **Platform:** High School Math  
-**Live Target:** [https://high-school-math-formula.vercel.app/](https://high-school-math-formula.vercel.app/)  
+**Live Target:** [https://math-high-school.vercel.app/](https://math-high-school.vercel.app/)  
 **Curriculum Scope:** MoEYS Cambodia, Grades 7–12 (Lower & Upper Secondary)  
 **Audit Date:** November 14, 2026  
 **Auditor:** Lead UI/UX Architect, Motion Specialist & QA Engineer  

@@ -1,7 +1,7 @@
 # Final UI/UX Review — High School Math
 
 **Project:** High School Math — Cambodian National Curriculum Migration & UI/UX Enhancement  
-**Live Production URL:** [https://high-school-math-formula.vercel.app/](https://high-school-math-formula.vercel.app/)  
+**Live Production URL:** [https://math-high-school.vercel.app/](https://math-high-school.vercel.app/)  
 **Completion Date:** November 14, 2026  
 **Lead Reviewer:** Lead Software Architect, Senior UI/UX Designer & QA Orchestrator  
 

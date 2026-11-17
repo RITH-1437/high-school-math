@@ -1,9 +1,24 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig, type Plugin } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
+import { generateSitemap } from './scripts/generate-sitemap'
+
+function sitemapPlugin(): Plugin {
+  return {
+    name: 'generate-sitemap',
+    apply: 'build',
+    buildStart() {
+      generateSitemap()
+    },
+    closeBundle() {
+      const distDir = path.resolve(__dirname, './dist')
+      generateSitemap(distDir)
+    },
+  }
+}
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), sitemapPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

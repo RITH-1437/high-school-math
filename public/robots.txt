@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://high-school-math-formula.vercel.app/sitemap.xml
+Sitemap: https://math-high-school.vercel.app/sitemap.xml
