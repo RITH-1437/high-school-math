@@ -1,6 +1,7 @@
 import katex from 'katex'
 import { describe, expect, it } from 'vitest'
 import { grades, topicBySlug } from './index'
+import { shapes } from './shapes'
 import { visualsByGrade } from './visuals'
 import { kmGrade7 } from '../i18n/km/grade7'
 import { kmGrade8 } from '../i18n/km/grade8'
@@ -8,6 +9,7 @@ import { kmGrade9 } from '../i18n/km/grade9'
 import { kmGrade10 } from '../i18n/km/grade10'
 import { kmGrade11 } from '../i18n/km/grade11'
 import { kmGrade12 } from '../i18n/km/grade12'
+import { kmShapeContent, localizeShape } from '../i18n/shapes-km'
 import type { GradeTranslation } from '../i18n/content'
 import { splitInlineMath } from '../lib/inline-math'
 import type { Flowchart, GraphSpec } from '../types/content'
@@ -100,6 +102,69 @@ describe('Khmer grade translations', () => {
       expect(errors).toEqual([])
     })
   }
+})
+
+describe('Khmer shape content', () => {
+  it('covers every shape and mirrors its structure', () => {
+    const errors: string[] = []
+    for (const shape of shapes) {
+      const km = kmShapeContent[shape.id]
+      if (!km) {
+        errors.push(`${shape.id}: missing Khmer copy`)
+        continue
+      }
+      if (km.properties.length !== shape.properties.length) {
+        errors.push(`${shape.id}: ${km.properties.length} properties, expected ${shape.properties.length}`)
+      }
+      if (km.formulas.length !== shape.formulas.length) {
+        errors.push(`${shape.id}: ${km.formulas.length} formulas, expected ${shape.formulas.length}`)
+      }
+      if (km.example.steps.length !== shape.example.steps.length) {
+        errors.push(`${shape.id}: ${km.example.steps.length} example steps, expected ${shape.example.steps.length}`)
+      }
+      for (const dimension of shape.dimensions) {
+        if (!km.dimensions[dimension.key]) errors.push(`${shape.id}: missing dimension ${dimension.key}`)
+      }
+      for (const metric of shape.metrics) {
+        if (!km.metrics[metric.key]) errors.push(`${shape.id}: missing metric ${metric.key}`)
+      }
+    }
+    expect(errors).toEqual([])
+  })
+
+  it('writes Khmer prose and keeps every math segment compilable', () => {
+    const errors: string[] = []
+    for (const shape of shapes) {
+      const km = kmShapeContent[shape.id]
+      if (!km) continue
+      expect(KHMER.test(km.definition), `${shape.id} definition is Khmer`).toBe(true)
+      errors.push(...mathErrors(km.definition, `${shape.id} definition`))
+      km.properties.forEach((property, i) => errors.push(...mathErrors(property, `${shape.id} property ${i}`)))
+      km.formulas.forEach((formula, i) => errors.push(...mathErrors(formula.note, `${shape.id} formula ${i}`)))
+      errors.push(...mathErrors(km.example.problem, `${shape.id} example`), ...mathErrors(km.example.answer, `${shape.id} answer`))
+      km.example.steps.forEach((step, i) => errors.push(...mathErrors(step, `${shape.id} step ${i}`)))
+    }
+    expect(errors).toEqual([])
+  })
+
+  it('localizes only text and leaves ids, formulas and calculations untouched', () => {
+    for (const shape of shapes) {
+      const localized = localizeShape(shape, 'km')
+      expect(localized.id).toBe(shape.id)
+      expect(localized.category).toBe(shape.category)
+      expect(localized.name).not.toBe(shape.name)
+      expect(KHMER.test(localized.name), `${shape.id} name`).toBe(true)
+      expect(localized.formulas.map((f) => f.expression)).toEqual(shape.formulas.map((f) => f.expression))
+      expect(localized.dimensions.map((d) => [d.key, d.min, d.max, d.step, d.defaultValue])).toEqual(
+        shape.dimensions.map((d) => [d.key, d.min, d.max, d.step, d.defaultValue]),
+      )
+      for (const [index, metric] of shape.metrics.entries()) {
+        const dims = Object.fromEntries(shape.dimensions.map((d) => [d.key, d.defaultValue]))
+        expect(localized.metrics[index].compute(dims)).toBe(metric.compute(dims))
+      }
+    }
+    expect(localizeShape(shapes[0], 'en')).toBe(shapes[0])
+  })
 })
 
 function flowchartProblems(chart: Flowchart): string[] {

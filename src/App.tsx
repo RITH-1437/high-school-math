@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useParams } from 'react-router-dom'
 import { RootLayout } from './components/layout/RootLayout'
 import HomePage from './pages/HomePage'
 import GradesPage from './pages/GradesPage'
@@ -16,6 +16,7 @@ const ShapesPage = lazy(() => import('./pages/ShapesPage'))
 const ExamPage = lazy(() => import('./pages/ExamPage'))
 const GlossaryPage = lazy(() => import('./pages/GlossaryPage'))
 const BaciiPage = lazy(() => import('./pages/BaciiPage'))
+const GraphPage = lazy(() => import('./pages/GraphPage'))
 
 function Loading() {
   return (
@@ -26,6 +27,11 @@ function Loading() {
   )
 }
 
+function CalculusTopicRedirect() {
+  const { topicId } = useParams()
+  return <Navigate to={`/grades/12/subjects/advanced/topics/${topicId}`} replace />
+}
+
 export default function App() {
   return (
     <Routes>
@@ -33,6 +39,8 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="grades" element={<GradesPage />} />
         <Route path="grades/:gradeId" element={<GradePage />} />
+        <Route path="grades/12/subjects/calculus" element={<Navigate to="/grades/12/subjects/advanced" replace />} />
+        <Route path="grades/12/subjects/calculus/topics/:topicId" element={<CalculusTopicRedirect />} />
         <Route path="grades/:gradeId/subjects/:subjectId" element={<SubjectPage />} />
         <Route path="grades/:gradeId/subjects/:subjectId/topics/:topicId" element={<TopicPage />} />
         <Route path="formulas" element={<FormulasPage />} />
@@ -92,6 +100,22 @@ export default function App() {
           element={
             <Suspense fallback={<Loading />}>
               <GlossaryPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="graph"
+          element={
+            <Suspense fallback={<Loading />}>
+              <GraphPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="plotter"
+          element={
+            <Suspense fallback={<Loading />}>
+              <GraphPage />
             </Suspense>
           }
         />

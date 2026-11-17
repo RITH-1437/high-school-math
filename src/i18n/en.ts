@@ -385,8 +385,8 @@ export const en = {
   /* Shapes ----------------------------------------------------------- */
   'shapes.crumb': 'Shapes',
   'shapes.eyebrow': 'Shape Lab',
-  'shapes.meta2d': '{count} 2D shapes',
-  'shapes.meta3d': '{count} 3D solids',
+  'shapes.meta2d': '2D shapes',
+  'shapes.meta3d': '3D solids',
   'shapes.metaHint': 'Drag, zoom and resize to explore',
   'shapes.labAria': '{name} interactive lab',
   'shapes.collectionEyebrow': 'Collection',
@@ -422,6 +422,16 @@ export const en = {
   'lab.answer': 'Answer:',
   'lab.grade': 'Grade {n}',
   'lab.dimensionValue': '{value} {unit}',
+  'lab.diagramAria': '{name} diagram. {metrics}.',
+  'lab.interactive3dAria': 'Interactive {name}. {metrics}. Drag to rotate; use plus and minus keys to zoom.',
+  'lab.viewControls': '3D view controls',
+  'lab.zoomIn': 'Zoom in',
+  'lab.zoomOut': 'Zoom out',
+  'lab.resetView': 'Reset 3D view',
+  'lab.dragToRotate': 'Drag to rotate',
+  'lab.scrollToZoom': 'scroll or +/− to zoom',
+  'lab.previewUnavailable': 'Preview unavailable',
+  'lab.staticReference': 'This solid is shown as a static reference drawing.',
 
   /* Exercises -------------------------------------------------------- */
   'exercise.questionOf': 'Question {current} of {total}',

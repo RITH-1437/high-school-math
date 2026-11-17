@@ -1,6 +1,15 @@
 import katex from 'katex'
 import { describe, expect, it } from 'vitest'
-import { formulaRefs, grades, libraryStats, topicRefs, topicBySlug } from './index'
+import {
+  findTopicInSubject,
+  formulaRefs,
+  getSubject,
+  getSubjectRef,
+  grades,
+  libraryStats,
+  topicBySlug,
+  topicRefs,
+} from './index'
 import { shapes } from './shapes'
 import { GRADE_IDS } from '../types/content'
 import { splitInlineMath } from '../lib/inline-math'
@@ -40,6 +49,14 @@ describe('grade structure', () => {
       const ids = grade.subjects.map((s) => s.id)
       expect(new Set(ids).size, `${grade.id}: ${ids.join(',')}`).toBe(ids.length)
     }
+  })
+
+  it('resolves subject aliases such as 12:calculus to advanced', () => {
+    const ref = getSubjectRef('12', 'calculus')
+    expect(ref).toBeDefined()
+    expect(ref?.subject.id).toBe('advanced')
+    expect(getSubject('12', 'calculus')?.id).toBe('advanced')
+    expect(findTopicInSubject('12', 'calculus', 'differentiation')?.topic.id).toBe('differentiation')
   })
 })
 

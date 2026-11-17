@@ -11,7 +11,8 @@ import { ShapeCard } from '../components/shapes/ShapeCard'
 import { ShapeLab, ShapeReference } from '../components/shapes/ShapeLab'
 import NotFoundPage from './NotFoundPage'
 import { useI18n } from '../lib/i18n'
-import { shapeCopy } from '../i18n/content'
+import { kmAliases, kmShapes, shapeTerm } from '../i18n/content'
+import { localizeShape } from '../i18n/shapes-km'
 
 type Category = 'all' | '2d' | '3d'
 
@@ -19,11 +20,11 @@ export default function ShapesPage() {
   const { shapeId } = useParams()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<Category>('all')
-  const { language, t } = useI18n()
+  const { language, num, t } = useI18n()
 
   const requested = shapeId ? findShape(shapeId) : undefined
   const selected = requested ?? shapes[0]
-  const shapeInfo = shapeCopy(selected, language)
+  const localized = useMemo(() => localizeShape(selected, language), [selected, language])
 
   useEffect(() => {
     if (requested) recordVisit('shape', requested.id)
@@ -34,13 +35,28 @@ export default function ShapesPage() {
     return shapes.filter((shape) => {
       if (category !== 'all' && shape.category !== category) return false
       if (!normalized) return true
-      const haystack = normalizeSearchText([shape.name, shape.tagline, ...(shape.aliases ?? [])].join(' '))
+      const copy = kmShapes[shape.id]
+      const aliases = shape.aliases ?? []
+      // Search both languages so a Khmer query still finds Latin-authored shapes.
+      const haystack = normalizeSearchText(
+        [
+          shape.name,
+          shape.tagline,
+          ...aliases,
+          ...aliases.map((alias) => shapeTerm(alias, 'km')),
+          copy?.name,
+          copy?.tagline,
+          ...(kmAliases[shape.id] ?? []),
+        ]
+          .filter(Boolean)
+          .join(' '),
+      )
       return normalized.split(' ').every((term) => haystack.includes(term))
     })
   }, [query, category])
 
   if (shapeId && !requested) {
-    return <NotFoundPage message={`There is no shape called “${shapeId}”. Pick one from the Shape Lab.`} />
+    return <NotFoundPage message={t('shapes.notFound', { id: shapeId })} />
   }
 
   const count2d = shapes.filter((s) => s.category === '2d').length
@@ -53,33 +69,33 @@ export default function ShapesPage() {
         crumbs={[
           { label: t('common.home'), to: '/' },
           { label: t('shapes.crumb'), to: shapeId ? '/shapes' : undefined },
-          ...(shapeId ? [{ label: shapeInfo.name }] : []),
+          ...(shapeId ? [{ label: localized.name }] : []),
         ]}
         eyebrow={t('shapes.eyebrow')}
-        title={shapeInfo.name}
-        intro={shapeInfo.tagline}
+        title={localized.name}
+        intro={localized.tagline}
         meta={
           <>
             <span>
-              <strong>{count2d}</strong> {t('shapes.meta2d', { count: count2d })}
+              <strong>{num(count2d)}</strong> {t('shapes.meta2d')}
             </span>
             <span>
-              <strong>{count3d}</strong> {t('shapes.meta3d', { count: count3d })}
+              <strong>{num(count3d)}</strong> {t('shapes.meta3d')}
             </span>
             <span>{t('shapes.metaHint')}</span>
           </>
         }
       />
 
-      <section className="lab-section" aria-label={`${selected.name} interactive lab`}>
+      <section className="lab-section" aria-label={t('shapes.labAria', { name: localized.name })}>
         <div className="container">
-          <ShapeLab key={selected.id} shape={selected} />
+          <ShapeLab key={selected.id} shape={localized} />
         </div>
       </section>
 
       <section className="section section--tight">
         <div className="container">
-          <ShapeReference key={selected.id} shape={selected} />
+          <ShapeReference key={selected.id} shape={localized} />
         </div>
       </section>
 

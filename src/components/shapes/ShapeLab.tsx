@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import type { Shape, ShapeDimensions } from '../../types/content'
 import { topicsForShape, topicUrl } from '../../data'
 import { formatMetricValue } from '../../lib/format'
+import { useI18n } from '../../lib/i18n'
+import { topicCopy } from '../../i18n/content'
 import { BookmarkButton } from '../ui/BookmarkButton'
 import { MathBlock, RichText } from '../ui/Math'
 import { IconEye, IconEyeOff, IconRotate } from '../ui/Icons'
@@ -22,6 +24,7 @@ function metricUnit(kind: string, baseUnit: string): string {
 }
 
 export function ShapeLab({ shape }: { shape: Shape }) {
+  const { num, t } = useI18n()
   const [dims, setDims] = useState<ShapeDimensions>(() => defaultsFor(shape))
   const [showLabels, setShowLabels] = useState(true)
   const [highlight, setHighlight] = useState<string | undefined>()
@@ -64,7 +67,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
             onClick={() => setShowLabels((v) => !v)}
           >
             {showLabels ? <IconEyeOff size={15} /> : <IconEye size={15} />}
-            {showLabels ? 'Hide labels' : 'Show labels'}
+            {showLabels ? t('lab.hideLabels') : t('lab.showLabels')}
           </button>
           <button
             type="button"
@@ -72,7 +75,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
             onClick={() => setDims(defaultsFor(shape))}
             disabled={isDefault}
           >
-            <IconRotate size={15} /> Reset dimensions
+            <IconRotate size={15} /> {t('lab.resetDimensions')}
           </button>
         </div>
       </div>
@@ -80,7 +83,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
       <div className="lab__panel">
         <section aria-labelledby="dims-heading">
           <h2 id="dims-heading" className="lab__heading">
-            Dimensions
+            {t('lab.dimensions')}
           </h2>
           <div className="lab__controls">
             {shape.dimensions.map((dimension) => {
@@ -100,7 +103,10 @@ export function ShapeLab({ shape }: { shape: Shape }) {
                       {dimension.label} <MathBlock tex={dimension.symbol} display={false} />
                     </label>
                     <output htmlFor={id}>
-                      {formatMetricValue(current, 2)} {dimension.unit}
+                      {t('lab.dimensionValue', {
+                        value: num(formatMetricValue(current, 2)),
+                        unit: dimension.unit,
+                      })}
                     </output>
                   </div>
                   <input
@@ -125,7 +131,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
 
         <section aria-labelledby="values-heading" aria-live="polite">
           <h2 id="values-heading" className="lab__heading">
-            Live measurements
+            {t('lab.liveMeasurements')}
           </h2>
           <dl className="readouts">
             {values.map(({ metric, computed, exact }) => (
@@ -133,7 +139,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
                 <dt>{metric.label}</dt>
                 <dd>
                   <strong>
-                    {formatMetricValue(computed, metric.precision ?? 2)} {metricUnit(metric.kind, baseUnit)}
+                    {num(formatMetricValue(computed, metric.precision ?? 2))} {metricUnit(metric.kind, baseUnit)}
                   </strong>
                   {exact && <span className="readout__exact">= {exact}</span>}
                   <span className="readout__formula">
@@ -150,13 +156,14 @@ export function ShapeLab({ shape }: { shape: Shape }) {
 }
 
 export function ShapeReference({ shape }: { shape: Shape }) {
+  const { language, t } = useI18n()
   const related = topicsForShape(shape.id)
   return (
     <div className="shape-reference">
       <div className="shape-reference__main">
         <header className="shape-reference__head">
           <div>
-            <span className="eyebrow">{shape.category === '2d' ? '2D shape' : '3D solid'}</span>
+            <span className="eyebrow">{shape.category === '2d' ? t('lab.shape2d') : t('lab.shape3d')}</span>
             <h2>{shape.name}</h2>
           </div>
           <BookmarkButton kind="shape" id={shape.id} label={shape.name} showLabel />
@@ -165,7 +172,7 @@ export function ShapeReference({ shape }: { shape: Shape }) {
           <RichText text={shape.definition} />
         </p>
 
-        <h3 className="lab__heading">Properties</h3>
+        <h3 className="lab__heading">{t('lab.properties')}</h3>
         <ul className="plain-list">
           {shape.properties.map((property, index) => (
             <li key={index}>
@@ -176,12 +183,12 @@ export function ShapeReference({ shape }: { shape: Shape }) {
 
         {related.length > 0 && (
           <>
-            <h3 className="lab__heading">Learn it in context</h3>
+            <h3 className="lab__heading">{t('lab.learnInContext')}</h3>
             <ul className="plain-list">
               {related.map((ref) => (
                 <li key={ref.key}>
-                  <Link to={topicUrl(ref)}>{ref.topic.title}</Link>{' '}
-                  <span className="muted">— Grade {ref.grade.number}</span>
+                  <Link to={topicUrl(ref)}>{topicCopy(ref.topic, language).title}</Link>{' '}
+                  <span className="muted">— {t('lab.grade', { n: ref.grade.number })}</span>
                 </li>
               ))}
             </ul>
@@ -190,7 +197,7 @@ export function ShapeReference({ shape }: { shape: Shape }) {
       </div>
 
       <div className="shape-reference__side">
-        <h3 className="lab__heading">Formulas</h3>
+        <h3 className="lab__heading">{t('lab.formulas')}</h3>
         <ul className="formula-lines">
           {shape.formulas.map((formula, index) => (
             <li key={index}>
@@ -205,7 +212,7 @@ export function ShapeReference({ shape }: { shape: Shape }) {
           ))}
         </ul>
 
-        <h3 className="lab__heading">Solved example</h3>
+        <h3 className="lab__heading">{t('lab.solvedExample')}</h3>
         <div className="example-card example-card--compact">
           <p>
             <RichText text={shape.example.problem} />
@@ -219,7 +226,7 @@ export function ShapeReference({ shape }: { shape: Shape }) {
           </ol>
           <div className="example-card__answer">
             <p>
-              <strong>Answer:</strong> <RichText text={shape.example.answer} />
+              <strong>{t('lab.answer')}</strong> <RichText text={shape.example.answer} />
             </p>
           </div>
         </div>

@@ -25,8 +25,18 @@ export function getGrade(id: string | undefined): Grade | undefined {
   return grades.find((grade) => grade.id === id)
 }
 
+export const subjectAliases: Record<string, string> = {
+  '12:calculus': 'advanced',
+}
+
+export function resolveSubjectId(gradeId: string, subjectId: string): string {
+  return subjectAliases[`${gradeId}:${subjectId}`] ?? subjectId
+}
+
 export function getSubject(gradeId: string | undefined, subjectId: string | undefined): Subject | undefined {
-  return getGrade(gradeId)?.subjects.find((subject) => subject.id === subjectId)
+  if (!gradeId || !subjectId) return undefined
+  const resolved = resolveSubjectId(gradeId, subjectId)
+  return getGrade(gradeId)?.subjects.find((subject) => subject.id === resolved)
 }
 
 export interface TopicLocation {
@@ -60,7 +70,8 @@ export function findTopicInSubject(
 ): TopicRef | undefined {
   const ref = findTopic(topicId)
   if (!ref) return undefined
-  if (ref.grade.id !== gradeId || ref.subject.id !== subjectId) return undefined
+  const resolved = gradeId && subjectId ? resolveSubjectId(gradeId, subjectId) : subjectId
+  if (ref.grade.id !== gradeId || ref.subject.id !== resolved) return undefined
   return ref
 }
 
@@ -94,7 +105,8 @@ export const subjectByKey = new Map<string, SubjectRef>(
 )
 
 export function getSubjectRef(gradeId: string, subjectId: string): SubjectRef | undefined {
-  return subjectByKey.get(`${gradeId}:${subjectId}`)
+  const resolved = resolveSubjectId(gradeId, subjectId)
+  return subjectByKey.get(`${gradeId}:${resolved}`)
 }
 
 export const shapeById = new Map<string, Shape>(shapes.map((shape) => [shape.id, shape]))

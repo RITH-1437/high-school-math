@@ -77,8 +77,9 @@ Unlike flat reference tables or cheat sheets, High School Math treats mathematic
 |---|---|---|
 | 🎓 **Curriculum Tracks (Grades 7–12)** | Complete coverage of lower and upper secondary mathematics structured into 8 fundamental subject families. | 6 Grades · 27 Subjects · 74 In-depth Topics · 264 Namespaced Formulas |
 | 📐 **Interactive Shape Lab** | Real-time parametric geometry laboratory with dynamic 2D inline SVG and custom 3D isometric canvas rendering. | 20 Shapes (12 2D, 8 3D) · Dynamic sliders · Exact algebraic expressions ($\pi$, surds, radicals) · Zero Three.js |
+| 📈 **Function Grapher** | Exact Cartesian plotting for lines, parabolas, polynomials, rational, trigonometric, root and absolute-value functions. | Intercepts · Vertex · Domain & range · Point tracer · Table of values · Step-by-step plotting guide |
 | 📝 **MoEYS National Exam Lab** | Timed mock examinations with real-world format matching Cambodian national diploma and baccalaureate standards. | Grade 9 Diploma · Grade 12 Bac II · Semester Papers · Official A–F Letter Grading · Printable exam layout |
-| 🌐 **Bilingual Khmer/English** | Native bilingual interface and curriculum content with dedicated Khmer typography and terminology. | English & ភាសាខ្មែរ · 227-term enriched glossary · Noto Sans/Serif Khmer Variable fonts · MoEYS vocabulary |
+| 🌐 **Bilingual Khmer/English** | Native bilingual interface and curriculum content with dedicated Khmer typography and terminology. | English & ភាសាខ្មែរ · Khmer lesson prose · Khmer Shape Lab · 227-term enriched glossary · Noto Sans/Serif Khmer Variable fonts · MoEYS vocabulary |
 | 🔬 **7-Step Worked Examples** | Pedagogically verified problem-solving sequences ensuring complete comprehension of every step. | 148 Worked Examples · Problem, Given, Formula, Substitution, Calculation, Answer, Units |
 | ✍️ **Interactive Practice Exercises** | Self-scoring multiple-choice and numeric problem sets with step-by-step explanations and hint systems. | 427 Exercises · Configurable numeric tolerance · Real-time validation · Attempt history |
 | 🔍 **Deterministic Instant Search** | Instant client-side search engine indexed over formulas, variables, theorems, topics, and bilingual synonyms. | Sub-millisecond queries · Weighted field scoring · Alias matching · Zero network calls |
@@ -193,6 +194,8 @@ high-school-math/
 │   │   │   ├── ShapeCard.tsx    Card preview component for shapes directory
 │   │   │   └── ShapeLab.tsx     Full interactive playground with live controls
 │   │   └── ui/                  Atomic design elements (Cards, Dialogs, Icons)
+│   │       ├── Graph.tsx        Exact SVG Cartesian graph renderer
+│   │       ├── Flowchart.tsx    Curriculum flowchart renderer
 │   │       ├── Math.tsx         KaTeX math wrapper (Inline & Block display)
 │   │       ├── ExampleCard.tsx  7-step worked solution card
 │   │       ├── FormulaCard.tsx  Card representation of namespaced formulas
@@ -213,6 +216,7 @@ high-school-math/
 │   │   ├── en.ts                English localization strings
 │   │   ├── km.ts                Khmer (ភាសាខ្មែរ) localization strings
 │   │   ├── content.ts           Bilingual mapping for curriculum titles & topics
+│   │   ├── shapes-km.ts         Khmer Shape Lab definitions, properties & examples
 │   │   ├── glossary.ts          227-term bilingual mathematics terminology
 │   │   └── types.ts             Language types & translation keys
 │   ├── lib/                     Pure logic, math engines, search & state management
@@ -221,6 +225,7 @@ high-school-math/
 │   │   ├── format.ts            Number formatting, tolerance verification & units
 │   │   ├── i18n.tsx             Language provider, document lang sync, font switches
 │   │   ├── inline-math.ts       Prose parser for `$math$` LaTeX expressions
+│   │   ├── math-parser.ts       Safe expression parser and function analyzer
 │   │   ├── progress.ts          Exercise attempts & recently viewed items
 │   │   ├── search.ts            Deterministic multi-field client-side search engine
 │   │   └── theme.tsx            Light/dark theme provider with flash-prevention
@@ -230,6 +235,7 @@ high-school-math/
 │   │   ├── FormulaPage.tsx      Dedicated permalink view for individual formulas
 │   │   ├── FormulasPage.tsx     Filtered directory of all 264 formulas
 │   │   ├── GlossaryPage.tsx     Bilingual searchable terminology dictionary
+│   │   ├── GraphPage.tsx        Interactive function grapher and analyzer
 │   │   ├── GradePage.tsx        Single grade dashboard with subject breakdowns
 │   │   ├── GradesPage.tsx       Overview of all Grades 7–12
 │   │   ├── HomePage.tsx         Editorial landing page with quick jump hubs

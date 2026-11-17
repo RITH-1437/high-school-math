@@ -13,6 +13,7 @@ import {
   IconChevronDown,
   IconExam,
   IconFormula,
+  IconFunction,
   IconGrades,
   IconHome,
   IconMoon,
@@ -127,6 +128,15 @@ export function Header() {
                     <h4>{isKhmer ? 'មន្ទីរពិសោធន៍គណិតវិទ្យា' : 'Interactive Labs'}</h4>
                   </div>
                   <ul className="mega-links-list">
+                    <li>
+                      <Link to="/graph" onClick={closeMenu}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <strong>{isKhmer ? 'ម៉ាស៊ីនគូសក្រាហ្វអនុគមន៍' : 'Function Grapher'}</strong>
+                          <span className="nav-dropdown__badge nav-dropdown__badge--gold">{isKhmer ? 'ថ្មី' : 'New'}</span>
+                        </div>
+                        <span>{isKhmer ? 'គូសក្រាហ្វ y = x + 2, ប៉ារ៉ាបូល, ស៊ីនុស និងតារាងតម្លៃ' : 'Plot y = x + 2, parabolas, trig & tables'}</span>
+                      </Link>
+                    </li>
                     <li>
                       <Link to="/shapes" onClick={closeMenu}>
                         <strong>{isKhmer ? 'មន្ទីរពិសោធន៍ធរណីមាត្រ' : 'Geometry Shape Lab'}</strong>
@@ -364,6 +374,19 @@ export function Header() {
                   <div className="nav-dropdown__item-body">
                     <strong>{isKhmer ? 'តារាងរូបមន្តទាំងអស់' : 'Formula Index'}</strong>
                     <span>{isKhmer ? `រូបមន្តគណិតវិទ្យាចំនួន ${num(formulaCount)} គ្របដណ្ដប់គ្រប់ផ្នែក` : `Complete directory of ${formulaCount} verified formulas`}</span>
+                  </div>
+                </Link>
+
+                <Link to="/graph" className="nav-dropdown__item" onClick={closeMenu}>
+                  <div className="nav-dropdown__item-icon">
+                    <IconFunction size={18} />
+                  </div>
+                  <div className="nav-dropdown__item-body">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <strong>{isKhmer ? 'ម៉ាស៊ីនគូសក្រាហ្វអនុគមន៍' : 'Function Grapher'}</strong>
+                      <span className="nav-dropdown__badge nav-dropdown__badge--gold">{isKhmer ? 'ថ្មី' : 'New'}</span>
+                    </div>
+                    <span>{isKhmer ? 'គូសក្រាហ្វ y = x + 2, ប៉ារ៉ាបូល, រកចំណុចប្រសព្វ និងតារាងតម្លៃ' : 'Interactive plotter for y = x + 2, parabolas, intercepts & tables'}</span>
                   </div>
                 </Link>
 

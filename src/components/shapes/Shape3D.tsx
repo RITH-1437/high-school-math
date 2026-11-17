@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Shape, ShapeDimensions } from '../../types/content'
 import { formatMetricValue, formatNumber } from '../../lib/format'
+import { useI18n } from '../../lib/i18n'
 import { IconRotate, IconZoom } from '../ui/Icons'
 
 type Vec3 = [number, number, number]
@@ -291,6 +292,7 @@ export function Shape3D({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const { num, t } = useI18n()
   const [size, setSize] = useState({ width: 640, height: 460 })
   const [yaw, setYaw] = useState(-0.62)
   const [pitch, setPitch] = useState(0.34)
@@ -432,14 +434,14 @@ export function Shape3D({
     if (mesh.vertices.length === 0) {
       context.fillStyle = '#a4aa9e'
       context.font = '13px Inter, sans-serif'
-      context.fillText('Preview unavailable', 16, 28)
+      context.fillText(t('lab.previewUnavailable'), 16, 28)
     }
-  }, [mesh, size, yaw, pitch, zoom, showLabels])
+  }, [mesh, size, yaw, pitch, zoom, showLabels, t])
 
   if (!mesh) {
     return (
       <div className={`shape-canvas shape-canvas--empty ${className}`}>
-        <p>This solid is shown as a static reference drawing.</p>
+        <p>{t('lab.staticReference')}</p>
       </div>
     )
   }
@@ -450,7 +452,7 @@ export function Shape3D({
     .map((metric) => {
       const computed = metric.compute(dimensions)
       const unit = metric.kind === 'volume' ? 'cm³' : 'cm²'
-      return `${metric.label}: ${formatMetricValue(computed, metric.precision ?? 2)} ${unit}`
+      return `${metric.label}: ${num(formatMetricValue(computed, metric.precision ?? 2))} ${unit}`
     })
 
   return (
@@ -463,7 +465,7 @@ export function Shape3D({
         ref={canvasRef}
         tabIndex={0}
         role="img"
-        aria-label={`Interactive ${shape.name}. ${liveMetrics.join('. ')}. Drag to rotate; use plus and minus keys to zoom.`}
+        aria-label={t('lab.interactive3dAria', { name: shape.name, metrics: liveMetrics.join('; ') })}
         onPointerDown={(event) => {
           event.currentTarget.setPointerCapture(event.pointerId)
           drag.current = { x: event.clientX, y: event.clientY, yaw, pitch }
@@ -513,12 +515,12 @@ export function Shape3D({
           }
         }}
       />
-      <div className="viewer-toolbar" aria-label="3D view controls">
+      <div className="viewer-toolbar" aria-label={t('lab.viewControls')}>
         <button
           type="button"
           className="viewer-control"
           onClick={() => setZoom((current) => Math.min(2.1, current + 0.12))}
-          aria-label="Zoom in"
+          aria-label={t('lab.zoomIn')}
         >
           <IconZoom size={15} />
         </button>
@@ -526,7 +528,7 @@ export function Shape3D({
           type="button"
           className="viewer-control"
           onClick={() => setZoom((current) => Math.max(0.6, current - 0.12))}
-          aria-label="Zoom out"
+          aria-label={t('lab.zoomOut')}
           style={{ fontSize: '1rem', lineHeight: 1 }}
         >
           −
@@ -539,13 +541,13 @@ export function Shape3D({
             setPitch(0.34)
             setZoom(1)
           }}
-          aria-label="Reset 3D view"
+          aria-label={t('lab.resetView')}
         >
           <IconRotate size={15} />
         </button>
       </div>
       <p className="viewer-hint">
-        <IconRotate size={12} /> Drag to rotate <span aria-hidden="true">·</span> scroll or +/− to zoom
+        <IconRotate size={12} /> {t('lab.dragToRotate')} <span aria-hidden="true">·</span> {t('lab.scrollToZoom')}
       </p>
     </div>
   )

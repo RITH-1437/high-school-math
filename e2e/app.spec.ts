@@ -148,6 +148,41 @@ test.describe('shape lab', () => {
   })
 })
 
+test.describe('Khmer localization', () => {
+  test('switches the interface and Shape Lab content to Khmer', async ({ page }) => {
+    await page.goto('/shapes/circle')
+    await page.locator('header .lang-toggle').click()
+    await expect(page.locator('html')).toHaveAttribute('lang', 'km')
+    await expect(page.locator('header .lang-toggle')).toHaveAttribute('data-current-lang', 'km')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('រង្វង់')
+    await expect(page.getByRole('heading', { name: 'វិមាត្រ' })).toBeVisible()
+    await expect(page.locator('.shape-reference .lead')).toContainText('រង្វង់')
+    await expect(page.locator('.shape-reference')).toContainText('ចម្លើយ')
+  })
+
+  test('keeps Khmer after reload and filters shapes with a Khmer query', async ({ page }) => {
+    await page.goto('/shapes')
+    await page.locator('header .lang-toggle').click()
+    await page.reload()
+    await expect(page.locator('html')).toHaveAttribute('lang', 'km')
+    await page.locator('#shape-search').fill('រង្វង់')
+    const names = await page.locator('#collection .shape-card__name').allTextContents()
+    expect(names).toContain('រង្វង់')
+    expect(names.length).toBeGreaterThan(0)
+    expect(names.length).toBeLessThan(20)
+  })
+})
+
+test.describe('function grapher', () => {
+  test('plots an inverted parabola with the correct vertex', async ({ page }) => {
+    await page.goto('/graph')
+    await page.locator('#eq-input').fill('y = -x^2 + 2x + 3')
+    await expect(page.locator('.graph-render-wrapper svg')).toBeVisible()
+    await expect(page.locator('.graph-props-list')).toContainText('Quadratic function (Parabola)')
+    await expect(page.locator('.graph-props-list')).toContainText('(1, 4)')
+  })
+})
+
 test.describe('exercises', () => {
   test('answering a multiple-choice question shows feedback', async ({ page }) => {
     await page.goto('/grades/7/subjects/number-systems/topics/integers')

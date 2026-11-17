@@ -1,6 +1,8 @@
 import { useId, useMemo } from 'react'
 import type { Shape, ShapeDimensions } from '../../types/content'
+import type { Language } from '../../i18n/types'
 import { formatMetricValue, formatNumber } from '../../lib/format'
+import { useI18n } from '../../lib/i18n'
 
 interface Vec2 {
   x: number
@@ -44,7 +46,7 @@ function dimensionText(shape: Shape, dims: ShapeDimensions, key: string): string
   return `${compactSymbol} = ${formatNumber(raw)}${unit}`
 }
 
-function buildSpec(shape: Shape, dims: ShapeDimensions): ShapeSpec {
+function buildSpec(shape: Shape, dims: ShapeDimensions, language: Language = 'en'): ShapeSpec {
   switch (shape.id) {
     case 'triangle': {
       const base = dimValue(dims, 'base', 10)
@@ -331,7 +333,7 @@ function buildSpec(shape: Shape, dims: ShapeDimensions): ShapeSpec {
         {
           from: { x: 0, y: 0 },
           to: apothemPoint,
-          label: 'apothem',
+          label: shape.metrics.find((metric) => metric.key === 'apothem')?.label ?? 'apothem',
           offset: { x: 8, y: 0 },
           dashed: true,
         },
@@ -340,7 +342,10 @@ function buildSpec(shape: Shape, dims: ShapeDimensions): ShapeSpec {
         guides.push({
           from: { x: -radius, y: -radius },
           to: { x: radius, y: -radius },
-          label: `${sides} sides`,
+          label:
+            language === 'km'
+              ? `${sides} ${findDimension(shape, 'sides')?.label ?? ''}`.trim()
+              : `${sides} sides`,
           dimensionKey: 'sides',
           offset: { x: 0, y: 20 },
         })
@@ -370,7 +375,8 @@ export function Shape2D({
   className?: string
 }) {
   const uid = useId().replace(/[^a-zA-Z0-9_-]/g, '')
-  const spec = useMemo(() => buildSpec(shape, dimensions), [shape, dimensions])
+  const { language, num, t } = useI18n()
+  const spec = useMemo(() => buildSpec(shape, dimensions, language), [shape, dimensions, language])
 
   const allPoints: Vec2[] = [...(spec.polygon ?? [])]
   if (spec.circle) {
@@ -420,14 +426,14 @@ export function Shape2D({
   const ariaMetrics = shape.metrics
     .filter((metric) => metric.kind === 'area' || metric.kind === 'length')
     .slice(0, 2)
-    .map((metric) => `${metric.label} ${formatMetricValue(metric.compute(dimensions), metric.precision ?? 2)}`)
+    .map((metric) => `${metric.label} ${num(formatMetricValue(metric.compute(dimensions), metric.precision ?? 2))}`)
 
   return (
     <div className={`shape-figure ${className}`.trim()}>
       <svg
         viewBox={`0 0 ${viewWidth} ${viewHeight}`}
         role="img"
-        aria-label={`${shape.name} diagram. ${ariaMetrics.join('. ')}.`}
+        aria-label={t('lab.diagramAria', { name: shape.name, metrics: ariaMetrics.join('; ') })}
         className="shape-svg"
       >
         <defs>
