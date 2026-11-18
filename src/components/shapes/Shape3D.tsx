@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Shape, ShapeDimensions } from '../../types/content'
 import { formatMetricValue, formatNumber } from '../../lib/format'
 import { useI18n } from '../../lib/i18n'
-import { IconRotate, IconZoom } from '../ui/Icons'
+import { IconPause, IconPlay, IconRotate, IconZoom } from '../ui/Icons'
 
 type Vec3 = [number, number, number]
 
@@ -300,7 +300,14 @@ export function Shape3D({
   const [yaw, setYaw] = useState(-0.62)
   const [pitch, setPitch] = useState(0.34)
   const [zoom, setZoom] = useState(1)
+  const [spinning, setSpinning] = useState(false)
   const drag = useRef<{ x: number; y: number; yaw: number; pitch: number } | null>(null)
+  const spinPaused = useRef(false)
+  const spinResumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const spinFrameRef = useRef<number>(0)
+  const reducedMotion = useRef(
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
   const mesh = useMemo(() => buildShapeMesh(shape.id, dimensions), [shape.id, dimensions])
 
   useEffect(() => {
@@ -333,6 +340,27 @@ export function Shape3D({
     }
     return undefined
   }, [])
+
+  useEffect(() => {
+    if (!spinning || reducedMotion.current) {
+      cancelAnimationFrame(spinFrameRef.current)
+      return
+    }
+    let lastTime: number | null = null
+    const tick = (time: number) => {
+      if (!spinPaused.current) {
+        const delta = lastTime !== null ? time - lastTime : 0
+        setYaw((y) => y + delta * 0.00055)
+      }
+      lastTime = time
+      spinFrameRef.current = requestAnimationFrame(tick)
+    }
+    spinFrameRef.current = requestAnimationFrame(tick)
+    return () => {
+      cancelAnimationFrame(spinFrameRef.current)
+      if (spinResumeTimer.current) clearTimeout(spinResumeTimer.current)
+    }
+  }, [spinning])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -472,6 +500,8 @@ export function Shape3D({
         aria-label={t('lab.interactive3dAria', { name: shape.name, metrics: liveMetrics.join('; ') })}
         onPointerDown={(event) => {
           event.currentTarget.setPointerCapture(event.pointerId)
+          spinPaused.current = true
+          if (spinResumeTimer.current) clearTimeout(spinResumeTimer.current)
           drag.current = { x: event.clientX, y: event.clientY, yaw, pitch }
         }}
         onPointerMove={(event) => {
@@ -484,9 +514,19 @@ export function Shape3D({
         onPointerUp={(event) => {
           drag.current = null
           event.currentTarget.releasePointerCapture(event.pointerId)
+          if (spinning && !reducedMotion.current) {
+            spinResumeTimer.current = setTimeout(() => {
+              spinPaused.current = false
+            }, 2000)
+          }
         }}
         onPointerCancel={() => {
           drag.current = null
+          if (spinning && !reducedMotion.current) {
+            spinResumeTimer.current = setTimeout(() => {
+              spinPaused.current = false
+            }, 2000)
+          }
         }}
         onWheel={(event) => {
           event.preventDefault()
@@ -522,6 +562,22 @@ export function Shape3D({
       <div className="viewer-toolbar" aria-label={t('lab.viewControls')}>
         <button
           type="button"
+          className={`viewer-control${spinning ? ' viewer-control--active' : ''}`}
+          onClick={() => {
+            const next = !spinning
+            setSpinning(next)
+            if (!next) {
+              spinPaused.current = false
+              if (spinResumeTimer.current) clearTimeout(spinResumeTimer.current)
+            }
+          }}
+          aria-label={spinning ? t('lab.autoRotateOff') : t('lab.autoRotateOn')}
+          aria-pressed={spinning}
+        >
+          {spinning ? <IconPause size={14} /> : <IconPlay size={14} />}
+        </button>
+        <button
+          type="button"
           className="viewer-control"
           onClick={() => setZoom((current) => Math.min(2.1, current + 0.12))}
           aria-label={t('lab.zoomIn')}
@@ -535,7 +591,7 @@ export function Shape3D({
           aria-label={t('lab.zoomOut')}
           style={{ fontSize: '1rem', lineHeight: 1 }}
         >
-          −
+          -
         </button>
         <button
           type="button"

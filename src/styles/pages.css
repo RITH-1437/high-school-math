@@ -1472,6 +1472,16 @@
   background: rgba(255, 255, 255, 0.14);
 }
 
+.viewer-control--active {
+  background: rgba(214, 168, 75, 0.28);
+  border-color: rgba(214, 168, 75, 0.6);
+  color: #E5BE65;
+}
+
+.viewer-control--active:hover {
+  background: rgba(214, 168, 75, 0.38);
+}
+
 .viewer-hint {
   position: absolute;
   left: 1rem;

@@ -432,6 +432,8 @@ export const en = {
   'lab.resetView': 'Reset 3D view',
   'lab.dragToRotate': 'Drag to rotate',
   'lab.scrollToZoom': 'scroll or +/− to zoom',
+  'lab.autoRotateOn': 'Start auto-rotate',
+  'lab.autoRotateOff': 'Stop auto-rotate',
   'lab.previewUnavailable': 'Preview unavailable',
   'lab.staticReference': 'This solid is shown as a static reference drawing.',
 

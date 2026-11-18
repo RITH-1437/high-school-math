@@ -190,6 +190,19 @@ export const IconRotate = (props: IconProps) => (
   </IconBase>
 )
 
+export const IconPlay = (props: IconProps) => (
+  <IconBase {...props}>
+    <polygon points="6,3 20,12 6,21" fill="currentColor" stroke="none" />
+  </IconBase>
+)
+
+export const IconPause = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect x="5" y="3" width="4" height="18" rx="1" fill="currentColor" stroke="none" />
+    <rect x="15" y="3" width="4" height="18" rx="1" fill="currentColor" stroke="none" />
+  </IconBase>
+)
+
 export const IconZoom = (props: IconProps) => (
   <IconBase {...props}>
     <circle cx="10.5" cy="10.5" r="6.5" />

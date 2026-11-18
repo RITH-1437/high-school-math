@@ -435,6 +435,8 @@ export const km: Record<TranslationKey, string> = {
   'lab.resetView': 'កំណត់ទិដ្ឋភាព 3D ឡើងវិញ',
   'lab.dragToRotate': 'អូសដើម្បីបង្វិល',
   'lab.scrollToZoom': 'រំកិល ឬ +/− ដើម្បីពង្រីក',
+  'lab.autoRotateOn': 'ចាប់ផ្ដើមបង្វិលដោយស្វ័យប្រវត្តិ',
+  'lab.autoRotateOff': 'បញ្ឈប់ការបង្វិលដោយស្វ័យប្រវត្តិ',
   'lab.previewUnavailable': 'មិនអាចបង្ហាញមើលជាមុនបានទេ',
   'lab.staticReference': 'តួរឹងនេះបង្ហាញជាគំនូរយោងស្ថិរភាព។',
 
