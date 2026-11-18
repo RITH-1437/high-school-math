@@ -26,7 +26,7 @@ describe('SEO & Sitemap generation', () => {
 
   it('generates all expected route entries without duplicates', () => {
     const entries = buildSitemapEntries()
-    const expected = 1 + 6 + 2 + 3 + 6 + topicRefs.length + formulaRefs.length + shapes.length
+    const expected = 1 + 8 + 2 + 3 + 6 + topicRefs.length + formulaRefs.length + shapes.length
     const subjectCount = new Set(topicRefs.map((ref) => `${ref.grade.id}:${ref.subject.id}`)).size
     expect(entries.length).toBe(expected + subjectCount)
 
@@ -42,6 +42,8 @@ describe('SEO & Sitemap generation', () => {
     expect(paths).toContain('/shapes')
     expect(paths).toContain('/graph')
     expect(paths).toContain('/unit-circle')
+    expect(paths).toContain('/conics')
+    expect(paths).toContain('/labs/revolution')
     expect(paths).toContain('/bacii')
     expect(paths).toContain('/bacii/science')
     expect(paths).toContain('/bacii/social')

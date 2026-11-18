@@ -249,6 +249,24 @@ export const IconEyeOff = (props: IconProps) => (
   </IconBase>
 )
 
+export const IconLayers = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M3 8.5 12 4l9 4.5L12 13 3 8.5z" />
+    <path d="m3 12 9 4.5 9-4.5" />
+    <path d="m3 15.5 9 4.5 9-4.5" />
+  </IconBase>
+)
+
+export const IconConstruct = (props: IconProps) => (
+  <IconBase {...props}>
+    <circle cx="5" cy="5" r="2" />
+    <circle cx="19" cy="5" r="2" />
+    <circle cx="5" cy="19" r="2" />
+    <circle cx="19" cy="19" r="2" />
+    <path d="M5 7v10M19 7v10M7 5h10M7 19h10" />
+  </IconBase>
+)
+
 export const IconExam = (props: IconProps) => (
   <IconBase {...props}>
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Shape, ShapeDimensions } from '../../types/content'
 import { formatMetricValue, formatNumber } from '../../lib/format'
 import { useI18n } from '../../lib/i18n'
-import { IconPause, IconPlay, IconRotate, IconZoom } from '../ui/Icons'
+import { IconPause, IconPlay, IconRotate, IconZoom, IconLayers, IconConstruct } from '../ui/Icons'
 
 type Vec3 = [number, number, number]
 
@@ -301,10 +301,14 @@ export function Shape3D({
   const [pitch, setPitch] = useState(0.34)
   const [zoom, setZoom] = useState(1)
   const [spinning, setSpinning] = useState(false)
+  const [explodeAmount, setExplodeAmount] = useState(0) // 0 = normal, 1 = fully exploded
+  const [buildProgress, setBuildProgress] = useState(1) // 0 = vertices only, 0.5 = edges, 1 = full faces
+  const [isBuilding, setIsBuilding] = useState(false)
   const drag = useRef<{ x: number; y: number; yaw: number; pitch: number } | null>(null)
   const spinPaused = useRef(false)
   const spinResumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const spinFrameRef = useRef<number>(0)
+  const buildFrameRef = useRef<number>(0)
   const reducedMotion = useRef(
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
@@ -398,30 +402,101 @@ export function Shape3D({
 
     const faceData = mesh.faces.map((face) => {
       const points = face.map((index) => rotated[index])
-      const projected = points.map(project)
       const avgZ = points.reduce((total, point) => total + point[2], 0) / points.length
       const normal = normalOf(points)
       const brightness = Math.abs(normal[0] * lightUnit[0] + normal[1] * lightUnit[1] + normal[2] * lightUnit[2])
-      return { face, points, projected, avgZ, brightness }
+      
+      // Calculate face centroid for explode animation
+      const centroid: Vec3 = [
+        points.reduce((sum, p) => sum + p[0], 0) / points.length,
+        points.reduce((sum, p) => sum + p[1], 0) / points.length,
+        points.reduce((sum, p) => sum + p[2], 0) / points.length,
+      ]
+      
+      // Apply explode offset: push each face outward from origin along its centroid direction
+      let explodedPoints = points
+      if (explodeAmount > 0) {
+        const explodeScale = 0.4 * explodeAmount // Control how far faces move
+        explodedPoints = points.map((point): Vec3 => [
+          point[0] + centroid[0] * explodeScale,
+          point[1] + centroid[1] * explodeScale,
+          point[2] + centroid[2] * explodeScale,
+        ])
+      }
+      const projected = explodedPoints.map(project)
+      
+      return { face, points: explodedPoints, projected, avgZ, brightness }
     })
 
     faceData.sort((a, b) => a.avgZ - b.avgZ)
 
-    for (const { projected, brightness } of faceData) {
-      if (projected.length < 3) continue
-      context.beginPath()
-      context.moveTo(projected[0].x, projected[0].y)
-      for (let index = 1; index < projected.length; index += 1) {
-        context.lineTo(projected[index].x, projected[index].y)
+    // Render based on build progress
+    if (buildProgress < 0.33) {
+      // Stage 1: Show only vertices as dots
+      const vertexAlpha = Math.min(1, buildProgress * 3)
+      for (let i = 0; i < rotated.length; i += 1) {
+        const p = project(rotated[i])
+        context.save()
+        context.fillStyle = `rgba(56, 189, 248, ${vertexAlpha})`
+        context.beginPath()
+        context.arc(p.x, p.y, 4, 0, Math.PI * 2)
+        context.fill()
+        context.restore()
       }
-      context.closePath()
-      const shade = 0.38 + 0.62 * brightness
-      context.fillStyle = `rgb(${Math.round(20 * shade + 10)}, ${Math.round(50 * shade + 25)}, ${Math.round(110 * shade + 45)})`
-      context.fill()
-      if (mesh.strokeAlpha) {
-        context.strokeStyle = `rgba(56, 189, 248, ${mesh.strokeAlpha})`
-        context.lineWidth = 0.8
+    } else if (buildProgress < 0.66) {
+      // Stage 2: Show vertices and edges (wireframe)
+      const edgeAlpha = Math.min(1, (buildProgress - 0.33) * 3)
+      
+      // Draw edges
+      context.save()
+      context.strokeStyle = `rgba(56, 189, 248, ${edgeAlpha * 0.8})`
+      context.lineWidth = 1.5
+      for (const { projected } of faceData) {
+        if (projected.length < 2) continue
+        context.beginPath()
+        context.moveTo(projected[0].x, projected[0].y)
+        for (let i = 1; i < projected.length; i += 1) {
+          context.lineTo(projected[i].x, projected[i].y)
+        }
+        context.closePath()
         context.stroke()
+      }
+      context.restore()
+      
+      // Draw vertices on top
+      for (let i = 0; i < rotated.length; i += 1) {
+        const p = project(rotated[i])
+        context.save()
+        context.fillStyle = `rgba(56, 189, 248, ${Math.min(1, edgeAlpha + 0.3)})`
+        context.beginPath()
+        context.arc(p.x, p.y, 3.5, 0, Math.PI * 2)
+        context.fill()
+        context.restore()
+      }
+    } else {
+      // Stage 3: Transition from wireframe to solid faces
+      const faceAlpha = Math.min(1, (buildProgress - 0.66) * 3)
+      
+      for (const { projected, brightness } of faceData) {
+        if (projected.length < 3) continue
+        context.beginPath()
+        context.moveTo(projected[0].x, projected[0].y)
+        for (let index = 1; index < projected.length; index += 1) {
+          context.lineTo(projected[index].x, projected[index].y)
+        }
+        context.closePath()
+        
+        // Blend from wireframe to solid
+        const shade = 0.38 + 0.62 * brightness
+        context.fillStyle = `rgba(${Math.round(20 * shade + 10)}, ${Math.round(50 * shade + 25)}, ${Math.round(110 * shade + 45)}, ${faceAlpha})`
+        context.fill()
+        
+        if (mesh.strokeAlpha || faceAlpha < 1) {
+          const wireAlpha = mesh.strokeAlpha || 0.16
+          context.strokeStyle = `rgba(56, 189, 248, ${wireAlpha * (1 - faceAlpha * 0.7)})`
+          context.lineWidth = 0.8
+          context.stroke()
+        }
       }
     }
 
@@ -468,7 +543,7 @@ export function Shape3D({
       context.font = '13px Inter, sans-serif'
       context.fillText(t('lab.previewUnavailable'), 16, 28)
     }
-  }, [mesh, size, yaw, pitch, zoom, showLabels, highlight, t])
+  }, [mesh, size, yaw, pitch, zoom, showLabels, highlight, explodeAmount, buildProgress, t])
 
   if (!mesh) {
     return (
@@ -575,6 +650,79 @@ export function Shape3D({
           aria-pressed={spinning}
         >
           {spinning ? <IconPause size={14} /> : <IconPlay size={14} />}
+        </button>
+        <button
+          type="button"
+          className={`viewer-control${isBuilding ? ' viewer-control--active' : ''}`}
+          onClick={() => {
+            if (isBuilding) {
+              // Stop the animation
+              cancelAnimationFrame(buildFrameRef.current)
+              setIsBuilding(false)
+              setBuildProgress(1)
+            } else {
+              // Start the build animation sequence
+              setIsBuilding(true)
+              setBuildProgress(0)
+              
+              if (!reducedMotion.current) {
+                const startTime = performance.now()
+                const duration = 3000 // 3 seconds total animation
+                
+                const animate = (time: number) => {
+                  const elapsed = time - startTime
+                  const progress = Math.min(1, elapsed / duration)
+                  
+                  // Ease-in-out for smoother transitions between stages
+                  const eased = progress < 0.5 
+                    ? 2 * progress * progress 
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2
+                  
+                  setBuildProgress(eased)
+                  
+                  if (progress < 1) {
+                    buildFrameRef.current = requestAnimationFrame(animate)
+                  } else {
+                    setIsBuilding(false)
+                  }
+                }
+                buildFrameRef.current = requestAnimationFrame(animate)
+              } else {
+                // No animation, just show final state
+                setBuildProgress(1)
+                setIsBuilding(false)
+              }
+            }
+          }}
+          aria-label={isBuilding ? 'Stop build animation' : 'Show build process'}
+          aria-pressed={isBuilding}
+        >
+          <IconConstruct size={15} />
+        </button>
+        <button
+          type="button"
+          className={`viewer-control${explodeAmount > 0 ? ' viewer-control--active' : ''}`}
+          onClick={() => {
+            const target = explodeAmount > 0 ? 0 : 1
+            if (!reducedMotion.current) {
+              // Animate the explode transition
+              const startTime = performance.now()
+              const startValue = explodeAmount
+              const animate = (time: number) => {
+                const progress = Math.min(1, (time - startTime) / 600)
+                const eased = target > startValue ? progress * progress : 1 - (1 - progress) ** 2
+                setExplodeAmount(startValue + (target - startValue) * eased)
+                if (progress < 1) requestAnimationFrame(animate)
+              }
+              requestAnimationFrame(animate)
+            } else {
+              setExplodeAmount(target)
+            }
+          }}
+          aria-label={explodeAmount > 0 ? 'Show assembled' : 'Show exploded view'}
+          aria-pressed={explodeAmount > 0}
+        >
+          <IconLayers size={15} />
         </button>
         <button
           type="button"
