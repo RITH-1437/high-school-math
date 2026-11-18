@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import type { GradeId, SearchResultKind, SubjectFamily } from '../types/content'
 import {
@@ -121,6 +121,10 @@ export default function SearchPage() {
   const gradeOpts = useMemo(() => gradeOptions(language), [language])
   const subjects = useMemo(() => subjectFilterOptions(language), [language])
 
+  // Keep a ref to params so the debounce effect can read it without depending on it
+  const paramsRef = useRef(params)
+  paramsRef.current = params
+
   // Sync local input with query param on external navigation
   useEffect(() => {
     setInputValue(query)
@@ -129,16 +133,16 @@ export default function SearchPage() {
   // Smoothly debounce URL updates to prevent reload loops and preserve Khmer IME composition
   useEffect(() => {
     const timer = setTimeout(() => {
-      const currentParam = params.get('q') ?? ''
+      const currentParam = paramsRef.current.get('q') ?? ''
       if (inputValue !== currentParam) {
-        const next = new URLSearchParams(params)
+        const next = new URLSearchParams(paramsRef.current)
         if (!inputValue.trim()) next.delete('q')
         else next.set('q', inputValue)
         setParams(next, { replace: true })
       }
     }, 200)
     return () => clearTimeout(timer)
-  }, [inputValue, params, setParams])
+  }, [inputValue, setParams])
 
   const hits = useMemo(
     () => (query.trim() ? searchContent(query, { filters: { grade, subject }, language }) : []),
