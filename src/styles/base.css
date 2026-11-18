@@ -237,7 +237,7 @@ code {
 }
 
 .faint {
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .on-dark .muted,

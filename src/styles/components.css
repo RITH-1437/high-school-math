@@ -459,7 +459,7 @@
 }
 
 .breadcrumbs .sep {
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .breadcrumbs [aria-current='page'] {
@@ -523,7 +523,7 @@
 }
 
 .search-field input::placeholder {
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .search-field input::-webkit-search-cancel-button {
@@ -788,7 +788,7 @@
 .data-table th {
   padding: 0.65rem 0.85rem;
   border-bottom: 1px solid var(--line-strong);
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -930,7 +930,7 @@
   margin-top: auto;
   padding: 0.85rem 1.3rem;
   border-top: 1px solid #E2E8F0;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.71rem;
 }
 
@@ -1000,7 +1000,7 @@
   padding-top: 0.15rem;
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  color: var(--faint);
+  color: var(--muted);
   letter-spacing: 0.05em;
 }
 
@@ -1037,12 +1037,12 @@
   flex-wrap: wrap;
   gap: 0.35rem 0.8rem;
   font-size: 0.68rem;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .topic-row__arrow {
   align-self: center;
-  color: var(--faint);
+  color: var(--muted);
   transition: transform var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft);
 }
 
@@ -1217,7 +1217,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
   vertical-align: super;
   margin-left: 0.25rem;
 }
@@ -1246,7 +1246,7 @@
   gap: 0.75rem;
   margin-top: auto;
   padding-top: 1.2rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.75rem;
 }
 
@@ -1399,7 +1399,7 @@
 }
 
 .subject-card__topics a span {
-  color: var(--faint);
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 0.62rem;
 }
@@ -1411,7 +1411,7 @@
   gap: 1rem;
   margin-top: auto;
   padding-top: 1.15rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.7rem;
 }
 
@@ -1523,12 +1523,12 @@
   justify-content: space-between;
   gap: 0.5rem;
   margin-top: 0.3rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.68rem;
 }
 
 .shape-card__arrow {
-  color: var(--faint);
+  color: var(--muted);
   transition: transform var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft);
 }
 
@@ -1583,7 +1583,7 @@
 .tab__count {
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .filter-bar {
@@ -1603,7 +1603,7 @@
 
 .filter-group__label {
   margin-right: 0.2rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.66rem;
   font-weight: 650;
   letter-spacing: 0.1em;
@@ -1664,7 +1664,7 @@
   gap: 0.75rem;
   padding: 0.95rem 1.1rem;
   border-bottom: 1px solid #E2E8F0;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 [data-theme='dark'] .search-dialog__head {
@@ -1684,7 +1684,7 @@
 }
 
 .search-dialog__head input::placeholder {
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .search-dialog__body {
@@ -1698,7 +1698,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.65rem 0.75rem 0.35rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.61rem;
   font-weight: 700;
   letter-spacing: 0.13em;
@@ -1754,7 +1754,7 @@
 }
 
 .search-result__title .search-result__kind {
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.6rem;
   font-weight: 650;
   letter-spacing: 0.08em;
@@ -1785,7 +1785,7 @@
 
 .search-result__enter {
   align-self: center;
-  color: var(--faint);
+  color: var(--muted);
   flex-shrink: 0;
 }
 
@@ -1814,7 +1814,7 @@
   padding: 0.65rem 1rem;
   border-top: 1px solid var(--line);
   background: var(--surface-sunken);
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.69rem;
 }
 
@@ -1885,7 +1885,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem 0.9rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.75rem;
 }
 

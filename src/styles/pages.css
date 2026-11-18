@@ -346,7 +346,7 @@
 .family-card__foot {
   margin-top: auto;
   padding-top: 0.75rem;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.7rem;
 }
 
@@ -442,7 +442,7 @@
 
 .pager__link small {
   display: block;
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -729,7 +729,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .example-card__given {
@@ -756,7 +756,7 @@
 .example-card__progress {
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .example-steps {
@@ -1505,7 +1505,7 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .lab-section .lab__heading {
@@ -1677,7 +1677,7 @@
 }
 
 .formula-lines__note {
-  color: var(--faint);
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
@@ -1749,7 +1749,7 @@
 .result-group__title span {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--faint);
+  color: var(--muted);
 }
 
 .result-list {
