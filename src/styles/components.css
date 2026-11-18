@@ -1149,7 +1149,7 @@
 .grade-card[data-milestone='bacii'] .badge--outline {
   background: #FFF1F2;
   border-color: rgba(200, 59, 69, 0.35);
-  color: #C83B45;
+  color: #B02F39; /* darkened from #C83B45 for WCAG AA contrast (5.77:1 vs 4.59:1) */
 }
 
 .grade-card[data-milestone='bacii']:hover {
