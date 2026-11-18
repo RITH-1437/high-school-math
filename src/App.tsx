@@ -42,6 +42,7 @@ const GraphPage = lazyPage(() => import('./pages/GraphPage'))
 const UnitCirclePage = lazyPage(() => import('./pages/UnitCirclePage'))
 const BacIISprintPage = lazyPage(() => import('./pages/BacIISprintPage'))
 const ConicsPage = lazyPage(() => import('./pages/ConicsPage'))
+const RevolutionPage = lazyPage(() => import('./pages/RevolutionPage'))
 
 const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
   shapes: ShapesPage,
@@ -55,6 +56,7 @@ const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
   circle: UnitCirclePage,
   sprint: BacIISprintPage,
   conics: ConicsPage,
+  revolution: RevolutionPage,
 }
 
 /** Loads the code-split page for a pathname, if it has one. Never rejects. */
@@ -192,6 +194,14 @@ export default function App() {
           element={
             <Suspense fallback={<Loading />}>
               <ConicsPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="labs/revolution"
+          element={
+            <Suspense fallback={<Loading />}>
+              <RevolutionPage />
             </Suspense>
           }
         />
