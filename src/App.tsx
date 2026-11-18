@@ -39,6 +39,8 @@ const ExamPage = lazyPage(() => import('./pages/ExamPage'))
 const GlossaryPage = lazyPage(() => import('./pages/GlossaryPage'))
 const BaciiPage = lazyPage(() => import('./pages/BaciiPage'))
 const GraphPage = lazyPage(() => import('./pages/GraphPage'))
+const UnitCirclePage = lazyPage(() => import('./pages/UnitCirclePage'))
+const BacIISprintPage = lazyPage(() => import('./pages/BacIISprintPage'))
 
 const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
   shapes: ShapesPage,
@@ -48,11 +50,18 @@ const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
   bacii: BaciiPage,
   graph: GraphPage,
   plotter: GraphPage,
+  'unit-circle': UnitCirclePage,
+  circle: UnitCirclePage,
+  sprint: BacIISprintPage,
 }
 
 /** Loads the code-split page for a pathname, if it has one. Never rejects. */
 export function preloadRoute(pathname: string): Promise<void> {
-  const section = pathname.split('/').filter(Boolean)[0] ?? ''
+  const segments = pathname.split('/').filter(Boolean)
+  if (segments[0] === 'exam' && segments[1] === 'sprint') {
+    return BacIISprintPage.preload().catch(() => undefined)
+  }
+  const section = segments[0] ?? ''
   const page = LAZY_SECTIONS[section]
   return page ? page.preload().catch(() => undefined) : Promise.resolve()
 }
@@ -111,6 +120,15 @@ export default function App() {
           }
         />
         <Route
+          path="exam/sprint"
+          element={
+            <Suspense fallback={<Loading />}>
+              <BacIISprintPage />
+            </Suspense>
+          }
+        />
+        <Route path="sprint" element={<Navigate to="/exam/sprint" replace />} />
+        <Route
           path="exams"
           element={
             <Suspense fallback={<Loading />}>
@@ -158,6 +176,15 @@ export default function App() {
             </Suspense>
           }
         />
+        <Route
+          path="unit-circle"
+          element={
+            <Suspense fallback={<Loading />}>
+              <UnitCirclePage />
+            </Suspense>
+          }
+        />
+        <Route path="circle" element={<Navigate to="/unit-circle" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

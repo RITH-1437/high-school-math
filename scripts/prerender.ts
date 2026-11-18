@@ -33,6 +33,8 @@ const LAZY_PAGE_SOURCES: Record<string, string> = {
   glossary: 'src/pages/GlossaryPage.tsx',
   bacii: 'src/pages/BaciiPage.tsx',
   graph: 'src/pages/GraphPage.tsx',
+  'unit-circle': 'src/pages/UnitCirclePage.tsx',
+  sprint: 'src/pages/BacIISprintPage.tsx',
 }
 
 const SEO_REGION = /<!--seo:start-->[\s\S]*?<!--seo:end-->/
@@ -56,8 +58,11 @@ function collectChunkAssets(manifest: Manifest, key: string, seen = new Set<stri
 
 function routeAssetTags(manifest: Manifest | null, routePath: string, template: string): string {
   if (!manifest) return ''
-  const section = routePath.split('/').filter(Boolean)[0] ?? ''
-  const source = LAZY_PAGE_SOURCES[section]
+  const segments = routePath.split('/').filter(Boolean)
+  const source =
+    segments[0] === 'exam' && segments[1] === 'sprint'
+      ? 'src/pages/BacIISprintPage.tsx'
+      : LAZY_PAGE_SOURCES[segments[0] ?? '']
   if (!source) return ''
   const { css, js } = collectChunkAssets(manifest, source)
   const tags: string[] = []

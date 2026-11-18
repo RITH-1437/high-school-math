@@ -5,6 +5,8 @@
   "redirects": [
     { "source": "/exams", "destination": "/exam", "permanent": true },
     { "source": "/plotter", "destination": "/graph", "permanent": true },
+    { "source": "/circle", "destination": "/unit-circle", "permanent": true },
+    { "source": "/sprint", "destination": "/exam/sprint", "permanent": true },
     { "source": "/grades/12/subjects/calculus", "destination": "/grades/12/subjects/advanced", "permanent": true },
     {
       "source": "/grades/12/subjects/calculus/topics/:topicId",

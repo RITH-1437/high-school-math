@@ -138,6 +138,15 @@ export function Header() {
                       </Link>
                     </li>
                     <li>
+                      <Link to="/unit-circle" onClick={closeMenu}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                          <strong>{isKhmer ? 'រង្វង់ត្រីកោណមាត្រ' : 'Unit Circle Lab'}</strong>
+                          <span className="nav-dropdown__badge nav-dropdown__badge--gold">{isKhmer ? 'ថ្មី' : 'New'}</span>
+                        </div>
+                        <span>{isKhmer ? 'ស្វែងយល់តម្លៃមុំ sin, cos, tan និងសញ្ញាកាដ្រង់' : 'Explore sin, cos, tan & exact radian values'}</span>
+                      </Link>
+                    </li>
+                    <li>
                       <Link to="/shapes" onClick={closeMenu}>
                         <strong>{isKhmer ? 'មន្ទីរពិសោធន៍ធរណីមាត្រ' : 'Geometry Shape Lab'}</strong>
                         <span>{isKhmer ? 'រាងពីរវិមាត្រ និងបីវិមាត្រ ជាមួយការគណនាផ្ទៃក្រឡា និងមាឌ' : '2D shapes & 3D solid recalculations'}</span>
@@ -387,6 +396,19 @@ export function Header() {
                       <span className="nav-dropdown__badge nav-dropdown__badge--gold">{isKhmer ? 'ថ្មី' : 'New'}</span>
                     </div>
                     <span>{isKhmer ? 'គូសក្រាហ្វ y = x + 2, ប៉ារ៉ាបូល, រកចំណុចប្រសព្វ និងតារាងតម្លៃ' : 'Interactive plotter for y = x + 2, parabolas, intercepts & tables'}</span>
+                  </div>
+                </Link>
+
+                <Link to="/unit-circle" className="nav-dropdown__item" onClick={closeMenu}>
+                  <div className="nav-dropdown__item-icon">
+                    <IconShapes size={18} />
+                  </div>
+                  <div className="nav-dropdown__item-body">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                      <strong>{isKhmer ? 'រង្វង់ត្រីកោណមាត្រ' : 'Unit Circle Lab'}</strong>
+                      <span className="nav-dropdown__badge nav-dropdown__badge--gold">{isKhmer ? 'ថ្មី' : 'New'}</span>
+                    </div>
+                    <span>{isKhmer ? 'ស្វែងយល់តម្លៃមុំ sin, cos, tan ជាក់លាក់ និងសញ្ញាកាដ្រង់' : 'Interactive unit circle, exact trig values & quadrant signs'}</span>
                   </div>
                 </Link>
 

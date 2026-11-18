@@ -283,6 +283,8 @@ export function normalizePath(pathname: string): string {
 export const ROUTE_ALIASES: Record<string, string> = {
   '/exams': '/exam',
   '/plotter': '/graph',
+  '/circle': '/unit-circle',
+  '/sprint': '/exam/sprint',
 }
 
 export function getRouteMeta(rawPathname: string): RouteMeta {
@@ -472,6 +474,28 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
       ])
     }
 
+    case 'unit-circle':
+    case 'circle': {
+      if (second) break
+      const description =
+        'Interactive Unit Circle Lab (រង្វង់ត្រីកោណមាត្រ): explore exact radian angles, sine, cosine and tangent coordinate projections, and MoEYS Cambodian high school formulas for Grades 10–12.'
+      return page(
+        '/unit-circle',
+        withBrand('Unit Circle Lab (រង្វង់ត្រីកោណមាត្រ)'),
+        description,
+        [HOME, { name: 'Unit Circle', path: '/unit-circle' }],
+        [
+          learningResourceLd({
+            path: '/unit-circle',
+            name: 'Interactive Unit Circle Lab',
+            description,
+            resourceType: 'Interactive resource',
+            about: ['Trigonometry', 'Unit Circle', 'Sine', 'Cosine', 'Radians'],
+          }),
+        ],
+      )
+    }
+
     case 'bacii': {
       const baciiCrumb: Crumb = { name: 'BacII Guide', path: '/bacii' }
       if (!second) {
@@ -509,6 +533,25 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
     }
 
     case 'exam': {
+      if (second === 'sprint') {
+        const description =
+          'BacII Sprint Drill Mode (ការហ្វឹកហាត់ល្បឿនបាក់ឌុប): rapid formula recall for Grade 12 MoEYS limits, derivatives, integrals, complex numbers, and probability with instant feedback.'
+        return page(
+          '/exam/sprint',
+          withBrand('BacII Sprint Drill Mode (ការហ្វឹកហាត់ល្បឿនបាក់ឌុប)'),
+          description,
+          [HOME, { name: 'Exams', path: '/exam' }, { name: 'Sprint Drill', path: '/exam/sprint' }],
+          [
+            learningResourceLd({
+              path: '/exam/sprint',
+              name: 'BacII Sprint Drill Mode',
+              description,
+              resourceType: 'Quiz',
+              educationalLevel: 'Grade 12',
+            }),
+          ],
+        )
+      }
       if (second) break
       const description =
         'Practice mathematics exam papers for Grades 7–12 in the Cambodian format: Grade 9 Diploma, Grade 12 BacII and semester papers, with timed self-testing and step-by-step solutions.'
@@ -585,9 +628,11 @@ export function listIndexableRoutes(): SitemapRoute[] {
   add('/formulas', '0.9')
   add('/shapes', '0.9')
   add('/graph', '0.8')
+  add('/unit-circle', '0.8')
   add('/bacii', '0.9')
   for (const track of Object.keys(TRACKS)) add(`/bacii/${track}`, '0.8')
   add('/exam', '0.8')
+  add('/exam/sprint', '0.8')
   add('/glossary', '0.8')
 
   for (const grade of grades) {
