@@ -35,6 +35,8 @@ const LAZY_PAGE_SOURCES: Record<string, string> = {
   graph: 'src/pages/GraphPage.tsx',
   'unit-circle': 'src/pages/UnitCirclePage.tsx',
   sprint: 'src/pages/BacIISprintPage.tsx',
+  conics: 'src/pages/ConicsPage.tsx',
+  labs: 'src/pages/RevolutionPage.tsx',
 }
 
 const SEO_REGION = /<!--seo:start-->[\s\S]*?<!--seo:end-->/

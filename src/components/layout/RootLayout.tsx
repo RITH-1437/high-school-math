@@ -19,7 +19,7 @@ function ScrollToTop() {
     }
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
     return undefined
-  }, [location.pathname, location.hash, location.key])
+  }, [location.pathname, location.hash])
 
   return null
 }
@@ -52,7 +52,7 @@ export function RootLayout() {
       <SeoHead />
       <Header />
       <main id="main-content" className="site-main" tabIndex={-1}>
-        <div key={`${location.pathname}${location.search}`} className="page-enter">
+        <div key={location.pathname} className="page-enter">
           <Outlet />
         </div>
       </main>

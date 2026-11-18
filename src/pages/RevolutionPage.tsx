@@ -27,7 +27,7 @@ export default function RevolutionPage() {
           'បន្ទះពិសោធន៍បរិមាណវិលបង្វិល',
         )}
         intro={pick(
-          'Watch the solid of revolution build up as x sweeps from a to b. Drag the 3D solid to rotate it, adjust the limits with sliders, and verify the closed-form result against the numerical integral. Covers y = x², y = √x, and y = x — all core BacII exam functions.',
+          'Watch the solid of revolution build up as x sweeps from a to b. Drag the 3D solid to rotate it, adjust the limits with sliders, and verify the closed-form result against the numerical integral. Covers y = x², y = √x, and y = x, all core BacII exam functions.',
           'មើលតួរាងបីវិមាត្រកកើតឡើងពេល x ស្រែកពី a ដល់ b។ អូសតួរាង 3D ដើម្បីបង្វិល ប្ដូរដែនកំណត់ដោយប្រើប៊ូតុងរំកិល ហើយបញ្ជាក់លទ្ធផលរូបមន្តបិទជាមួយអាំងតេក្រាលលេខ។ គ្របដណ្ដប់ y = x² y = √x និង y = x ដែលជាអនុគមន៍ស្នូល BacII ទាំងអស់។',
         )}
       />

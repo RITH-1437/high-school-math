@@ -496,6 +496,52 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
       )
     }
 
+    case 'conics': {
+      if (second) break
+      const description =
+        'Interactive Conic Sections Playground (បន្ទះពិសោធន៍កោនិក): explore Parabola, Ellipse, and Hyperbola with draggable point P, live focal-distance verification, and parameter sliders. Grades 11–12 MoEYS curriculum.'
+      return page(
+        '/conics',
+        withBrand('Conic Sections Playground (បន្ទះពិសោធន៍កោនិក)'),
+        description,
+        [HOME, { name: 'Conic Sections', path: '/conics' }],
+        [
+          learningResourceLd({
+            path: '/conics',
+            name: 'Conic Sections Playground',
+            description,
+            resourceType: 'Interactive resource',
+            educationalLevel: 'Grades 11–12',
+            about: ['Conic sections', 'Parabola', 'Ellipse', 'Hyperbola'],
+          }),
+        ],
+      )
+    }
+
+    case 'labs': {
+      if (second === 'revolution') {
+        const description =
+          'Volume of Revolution Lab (បន្ទះពិសោធន៍បរិមាណវិលបង្វិល): interactive 3D solid built by rotating y = x², y = √x, or y = x around the x-axis. Watch the sweep animation, adjust limits a and b, and verify closed-form integrals. Grade 12 BacII core.'
+        return page(
+          '/labs/revolution',
+          withBrand('Volume of Revolution Lab (Grade 12 BacII)'),
+          description,
+          [HOME, { name: 'Volume of Revolution', path: '/labs/revolution' }],
+          [
+            learningResourceLd({
+              path: '/labs/revolution',
+              name: 'Volume of Revolution Lab',
+              description,
+              resourceType: 'Interactive resource',
+              educationalLevel: 'Grade 12',
+              about: ['Integral calculus', 'Volume of revolution', 'BacII'],
+            }),
+          ],
+        )
+      }
+      break
+    }
+
     case 'bacii': {
       const baciiCrumb: Crumb = { name: 'BacII Guide', path: '/bacii' }
       if (!second) {
@@ -629,6 +675,8 @@ export function listIndexableRoutes(): SitemapRoute[] {
   add('/shapes', '0.9')
   add('/graph', '0.8')
   add('/unit-circle', '0.8')
+  add('/conics', '0.8')
+  add('/labs/revolution', '0.8')
   add('/bacii', '0.9')
   for (const track of Object.keys(TRACKS)) add(`/bacii/${track}`, '0.8')
   add('/exam', '0.8')

@@ -383,10 +383,10 @@ export function RevolutionLab() {
     x: 'y = x',
   }
 
-  const formulaTeX: Record<FuncId, string> = {
-    x2: 'V = \\pi\\int_{a}^{b} x^4\\,dx',
-    sqrtx: 'V = \\pi\\int_{a}^{b} x\\,dx',
-    x: 'V = \\pi\\int_{a}^{b} x^2\\,dx',
+  const integrandTeX: Record<FuncId, string> = {
+    x2: 'x^4',
+    sqrtx: 'x',
+    x: 'x^2',
   }
 
   return (
@@ -401,7 +401,7 @@ export function RevolutionLab() {
             role="img"
             aria-label={pick(
               `Volume of revolution solid, V = ${fmt(volume)} cubic units`,
-              `បរិមាណវិលបង្វិល V = ${fmt(volume)} ឯកតាឡូប`,
+              `បរិមាណវិលបង្វិល V = ${fmt(volume)} ឯកតាគូប`,
             )}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
@@ -476,7 +476,7 @@ export function RevolutionLab() {
 
           {/* Integral formula */}
           <div className="rev-lab__section rev-lab__formula-block">
-            <MathBlock tex={`${formulaTeX[funcId]} = \\pi \\int_{${fmt(aVal, 2)}}^{${fmt(bVal, 2)}} [f(x)]^2\\,dx`} />
+            <MathBlock tex={`V = \\pi\\int_{${fmt(aVal, 2)}}^{${fmt(bVal, 2)}} ${integrandTeX[funcId]}\\,dx`} />
           </div>
 
           {/* Numerical + closed-form result */}
@@ -508,11 +508,11 @@ export function RevolutionLab() {
             className={`rev-lab__play-btn${playing ? ' is-playing' : ''}`}
             onClick={playAnimation}
             disabled={playing}
-            aria-label={pick('Animate sweep from a to b', 'ចាក់ហ្វីល្មពី a ដល់ b')}
+            aria-label={pick('Animate sweep from a to b', 'បង្ហាញចលនាពី a ដល់ b')}
           >
             {playing
-              ? pick('Sweeping…', 'កំពុងចាក់ហ្វីល្ម…')
-              : pick('Animate sweep', 'ចាក់ហ្វីល្ម')}
+              ? pick('Sweeping…', 'កំពុងបង្ហាញចលនា…')
+              : pick('Animate sweep', 'បង្ហាញចលនា')}
           </button>
 
           {/* Terms */}

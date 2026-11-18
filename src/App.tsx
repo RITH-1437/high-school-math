@@ -56,7 +56,7 @@ const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
   circle: UnitCirclePage,
   sprint: BacIISprintPage,
   conics: ConicsPage,
-  revolution: RevolutionPage,
+  labs: RevolutionPage,
 }
 
 /** Loads the code-split page for a pathname, if it has one. Never rejects. */
