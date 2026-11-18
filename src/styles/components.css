@@ -1096,6 +1096,87 @@
   border-color: var(--accent);
 }
 
+/* Milestone grade cards — Grade 9 (Diploma) and Grade 12 (BacII) */
+.grade-card[data-milestone='diploma'] {
+  border-color: rgba(214, 168, 75, 0.5);
+  background: linear-gradient(150deg, #FFFFFF 55%, rgba(214, 168, 75, 0.07) 100%);
+}
+
+.grade-card[data-milestone='diploma'] .grade-card__number {
+  color: #8A5A00;
+}
+
+.grade-card[data-milestone='diploma'] .badge--outline {
+  background: #FFF8E7;
+  border-color: rgba(214, 168, 75, 0.45);
+  color: #8A5A00;
+}
+
+.grade-card[data-milestone='diploma']:hover {
+  border-color: #D6A84B;
+  box-shadow: 0 12px 32px -16px rgba(214, 168, 75, 0.38);
+}
+
+[data-theme='dark'] .grade-card[data-milestone='diploma'] {
+  border-color: rgba(214, 168, 75, 0.38);
+  background: linear-gradient(150deg, var(--surface) 55%, rgba(214, 168, 75, 0.09) 100%);
+}
+
+[data-theme='dark'] .grade-card[data-milestone='diploma'] .grade-card__number {
+  color: #E5BE65;
+}
+
+[data-theme='dark'] .grade-card[data-milestone='diploma'] .badge--outline {
+  background: rgba(214, 168, 75, 0.14);
+  border-color: rgba(214, 168, 75, 0.38);
+  color: #F5D78E;
+}
+
+[data-theme='dark'] .grade-card[data-milestone='diploma']:hover {
+  border-color: #E5BE65;
+  box-shadow: 0 12px 32px -16px rgba(214, 168, 75, 0.28);
+}
+
+.grade-card[data-milestone='bacii'] {
+  border-color: rgba(200, 59, 69, 0.45);
+  background: linear-gradient(150deg, #FFFFFF 55%, rgba(200, 59, 69, 0.05) 100%);
+}
+
+.grade-card[data-milestone='bacii'] .grade-card__number {
+  color: #C83B45;
+}
+
+.grade-card[data-milestone='bacii'] .badge--outline {
+  background: #FFF1F2;
+  border-color: rgba(200, 59, 69, 0.35);
+  color: #C83B45;
+}
+
+.grade-card[data-milestone='bacii']:hover {
+  border-color: #C83B45;
+  box-shadow: 0 12px 32px -16px rgba(200, 59, 69, 0.32);
+}
+
+[data-theme='dark'] .grade-card[data-milestone='bacii'] {
+  border-color: rgba(224, 83, 94, 0.38);
+  background: linear-gradient(150deg, var(--surface) 55%, rgba(200, 59, 69, 0.08) 100%);
+}
+
+[data-theme='dark'] .grade-card[data-milestone='bacii'] .grade-card__number {
+  color: #E0535E;
+}
+
+[data-theme='dark'] .grade-card[data-milestone='bacii'] .badge--outline {
+  background: rgba(200, 59, 69, 0.18);
+  border-color: rgba(200, 59, 69, 0.42);
+  color: #FF8A93;
+}
+
+[data-theme='dark'] .grade-card[data-milestone='bacii']:hover {
+  border-color: #E0535E;
+  box-shadow: 0 12px 32px -16px rgba(224, 83, 94, 0.28);
+}
+
 .grade-card__top {
   display: flex;
   align-items: flex-start;

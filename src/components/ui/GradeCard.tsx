@@ -23,11 +23,15 @@ export function GradeCard({ grade }: { grade: Grade }) {
   const formulaCount = gradeFormulaCount(grade)
   const topicCount = gradeTopicCount(grade)
 
+  const milestone =
+    grade.number === 9 ? 'diploma' : grade.number === 12 ? 'bacii' : undefined
+
   return (
     <Link
       className="grade-card"
       to={`/grades/${grade.id}`}
       aria-label={t('grade.explore', { n: grade.number })}
+      data-milestone={milestone}
     >
       <div className="grade-card__top">
         <span className="grade-card__number">
