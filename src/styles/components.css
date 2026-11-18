@@ -1163,7 +1163,7 @@
 }
 
 [data-theme='dark'] .grade-card[data-milestone='bacii'] .grade-card__number {
-  color: #E0535E;
+  color: #FF8A93; /* raised from #E0535E (3.74:1) to 6.26:1 on dark surface */
 }
 
 [data-theme='dark'] .grade-card[data-milestone='bacii'] .badge--outline {
@@ -1175,6 +1175,12 @@
 [data-theme='dark'] .grade-card[data-milestone='bacii']:hover {
   border-color: #E0535E;
   box-shadow: 0 12px 32px -16px rgba(224, 83, 94, 0.28);
+}
+
+/* Milestone sub-labels: swap --faint (2.56:1) → --muted (4.76:1) on both themes */
+.grade-card[data-milestone] .grade-card__number span,
+.grade-card[data-milestone] .grade-card__foot {
+  color: var(--muted);
 }
 
 .grade-card__top {
