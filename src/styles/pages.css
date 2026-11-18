@@ -3802,3 +3802,175 @@
   font-style: italic;
   line-height: 1.5;
 }
+
+/* ------------------------------------------------------------------
+   Conic Sections Lab (.conic-lab)
+   ------------------------------------------------------------------ */
+
+.conic-lab {
+  margin-top: 2rem;
+}
+
+/* Tab strip is reused from .tabs / .tab globals */
+
+.conic-lab__inner {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 1.25rem;
+}
+
+/* SVG wrapper */
+.conic-lab__svg-wrap {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md, 10px);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  touch-action: none;
+}
+
+.conic-lab__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+}
+
+/* Right-side control panel */
+.conic-lab__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* KaTeX formula block */
+.conic-lab__formula {
+  background: var(--surface-raised, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm, 6px);
+  padding: 0.75rem 1rem;
+  font-size: 1.05rem;
+  overflow-x: auto;
+}
+
+/* Slider row */
+.conic-lab__slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.conic-lab__label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+}
+
+.conic-lab__range {
+  width: 100%;
+  height: 2.5rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.conic-lab__range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--line-strong);
+}
+
+.conic-lab__range::-moz-range-track {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--line-strong);
+}
+
+.conic-lab__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: -0.4rem;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.conic-lab__range::-moz-range-thumb {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--surface);
+}
+
+.conic-lab__range:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Distance readout block */
+.conic-lab__distances {
+  background: var(--surface-raised, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm, 6px);
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.conic-lab__dist-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+}
+
+.conic-lab__dist-label {
+  font-weight: 550;
+  font-family: var(--font-sans);
+  color: var(--ink-soft);
+}
+
+.conic-lab__dist-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.conic-lab__locus-check {
+  margin-top: 0.3rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+}
+
+/* Terms summary row at bottom of panel */
+.conic-lab__terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-family: var(--font-mono, monospace);
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 720px) {
+  .conic-lab__inner {
+    grid-template-columns: 1fr;
+  }
+}
