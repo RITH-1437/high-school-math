@@ -559,6 +559,26 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
           ],
         )
       }
+      if (second === 'probability') {
+        const description =
+          'Probability Tree & Counting Lab (ដើមឈើប្រូបាប): build a 2-stage probability tree, verify branch sums, and read off P(A∩B), conditional probability P(B|A), and total probability live. Includes Permutations and Combinations calculators. Grades 10–12 MoEYS.'
+        return page(
+          '/labs/probability',
+          withBrand('Probability Tree & Counting Lab (Grades 10–12)'),
+          description,
+          [HOME, { name: 'Probability Tree', path: '/labs/probability' }],
+          [
+            learningResourceLd({
+              path: '/labs/probability',
+              name: 'Probability Tree & Counting Lab',
+              description,
+              resourceType: 'Interactive resource',
+              educationalLevel: 'Grades 10–12',
+              about: ['Probability', 'Conditional probability', 'Permutations', 'Combinations', 'BacII'],
+            }),
+          ],
+        )
+      }
       break
     }
 
@@ -697,6 +717,8 @@ export function listIndexableRoutes(): SitemapRoute[] {
   add('/unit-circle', '0.8')
   add('/conics', '0.8')
   add('/labs/revolution', '0.8')
+  add('/labs/argand', '0.8')
+  add('/labs/probability', '0.8')
   add('/bacii', '0.9')
   for (const track of Object.keys(TRACKS)) add(`/bacii/${track}`, '0.8')
   add('/exam', '0.8')

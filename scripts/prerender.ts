@@ -66,7 +66,9 @@ function routeAssetTags(manifest: Manifest | null, routePath: string, template: 
       ? 'src/pages/BacIISprintPage.tsx'
       : segments[0] === 'labs' && segments[1] === 'argand'
         ? 'src/pages/ArgandPage.tsx'
-        : LAZY_PAGE_SOURCES[segments[0] ?? '']
+        : segments[0] === 'labs' && segments[1] === 'probability'
+          ? 'src/pages/ProbabilityPage.tsx'
+          : LAZY_PAGE_SOURCES[segments[0] ?? '']
   if (!source) return ''
   const { css, js } = collectChunkAssets(manifest, source)
   const tags: string[] = []

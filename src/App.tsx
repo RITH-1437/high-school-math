@@ -44,6 +44,7 @@ const BacIISprintPage = lazyPage(() => import('./pages/BacIISprintPage'))
 const ConicsPage = lazyPage(() => import('./pages/ConicsPage'))
 const RevolutionPage = lazyPage(() => import('./pages/RevolutionPage'))
 const ArgandPage = lazyPage(() => import('./pages/ArgandPage'))
+const ProbabilityPage = lazyPage(() => import('./pages/ProbabilityPage'))
 
 const LAZY_SECTIONS: Record<string, { preload: () => Promise<void> }> = {
   shapes: ShapesPage,
@@ -66,8 +67,9 @@ export function preloadRoute(pathname: string): Promise<void> {
   if (segments[0] === 'exam' && segments[1] === 'sprint') {
     return BacIISprintPage.preload().catch(() => undefined)
   }
-  if (segments[0] === 'labs' && segments[1] === 'argand') {
-    return ArgandPage.preload().catch(() => undefined)
+  if (segments[0] === 'labs') {
+    if (segments[1] === 'argand') return ArgandPage.preload().catch(() => undefined)
+    if (segments[1] === 'probability') return ProbabilityPage.preload().catch(() => undefined)
   }
   const section = segments[0] ?? ''
   const page = LAZY_SECTIONS[section]
@@ -214,6 +216,14 @@ export default function App() {
           element={
             <Suspense fallback={<Loading />}>
               <ArgandPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="labs/probability"
+          element={
+            <Suspense fallback={<Loading />}>
+              <ProbabilityPage />
             </Suspense>
           }
         />
