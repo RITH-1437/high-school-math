@@ -267,6 +267,22 @@ export const IconConstruct = (props: IconProps) => (
   </IconBase>
 )
 
+export const IconSlice = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M3 12h18" strokeWidth="2.2" />
+    <circle cx="21" cy="12" r="1.5" fill="currentColor" stroke="none" />
+  </IconBase>
+)
+
+export const IconWireframe = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M4 8 12 4l8 4-8 4z" fill="none" />
+    <path d="M4 8v8l8 4 8-4V8" fill="none" />
+    <path d="M12 12v8" />
+  </IconBase>
+)
+
 export const IconExam = (props: IconProps) => (
   <IconBase {...props}>
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

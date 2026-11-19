@@ -1604,6 +1604,30 @@
 .readout {
   padding-block: 0.85rem;
   border-top: 1px solid var(--hero-line);
+  transition: background var(--dur-fast) var(--ease-soft);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    background: transparent;
+    box-shadow: none;
+  }
+  50% {
+    background: rgba(251, 191, 36, 0.12);
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.25);
+  }
+}
+
+.readout--pulse {
+  animation: pulse-glow 800ms ease-in-out;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .readout--pulse {
+    animation: none;
+    background: rgba(251, 191, 36, 0.12);
+  }
 }
 
 .readout dt {

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Shape, ShapeDimensions } from '../../types/content'
 import { topicsForShape, topicUrl } from '../../data'
@@ -28,6 +28,11 @@ export function ShapeLab({ shape }: { shape: Shape }) {
   const [dims, setDims] = useState<ShapeDimensions>(() => defaultsFor(shape))
   const [showLabels, setShowLabels] = useState(true)
   const [highlight, setHighlight] = useState<string | undefined>()
+  const [pulsingMetrics, setPulsingMetrics] = useState<Set<string>>(new Set())
+  const prevDims = useRef<ShapeDimensions>(dims)
+  const reducedMotion = useRef(
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
 
   const baseUnit = shape.dimensions.find((d) => d.unit)?.unit ?? ''
 
@@ -48,6 +53,29 @@ export function ShapeLab({ shape }: { shape: Shape }) {
   )
 
   const isDefault = shape.dimensions.every((d) => dims[d.key] === d.defaultValue)
+
+  // Detect dimension changes and trigger metric pulse animations
+  useEffect(() => {
+    const prev = prevDims.current
+    const changed = Object.keys(dims).some((key) => prev[key as keyof ShapeDimensions] !== dims[key as keyof ShapeDimensions])
+    
+    if (changed) {
+      // Mark all metrics as pulsing
+      const allMetrics = new Set(shape.metrics.map((m) => m.key))
+      setPulsingMetrics(allMetrics)
+      
+      if (!reducedMotion.current) {
+        const timer = setTimeout(() => {
+          setPulsingMetrics(new Set())
+        }, 800)
+        prevDims.current = dims
+        return () => clearTimeout(timer)
+      }
+    }
+    
+    prevDims.current = dims
+    return undefined
+  }, [dims, shape.metrics])
 
   return (
     <div className="lab">
@@ -135,7 +163,7 @@ export function ShapeLab({ shape }: { shape: Shape }) {
           </h2>
           <dl className="readouts">
             {values.map(({ metric, computed, exact }) => (
-              <div key={metric.key} className="readout">
+              <div key={metric.key} className={`readout${pulsingMetrics.has(metric.key) ? ' readout--pulse' : ''}`}>
                 <dt>{metric.label}</dt>
                 <dd>
                   <strong>

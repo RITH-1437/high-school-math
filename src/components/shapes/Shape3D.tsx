@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Shape, ShapeDimensions } from '../../types/content'
 import { formatMetricValue, formatNumber } from '../../lib/format'
 import { useI18n } from '../../lib/i18n'
-import { IconPause, IconPlay, IconRotate, IconZoom, IconLayers, IconConstruct } from '../ui/Icons'
+import { IconPause, IconPlay, IconRotate, IconZoom, IconLayers, IconConstruct, IconSlice, IconWireframe } from '../ui/Icons'
 
 type Vec3 = [number, number, number]
 
@@ -304,11 +304,19 @@ export function Shape3D({
   const [explodeAmount, setExplodeAmount] = useState(0) // 0 = normal, 1 = fully exploded
   const [buildProgress, setBuildProgress] = useState(1) // 0 = vertices only, 0.5 = edges, 1 = full faces
   const [isBuilding, setIsBuilding] = useState(false)
+  const [slicePosition, setSlicePosition] = useState(1) // 0 = fully sliced, 1 = no slice
+  const [isSlicing, setIsSlicing] = useState(false)
+  const [dimensionPulse, setDimensionPulse] = useState<string | null>(null) // Which dimension is pulsing
+  const prevDimensions = useRef<ShapeDimensions>(dimensions)
+  const [wireframeMode, setWireframeMode] = useState(0) // 0 = solid, 1 = wireframe
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const drag = useRef<{ x: number; y: number; yaw: number; pitch: number } | null>(null)
   const spinPaused = useRef(false)
   const spinResumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const spinFrameRef = useRef<number>(0)
   const buildFrameRef = useRef<number>(0)
+  const sliceFrameRef = useRef<number>(0)
+  const wireframeFrameRef = useRef<number>(0)
   const reducedMotion = useRef(
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   )
@@ -344,6 +352,32 @@ export function Shape3D({
     }
     return undefined
   }, [])
+
+  // Detect dimension changes and trigger pulse animation
+  useEffect(() => {
+    if (!showLabels) return
+    
+    const prev = prevDimensions.current
+    const keys = Object.keys(dimensions) as Array<keyof ShapeDimensions>
+    
+    for (const key of keys) {
+      if (prev[key] !== dimensions[key]) {
+        // Dimension changed, trigger pulse animation
+        setDimensionPulse(key)
+        
+        if (!reducedMotion.current) {
+          const timer = setTimeout(() => {
+            setDimensionPulse(null)
+          }, 800)
+          return () => clearTimeout(timer)
+        }
+        break
+      }
+    }
+    
+    prevDimensions.current = dimensions
+    return undefined
+  }, [dimensions, showLabels])
 
   useEffect(() => {
     if (!spinning || reducedMotion.current) {
@@ -423,9 +457,49 @@ export function Shape3D({
           point[2] + centroid[2] * explodeScale,
         ])
       }
-      const projected = explodedPoints.map(project)
       
-      return { face, points: explodedPoints, projected, avgZ, brightness }
+      // Apply cross-section clipping based on Y-axis
+      let clippedPoints = explodedPoints
+      let isClipped = false
+      if (slicePosition < 1) {
+        const sliceY = (slicePosition * 2 - 1) * 1.2 // Map 0-1 to range for cutting
+        const clipped: Vec3[] = []
+        
+        for (let i = 0; i < explodedPoints.length; i += 1) {
+          const current = explodedPoints[i]
+          const next = explodedPoints[(i + 1) % explodedPoints.length]
+          
+          const currentAbove = current[1] >= sliceY
+          const nextAbove = next[1] >= sliceY
+          
+          if (currentAbove) {
+            clipped.push(current)
+          }
+          
+          // Add intersection point if edge crosses the slice plane
+          if (currentAbove !== nextAbove) {
+            const t = (sliceY - current[1]) / (next[1] - current[1])
+            const intersectionPoint: Vec3 = [
+              current[0] + t * (next[0] - current[0]),
+              sliceY,
+              current[2] + t * (next[2] - current[2]),
+            ]
+            clipped.push(intersectionPoint)
+            isClipped = true
+          }
+        }
+        
+        if (clipped.length >= 3) {
+          clippedPoints = clipped
+        } else {
+          // Face is completely below the slice plane
+          clippedPoints = []
+        }
+      }
+      
+      const projected = clippedPoints.map(project)
+      
+      return { face, points: clippedPoints, projected, avgZ, brightness, isClipped }
     })
 
     faceData.sort((a, b) => a.avgZ - b.avgZ)
@@ -477,7 +551,7 @@ export function Shape3D({
       // Stage 3: Transition from wireframe to solid faces
       const faceAlpha = Math.min(1, (buildProgress - 0.66) * 3)
       
-      for (const { projected, brightness } of faceData) {
+      for (const { projected, brightness, isClipped } of faceData) {
         if (projected.length < 3) continue
         context.beginPath()
         context.moveTo(projected[0].x, projected[0].y)
@@ -486,17 +560,59 @@ export function Shape3D({
         }
         context.closePath()
         
-        // Blend from wireframe to solid
+        // Blend from wireframe to solid based on wireframeMode
+        const solidAlpha = faceAlpha * (1 - wireframeMode)
         const shade = 0.38 + 0.62 * brightness
-        context.fillStyle = `rgba(${Math.round(20 * shade + 10)}, ${Math.round(50 * shade + 25)}, ${Math.round(110 * shade + 45)}, ${faceAlpha})`
-        context.fill()
         
-        if (mesh.strokeAlpha || faceAlpha < 1) {
-          const wireAlpha = mesh.strokeAlpha || 0.16
-          context.strokeStyle = `rgba(56, 189, 248, ${wireAlpha * (1 - faceAlpha * 0.7)})`
-          context.lineWidth = 0.8
-          context.stroke()
+        if (solidAlpha > 0) {
+          context.fillStyle = `rgba(${Math.round(20 * shade + 10)}, ${Math.round(50 * shade + 25)}, ${Math.round(110 * shade + 45)}, ${solidAlpha})`
+          context.fill()
         }
+        
+        // Wire stroke intensity increases with wireframeMode
+        const wireIntensity = Math.max(wireframeMode, mesh.strokeAlpha || 0, 1 - faceAlpha)
+        
+        if (wireIntensity > 0) {
+          if (isClipped && slicePosition < 1) {
+            context.strokeStyle = 'rgba(255, 193, 7, 0.9)'
+            context.lineWidth = 2.5
+            context.stroke()
+          } else {
+            const baseAlpha = mesh.strokeAlpha || 0.16
+            const wireAlpha = Math.max(baseAlpha, wireframeMode * 0.85)
+            context.strokeStyle = `rgba(56, 189, 248, ${wireAlpha})`
+            context.lineWidth = wireframeMode > 0 ? 1.5 : 0.8
+            context.stroke()
+          }
+        }
+      }
+      
+      // Draw the cutting plane indicator
+      if (slicePosition < 1 && slicePosition > 0) {
+        const sliceY = (slicePosition * 2 - 1) * 1.2
+        const planePoints: Vec3[] = [
+          [-1.5, sliceY, -1.5],
+          [1.5, sliceY, -1.5],
+          [1.5, sliceY, 1.5],
+          [-1.5, sliceY, 1.5],
+        ]
+        const rotatedPlane = planePoints.map((p) => rotatePoint(p, yaw, pitch))
+        const projectedPlane = rotatedPlane.map(project)
+        
+        context.save()
+        context.beginPath()
+        context.moveTo(projectedPlane[0].x, projectedPlane[0].y)
+        for (let i = 1; i < projectedPlane.length; i += 1) {
+          context.lineTo(projectedPlane[i].x, projectedPlane[i].y)
+        }
+        context.closePath()
+        context.fillStyle = 'rgba(255, 193, 7, 0.15)'
+        context.fill()
+        context.strokeStyle = 'rgba(255, 193, 7, 0.6)'
+        context.lineWidth = 1.5
+        context.setLineDash([4, 4])
+        context.stroke()
+        context.restore()
       }
     }
 
@@ -514,11 +630,26 @@ export function Shape3D({
       context.textBaseline = 'middle'
       for (const guide of mesh.guides) {
         const isHighlighted = highlight === guide.dimensionKey
+        const isPulsing = dimensionPulse === guide.dimensionKey
         const start = project(rotatePoint([guide.from[0] / maxExtent, guide.from[1] / maxExtent, guide.from[2] / maxExtent], yaw, pitch))
         const end = project(rotatePoint([guide.to[0] / maxExtent, guide.to[1] / maxExtent, guide.to[2] / maxExtent], yaw, pitch))
+        
         context.save()
-        context.strokeStyle = isHighlighted ? '#93c5fd' : '#38bdf8'
-        context.lineWidth = isHighlighted ? 2.4 : 1.5
+        
+        // Enhanced styling for pulsing dimensions
+        if (isPulsing) {
+          context.strokeStyle = '#fbbf24'
+          context.lineWidth = 2.8
+          context.shadowColor = '#fbbf24'
+          context.shadowBlur = 8
+        } else if (isHighlighted) {
+          context.strokeStyle = '#93c5fd'
+          context.lineWidth = 2.4
+        } else {
+          context.strokeStyle = '#38bdf8'
+          context.lineWidth = 1.5
+        }
+        
         context.setLineDash([4, 4])
         context.beginPath()
         context.moveTo(start.x, start.y)
@@ -528,11 +659,20 @@ export function Shape3D({
 
         const labelX = (start.x + end.x) / 2
         const labelY = (start.y + end.y) / 2 - 14
-        drawLabel(context, guide.label, labelX, labelY, isHighlighted)
+        drawLabel(context, guide.label, labelX, labelY, isHighlighted || isPulsing, isPulsing)
+        
         context.save()
-        context.fillStyle = isHighlighted ? '#bfdbfe' : '#38bdf8'
+        if (isPulsing) {
+          context.fillStyle = '#fbbf24'
+          context.shadowColor = '#fbbf24'
+          context.shadowBlur = 6
+        } else if (isHighlighted) {
+          context.fillStyle = '#bfdbfe'
+        } else {
+          context.fillStyle = '#38bdf8'
+        }
         context.beginPath()
-        context.arc(end.x, end.y, isHighlighted ? 3.2 : 2.4, 0, Math.PI * 2)
+        context.arc(end.x, end.y, isPulsing ? 4 : isHighlighted ? 3.2 : 2.4, 0, Math.PI * 2)
         context.fill()
         context.restore()
       }
@@ -543,7 +683,7 @@ export function Shape3D({
       context.font = '13px Inter, sans-serif'
       context.fillText(t('lab.previewUnavailable'), 16, 28)
     }
-  }, [mesh, size, yaw, pitch, zoom, showLabels, highlight, explodeAmount, buildProgress, t])
+  }, [mesh, size, yaw, pitch, zoom, showLabels, highlight, explodeAmount, buildProgress, slicePosition, dimensionPulse, wireframeMode, t])
 
   if (!mesh) {
     return (
@@ -653,6 +793,46 @@ export function Shape3D({
         </button>
         <button
           type="button"
+          className={`viewer-control${wireframeMode > 0 || isTransitioning ? ' viewer-control--active' : ''}`}
+          onClick={() => {
+            const target = wireframeMode > 0.5 ? 0 : 1
+            
+            if (!reducedMotion.current) {
+              setIsTransitioning(true)
+              const startTime = performance.now()
+              const startValue = wireframeMode
+              const duration = 600
+              
+              const animate = (time: number) => {
+                const elapsed = time - startTime
+                const progress = Math.min(1, elapsed / duration)
+                
+                // Ease-in-out for smooth transition
+                const eased = progress < 0.5 
+                  ? 2 * progress * progress 
+                  : 1 - Math.pow(-2 * progress + 2, 2) / 2
+                
+                setWireframeMode(startValue + (target - startValue) * eased)
+                
+                if (progress < 1) {
+                  wireframeFrameRef.current = requestAnimationFrame(animate)
+                } else {
+                  setWireframeMode(target)
+                  setIsTransitioning(false)
+                }
+              }
+              wireframeFrameRef.current = requestAnimationFrame(animate)
+            } else {
+              setWireframeMode(target)
+            }
+          }}
+          aria-label={wireframeMode > 0.5 ? 'Show solid view' : 'Show wireframe'}
+          aria-pressed={wireframeMode > 0.5}
+        >
+          <IconWireframe size={15} />
+        </button>
+        <button
+          type="button"
           className={`viewer-control${isBuilding ? ' viewer-control--active' : ''}`}
           onClick={() => {
             if (isBuilding) {
@@ -698,6 +878,63 @@ export function Shape3D({
           aria-pressed={isBuilding}
         >
           <IconConstruct size={15} />
+        </button>
+        <button
+          type="button"
+          className={`viewer-control${isSlicing ? ' viewer-control--active' : ''}`}
+          onClick={() => {
+            if (isSlicing) {
+              // Stop the animation
+              cancelAnimationFrame(sliceFrameRef.current)
+              setIsSlicing(false)
+              setSlicePosition(1)
+            } else {
+              // Start the slice animation
+              setIsSlicing(true)
+              setSlicePosition(1)
+              
+              if (!reducedMotion.current) {
+                const startTime = performance.now()
+                const duration = 4000 // 4 seconds: slice down and back up
+                
+                const animate = (time: number) => {
+                  const elapsed = time - startTime
+                  const progress = Math.min(1, elapsed / duration)
+                  
+                  // Go from 1 → 0 → 1 (slice down then back up)
+                  let position: number
+                  if (progress < 0.5) {
+                    // First half: slice down (1 → 0)
+                    position = 1 - (progress * 2)
+                  } else {
+                    // Second half: slice back up (0 → 1)
+                    position = (progress - 0.5) * 2
+                  }
+                  
+                  setSlicePosition(position)
+                  
+                  if (progress < 1) {
+                    sliceFrameRef.current = requestAnimationFrame(animate)
+                  } else {
+                    setIsSlicing(false)
+                    setSlicePosition(1)
+                  }
+                }
+                sliceFrameRef.current = requestAnimationFrame(animate)
+              } else {
+                // No animation, just show sliced state briefly
+                setSlicePosition(0.5)
+                setTimeout(() => {
+                  setSlicePosition(1)
+                  setIsSlicing(false)
+                }, 1000)
+              }
+            }
+          }}
+          aria-label={isSlicing ? 'Stop cross-section' : 'Show cross-section'}
+          aria-pressed={isSlicing}
+        >
+          <IconSlice size={15} />
         </button>
         <button
           type="button"
@@ -783,6 +1020,7 @@ function drawLabel(
   x: number,
   y: number,
   isHighlighted = false,
+  isPulsing = false,
 ) {
   const metrics = context.measureText(text)
   const paddingX = 7
@@ -792,14 +1030,37 @@ function drawLabel(
   const left = Math.max(6, Math.min(x - width / 2, context.canvas.width - width - 6))
   const top = Math.max(6, y - height / 2)
   context.save()
-  context.fillStyle = 'rgba(9, 27, 56, 0.88)'
-  context.strokeStyle = isHighlighted ? '#93c5fd' : 'rgba(56, 189, 248, 0.45)'
-  context.lineWidth = isHighlighted ? 1.5 : 1
+  
+  if (isPulsing) {
+    context.fillStyle = 'rgba(251, 191, 36, 0.95)'
+    context.strokeStyle = '#fbbf24'
+    context.lineWidth = 2
+    context.shadowColor = '#fbbf24'
+    context.shadowBlur = 12
+  } else if (isHighlighted) {
+    context.fillStyle = 'rgba(9, 27, 56, 0.88)'
+    context.strokeStyle = '#93c5fd'
+    context.lineWidth = 1.5
+  } else {
+    context.fillStyle = 'rgba(9, 27, 56, 0.88)'
+    context.strokeStyle = 'rgba(56, 189, 248, 0.45)'
+    context.lineWidth = 1
+  }
+  
   context.beginPath()
   context.roundRect(left, top, width, height, 5)
   context.fill()
   context.stroke()
-  context.fillStyle = isHighlighted ? '#bfdbfe' : '#eaf2ff'
+  
+  if (isPulsing) {
+    context.fillStyle = '#1e3a8a'
+    context.shadowBlur = 0
+  } else if (isHighlighted) {
+    context.fillStyle = '#bfdbfe'
+  } else {
+    context.fillStyle = '#eaf2ff'
+  }
+  
   context.fillText(text, left + paddingX, top + height / 2 + paddingY / 2)
   context.restore()
 }
