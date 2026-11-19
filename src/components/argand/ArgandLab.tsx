@@ -302,7 +302,7 @@ export function ArgandLab() {
                 style={showNegation ? { borderColor: NEG_COLOR, color: NEG_COLOR } : {}}
                 onClick={() => setShowNegation((v) => !v)}
               >
-                {pick('Negation -z', 'ចំនួនអវិជ្ជមាន -z')}
+                {pick('Negation -z', 'ចំនួនបញ្ច្រាស -z')}
               </button>
               <button
                 type="button"
@@ -351,7 +351,7 @@ export function ArgandLab() {
           <div className="argand-lab__sliders">
             <div className="argand-lab__slider-row">
               <label className="argand-lab__slider-label">
-                {showProduct ? `z₁: ${pick('Real a', 'ពិត a')}` : pick('Real part a', 'ផ្នែកពិត a')} = {fmt(a, 2)}
+                {showProduct ? `z₁: ${pick('Real part a', 'ផ្នែកពិត a')}` : pick('Real part a', 'ផ្នែកពិត a')} = {fmt(a, 2)}
               </label>
               <input type="range" min={-5} max={5} step={0.1} value={a}
                 onChange={(e) => setA(Number(e.target.value))}
@@ -359,7 +359,7 @@ export function ArgandLab() {
             </div>
             <div className="argand-lab__slider-row">
               <label className="argand-lab__slider-label">
-                {showProduct ? `z₁: ${pick('Imag b', 'ស្រមើ b')}` : pick('Imaginary part b', 'ផ្នែកស្រមើ b')} = {fmt(b, 2)}
+                {showProduct ? `z₁: ${pick('Imaginary part b', 'ផ្នែកស្រមើ b')}` : pick('Imaginary part b', 'ផ្នែកស្រមើ b')} = {fmt(b, 2)}
               </label>
               <input type="range" min={-5} max={5} step={0.1} value={b}
                 onChange={(e) => setB(Number(e.target.value))}

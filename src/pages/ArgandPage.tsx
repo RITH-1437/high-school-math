@@ -28,7 +28,7 @@ export default function ArgandPage() {
         )}
         intro={pick(
           'Place any complex number z = a + bi on the Argand plane and explore its modulus, argument, and polar form. Toggle conjugate, negation, and the product rule to see how z₁z₂ multiplies moduli and adds arguments, a key BacII exam technique.',
-          'ដាក់ចំនួនកុំផ្លិច z = a + bi នៅលើប្លង់អាកង់ ហើយស្វែងយល់ពីម៉ូឌុល អាគីម៉ង់ និងទម្រង់ប៉ូឡែរ។ ប្ដូរដើម្បីមើលចំនួនផ្ចិត ចំនួនអវិជ្ជមាន និងច្បាប់គុណ z₁z₂ ដែលជាបច្ចេកទេសសំខាន់ BacII។',
+          'ដាក់ចំនួនកុំផ្លិច z = a + bi នៅលើប្លង់អាកង់ ហើយស្វែងយល់ពីម៉ូឌុល អាគីម៉ង់ និងទម្រង់ប៉ូឡែរ។ ប្ដូរដើម្បីមើលចំនួនផ្ចិត ចំនួនបញ្ច្រាស និងច្បាប់គុណ z₁z₂ ដែលជាបច្ចេកទេសសំខាន់ BacII។',
         )}
       />
 
