@@ -539,6 +539,26 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
           ],
         )
       }
+      if (second === 'argand') {
+        const description =
+          'Argand Plane Lab (បន្ទះពិសោធន៍ប្លង់អាកង់): place any complex number z = a + bi and explore its modulus, argument, and polar form z = r(cosθ + isinθ). Toggle conjugate, negation, and product rules — Grade 12 BacII core.'
+        return page(
+          '/labs/argand',
+          withBrand('Argand Plane Lab (Complex Numbers, Grade 12)'),
+          description,
+          [HOME, { name: 'Argand Plane', path: '/labs/argand' }],
+          [
+            learningResourceLd({
+              path: '/labs/argand',
+              name: 'Argand Plane Lab',
+              description,
+              resourceType: 'Interactive resource',
+              educationalLevel: 'Grade 12',
+              about: ['Complex numbers', 'Argand plane', 'Polar form', 'BacII'],
+            }),
+          ],
+        )
+      }
       break
     }
 

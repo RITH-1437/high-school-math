@@ -19,11 +19,11 @@ export default function ConicsPage() {
         ]}
         eyebrow={pick(
           'Interactive Geometry · Grades 11–12 · MoEYS Standard',
-          'រូបមន្តអន្តរកម្ម · ថ្នាក់ទី១១–១២ · កម្មវិធីសិក្សាជាតិ',
+          'រូបតឃ្លែតអន្ដរកម្ម · ថ្នាក់ទី១១–១២ · កម្មវិធីសិក្សាជាតិ',
         )}
         title={pick(
           'Conic Sections Playground (បន្ទះពិសោធន៍កោនិក)',
-          'បន្ទះពិសោធន៍ប្លង់កោនិក',
+          'បន្ទះពិសោធន៍កោនិក',
         )}
         intro={pick(
           'Explore Parabolas, Ellipses, and Hyperbolas interactively. Drag point P to verify the focal-distance property of each conic in real time. Adjust parameters with sliders and watch the shape update live.',
