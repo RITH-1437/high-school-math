@@ -26,7 +26,7 @@ describe('SEO & Sitemap generation', () => {
 
   it('generates all expected route entries without duplicates', () => {
     const entries = buildSitemapEntries()
-    const expected = 1 + 8 + 2 + 3 + 6 + topicRefs.length + formulaRefs.length + shapes.length
+    const expected = 1 + 10 + 2 + 3 + 6 + topicRefs.length + formulaRefs.length + shapes.length
     const subjectCount = new Set(topicRefs.map((ref) => `${ref.grade.id}:${ref.subject.id}`)).size
     expect(entries.length).toBe(expected + subjectCount)
 
@@ -44,6 +44,8 @@ describe('SEO & Sitemap generation', () => {
     expect(paths).toContain('/unit-circle')
     expect(paths).toContain('/conics')
     expect(paths).toContain('/labs/revolution')
+    expect(paths).toContain('/labs/argand')
+    expect(paths).toContain('/labs/probability')
     expect(paths).toContain('/bacii')
     expect(paths).toContain('/bacii/science')
     expect(paths).toContain('/bacii/social')
@@ -145,12 +147,32 @@ describe('SEO & Sitemap generation', () => {
     expect(getRouteMeta('/bookmarks').robots).toBe('noindex,follow')
   })
 
-  it('home page declares WebSite identity with alternate names', () => {
+  it('home page declares WebSite identity with alternate names and AEO FAQPage', () => {
     const meta = getRouteMeta('/')
     const site = meta.jsonLd.find((item) => item['@type'] === 'WebSite')
     expect(site?.name).toBe('High School Math')
     expect(site?.alternateName).toContain('Math High School')
     expect(meta.title).toContain('High School Math')
+
+    const faq = meta.jsonLd.find((item) => item['@type'] === 'FAQPage')
+    expect(faq).toBeDefined()
+    expect(Array.isArray(faq?.mainEntity)).toBe(true)
+  })
+
+  it('interactive labs declare WebApplication schema for rich app discovery', () => {
+    for (const labPath of ['/unit-circle', '/conics', '/labs/revolution', '/labs/argand', '/labs/probability', '/shapes', '/graph', '/exam/sprint']) {
+      const meta = getRouteMeta(labPath)
+      const app = meta.jsonLd.find((item) => item['@type'] === 'WebApplication')
+      expect(app, labPath).toBeDefined()
+    }
+  })
+
+  it('robots.txt allows major AI engines for GEO and AEO', () => {
+    const robotsPath = path.resolve(__dirname, '../../public/robots.txt')
+    const content = fs.readFileSync(robotsPath, 'utf-8')
+    expect(content).toContain('User-agent: GPTBot')
+    expect(content).toContain('User-agent: ClaudeBot')
+    expect(content).toContain('User-agent: PerplexityBot')
   })
 
   it('matches vercel.json redirects to the route aliases', () => {

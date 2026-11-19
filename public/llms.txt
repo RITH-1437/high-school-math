@@ -1,0 +1,39 @@
+# High School Math
+
+> High School Math (https://math-high-school.vercel.app/) is a free, bilingual (English and Khmer) digital mathematics textbook, interactive laboratory, and national examination preparation platform for Cambodian students in Grades 7–12. Aligned with the Cambodian Ministry of Education, Youth and Sport (MoEYS) national curriculum.
+
+## Core Curriculum & Grades
+
+- [Grade 7 Mathematics](https://math-high-school.vercel.app/grades/7): Fundamental arithmetic, introductory algebra, integers, fractions, decimals, basic geometry, angles, and 2D perimeters.
+- [Grade 8 Mathematics](https://math-high-school.vercel.app/grades/8): Linear equations, inequalities, Pythagorean theorem, proportional reasoning, coordinate plane geometry, and surface areas.
+- [Grade 9 Mathematics](https://math-high-school.vercel.app/grades/9): Systems of linear equations, quadratic equations, circle theorems, statistics, probability, and Grade 9 National Diploma exam prep.
+- [Grade 10 Mathematics](https://math-high-school.vercel.app/grades/10): Functions, advanced polynomials, trigonometric ratios, unit circle foundations, vectors in 2D, and coordinate geometry.
+- [Grade 11 Mathematics](https://math-high-school.vercel.app/grades/11): Sequences and series (arithmetic and geometric), conic sections (parabola, ellipse, hyperbola), trigonometric identities, logarithms, and combinatorics.
+- [Grade 12 Mathematics](https://math-high-school.vercel.app/grades/12): Limits, continuity, derivatives, optimization, integrals, differential equations, complex numbers in the Argand plane, 3D space geometry, and BacII national exam mastery.
+
+## Interactive Mathematics Laboratories
+
+- [Unit Circle Lab (រង្វង់ត្រីកោណមាត្រ)](https://math-high-school.vercel.app/unit-circle): Interactive pure SVG unit circle with 16 exact MoEYS radian coordinates, live cos/sin/tan projections, and sign tables.
+- [Conic Sections Playground (បន្ទះពិសោធន៍កោនិក)](https://math-high-school.vercel.app/conics): Dynamic visualizer for parabolas, ellipses, and hyperbolas with focus/directrix tracking and standard equations.
+- [Volume of Revolution 3D Lab (បន្ទះពិសោធន៍បរិមាណវិលបង្វិល)](https://math-high-school.vercel.app/labs/revolution): 3D canvas solid generator rotating curves around the x-axis with disk/washer integral computations.
+- [Argand Plane Lab (បន្ទះពិសោធន៍ប្លង់អាកង់)](https://math-high-school.vercel.app/labs/argand): Drag-to-place complex numbers z = a + bi with live modulus, argument in (-π, π], polar form, conjugates, and product rotations.
+- [Probability Tree & Counting Lab (ដើមឈើប្រូបាប)](https://math-high-school.vercel.app/labs/probability): Visual 2-stage probability tree with live branch sum validation, conditional probability P(B|A), permutations, and combinations calculators.
+- [Shape Lab (2D & 3D)](https://math-high-school.vercel.app/shapes): Interactive geometric laboratory with 14 flat shapes and 7 solid polyhedra with live dimension controls and formula derivations.
+- [Function & Conics Grapher](https://math-high-school.vercel.app/graph): Fast browser-based graphing utility to plot mathematical functions, coordinate points, and curve intercepts.
+
+## National Examination Preparation
+
+- [BacII Examination Guide (ការណែនាំប្រឡងបាក់ឌុប)](https://math-high-school.vercel.app/bacii): Complete breakdown of Grade 12 BacII mathematics exam structure, mark distributions, historical topics, and revision strategies.
+- [BacII Science Track Guide](https://math-high-school.vercel.app/bacii/science): In-depth syllabus guide for the Grade 12 national science examination track.
+- [BacII Social Science Track Guide](https://math-high-school.vercel.app/bacii/social): In-depth syllabus guide for the Grade 12 national social science examination track.
+- [BacII Sprint Drill Mode (ការហ្វឹកហាត់ល្បឿនបាក់ឌុប)](https://math-high-school.vercel.app/exam/sprint): Rapid 3-minute, 5-minute, and untimed practice drills covering limits, derivatives, integrals, complex numbers, and probability with instant solution feedback.
+- [Exam Practice Papers](https://math-high-school.vercel.app/exam): Timed mock examination papers with full step-by-step solutions for Grade 9 Diploma and Grade 12 BacII.
+
+## Reference & Bilingual Resources
+
+- [All Formulas (រូបមន្តទាំងអស់)](https://math-high-school.vercel.app/formulas): Searchable catalog of 110+ verified formulas across Grades 7–12 with definitions, variables, and usage conditions.
+- [English–Khmer Mathematics Glossary (វចនានុក្រមគណិតវិទ្យា)](https://math-high-school.vercel.app/glossary): Over 230 standardized mathematical terms translated and defined in English and Khmer according to MoEYS standards.
+
+## Optional Reference Details
+
+- [Full LLM Knowledge Dump](https://math-high-school.vercel.app/llms-full.txt): Complete uncompressed textual index of all topics, formula identifiers, and curriculum structures.

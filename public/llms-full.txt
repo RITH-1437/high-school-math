@@ -1,0 +1,66 @@
+# High School Math - Complete Knowledge Reference (MoEYS Grade 7–12 Cambodia)
+
+## System Identity & Core Mission
+High School Math (https://math-high-school.vercel.app/) is a free, privacy-first, bilingual (English and Khmer) digital mathematics textbook, interactive laboratory, and national examination preparation platform created specifically for Cambodian high school students and educators in Grades 7 through 12.
+
+The curriculum is strictly aligned with the standards, terminology, and examination formats established by the Ministry of Education, Youth and Sport (MoEYS) of the Kingdom of Cambodia (ក្រសួងអប់រំ យុវជន និងកីឡា).
+
+## Key Educational Pillars
+1. Deductive Understanding: Every formula is introduced with its geometric or algebraic derivation, parameter conditions, and a 7-step worked solution.
+2. 100% Client-Side Privacy: No accounts, no servers, zero telemetry or data collection. All progress and quiz bookmarks persist in browser localStorage.
+3. Authentic MoEYS Terminology: Official Khmer mathematical terms (e.g., រង្វង់ត្រីកោណមាត្រ for unit circle, ប្លង់អាកង់ for Argand plane, កោនិក for conic sections, ស្ទួននៃអនុក្រម for series) are used alongside international English notation.
+4. Interactive Laboratories: Zero-dependency SVG and HTML5 Canvas simulations allow students to visually manipulate parameters and verify theorems in real-time.
+
+## Curriculum Structure by Grade
+
+### Grade 7 (ថ្នាក់ទី៧)
+- Numbers & Arithmetic: Integers, operations, order of operations, fractions, decimals, percentages, prime factorization, greatest common divisor (GCD), least common multiple (LCM).
+- Introductory Algebra: Variables, algebraic expressions, evaluating terms, simplifying linear expressions.
+- Foundations of Geometry: Points, lines, segments, rays, angle measurement, complementary and supplementary angles, perimeters and areas of rectangles, squares, and triangles.
+
+### Grade 8 (ថ្នាក់ទី៨)
+- Algebra & Linear Equations: Solving one-variable linear equations, linear inequalities, Cartesian coordinate plane, plotting points, graphing lines.
+- Proportions & Relations: Direct and inverse variation, ratios, practical rates.
+- Plane & Solid Geometry: Properties of triangles and quadrilaterals, Pythagorean theorem (ទ្រឹស្តីបទពីតាករ), perimeter and area of polygons, surface area and volume of basic prisms and cylinders.
+
+### Grade 9 (ថ្នាក់ទី៩ - ត្រៀមប្រឡងឌីប្លូម)
+- Advanced Algebra: Systems of two linear equations in two variables (substitution and elimination methods), factoring polynomials, quadratic equations.
+- Circles & Angles: Central angles, inscribed angles, chord properties, tangents to circles.
+- Statistics & Probability: Data organization, frequency tables, histograms, mean, median, mode, sample spaces, simple theoretical probability.
+- National Diploma Examination Preparation: Targeted problem sets aligned with national Grade 9 diploma examination patterns.
+
+### Grade 10 (ថ្នាក់ទី១០)
+- Functions & Polynomials: Function notation, domain and range, linear and quadratic functions, polynomial division, remainder and factor theorems.
+- Trigonometry: Trigonometric ratios in right-angled triangles, angles of elevation and depression, standard angles (30°, 45°, 60°), the unit circle concept, radian conversion.
+- Vectors & Coordinate Geometry: Vectors in the 2D plane, vector addition, scalar multiplication, distance formula, midpoint formula, equation of a line.
+
+### Grade 11 (ថ្នាក់ទី១១)
+- Sequences & Series (អនុក្រម និងស្ទួន): Arithmetic progressions (ស្វ៊ីតនព្វន្ត), geometric progressions (ស្វ៊ីតធរណីមាត្រ), finite and infinite sums, convergence.
+- Conic Sections (កោនិក): Parabolas (ប៉ារ៉ាបូល, y² = 4px), Ellipses (អេលីប, x²/a² + y²/b² = 1), Hyperbolas (អ៊ីពែបូល, x²/a² - y²/b² = 1), focus, directrix, vertices, and eccentricity conditions.
+- Advanced Trigonometry: Addition formulas, double-angle formulas, half-angle formulas, product-to-sum and sum-to-product transformations.
+- Exponentials & Logarithms: Laws of exponents, natural logarithm (ln), common logarithm (log), exponential equations and applications.
+- Combinatorics & Probability: Fundamental counting principle, permutations P(n, r), combinations C(n, r), binomial theorem (ទ្រឹស្តីបទដេ្វធា), conditional probability P(B|A).
+
+### Grade 12 (ថ្នាក់ទី១២ - ត្រៀមប្រឡងបាក់ឌុប BacII)
+- Limits & Continuity (លីមីត និងភាពជាប់): Indeterminate forms (0/0, ∞/∞, ∞ - ∞, 0·∞), trigonometric limits, vertical and horizontal asymptotes.
+- Differential Calculus (ដេរីវេ): Differentiation rules (product, quotient, chain rule), implicit differentiation, derivatives of exponential and logarithmic functions, tangents, concavity, inflection points, curve sketching, optimization.
+- Integral Calculus (អាំងតេក្រាល): Antiderivatives, indefinite integrals, definite integrals, integration by substitution, integration by parts, area between curves, volume of solids of revolution (បរិមាណវិលបង្វិល) using the disk method V = π ∫ [f(x)]² dx.
+- Complex Numbers (ចំនួនកុំផ្លិច): Standard form z = a + bi, conjugate z̄ = a - bi, modulus |z| = √(a² + b²), argument arg(z) in (-π, π], polar form z = r(cosθ + i sinθ), Euler's formula, de Moivre's theorem, roots of complex numbers, Argand plane (ប្លង់អាកង់).
+- Differential Equations: First-order separable equations, linear first-order differential equations, applications in growth and decay models.
+- 3D Analytical Geometry (ធរណីមាត្រក្នុងលំហ): 3D vectors, dot product, cross product, lines and planes in 3D space, distance from a point to a plane.
+- National BacII Examination Preparation: Comprehensive preparation across Science Track (ថ្នាក់វិទ្យាសាស្ត្រ) and Social Science Track (ថ្នាក់វិទ្យាសាស្ត្រសង្គម).
+
+## Interactive STEM Laboratories
+1. Unit Circle Lab (`/unit-circle`): Pure SVG coordinate explorer with all 16 standard radian values from 0 to 2π, exact radical coordinates (±√3/2, ±1/2, ±√2/2), and live projection bars.
+2. Conic Sections Playground (`/conics`): Real-time parameter manipulators for parabola, ellipse, and hyperbola with draggable test point P verifying focal distance conditions.
+3. 3D Volume of Revolution Lab (`/labs/revolution`): Interactive 3D solid generated by rotating y = x², y = √x, or y = x around the x-axis with disk-slicing visualization and exact integral solutions.
+4. Argand Plane Lab (`/labs/argand`): Interactive complex plane supporting drag-to-position z, modulus and argument readouts, conjugate identity z·z̄ = |z|², negation, and complex product geometry.
+5. Probability Tree & Counting Lab (`/labs/probability`): Dynamic multi-stage probability trees with automated branch verification, conditional probability computation, and permutation/combination calculators.
+6. Shape Lab (`/shapes`): Interactive 2D polygons and 3D polyhedra (cubes, cylinders, spheres, cones, pyramids) with real-time geometric calculators.
+7. Function & Conics Grapher (`/graph`): High-performance canvas grapher for mathematical functions and Cartesian equations.
+8. BacII Sprint Drill (`/exam/sprint`): High-speed formula recall trainer with 3-minute, 5-minute, and untimed modes covering high-yield BacII topics.
+
+## Official Sitemap & Canonical URLs
+- Canonical Domain: https://math-high-school.vercel.app/
+- Complete Sitemap: https://math-high-school.vercel.app/sitemap.xml
+- LLM Summary: https://math-high-school.vercel.app/llms.txt

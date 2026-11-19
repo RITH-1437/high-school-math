@@ -155,6 +155,12 @@ function learningResourceLd(options: {
     ...(options.about?.length ? { about: options.about.map((name) => ({ '@type': 'Thing', name })) } : {}),
     ...(options.teaches?.length ? { teaches: options.teaches } : {}),
     audience: { '@type': 'EducationalAudience', educationalRole: 'student' },
+    educationalAlignment: {
+      '@type': 'AlignmentObject',
+      alignmentType: 'educationalSubject',
+      educationalFramework: 'MoEYS Cambodia High School Mathematics Curriculum',
+      targetName: options.educationalLevel || 'Secondary Education Grade 7-12',
+    },
     isPartOf: { '@id': WEBSITE_ID },
     publisher: { '@id': PUBLISHER_ID },
   }
@@ -171,6 +177,92 @@ function collectionPageLd(path: string, name: string, description: string): Reco
     isPartOf: { '@id': WEBSITE_ID },
   }
 }
+
+function webAppLd(options: {
+  path: string
+  name: string
+  description: string
+  applicationCategory: string
+}): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    '@id': `${absoluteUrl(options.path)}#app`,
+    name: options.name,
+    description: options.description,
+    url: absoluteUrl(options.path),
+    applicationCategory: options.applicationCategory,
+    operatingSystem: 'All',
+    browserRequirements: 'Requires JavaScript and HTML5 Canvas or SVG support',
+    isAccessibleForFree: true,
+    inLanguage: ['en', 'km'],
+    isPartOf: { '@id': WEBSITE_ID },
+  }
+}
+
+function faqPageLd(faqs: { question: string; answer: string }[]): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+}
+
+export const HOME_FAQS = [
+  {
+    question: 'What is High School Math (គណិតវិទ្យា ថ្នាក់ទី៧-១២)?',
+    answer:
+      'High School Math is a free, privacy-first, bilingual English and Khmer mathematics platform for Cambodian students and educators in Grades 7 to 12. It includes comprehensive formula derivations, 7-step worked solutions, BacII exam guides, and visual STEM laboratories.',
+  },
+  {
+    question: 'Is High School Math aligned with the Cambodian MoEYS curriculum?',
+    answer:
+      'Yes, all lessons, formulas, definitions, and worked examples strictly follow the Cambodian Ministry of Education, Youth and Sport (MoEYS) national curriculum standards and BacII national examination formats.',
+  },
+  {
+    question: 'What interactive mathematics laboratories are available?',
+    answer:
+      'The platform provides interactive STEM labs including the Unit Circle Lab (រង្វង់ត្រីកោណមាត្រ), Conic Sections Playground, 3D Volume of Revolution Lab, Complex Numbers Argand Plane Lab, Probability Tree Lab, 2D and 3D Shape Lab, and a Function Grapher.',
+  },
+  {
+    question: 'How does High School Math help students prepare for the Grade 12 BacII exam?',
+    answer:
+      'It offers complete examination guides for both Science and Social Science tracks, formula summaries from past national papers, and an interactive timed BacII Sprint Drill mode for rapid formula recall.',
+  },
+  {
+    question: 'Are mathematical formulas and lessons available in Khmer?',
+    answer:
+      'Yes, the entire library features standardized MoEYS Khmer mathematical terminology alongside international notation, including an English-Khmer glossary of over 230 mathematical terms.',
+  },
+]
+
+export const BACII_FAQS = [
+  {
+    question: 'What is the structure of the Grade 12 BacII mathematics exam in Cambodia?',
+    answer:
+      'The BacII mathematics examination is divided into two tracks: Science Track (focused on limits, derivatives, integrals, complex numbers, differential equations, and 3D space geometry) and Social Science Track (focused on statistics, probability, financial mathematics, and foundational calculus).',
+  },
+  {
+    question: 'What are the highest-yield topics on the BacII Science Track math exam?',
+    answer:
+      'High-yield topics include Indeterminate Limits (0/0 and trig limits), Derivative curve sketching and optimization, Definite Integrals and Volumes of Revolution, Complex Numbers in the Argand Plane, and 3D Vector Geometry.',
+  },
+  {
+    question: 'How can students practice timed BacII math problems?',
+    answer:
+      'Students can use the interactive BacII Sprint Drill mode (/exam/sprint) for 3-minute, 5-minute, or untimed rapid formula drills with instant feedback and step-by-step explanations.',
+  },
+]
+
+export const SITE_KEYWORDS =
+  'High School Math, Math High School Cambodia, Cambodian Mathematics, Khmer Mathematics, Mathematics Grade 7-12, MoEYS math, BacII math, គណិតវិទ្យា ថ្នាក់ទី៧-១២, បាក់ឌុប, រូបមន្តគណិតវិទ្យា, ប្រឡងបាក់ឌុប'
 
 function siteIdentityLd(description: string): Record<string, unknown>[] {
   return [
@@ -189,6 +281,10 @@ function siteIdentityLd(description: string): Record<string, unknown>[] {
         target: { '@type': 'EntryPoint', urlTemplate: `${SITE_ORIGIN}/search?q={search_term_string}` },
         'query-input': 'required name=search_term_string',
       },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['h1', '.hero__lead', '.seo-summary'],
+      },
     },
     {
       '@context': 'https://schema.org',
@@ -198,6 +294,18 @@ function siteIdentityLd(description: string): Record<string, unknown>[] {
       alternateName: SITE_ALTERNATE_NAMES,
       url: `${SITE_ORIGIN}/`,
       logo: { '@type': 'ImageObject', url: LOGO_URL, width: 512, height: 512 },
+      knowsAbout: [
+        'Mathematics',
+        'Cambodian High School Curriculum',
+        'MoEYS Cambodia',
+        'Grade 7-12 Mathematics',
+        'BacII Examination',
+        'Trigonometry',
+        'Calculus',
+        'Algebra',
+        'Geometry',
+        'Probability',
+      ],
     },
   ]
 }
@@ -304,13 +412,13 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
     const description = homeDescription()
     return {
       path: '/',
-      title: `${SITE_NAME} — Grade 7–12 Mathematics for Cambodian Students`,
+      title: `${SITE_NAME} - Grade 7–12 Mathematics for Cambodian Students`,
       description,
       robots: 'index,follow',
       ogType: 'website',
       status: 200,
       breadcrumbs: [HOME],
-      jsonLd: siteIdentityLd(description),
+      jsonLd: [...siteIdentityLd(description), faqPageLd(HOME_FAQS)],
     }
   }
 
@@ -431,7 +539,15 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
         return page('/shapes', withBrand('Shape Lab: Area, Perimeter & Volume Formulas'), description, [
           HOME,
           { name: 'Shapes', path: '/shapes' },
-        ], [collectionPageLd('/shapes', 'Shape Lab', truncate(description))])
+        ], [
+          collectionPageLd('/shapes', 'Shape Lab', truncate(description)),
+          webAppLd({
+            path: '/shapes',
+            name: 'Interactive Shape Lab (2D & 3D)',
+            description: truncate(description),
+            applicationCategory: 'EducationalApplication',
+          }),
+        ])
       }
       if (third) break
       const shape = findShape(second)
@@ -447,7 +563,7 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
         [
           learningResourceLd({
             path: shapePath,
-            name: `${shape.name} — ${measures}`,
+            name: `${shape.name} - ${measures}`,
             description: truncate(description),
             resourceType: 'Interactive resource',
             about: ['Geometry', shape.name],
@@ -471,6 +587,12 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
           resourceType: 'Interactive resource',
           about: ['Functions', 'Conic sections'],
         }),
+        webAppLd({
+          path: '/graph',
+          name: 'Function & Conics Grapher',
+          description,
+          applicationCategory: 'EducationalApplication',
+        }),
       ])
     }
 
@@ -491,6 +613,12 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
             description,
             resourceType: 'Interactive resource',
             about: ['Trigonometry', 'Unit Circle', 'Sine', 'Cosine', 'Radians'],
+          }),
+          webAppLd({
+            path: '/unit-circle',
+            name: 'Interactive Unit Circle Lab (រង្វង់ត្រីកោណមាត្រ)',
+            description,
+            applicationCategory: 'EducationalApplication',
           }),
         ],
       )
@@ -514,6 +642,12 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
             educationalLevel: 'Grades 11–12',
             about: ['Conic sections', 'Parabola', 'Ellipse', 'Hyperbola'],
           }),
+          webAppLd({
+            path: '/conics',
+            name: 'Conic Sections Playground (បន្ទះពិសោធន៍កោនិក)',
+            description,
+            applicationCategory: 'EducationalApplication',
+          }),
         ],
       )
     }
@@ -536,12 +670,18 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
               educationalLevel: 'Grade 12',
               about: ['Integral calculus', 'Volume of revolution', 'BacII'],
             }),
+            webAppLd({
+              path: '/labs/revolution',
+              name: 'Volume of Revolution Lab (Grade 12 BacII)',
+              description,
+              applicationCategory: 'EducationalApplication',
+            }),
           ],
         )
       }
       if (second === 'argand') {
         const description =
-          'Argand Plane Lab (បន្ទះពិសោធន៍ប្លង់អាកង់): place any complex number z = a + bi and explore its modulus, argument, and polar form z = r(cosθ + isinθ). Toggle conjugate, negation, and product rules — Grade 12 BacII core.'
+          'Argand Plane Lab (បន្ទះពិសោធន៍ប្លង់អាកង់): place any complex number z = a + bi and explore its modulus, argument, and polar form z = r(cosθ + isinθ). Toggle conjugate, negation, and product rules, Grade 12 BacII core.'
         return page(
           '/labs/argand',
           withBrand('Argand Plane Lab (Complex Numbers, Grade 12)'),
@@ -555,6 +695,12 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
               resourceType: 'Interactive resource',
               educationalLevel: 'Grade 12',
               about: ['Complex numbers', 'Argand plane', 'Polar form', 'BacII'],
+            }),
+            webAppLd({
+              path: '/labs/argand',
+              name: 'Argand Plane Lab (Complex Numbers, Grade 12)',
+              description,
+              applicationCategory: 'EducationalApplication',
             }),
           ],
         )
@@ -576,6 +722,12 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
               educationalLevel: 'Grades 10–12',
               about: ['Probability', 'Conditional probability', 'Permutations', 'Combinations', 'BacII'],
             }),
+            webAppLd({
+              path: '/labs/probability',
+              name: 'Probability Tree & Counting Lab (Grades 10–12)',
+              description,
+              applicationCategory: 'EducationalApplication',
+            }),
           ],
         )
       }
@@ -595,6 +747,7 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
             resourceType: 'Study guide',
             educationalLevel: 'Grade 12',
           }),
+          faqPageLd(BACII_FAQS),
         ])
       }
       if (third || !isBacTrack(second)) break
@@ -603,13 +756,13 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
       const description = `BacII mathematics, ${track.title}: ${toPlainText(track.description)}`
       return page(
         trackPath,
-        withBrand(`BacII Math — ${track.title}`),
+        withBrand(`BacII Math - ${track.title}`),
         description,
         [HOME, baciiCrumb, { name: track.title, path: trackPath }],
         [
           learningResourceLd({
             path: trackPath,
-            name: `BacII Mathematics — ${track.title}`,
+            name: `BacII Mathematics - ${track.title}`,
             description: truncate(description),
             resourceType: 'Study guide',
             educationalLevel: 'Grade 12',
@@ -634,6 +787,12 @@ export function getRouteMeta(rawPathname: string): RouteMeta {
               description,
               resourceType: 'Quiz',
               educationalLevel: 'Grade 12',
+            }),
+            webAppLd({
+              path: '/exam/sprint',
+              name: 'BacII Sprint Drill Mode (ការហ្វឹកហាត់ល្បឿនបាក់ឌុប)',
+              description,
+              applicationCategory: 'EducationalApplication',
             }),
           ],
         )
@@ -776,10 +935,17 @@ export function serializeJsonLd(data: Record<string, unknown>[]): string {
 /** The managed <head> tags for a route. The runtime SeoHead updates exactly these elements. */
 export function renderHeadTags(meta: RouteMeta): string {
   const url = absoluteUrl(meta.path)
+  const robotsTag =
+    meta.robots === 'index,follow'
+      ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+      : meta.robots
+
   const tags = [
     `<title>${escapeAttr(meta.title)}</title>`,
     `<meta name="description" content="${escapeAttr(meta.description)}" />`,
-    `<meta name="robots" content="${meta.robots}" />`,
+    `<meta name="keywords" content="${SITE_KEYWORDS}" />`,
+    `<meta name="author" content="High School Math Cambodia" />`,
+    `<meta name="robots" content="${robotsTag}" />`,
   ]
   if (meta.status === 200) tags.push(`<link rel="canonical" href="${url}" />`)
   tags.push(
@@ -793,7 +959,7 @@ export function renderHeadTags(meta: RouteMeta): string {
     `<meta property="og:image" content="${OG_IMAGE}" />`,
     `<meta property="og:image:width" content="${OG_IMAGE_WIDTH}" />`,
     `<meta property="og:image:height" content="${OG_IMAGE_HEIGHT}" />`,
-    `<meta property="og:image:alt" content="${SITE_NAME} — π logo, mathematics for Grades 7–12" />`,
+    `<meta property="og:image:alt" content="${SITE_NAME} - π logo, mathematics for Grades 7–12" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeAttr(meta.title)}" />`,
     `<meta name="twitter:description" content="${escapeAttr(meta.description)}" />`,

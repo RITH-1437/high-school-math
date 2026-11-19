@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
   OG_IMAGE,
+  SITE_KEYWORDS,
   absoluteUrl,
   getRouteMeta,
   serializeJsonLd,
@@ -52,7 +53,15 @@ export function applyRouteMeta(meta: RouteMeta) {
   const url = absoluteUrl(meta.path)
   document.title = meta.title
   upsertMeta('name', 'description', meta.description)
-  upsertMeta('name', 'robots', meta.robots)
+  upsertMeta('name', 'keywords', SITE_KEYWORDS)
+  upsertMeta('name', 'author', 'High School Math Cambodia')
+  upsertMeta(
+    'name',
+    'robots',
+    meta.robots === 'index,follow'
+      ? 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'
+      : meta.robots,
+  )
   upsertMeta('property', 'og:type', meta.ogType)
   upsertMeta('property', 'og:title', meta.title)
   upsertMeta('property', 'og:description', meta.description)
